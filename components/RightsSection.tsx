@@ -1,6 +1,6 @@
 
 import React from 'react';
-import type { Right } from '../types';
+import type { Right } from '../types.ts';
 import {
   UserCircleIcon,
   PencilIcon,
@@ -11,7 +11,7 @@ import {
   ChatBubbleBottomCenterTextIcon,
   ArrowUturnLeftIcon,
   QuestionMarkCircleIcon,
-} from './icons/FeatureIcons';
+} from './icons/FeatureIcons.tsx';
 
 const rightsData: Right[] = [
   {
@@ -53,6 +53,11 @@ const rightsData: Right[] = [
     icon: <ArrowUturnLeftIcon />,
     title: 'Revogação do Consentimento',
     description: 'Você pode revogar seu consentimento para o tratamento de dados a qualquer momento.',
+  },
+  {
+    icon: <QuestionMarkCircleIcon />,
+    title: 'Revisão de Decisões Automatizadas',
+    description: 'Solicite a revisão de decisões tomadas unicamente com base em tratamento automatizado de dados pessoais.',
   },
 ];
 
