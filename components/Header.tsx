@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { ShieldCheckIcon } from './icons/ShieldCheckIcon.tsx';
+import { ShieldCheckIcon } from './icons/ShieldCheckIcon';
 
 const Header: React.FC = () => {
   return (

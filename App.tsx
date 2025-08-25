@@ -1,10 +1,10 @@
 
 import React from 'react';
-import Header from './components/Header.tsx';
-import Hero from './components/Hero.tsx';
-import RightsSection from './components/RightsSection.tsx';
-import CallToAction from './components/CallToAction.tsx';
-import Footer from './components/Footer.tsx';
+import Header from './components/Header';
+import Hero from './components/Hero';
+import RightsSection from './components/RightsSection';
+import CallToAction from './components/CallToAction';
+import Footer from './components/Footer';
 
 const App: React.FC = () => {
   return (
