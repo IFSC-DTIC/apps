@@ -1,8 +1,8 @@
-
-import React from 'react';
-
-export interface Right {
-  icon: React.ReactNode;
-  title: string;
+export interface App {
+  name: string;
   description: string;
+  url: string;
+  githubUrl: string;
+  imageUrl: string;
+  tags: string[];
 }

@@ -1,5 +1,5 @@
 {
-  "name": "IFSC Privacy Portal Landing Page",
-  "description": "A simple and informative landing page about the 'IFSC Privacy Portal', developed as a Proof of Concept for a direct Git commit feature from IA Studio.",
+  "name": "IFSC App Portal",
+  "description": "A dynamic showcase of applications from the IFSC community. Colleagues can add their own apps via GitHub.",
   "requestFramePermissions": []
 }

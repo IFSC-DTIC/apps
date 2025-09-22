@@ -1,88 +1,73 @@
+import AppCard from './CallToAction.js';
+import type { App } from '../types.js';
 
-import React from 'react';
-import type { Right } from '../types';
-import {
-  UserCircleIcon,
-  PencilIcon,
-  EyeSlashIcon,
-  ArrowRightLeftIcon,
-  TrashIcon,
-  InfoIcon,
-  ChatBubbleBottomCenterTextIcon,
-  ArrowUturnLeftIcon,
-  QuestionMarkCircleIcon,
-} from './icons/FeatureIcons';
-
-const rightsData: Right[] = [
+// Colleagues can add their apps to this list via a GitHub PR.
+const appsData: App[] = [
   {
-    icon: <UserCircleIcon />,
-    title: 'Confirmação e Acesso',
-    description: 'Você pode confirmar se seus dados são tratados por nós e solicitar o acesso a eles.',
+    name: 'Portal da Privacidade',
+    description: 'Página informativa sobre a Lei Geral de Proteção de Dados (LGPD) no IFSC. O app original deste repositório.',
+    url: '#',
+    githubUrl: 'https://github.com/ifsc/app-portal-poc',
+    imageUrl: 'https://picsum.photos/seed/privacy/400/200',
+    tags: ['Institucional', 'LGPD', 'Segurança'],
   },
   {
-    icon: <PencilIcon />,
-    title: 'Correção de Dados',
-    description: 'Solicite a correção de dados incompletos, inexatos ou desatualizados a qualquer momento.',
+    name: 'Sistema de Inscrições',
+    description: 'Plataforma para gerenciar inscrições em eventos e cursos de extensão do IFSC.',
+    url: 'https://inscricoes.ifsc.edu.br/',
+    githubUrl: 'https://github.com/ifsc/sistema-inscricoes',
+    imageUrl: 'https://picsum.photos/seed/inscricoes/400/200',
+    tags: ['Extensão', 'Eventos', 'Acadêmico'],
   },
   {
-    icon: <EyeSlashIcon />,
-    title: 'Anonimização e Bloqueio',
-    description: 'Direito de solicitar a anonimização, bloqueio ou eliminação de dados desnecessários ou excessivos.',
+    name: 'Repositório Institucional',
+    description: 'Acesso à produção científica, acadêmica e administrativa do Instituto Federal de Santa Catarina.',
+    url: 'https://repositorio.ifsc.edu.br/',
+    githubUrl: 'https://github.com/ifsc/repositorio',
+    imageUrl: 'https://picsum.photos/seed/repo/400/200',
+    tags: ['Pesquisa', 'Educação', 'Repositório'],
   },
-  {
-    icon: <ArrowRightLeftIcon />,
-    title: 'Portabilidade',
-    description: 'Seus dados podem ser transferidos para outro fornecedor de serviço, mediante sua requisição.',
-  },
-  {
-    icon: <TrashIcon />,
-    title: 'Eliminação de Dados',
-    description: 'Peça a eliminação dos seus dados pessoais tratados com base no seu consentimento.',
-  },
-  {
-    icon: <InfoIcon />,
-    title: 'Informação de Compartilhamento',
-    description: 'Saiba com quais entidades públicas ou privadas o IFSC compartilhou seus dados.',
-  },
-  {
-    icon: <ChatBubbleBottomCenterTextIcon />,
-    title: 'Informação sobre Consentimento',
-    description: 'Receba informações claras sobre a possibilidade de não fornecer consentimento e suas consequências.',
-  },
-  {
-    icon: <ArrowUturnLeftIcon />,
-    title: 'Revogação do Consentimento',
-    description: 'Você pode revogar seu consentimento para o tratamento de dados a qualquer momento.',
+    {
+    name: 'Moodle Institucional',
+    description: 'Ambiente virtual de ensino e aprendizagem para os cursos e atividades do IFSC.',
+    url: 'https://moodle.ifsc.edu.br/',
+    githubUrl: 'https://github.com/moodle/moodle',
+    imageUrl: 'https://picsum.photos/seed/moodle/400/200',
+    tags: ['EAD', 'Ensino', 'Acadêmico'],
   },
 ];
 
-const RightCard: React.FC<{ right: Right }> = ({ right }) => (
-  <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-200">
-    <div className="flex items-center space-x-4">
-      <div className="flex-shrink-0 bg-green-100 text-green-600 p-3 rounded-full">
-        {right.icon}
-      </div>
-      <div>
-        <h3 className="text-lg font-semibold text-gray-900">{right.title}</h3>
-      </div>
-    </div>
-    <p className="mt-4 text-gray-600">{right.description}</p>
-  </div>
-);
+const tagColorClasses = {
+  default: 'bg-gray-200 text-gray-700',
+  Institucional: 'bg-blue-100 text-blue-800',
+  LGPD: 'bg-yellow-100 text-yellow-800',
+  Segurança: 'bg-red-100 text-red-800',
+  Extensão: 'bg-green-100 text-green-800',
+  Eventos: 'bg-purple-100 text-purple-800',
+  Acadêmico: 'bg-indigo-100 text-indigo-800',
+  Pesquisa: 'bg-pink-100 text-pink-800',
+  Educação: 'bg-teal-100 text-teal-800',
+  Repositório: 'bg-orange-100 text-orange-800',
+  EAD: 'bg-cyan-100 text-cyan-800',
+  Ensino: 'bg-lime-100 text-lime-800',
+};
 
-const RightsSection: React.FC = () => {
+const AppGrid = () => {
   return (
-    <section className="py-20 sm:py-24 bg-gray-50">
+    <section id="apps" className="py-20 sm:py-24 bg-gray-50">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Conheça Seus Direitos</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">Nossas Aplicações</h2>
           <p className="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-            A LGPD garante a você, titular dos dados, uma série de direitos. Entenda os principais:
+            Ferramentas e sistemas desenvolvidos para facilitar o dia a dia da comunidade acadêmica.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {rightsData.map((right) => (
-            <RightCard key={right.title} right={right} />
+          {/* FIX: The key prop is special in React and should not cause a type error.
+              The underlying issue is in how AppCard is typed. I've fixed that in CallToAction.tsx.
+              The error about 'key' not being assignable to 'AppCardProps' is resolved by correctly typing AppCard as a React Function Component. */}
+          {appsData.map((app) => (
+            <AppCard key={app.name} app={app} tagColors={tagColorClasses} />
           ))}
         </div>
       </div>
@@ -90,4 +75,4 @@ const RightsSection: React.FC = () => {
   );
 };
 
-export default RightsSection;
+export default AppGrid;

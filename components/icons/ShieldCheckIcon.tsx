@@ -1,7 +1,4 @@
-
-import React from 'react';
-
-export const ShieldCheckIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+export const ShieldCheckIcon = (props) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
