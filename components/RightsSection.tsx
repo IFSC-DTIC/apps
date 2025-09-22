@@ -1,5 +1,5 @@
-import AppItem from './CallToAction.js';
-import type { App } from '../types.js';
+import AppItem from './CallToAction.tsx';
+import type { App } from '../types.ts';
 import {
   PrivacyIcon,
   InscricoesIcon,
@@ -8,7 +8,7 @@ import {
   AIStudioIcon,
   SIGAAIcon,
   SUAPIcon
-} from './icons/FeatureIcons.js';
+} from './icons/FeatureIcons.tsx';
 
 
 // Colleagues can add their apps to this list via a GitHub PR.

@@ -1,6 +1,6 @@
-import Header from './components/Header.js';
-import AppGrid from './components/RightsSection.js';
-import { PlusIcon, LayoutGridIcon, SparklesIcon, SettingsIcon } from './components/icons/FeatureIcons.js';
+import Header from './components/Header.tsx';
+import AppGrid from './components/RightsSection.tsx';
+import { PlusIcon, LayoutGridIcon, SparklesIcon, SettingsIcon } from './components/icons/FeatureIcons.tsx';
 
 
 const App = () => {

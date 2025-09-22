@@ -1,5 +1,5 @@
 import React from 'react';
-import type { App } from '../types.js';
+import type { App } from '../types.ts';
 
 interface AppItemProps {
   app: App;
