@@ -1,4 +1,4 @@
-import { ShieldCheckIcon } from './icons/ShieldCheckIcon.tsx';
+import { ShieldCheckIcon } from './icons/FeatureIcons.tsx';
 
 const Header = () => {
   return (

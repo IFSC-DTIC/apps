@@ -1,7 +1,73 @@
+import React from 'react';
 import Header from './components/Header.tsx';
 import AppGrid from './components/RightsSection.tsx';
 import Footer from './components/Footer.tsx';
-import { PlusIcon, LayoutGridIcon, SparklesIcon, SettingsIcon } from './components/icons/FeatureIcons.tsx';
+import { 
+  PlusIcon, 
+  LayoutGridIcon, 
+  SparklesIcon, 
+  SettingsIcon,
+  PrivacyIcon,
+  InscricoesIcon,
+  RepositorioIcon,
+  MoodleIcon,
+  AIStudioIcon,
+  SIGAAIcon,
+  SUAPIcon
+} from './components/icons/FeatureIcons.tsx';
+import type { App } from './types.ts';
+
+// Colleagues can add their apps to this list via a GitHub PR.
+const appsData: App[] = [
+  {
+    name: 'Portal da Privacidade',
+    url: '#',
+    icon: PrivacyIcon,
+    description: 'Acesse informações e políticas de privacidade do IFSC.',
+  },
+  {
+    name: 'Sistema de Inscrições',
+    url: 'https://inscricoes.ifsc.edu.br/',
+    icon: InscricoesIcon,
+    description: 'Realize sua inscrição para cursos e eventos do IFSC.',
+  },
+  {
+    name: 'Repositório Institucional',
+    url: 'https://repositorio.ifsc.edu.br/',
+    icon: RepositorioIcon,
+    description: 'Explore a produção acadêmica e científica da instituição.',
+  },
+  {
+    name: 'Moodle Institucional',
+    url: 'https://moodle.ifsc.edu.br/',
+    icon: MoodleIcon,
+    description: 'Ambiente virtual de aprendizagem para alunos e professores.',
+  },
+  {
+    name: 'SIGAA',
+    url: '#',
+    icon: SIGAAIcon,
+    description: 'Sistema Integrado de Gestão de Atividades Acadêmicas.',
+  },
+  {
+    name: 'SUAP',
+    url: '#',
+    icon: SUAPIcon,
+    description: 'Sistema Unificado de Administração Pública.',
+  },
+  {
+    name: 'AI Studio: Roteiros',
+    url: '#',
+    icon: AIStudioIcon,
+    description: 'Crie roteiros de estudo personalizados com IA.',
+  },
+  {
+    name: 'AI Studio: Análise',
+    url: '#',
+    icon: AIStudioIcon,
+    description: 'Ferramenta de IA para análise de dados e textos.',
+  },
+];
 
 
 const App = () => {
@@ -37,7 +103,7 @@ const App = () => {
                     <span className="ml-1">Configurações</span>
                 </a>
             </div>
-            <AppGrid />
+            <AppGrid apps={appsData} />
         </div>
       </main>
       <Footer />
