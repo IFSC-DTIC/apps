@@ -1,13 +1,14 @@
 import Header from './components/Header.tsx';
 import AppGrid from './components/RightsSection.tsx';
+import Footer from './components/Footer.tsx';
 import { PlusIcon, LayoutGridIcon, SparklesIcon, SettingsIcon } from './components/icons/FeatureIcons.tsx';
 
 
 const App = () => {
   return (
-    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-300 antialiased">
+    <div className="bg-gray-100 dark:bg-gray-900 min-h-screen text-gray-800 dark:text-gray-300 antialiased flex flex-col">
       <Header />
-      <main className="container mx-auto px-6 py-8">
+      <main className="container mx-auto px-6 py-8 flex-grow">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6">
           <h1 className="text-2xl font-semibold text-gray-800 dark:text-white">
             Painel de aplicativos
@@ -39,6 +40,7 @@ const App = () => {
             <AppGrid />
         </div>
       </main>
+      <Footer />
     </div>
   );
 };

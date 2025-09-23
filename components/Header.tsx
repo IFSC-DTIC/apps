@@ -7,7 +7,7 @@ const Header = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <ShieldCheckIcon className="w-7 h-7 text-green-600" />
-            <span className="text-lg font-bold text-gray-800 dark:text-white tracking-tight">Portal de Aplicações IFSC</span>
+            <span className="text-lg font-bold text-gray-800 dark:text-white tracking-tight">Portal de Aplicações IFSC-DTIC-CGD</span>
           </div>
         </div>
       </div>
