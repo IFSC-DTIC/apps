@@ -1,4 +1,4 @@
-import { InformationCircleIcon } from './icons/FeatureIcons.tsx';
+import { InformationCircleIcon } from './icons/FeatureIcons';
 
 const Footer = () => {
   return (

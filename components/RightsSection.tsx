@@ -1,6 +1,6 @@
 import React from 'react';
-import AppItem from './CallToAction.tsx';
-import type { App } from '../types.ts';
+import AppItem from './CallToAction';
+import type { App } from '../types';
 
 interface AppGridProps {
   apps: App[];

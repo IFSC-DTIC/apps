@@ -1,6 +1,7 @@
 import React from 'react';
 
-const IconWrapper = (props: { children: React.ReactNode, className?: string }) => (
+// FIX: Made `children` prop optional to resolve TypeScript errors.
+const IconWrapper = (props: { children?: React.ReactNode, className?: string }) => (
   <div className={props.className}>{props.children}</div>
 );
 
@@ -60,7 +61,8 @@ export const InformationCircleIcon = () => (
 
 
 // App Icons
-const AppIconContainer = (props: { children: React.ReactNode, className?: string }) => (
+// FIX: Made `children` prop optional to resolve TypeScript errors.
+const AppIconContainer = (props: { children?: React.ReactNode, className?: string }) => (
     <div className={`w-full h-full rounded-lg flex items-center justify-center text-white font-bold text-2xl ${props.className}`}>
         {props.children}
     </div>

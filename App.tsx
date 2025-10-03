@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './components/Header.tsx';
-import AppGrid from './components/RightsSection.tsx';
-import Footer from './components/Footer.tsx';
+import Header from './components/Header';
+import AppGrid from './components/RightsSection';
+import Footer from './components/Footer';
 import { 
   PlusIcon, 
   LayoutGridIcon, 
@@ -14,8 +14,8 @@ import {
   AIStudioIcon,
   SIGAAIcon,
   SUAPIcon
-} from './components/icons/FeatureIcons.tsx';
-import type { App } from './types.ts';
+} from './components/icons/FeatureIcons';
+import type { App } from './types';
 
 // Colleagues can add their apps to this list via a GitHub PR.
 const appsData: App[] = [
