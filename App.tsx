@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from './components/Header';
 import AppGrid from './components/RightsSection';
 import Footer from './components/Footer';
