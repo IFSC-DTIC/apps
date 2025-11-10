@@ -161,7 +161,9 @@
           layoutMode: 'fitRows'
         });
 
-        iso.layout();
+        setTimeout(() => {
+          iso.layout();
+        }, 100);
 
         let categoryFilter = '*';
 
