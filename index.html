@@ -85,7 +85,7 @@
     </footer>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      window.onload = () => {
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const icons = {
@@ -102,6 +102,7 @@
               { name: 'Guardião LGPD - IFSC', url: 'https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv', description: 'Ferramenta de Anonimização de Dados para o Contexto do IFSC.' },
               { name: 'sez.iO - Agente IA', url: 'https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ', description: 'Assistente de Modelagem de Processos e Relatórios LGPD.' },
               { name: 'Chatbot LGPD para Geração de Relatórios', url: 'https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR', description: 'Assistente Conversacional para Conformidade no IFSC' },
+              { name: 'IFSC-DTIC-CGD: Form2RIPD', url: 'https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7', description: 'Gerador de Relatórios para LGPD no IFSC' }
             ]
           },
           {
@@ -160,6 +161,10 @@
           layoutMode: 'fitRows'
         });
 
+        setTimeout(() => {
+          iso.layout();
+        }, 100);
+
         let categoryFilter = '*';
 
         const debounce = (fn, threshold = 200) => {
@@ -195,7 +200,7 @@
         });
 
         quicksearch.addEventListener('keyup', debounce(combinedFilter));
-      });
+      };
     </script>
 </body>
 </html>
