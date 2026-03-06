@@ -1,0 +1,114 @@
+[
+  {
+    "name": "Ensino & Acadêmico",
+    "iconKey": "ensino",
+    "theme": "indigo",
+    "apps": [
+      {
+        "id": "ensino-1",
+        "name": "Meu IFSC (App)",
+        "url": "https://www.ifsc.edu.br/meu-ifsc",
+        "description": "Aplicativo oficial para estudantes: notas, horários e links úteis na palma da mão.",
+        "isNew": false
+      },
+      {
+        "id": "ensino-2",
+        "name": "SIGAA - Portal do Aluno",
+        "url": "https://sigaa.ifsc.edu.br/",
+        "description": "Sistema Integrado de Gestão Acadêmica: rematrícula, atividades, notas e histórico.",
+        "isNew": false
+      },
+      {
+        "id": "ensino-3",
+        "name": "Biblioteca Pergamum",
+        "url": "https://pergamum.ifsc.edu.br/",
+        "description": "Acervo das bibliotecas, renovações e reservas de materiais.",
+        "isNew": false
+      }
+    ]
+  },
+  {
+    "name": "Gestão & Servidor",
+    "iconKey": "gestao",
+    "theme": "green",
+    "apps": [
+      {
+        "id": "servidor-1",
+        "name": "Portal do Servidor",
+        "url": "https://www.ifsc.edu.br/portal-do-servidor",
+        "description": "Acesso a sistemas de avaliação, ponto eletrônico e oportunidades institucionais.",
+        "isNew": false
+      },
+      {
+        "id": "servidor-2",
+        "name": "Assinatura Digital",
+        "url": "https://assina.ifsc.edu.br/",
+        "description": "Assine documentos digitalmente com validade jurídica gov.br padrão ICP-Brasil.",
+        "isNew": true
+      },
+      {
+        "id": "servidor-3",
+        "name": "Portal da Transparência",
+        "url": "https://portaldatransparencia.gov.br/",
+        "description": "Consultas a despesas, salários e informações institucionais públicas do IFSC.",
+        "isNew": false
+      }
+    ]
+  },
+  {
+    "name": "Inovação & Oportunidades",
+    "iconKey": "inovacao",
+    "theme": "blue",
+    "apps": [
+      {
+        "id": "inov-1",
+        "name": "Desafio de Ideias Inovadoras",
+        "url": "https://ifsc.edu.br/inovacao",
+        "description": "Portal do NIT para submissão de ideias, empreendedorismo e geração de renda.",
+        "isNew": true
+      },
+      {
+        "id": "inov-2",
+        "name": "Plataforma de Estágios",
+        "url": "https://estagios.ifsc.edu.br",
+        "description": "Mural de vagas, estágios e empregos para os estudantes da rede.",
+        "isNew": false
+      }
+    ]
+  },
+  {
+    "name": "Conformidade LGPD",
+    "iconKey": "lgpd",
+    "theme": "yellow",
+    "apps": [
+      {
+        "id": "lgpd-1",
+        "name": "Guardião LGPD - IFSC",
+        "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true",
+        "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC.",
+        "isNew": true
+      },
+      {
+        "id": "lgpd-2",
+        "name": "sez.iO - Agente IA",
+        "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true",
+        "description": "Assistente de Modelagem de Processos e Relatórios LGPD.",
+        "isNew": false
+      },
+      {
+        "id": "lgpd-3",
+        "name": "Chatbot LGPD para Geração de Relatórios",
+        "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true",
+        "description": "Assistente Conversacional para Conformidade no IFSC",
+        "isNew": false
+      },
+      {
+        "id": "lgpd-4",
+        "name": "IFSC-DTIC-CGD: Form2RIPD",
+        "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true",
+        "description": "Gerador de Relatórios para LGPD no IFSC",
+        "isNew": true
+      }
+    ]
+  }
+]

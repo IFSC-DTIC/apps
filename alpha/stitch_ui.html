@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Portal de Serviços IFSC</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#c8191f",
+                        "gov-green": "#32A041",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#211112",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+<div class="relative flex min-h-screen flex-col">
+<header class="sticky top-0 z-50 w-full border-b-4 border-gov-green bg-white dark:bg-slate-900 px-4 md:px-10 lg:px-40 py-3 shadow-sm">
+<div class="mx-auto flex max-w-[1200px] items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="flex h-12 w-12 items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined text-3xl">school</span>
+</div>
+<div class="hidden md:block">
+<h2 class="text-xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white uppercase">
+                            IFSC
+                        </h2>
+<p class="text-xs font-semibold text-slate-500 dark:text-slate-400">Portal de Aplicações e Serviços</p>
+</div>
+</div>
+<div class="flex flex-1 justify-center max-w-xl px-4">
+<h1 class="hidden lg:block text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-widest text-center">
+                        Portal de Serviços do Instituto Federal de Santa Catarina
+                    </h1>
+</div>
+<div class="flex items-center gap-4">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Início</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Sobre</a>
+<a class="text-sm font-semibold hover:text-primary transition-colors" href="#">Ajuda</a>
+</nav>
+<button class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden ring-2 ring-primary/20">
+<img alt="Avatar" class="h-full w-full object-cover" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuByE9U16WMHaWvRIztRCjLQLFBztugKS6KqPkU9KHZDKCptTOZfWd98U_FW_CsxBzcVzyjo4AWSu5abW-pIO7JWACpcLjUWk6X8-jKXnZsUQsMc0InyIpHrc8lXSD4-mJyJ1zMzwV50mP_O1SC0zw1wWbRz4bKp5lyCzBTicFKgGyg9X99wp2C2oef8NA_9xj_wDGs03Mbbm0917HeD22eHhErGXKTaFHHhkt30wSgrYHh-i3hovcv20y10FN-ZLOUQuy-DXwpkiGw"/>
+</div>
+</div>
+</div>
+</header>
+<main class="flex-1">
+<section class="bg-slate-100 dark:bg-slate-800/50 py-12 md:py-20 px-4">
+<div class="mx-auto max-w-[1200px]">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-xl p-8 md:p-12 text-center border border-slate-200 dark:border-slate-800">
+<h2 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">
+                            O que você está procurando?
+                        </h2>
+<p class="text-lg text-slate-600 dark:text-slate-400 mb-8 max-w-2xl mx-auto">
+                            Acesse sistemas acadêmicos, administrativos e portais de informação em um só lugar.
+                        </p>
+<div class="max-w-3xl mx-auto relative group">
+<div class="flex items-stretch rounded-lg overflow-hidden border-2 border-slate-200 dark:border-slate-700 focus-within:border-primary transition-all shadow-sm">
+<div class="flex items-center px-4 bg-white dark:bg-slate-900">
+<span class="material-symbols-outlined text-slate-400">search</span>
+</div>
+<input class="w-full py-4 px-2 border-none focus:ring-0 bg-white dark:bg-slate-900 text-slate-900 dark:text-white text-lg" placeholder="Pesquisar serviços, sistemas ou documentos..." type="text"/>
+<button class="bg-primary hover:bg-primary/90 text-white px-8 font-bold transition-colors">
+                                    BUSCAR
+                                </button>
+</div>
+</div>
+<div class="mt-8 flex flex-wrap justify-center gap-3">
+<button class="px-5 py-2 rounded-full bg-primary text-white text-sm font-bold shadow-md">Todos</button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Ensino &amp; Acadêmico</button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Gestão</button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Oportunidades</button>
+<button class="px-5 py-2 rounded-full bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 text-sm font-semibold hover:bg-slate-50 dark:hover:bg-slate-700 transition-all">Extensão</button>
+</div>
+</div>
+</div>
+</section>
+<section class="py-16 px-4 md:px-10 lg:px-40">
+<div class="mx-auto max-w-[1200px]">
+<div class="flex items-center justify-between mb-8">
+<h3 class="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">apps</span>
+                            Principais Aplicações
+                        </h3>
+<a class="text-sm font-bold text-primary hover:underline uppercase tracking-wider" href="#">Ver todos</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">book</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">SIGAA</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Sistema Integrado de Gestão de Atividades Acadêmicas para alunos e professores.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-gov-green/10 text-gov-green flex items-center justify-center mb-4 group-hover:bg-gov-green group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">person</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Meu IFSC</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Aplicativo oficial para consulta de notas, horários e notícias institucionais.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center mb-4 group-hover:bg-blue-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">work</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Portal RH</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Gestão de pessoas, contracheques, férias e processos para servidores.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center mb-4 group-hover:bg-amber-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">description</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">SIPAC</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Sistema de Patrimônio, Administração e Contratos do IFSC.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-purple-500/10 text-purple-500 flex items-center justify-center mb-4 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">groups</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Extensão</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Editais de extensão, cursos FIC e projetos com a comunidade externa.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-cyan-500/10 text-cyan-500 flex items-center justify-center mb-4 group-hover:bg-cyan-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">lightbulb</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Pesquisa e Inovação</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Acompanhamento de projetos de pesquisa e fomento à inovação tecnológica.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-4 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">library_books</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Bibliotecas</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Consulta ao acervo, renovações e acesso a bases de dados científicas.
+                            </p>
+</div>
+<div class="group bg-white dark:bg-slate-900 p-6 rounded-xl border border-slate-100 dark:border-slate-800 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+<div class="w-12 h-12 rounded-lg bg-slate-500/10 text-slate-500 flex items-center justify-center mb-4 group-hover:bg-slate-500 group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">support_agent</span>
+</div>
+<h4 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Suporte de TI</h4>
+<p class="text-sm text-slate-600 dark:text-slate-400 line-clamp-2">
+                                Abertura de chamados e solicitações de serviços de tecnologia.
+                            </p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-12 pb-8 px-4">
+<div class="mx-auto max-w-[1200px]">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-3 mb-4">
+<div class="h-8 w-8 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-lg">school</span>
+</div>
+<span class="text-xl font-black text-slate-900 dark:text-white">IFSC</span>
+</div>
+<p class="text-sm text-slate-500 dark:text-slate-400">
+                            Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina.
+                        </p>
+</div>
+<div>
+<h5 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Acesso Rápido</h5>
+<ul class="space-y-2">
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Portal do Aluno</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Portal do Servidor</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Transparência</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Suporte</h5>
+<ul class="space-y-2">
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Ajuda e Tutoriais</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Contato TI</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Ouvidoria</a></li>
+</ul>
+</div>
+<div>
+<h5 class="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-4">Institucional</h5>
+<ul class="space-y-2">
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Portal IFSC</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Privacidade</a></li>
+<li><a class="text-sm text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#">Acessibilidade</a></li>
+</ul>
+</div>
+</div>
+<div class="border-t border-slate-100 dark:border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+<p class="text-xs text-slate-500 dark:text-slate-500 text-center md:text-left">
+                        © 2024 Instituto Federal de Santa Catarina. Todos os direitos reservados.
+                    </p>
+<div class="flex gap-4">
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">share</span></a>
+<a class="text-slate-400 hover:text-primary" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

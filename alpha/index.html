@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO & Open Graph Meta Tags -->
+  <meta name="description"
+    content="Portal centralizador de sistemas, formulários e aplicações voltado a estudantes e servidores do Instituto Federal de Santa Catarina (IFSC)." />
+  <meta name="keywords"
+    content="IFSC, portal, serviços digitais, SIGAA, Meu IFSC, portal do aluno, instituto federal, santa catarina, aplicações institucionais" />
+  <meta name="author" content="IFSC - Diretoria de Tecnologia da Informação (DTIC)" />
+
+  <meta property="og:title" content="Portal de Aplicações e Serviços - IFSC" />
+  <meta property="og:description"
+    content="Acesse facilmente sistemas acadêmicos, administrativos e portais de informação em um só lugar. Feito para a comunidade do IFSC." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://apps.ifsc.edu.br/" />
+
+  <title>Portal de Aplicações e Serviços - IFSC</title>
+
+  <!-- PWA & Icons -->
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+  <meta name="theme-color" content="#32A041" />
+
+  <!-- Fonts & Material Symbols -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#C8191E", // IFSC Red
+            "gov-green": "#32A041", // IFSC Green
+            "background-light": "#f8f6f6",
+            "background-dark": "#0d1117",
+          },
+          fontFamily: {
+            "display": ["Inter", "sans-serif"]
+          }
+        },
+      },
+    }
+
+    // Check local storage for theme
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .filter-btn-group .is-checked {
+      background-color: #32A041;
+      color: white;
+      border-color: #32A041;
+    }
+
+    .filter-btn-group button {
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal-active {
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body
+  class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200">
+  <div class="relative flex min-h-screen flex-col">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-40 w-full border-b-4 border-gov-green bg-white dark:bg-slate-900 px-4 md:px-10 lg:px-40 py-3 shadow-sm">
+      <div class="mx-auto flex max-w-[1200px] items-center justify-between gap-4">
+        <div class="flex items-center gap-4">
+          <div class="flex h-12 w-12 items-center justify-center bg-primary rounded-lg text-white shadow-md">
+            <span class="material-symbols-outlined text-3xl">school</span>
+          </div>
+          <div class="hidden md:block">
+            <h2 class="text-xl font-extrabold leading-tight tracking-tight text-slate-900 dark:text-white uppercase">
+              IFSC</h2>
+            <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-widest">Portal de
+              Serviços</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-4">
+          <nav class="hidden md:flex items-center gap-6">
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="https://www.ifsc.edu.br"
+              target="_blank" rel="noopener noreferrer">Site do IFSC</a>
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="https://sigaa.ifsc.edu.br/"
+              target="_blank" rel="noopener noreferrer">SIGAA</a>
+          </nav>
+
+          <button id="theme-toggle"
+            class="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 hover:bg-primary/10 transition-colors focus:ring-2 focus:ring-primary focus:outline-none"
+            aria-label="Alterar Tema">
+            <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
+            </svg>
+            <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z">
+              </path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1">
+      <!-- Hero Section -->
+      <section
+        class="bg-slate-100 dark:bg-[#161b22] py-8 md:py-16 px-4 border-b border-slate-200 dark:border-slate-800">
+        <div class="mx-auto max-w-[1000px]">
+          <div
+            class="bg-white dark:bg-slate-900 rounded-2xl shadow-xl shadow-slate-200/50 dark:shadow-none p-8 md:p-14 text-center border border-slate-200 dark:border-slate-800 relative overflow-hidden">
+            <!-- Decorative blur element -->
+            <div class="absolute -top-24 -right-24 w-48 h-48 bg-gov-green/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+            <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-primary/10 rounded-full blur-3xl pointer-events-none">
+            </div>
+
+            <h1 class="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-4 relative z-10">
+              Serviços Digitais IFSC
+            </h1>
+            <p
+              class="text-base md:text-lg text-slate-600 dark:text-slate-400 mb-10 max-w-3xl mx-auto relative z-10 leading-relaxed">
+              Aproveite o portal centralizador para localizar facilmente os sistemas acadêmicos, administrativos,
+              aplicações de saúde digital e os processos focados na comunidade do Instituto Federal de Santa Catarina.
+            </p>
+
+            <div class="max-w-2xl mx-auto relative z-10">
+              <div
+                class="flex items-stretch rounded-xl overflow-hidden border-2 border-slate-200 dark:border-slate-700 focus-within:border-gov-green focus-within:ring-4 focus-within:ring-gov-green/20 transition-all shadow-sm">
+                <div class="flex items-center px-4 bg-white dark:bg-slate-800">
+                  <span class="material-symbols-outlined text-slate-400">search</span>
+                </div>
+                <input id="quicksearch"
+                  class="w-full py-4 px-2 border-none focus:ring-0 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-lg placeholder-slate-400"
+                  placeholder="O que você procura hoje?" type="text" autocomplete="off" />
+              </div>
+            </div>
+
+            <!-- Categories / Filters -->
+            <div class="mt-10 flex flex-wrap justify-center filter-btn-group relative z-10">
+              <!-- JS Injected Fillters Here -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Apps Grid Section -->
+      <section class="py-12 md:py-16 px-4 md:px-10 lg:px-20 relative">
+        <div class="mx-auto max-w-[1200px]">
+          <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-bold text-slate-800 dark:text-white flex items-center gap-2">
+              <span class="material-symbols-outlined text-gov-green">grid_view</span>
+              Catálogo de Sistemas
+            </h2>
+          </div>
+
+          <!-- Isotope Grid Container -->
+          <div id="app-grid" class="flex flex-wrap -mx-3 min-h-[400px]">
+            <!-- App items will be inserted here by js -->
+            <div class="w-full text-center py-12 text-slate-500 text-lg">Carregando aplicações...</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer
+      class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 pt-12 pb-8 px-4 md:px-10 lg:px-20 mt-auto relative overflow-hidden">
+      <!-- Identidade visual verde/vermelho em linha tênue -->
+      <div class="absolute bottom-0 left-0 w-full h-[6px] flex">
+        <div class="bg-gov-green w-[80%]"></div>
+        <div class="bg-primary w-[20%]"></div>
+      </div>
+      <div class="mx-auto max-w-[1200px]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8 mb-10">
+          <div class="col-span-1">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="h-10 w-10 bg-primary rounded flex items-center justify-center text-white shadow">
+                <span class="material-symbols-outlined text-xl">school</span>
+              </div>
+              <div>
+                <span class="text-lg font-black text-slate-900 dark:text-white leading-none block">IFSC</span>
+                <span class="text-xs text-slate-500 font-bold uppercase tracking-wider block">Serviços Digitais</span>
+              </div>
+            </div>
+            <p class="text-sm text-slate-600 dark:text-slate-400 mt-4 leading-relaxed pr-6">
+              O Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina (IFSC) visa prover a sociedade com
+              acesso a educação profissional e sistemas gerenciais eficientes e modernos.
+            </p>
+          </div>
+          <div>
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-5 uppercase tracking-wider border-b border-gray-200 dark:border-gray-800 pb-2">
+              Acesso Rápido</h3>
+            <ul class="space-y-3">
+              <li><a
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-gov-green transition-colors flex items-center gap-2"
+                  href="https://sigaa.ifsc.edu.br/" target="_blank"><span
+                    class="material-symbols-outlined text-sm">open_in_new</span> SIGAA</a></li>
+              <li><a
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-gov-green transition-colors flex items-center gap-2"
+                  href="https://www.ifsc.edu.br/portal-do-servidor" target="_blank"><span
+                    class="material-symbols-outlined text-sm">open_in_new</span> Portal do Servidor</a></li>
+              <li><a
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-gov-green transition-colors flex items-center gap-2"
+                  href="https://www.ifsc.edu.br/editais" target="_blank"><span
+                    class="material-symbols-outlined text-sm">open_in_new</span> Editais Abertos</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3
+              class="text-sm font-bold text-slate-900 dark:text-white mb-5 uppercase tracking-wider border-b border-gray-200 dark:border-gray-800 pb-2">
+              Institucional</h3>
+            <ul class="space-y-3">
+              <li><a
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-gov-green transition-colors flex items-center gap-2"
+                  href="https://www.ifsc.edu.br" target="_blank"><span
+                    class="material-symbols-outlined text-[16px]">domain</span> Site Oficial</a></li>
+              <li><a
+                  class="text-sm text-slate-600 dark:text-slate-400 hover:text-gov-green transition-colors flex items-center gap-2"
+                  href="mailto:contato@ifsc.edu.br"><span class="material-symbols-outlined text-[16px]">mail</span> Fale
+                  Conosco</a></li>
+            </ul>
+          </div>
+        </div>
+        <div
+          class="border-t border-slate-100 dark:border-slate-800/60 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
+          <p class="text-xs text-slate-500 dark:text-slate-500">
+            &copy; <span id="year"></span> Instituto Federal de Santa Catarina. Todos os direitos reservados.
+          </p>
+          <div class="flex items-center gap-4">
+            <span class="text-xs text-slate-400">Desenvolvido com IA - Versão Beta</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal Backdrop & Container -->
+    <div id="app-modal"
+      class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 opacity-0 pointer-events-none transition-opacity duration-300 p-4 sm:p-6 backdrop-blur-md"
+      role="dialog" aria-modal="true" aria-labelledby="modal-app-name">
+      <div id="app-modal-content"
+        class="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-lg w-full transform scale-95 transition-all duration-300 flex flex-col relative overflow-hidden border border-slate-200 dark:border-slate-700">
+
+        <!-- Header stripe -->
+        <div class="h-2 w-full flex absolute top-0 left-0">
+          <div class="bg-gov-green w-[80%]"></div>
+          <div class="bg-primary w-[20%]"></div>
+        </div>
+
+        <div class="p-6 pt-10 sm:p-10 flex-grow">
+          <button id="close-modal-btn" aria-label="Fechar"
+            class="absolute top-5 right-5 text-slate-400 hover:text-primary bg-slate-100 dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full p-2 focus:outline-none transition-colors">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+
+          <div class="flex items-center space-x-5 mb-6">
+            <div id="modal-app-icon-container"
+              class="shrink-0 w-16 h-16 rounded-xl overflow-hidden flex items-center justify-center bg-slate-100 dark:bg-slate-800 text-3xl font-bold shadow-inner">
+              <!-- Icon generated dynamically -->
+            </div>
+            <div class="flex flex-col">
+              <h2 id="modal-app-name" class="text-2xl font-black text-slate-800 dark:text-white leading-tight">Nome App
+              </h2>
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-50 dark:bg-slate-800/50 py-4 px-5 rounded-xl border border-slate-100 dark:border-slate-800/80">
+            <div class="flex items-center gap-2 mb-2 text-gov-green">
+              <span class="material-symbols-outlined text-sm">info</span>
+              <h3 class="text-xs font-bold uppercase tracking-widest text-slate-700 dark:text-slate-300">Sobre o Sistema
+              </h3>
+            </div>
+            <p id="modal-app-description"
+              class="text-[15px] text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+              Descrição completa aqui.
+            </p>
+          </div>
+        </div>
+
+        <!-- Footer Actions -->
+        <div
+          class="px-6 py-5 bg-slate-50 dark:bg-slate-800/80 border-t border-slate-200 dark:border-slate-700/80 flex justify-end space-x-3 rounded-b-2xl">
+          <button id="close-modal-footer-btn"
+            class="px-5 py-2.5 text-sm font-bold text-slate-700 bg-white border border-slate-300 rounded-lg hover:bg-slate-50 focus:ring-4 focus:ring-slate-100 dark:bg-slate-800 dark:text-slate-300 dark:border-slate-600 dark:hover:bg-slate-700 transition-colors shadow-sm">
+            Voltar
+          </button>
+          <a id="modal-open-app-btn" href="#" target="_blank" rel="noopener noreferrer"
+            class="px-6 py-2.5 text-sm font-bold text-white inline-flex items-center justify-center bg-gov-green hover:bg-green-700 focus:ring-4 focus:ring-green-300 rounded-lg shadow-md shadow-green-600/20 transition-all hover:-translate-y-0.5"
+            aria-label="Acessar Sistema">
+            <span class="mr-2">Acessar Sistema</span>
+            <span class="material-symbols-outlined text-[18px]">launch</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+  <script>
+    // Theme toggle Logic
+    const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+    const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      themeToggleLightIcon.classList.remove('hidden');
+    } else {
+      themeToggleDarkIcon.classList.remove('hidden');
+    }
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    themeToggleBtn.addEventListener('click', function () {
+      themeToggleDarkIcon.classList.toggle('hidden');
+      themeToggleLightIcon.classList.toggle('hidden');
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    // PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => { navigator.serviceWorker.register('./service-worker.js'); });
+    }
+
+    // Material Symbols Mapping
+    const getIconSvg = (iconKey, categoryThemeColor) => {
+      const iconMap = {
+        'ensino': 'menu_book',
+        'gestao': 'badge',
+        'inovacao': 'lightbulb',
+        'lgpd': 'shield_lock',
+        'dados': 'analytics',
+        'processos': 'account_tree'
+      };
+      return `<div class="w-full h-full flex items-center justify-center bg-${categoryThemeColor}-100 dark:bg-${categoryThemeColor}-900/30 text-${categoryThemeColor}-600 dark:text-${categoryThemeColor}-400 rounded-xl"><span class="material-symbols-outlined text-4xl">${iconMap[iconKey] || 'apps'}</span></div>`;
+    }
+
+    window.onload = async () => {
+      document.getElementById('year').textContent = new Date().getFullYear();
+
+      let favorites = JSON.parse(localStorage.getItem('ifsc-favorites-v2') || '[]');
+      window.toggleFavorite = (e, appId) => {
+        e.stopPropagation();
+        const index = favorites.indexOf(appId);
+        const iconSpan = e.currentTarget.querySelector('span');
+
+        if (index > -1) {
+          favorites.splice(index, 1);
+          iconSpan.classList.remove('text-yellow-400');
+          iconSpan.classList.add('text-slate-300', 'dark:text-slate-600');
+          iconSpan.style.fontVariationSettings = "'FILL' 0";
+          document.getElementById('app-item-' + appId).classList.remove('favoritos');
+        } else {
+          favorites.push(appId);
+          iconSpan.classList.remove('text-slate-300', 'dark:text-slate-600');
+          iconSpan.classList.add('text-yellow-400');
+          iconSpan.style.fontVariationSettings = "'FILL' 1";
+          document.getElementById('app-item-' + appId).classList.add('favoritos');
+        }
+        localStorage.setItem('ifsc-favorites-v2', JSON.stringify(favorites));
+
+        if (categoryFilter === '.favoritos' && typeof iso !== 'undefined') {
+          iso.arrange({ filter: window.combinedFilterFunc });
+        }
+      };
+
+      let categoriesData = [];
+      const appGrid = document.getElementById('app-grid');
+      try {
+        const response = await fetch('./apps.json');
+        categoriesData = await response.json();
+      } catch (error) {
+        appGrid.innerHTML = '<div class="w-full py-10 text-center"><p class="text-red-500 font-bold">Erro ao carregar dados do portal. Tente atualizar a página.</p></div>';
+        return;
+      }
+
+      const slugify = str => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+      const filterControls = document.querySelector('.filter-btn-group');
+      const quicksearch = document.getElementById('quicksearch');
+
+      let appItemsHTML = '';
+      categoriesData.forEach(category => {
+        const categoryClass = slugify(category.name);
+        const themeColor = category.theme || 'gov-green';
+
+        category.apps.forEach(app => {
+          const encodedName = encodeURIComponent(app.name);
+          const encodedDesc = encodeURIComponent(app.description);
+          const isFavorite = favorites.includes(app.id);
+          const favClass = isFavorite ? 'favoritos' : '';
+          const starSettings = isFavorite ? "'FILL' 1" : "'FILL' 0";
+          const starColor = isFavorite ? "text-yellow-400" : "text-slate-300 dark:text-slate-600";
+
+          let newBadge = app.isNew ? `<span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow-sm z-10 uppercase tracking-widest"><span class="animate-pulse mr-1">•</span>Novo</span>` : '';
+
+          appItemsHTML += `
+            <div id="app-item-${app.id}" class="app-item ${categoryClass} ${favClass} w-full sm:w-1/2 lg:w-1/3 xl:w-1/4 px-3 mb-6 relative">
+               <div onclick="openModal('${encodedName}', '${encodedDesc}', '${app.url}', '${category.iconKey}', '${themeColor}')" role="button" tabindex="0" class="group flex flex-col items-center bg-white dark:bg-slate-900 px-5 pt-8 pb-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-${themeColor}-400 dark:hover:border-${themeColor}-500 hover:-translate-y-1.5 transition-all duration-300 h-64 text-center cursor-pointer focus:outline-none focus:ring-4 focus:ring-${themeColor}-500/30">
+                 ${newBadge}
+                 <button onclick="toggleFavorite(event, '${app.id}')" class="absolute top-3 right-3 p-1.5 rounded-full bg-slate-50 dark:bg-slate-800/80 hover:bg-slate-100 hover:scale-110 dark:hover:bg-slate-700 transition-all z-10 shadow-sm" title="Favoritar">
+                   <span class="material-symbols-outlined text-[20px] ${starColor} transition-colors" style="font-variation-settings: ${starSettings}">star</span>
+                 </button>
+                 
+                 <div class="w-16 h-16 xl:w-16 xl:h-16 mb-4 flex-shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-3">
+                   ${getIconSvg(category.iconKey, themeColor)}
+                 </div>
+                 
+                 <h3 class="text-[16px] font-bold text-slate-800 dark:text-slate-100 group-hover:text-${themeColor}-600 dark:group-hover:text-${themeColor}-400 leading-tight mb-2 w-full line-clamp-2">${app.name}</h3>
+                 <p class="text-[13px] text-slate-500 dark:text-slate-400 line-clamp-3 w-full mt-auto">${app.description}</p>
+               </div>
+            </div>`;
+        });
+      });
+      appGrid.innerHTML = appItemsHTML;
+
+      // Filter Buttons setup
+      let filterButtonsHTML = `<button data-filter="*" class="is-checked px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-bold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-all focus:outline-none">Todos</button>`;
+
+      filterButtonsHTML += `<button data-filter=".favoritos" class="flex items-center gap-1.5 px-5 py-2.5 rounded-full border border-yellow-200 dark:border-yellow-900 bg-yellow-50 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-400 font-bold text-sm shadow-sm hover:scale-105 transition-all focus:outline-none"><span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1">star</span>Favoritos</button>`;
+
+      categoriesData.forEach(category => {
+        filterButtonsHTML += `<button data-filter=".${slugify(category.name)}" class="px-5 py-2.5 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-200 text-sm font-semibold shadow-sm hover:bg-slate-50 dark:hover:bg-slate-700 transition-all focus:outline-none">${category.name}</button>`;
+      });
+      filterControls.innerHTML = filterButtonsHTML;
+
+      // Prevent white flash when loading Isotope heavily
+      setTimeout(() => {
+        window.iso = new Isotope(appGrid, {
+          itemSelector: '.app-item',
+          layoutMode: 'fitRows',
+          transitionDuration: '0.4s'
+        });
+        window.addEventListener('resize', () => window.iso.layout());
+      }, 100);
+
+      let categoryFilter = '*';
+      const debounce = (fn, threshold = 200) => {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => { fn(...args); }, threshold);
+        };
+      };
+
+      window.combinedFilterFunc = (itemElem) => {
+        const matchesCategory = categoryFilter === '*' ? true : itemElem.matches(categoryFilter);
+        const textContent = itemElem.textContent.toLowerCase();
+        const matchesSearch = quicksearch.value.toLowerCase() ? textContent.includes(quicksearch.value.toLowerCase()) : true;
+        return matchesCategory && matchesSearch;
+      };
+
+      const combinedFilter = () => window.iso.arrange({ filter: window.combinedFilterFunc });
+
+      filterControls.addEventListener('click', (event) => {
+        const btn = event.target.closest('button');
+        if (!btn) return;
+        categoryFilter = btn.getAttribute('data-filter');
+        filterControls.querySelectorAll('button').forEach(b => {
+          b.classList.remove('is-checked', 'bg-gov-green', 'text-white', 'border-gov-green');
+          // Retain base look
+          if (b.getAttribute('data-filter') !== '.favoritos') {
+            b.classList.add('bg-white', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-200');
+          }
+        });
+
+        if (categoryFilter !== '.favoritos') {
+          btn.classList.remove('bg-white', 'text-slate-700', 'dark:bg-slate-800', 'dark:text-slate-200');
+          btn.classList.add('is-checked', '!bg-gov-green', '!text-white', '!border-gov-green');
+        }
+        combinedFilter();
+      });
+
+      quicksearch.addEventListener('keyup', debounce(combinedFilter));
+      // Stop form submission on enter
+      quicksearch.addEventListener('keydown', (e) => { if (e.key === 'Enter') e.preventDefault(); })
+
+      appGrid.addEventListener('keydown', (e) => {
+        const btn = e.target.closest('[role="button"]');
+        if (e.key === 'Enter' && btn) btn.click();
+      });
+
+      // Modal Logic
+      const modal = document.getElementById('app-modal');
+      const modalContent = document.getElementById('app-modal-content');
+      const modalAppName = document.getElementById('modal-app-name');
+      const modalAppDesc = document.getElementById('modal-app-description');
+      const modalOpenBtn = document.getElementById('modal-open-app-btn');
+      const modalIconContainer = document.getElementById('modal-app-icon-container');
+
+      window.openModal = (encodedName, encodedDesc, url, iconKey, themeColor) => {
+        modalAppName.textContent = decodeURIComponent(encodedName);
+        modalAppDesc.textContent = decodeURIComponent(encodedDesc);
+        modalOpenBtn.href = url;
+        modalIconContainer.innerHTML = getIconSvg(iconKey, themeColor);
+
+        document.body.classList.add('modal-active');
+        modal.classList.remove('pointer-events-none', 'opacity-0');
+        modal.classList.add('opacity-100');
+        modalContent.classList.remove('scale-95');
+        modalContent.classList.add('scale-100');
+        setTimeout(() => modalOpenBtn.focus(), 100);
+      };
+
+      window.closeModal = () => {
+        document.body.classList.remove('modal-active');
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+      };
+
+      document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+      document.getElementById('close-modal-footer-btn').addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+    };
+  </script>
+</body>
+
+</html>
