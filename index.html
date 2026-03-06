@@ -225,7 +225,7 @@
           iconKey: 'processos',
           apps: [
             { name: 'LaRDiC - Laboratório de Roteirização e Documentação com IA', url: 'https://ai.studio/apps/drive/1UDGQ0KWeFrb47zM5koH2NJooFXos7Q46?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'Sistema CProc: BPMN/DMN->ProcessoIFSC->DocX' },
-            { name: 'Pé-de-Meia', url: 'https://ai.studio/apps/drive/1Of7DeM0MJBRxAg__VdQWfzXo3C2OL5L6?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'Assistente de formatação SGP - Pé-de-Meia' },
+            { id: 'pedemeia', name: 'Pé-de-Meia', url: 'https://ai.studio/apps/drive/1Of7DeM0MJBRxAg__VdQWfzXo3C2OL5L6?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'Assistente de formatação SGP - Pé-de-Meia' },
             { name: 'Texto -> Processo -> Especificação de Sistema', url: 'https://ai.studio/apps/drive/1GvqPgG2sjuoaw2XM89jj7Hfk3z4V9GO9?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'Mapeador de Processos Automágico com IA' },
           ]
         },
@@ -382,6 +382,47 @@
           closeModal();
         }
       });
+
+      // --- Application Router Logic ---
+      const routeApp = () => {
+        const urlParams = new URL(window.location.href).searchParams;
+        let appId = urlParams.get('app');
+
+        if (!appId && window.location.hash) {
+          appId = window.location.hash.substring(1);
+        }
+
+        if (!appId) {
+          const pathSegments = window.location.pathname.split('/').filter(Boolean);
+          if (pathSegments.length > 0) {
+            const lastSegment = pathSegments[pathSegments.length - 1];
+            if (lastSegment !== 'index.html' && lastSegment !== 'alpha' && lastSegment !== 'beta') {
+              appId = lastSegment;
+            }
+          }
+        }
+
+        if (appId) {
+          appId = appId.toLowerCase();
+          for (const category of categoriesData) {
+            const app = category.apps.find(a => {
+              const appIdentifier = a.id ? a.id.toLowerCase() : slugify(a.name);
+              return appIdentifier === appId || appIdentifier === appId.replace(/-/g, '');
+            });
+            if (app) {
+              if (urlParams.get('redirect') === 'true') {
+                window.location.href = app.url;
+              } else {
+                openModal(encodeURIComponent(app.name), encodeURIComponent(app.description), app.url, category.iconKey);
+              }
+              break;
+            }
+          }
+        }
+      };
+
+      // Executar router após renderização
+      setTimeout(routeApp, 150);
     };
   </script>
 </body>
