@@ -1,112 +1,119 @@
 [
   {
-    "name": "Ensino & Acadêmico",
+    "name": "Ensino",
     "iconKey": "ensino",
     "theme": "indigo",
     "apps": [
       {
-        "id": "ensino-1",
-        "name": "Meu IFSC (App)",
-        "url": "https://www.ifsc.edu.br/meu-ifsc",
-        "description": "Aplicativo oficial para estudantes: notas, horários e links úteis na palma da mão.",
-        "isNew": false
-      },
-      {
-        "id": "ensino-2",
-        "name": "SIGAA - Portal do Aluno",
+        "id": "sigaa",
+        "name": "SIGAA - Sistema Acadêmico",
         "url": "https://sigaa.ifsc.edu.br/",
-        "description": "Sistema Integrado de Gestão Acadêmica: rematrícula, atividades, notas e histórico.",
+        "description": "Sistema integrado de gestão acadêmica para alunos, professores e coordenação.",
         "isNew": false
       },
       {
-        "id": "ensino-3",
-        "name": "Biblioteca Pergamum",
-        "url": "https://pergamum.ifsc.edu.br/",
-        "description": "Acervo das bibliotecas, renovações e reservas de materiais.",
+        "id": "moodle",
+        "name": "Moodle IFSC",
+        "url": "https://moodle.ifsc.edu.br/",
+        "description": "Ambiente virtual de ensino e aprendizagem para cursos presenciais e a distância.",
         "isNew": false
       }
     ]
   },
   {
-    "name": "Gestão & Servidor",
+    "name": "Gestão",
     "iconKey": "gestao",
-    "theme": "green",
+    "theme": "primary",
     "apps": [
       {
-        "id": "servidor-1",
+        "id": "portal-servidor",
         "name": "Portal do Servidor",
         "url": "https://www.ifsc.edu.br/portal-do-servidor",
-        "description": "Acesso a sistemas de avaliação, ponto eletrônico e oportunidades institucionais.",
+        "description": "Acesso a sistemas administrativos, contracheques e informações funcionais.",
         "isNew": false
       },
       {
-        "id": "servidor-2",
-        "name": "Assinatura Digital",
-        "url": "https://assina.ifsc.edu.br/",
-        "description": "Assine documentos digitalmente com validade jurídica gov.br padrão ICP-Brasil.",
-        "isNew": true
-      },
-      {
-        "id": "servidor-3",
-        "name": "Portal da Transparência",
-        "url": "https://portaldatransparencia.gov.br/",
-        "description": "Consultas a despesas, salários e informações institucionais públicas do IFSC.",
+        "id": "sipac",
+        "name": "SIPAC",
+        "url": "https://sipac.ifsc.edu.br/",
+        "description": "Sistema Integrado de Patrimônio, Administração e Contratos.",
         "isNew": false
       }
     ]
   },
   {
-    "name": "Inovação & Oportunidades",
+    "name": "Inovação",
+    "theme": "amber",
     "iconKey": "inovacao",
-    "theme": "blue",
     "apps": [
       {
-        "id": "inov-1",
-        "name": "Desafio de Ideias Inovadoras",
-        "url": "https://ifsc.edu.br/inovacao",
-        "description": "Portal do NIT para submissão de ideias, empreendedorismo e geração de renda.",
+        "id": "ia-studio",
+        "name": "IA Studio IFSC",
+        "url": "https://ia.ifsc.edu.br/",
+        "description": "Plataforma de inovação e aplicações baseadas em inteligência artificial do IFSC.",
         "isNew": true
-      },
+      }
+    ]
+  },
+  {
+    "name": "LGPD",
+    "theme": "slate",
+    "iconKey": "lgpd",
+    "apps": [
       {
-        "id": "inov-2",
-        "name": "Plataforma de Estágios",
-        "url": "https://estagios.ifsc.edu.br",
-        "description": "Mural de vagas, estágios e empregos para os estudantes da rede.",
+        "id": "lgpd-portal",
+        "name": "Portal LGPD",
+        "url": "https://www.ifsc.edu.br/lgpd",
+        "description": "Orientações e documentos sobre a Lei Geral de Proteção de Dados no IFSC.",
         "isNew": false
       }
     ]
   },
   {
-    "name": "Conformidade LGPD",
-    "iconKey": "lgpd",
-    "theme": "yellow",
+    "name": "Processos",
+    "theme": "emerald",
+    "iconKey": "processos",
     "apps": [
       {
-        "id": "lgpd-1",
-        "name": "Guardião LGPD - IFSC",
-        "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true",
-        "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC.",
+        "id": "processos-seletivos",
+        "name": "Ingresso IFSC",
+        "url": "https://www.ifsc.edu.br/ingresso",
+        "description": "Acompanhamento de editais e inscrições em cursos do IFSC.",
+        "isNew": false
+      }
+    ]
+  },
+  {
+    "name": "Dados",
+    "theme": "sky",
+    "iconKey": "dados",
+    "apps": [
+      {
+        "id": "transparencia",
+        "name": "Portal da Transparência",
+        "url": "https://www.ifsc.edu.br/transparencia",
+        "description": "Acesso a dados sobre execução orçamentária e gestão institucional.",
+        "isNew": false
+      },
+      {
+        "id": "pedemeia",
+        "name": "Pé de Meia - Consulta",
+        "url": "https://ai.studio/apps/718712a2-3860-496a-9359-57e0344d6480?fullscreenApplet=true",
+        "description": "Assistente para extração de dados e consulta ao programa Pé de Meia.",
         "isNew": true
-      },
+      }
+    ]
+  },
+  {
+    "name": "RSC-TAE",
+    "iconKey": "rsctae",
+    "theme": "purple",
+    "apps": [
       {
-        "id": "lgpd-2",
-        "name": "sez.iO - Agente IA",
-        "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true",
-        "description": "Assistente de Modelagem de Processos e Relatórios LGPD.",
-        "isNew": false
-      },
-      {
-        "id": "lgpd-3",
-        "name": "Chatbot LGPD para Geração de Relatórios",
-        "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true",
-        "description": "Assistente Conversacional para Conformidade no IFSC",
-        "isNew": false
-      },
-      {
-        "id": "lgpd-4",
-        "name": "IFSC-DTIC-CGD: Form2RIPD",
-        "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true",
-        "description": "Gerador de Relatórios para LGPD no IFSC",
+        "id": "rsctae",
+        "name": "RSC-TAE - Assistente AI",
+        "url": "https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true",
+        "description": "Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial.",
         "isNew": true
       }
     ]

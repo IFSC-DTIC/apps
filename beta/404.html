@@ -207,7 +207,8 @@
       const icons = {
         lgpd: `<div class="w-full h-full rounded-lg flex items-center justify-center text-white bg-green-500 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 sm:w-10 sm:h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.286Z"></path></svg></div>`,
         processos: `<div class="w-full h-full rounded-lg flex items-center justify-center text-white bg-blue-500 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 sm:w-10 sm:h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a2.25 2.25 0 0 1-2.25 2.25h-5.25a2.25 2.25 0 0 1-2.25-2.25v-1.5a2.25 2.25 0 0 1 2.25-2.25H8.25m6.75 12h9.75M10.5 18a2.25 2.25 0 0 0 2.25-2.25h-5.25a2.25 2.25 0 0 0-2.25 2.25v1.5a2.25 2.25 0 0 0 2.25 2.25H8.25m-1.5-6h9.75M3.75 12a2.25 2.25 0 0 1 2.25-2.25h5.25a2.25 2.25 0 0 1 2.25 2.25v1.5a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25v-1.5Z" /></svg></div>`,
-        dados: `<div class="w-full h-full rounded-lg flex items-center justify-center text-white bg-yellow-500 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 sm:w-10 sm:h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" /></svg></div>`
+        dados: `<div class="w-full h-full rounded-lg flex items-center justify-center text-white bg-yellow-500 shadow-sm"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7 sm:w-10 sm:h-10"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" /></svg></div>`,
+        rsctae: `<div class="w-full h-full rounded-lg flex items-center justify-center text-white bg-purple-600 shadow-sm font-black text-[15px] leading-[1.1]">RSC<br>TAE</div>`
       };
 
       const categoriesData = [
@@ -237,6 +238,13 @@
             { name: 'Automação de Mapeamento de Dados LGPD', url: 'https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'Plataforma do Instituto Federal de Santa Catarina (IFSC).' },
             { name: 'Ferramenta de Padronização de Inventário', url: 'https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente.' },
             { name: 'SIADS - Agregador de Inventário com IA', url: 'https://ai.studio/apps/drive/1yZm3Z3PbrXS0316yJVm12ScHfSqxFFJ0?showAssistant=true&showPreview=true&fullscreenApplet=true', description: 'SIADS - Agregador de Inventário com IA' }
+          ]
+        },
+        {
+          name: 'RSC-TAE',
+          iconKey: 'rsctae',
+          apps: [
+            { id: 'rsctae', name: 'RSC-TAE - Assistente AI', url: 'https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true', description: 'Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial.' }
           ]
         }
       ];

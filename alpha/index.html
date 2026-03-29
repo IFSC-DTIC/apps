@@ -354,6 +354,9 @@
 
     // Material Symbols Mapping
     const getIconSvg = (iconKey, categoryThemeColor) => {
+      if (iconKey === 'rsctae') {
+        return `<div class="w-full h-full flex items-center justify-center bg-${categoryThemeColor}-100 dark:bg-${categoryThemeColor}-900/30 text-${categoryThemeColor}-600 dark:text-${categoryThemeColor}-400 rounded-xl font-black text-[15px] leading-[1.1]">RSC<br>TAE</div>`;
+      }
       const iconMap = {
         'ensino': 'menu_book',
         'gestao': 'badge',
