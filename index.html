@@ -221,8 +221,12 @@
         <h2 id="modal-app-name" class="text-2xl sm:text-3xl font-black mb-4 font-inter">Nome do App</h2>
         <p id="modal-app-description" class="text-sm sm:text-base mb-8 max-w-md line-clamp-6 font-semibold opacity-90 leading-relaxed"></p>
         <div class="flex flex-col sm:flex-row gap-3 w-full">
-          <button id="close-modal-footer-btn" class="flex-1 px-6 py-3.5 rounded-2xl border border-gray-200 dark:border-gray-700 font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all">Voltar</button>
-          <a id="modal-open-app-btn" href="#" target="_blank" class="flex-1 px-6 py-3.5 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg shadow-green-500/30 flex items-center justify-center group transition-all">Abrir App</a>
+          <button id="close-modal-footer-btn" class="flex-1 px-6 py-3.5 rounded-2xl border border-gray-200 dark:border-gray-700 font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all order-3 sm:order-1">Voltar</button>
+          <button id="modal-share-btn" class="flex-1 px-6 py-3.5 rounded-2xl border border-gray-200 dark:border-gray-700 font-bold hover:bg-gray-50 dark:hover:bg-gray-800 transition-all flex items-center justify-center gap-2 order-2">
+            <span class="material-icons-round text-lg">share</span>
+            <span id="share-btn-text">Compartilhar</span>
+          </button>
+          <a id="modal-open-app-btn" href="#" target="_blank" class="flex-1 px-6 py-3.5 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg shadow-green-500/30 flex items-center justify-center group transition-all order-1 sm:order-3">Abrir App</a>
         </div>
       </div>
     </div>
@@ -269,7 +273,7 @@
                       class="favorite-btn ${isFav ? 'active' : 'text-gray-300 dark:text-gray-600'}">
                 <span class="material-icons-round text-2xl">${isFav ? 'star' : 'star_outline'}</span>
               </button>
-              <div onclick="openModal('${encodeURIComponent(a.name)}', '${encodeURIComponent(a.description)}', '${a.url}', '${a.iconKey}')" class="flex flex-col flex-grow cursor-pointer mt-2">
+              <div onclick="openModal('${a.id}', '${encodeURIComponent(a.name)}', '${encodeURIComponent(a.description)}', '${a.url}', '${a.iconKey}')" class="flex flex-col flex-grow cursor-pointer mt-2">
                 <div class="w-12 h-12 mb-4 mx-auto">${icons[a.iconKey]}</div>
                 <div class="flex flex-col flex-grow overflow-hidden">
                   <h3 class="text-sm font-bold font-inter leading-tight mb-2 line-clamp-2">${a.name}</h3>
@@ -347,7 +351,7 @@
               allApps.some(a => { 
                 if (a.id.toLowerCase() === id) {
                   if(p.get('redirect')==='true') window.location.href = a.url; 
-                  else openModal(encodeURIComponent(a.name), encodeURIComponent(a.description), a.url, a.iconKey); 
+                  else openModal(a.id, encodeURIComponent(a.name), encodeURIComponent(a.description), a.url, a.iconKey); 
                   return true; 
                 } 
                 return false; 
@@ -357,15 +361,33 @@
         });
 
       const modal = document.getElementById('app-modal');
-      window.openModal = (n, d, u, i) => { 
+      const shareBtn = document.getElementById('modal-share-btn');
+      let currentAppId = null;
+
+      window.openModal = (id, n, d, u, i) => { 
+        currentAppId = id;
         document.getElementById('modal-app-name').textContent = decodeURIComponent(n); 
-        document.getElementById('modal-app-description').textContent = decodeURIComponent(d); 
+        document.getElementById('modal-app-description').textContent = decodeURIComponent(d).replace(/#atalho/g, '').trim(); 
         document.getElementById('modal-open-app-btn').href = u; 
         document.getElementById('modal-app-icon-container').innerHTML = icons[i] || ''; 
+        
+        // Reset share button text
+        document.getElementById('share-btn-text').textContent = 'Compartilhar';
+        
         modal.classList.remove('pointer-events-none'); 
         modal.classList.add('opacity-100'); 
         document.getElementById('app-modal-content').classList.remove('scale-95'); 
         document.getElementById('app-modal-content').classList.add('scale-100'); 
+      };
+
+      shareBtn.onclick = () => {
+        if (!currentAppId) return;
+        const shareUrl = `${window.location.origin}/${currentAppId}`;
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          const btnText = document.getElementById('share-btn-text');
+          btnText.textContent = 'Copiado!';
+          setTimeout(() => { btnText.textContent = 'Compartilhar'; }, 2000);
+        });
       };
 
       const closeModal = () => { 
