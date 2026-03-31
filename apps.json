@@ -5,7 +5,8 @@
     "apps": [
       { "id": "guardiao", "name": "Guardião LGPD - IFSC", "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC." },
       { "id": "chatbot", "name": "Chatbot LGPD para Geração de Relatórios", "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente Conversacional para Conformidade no IFSC" },
-      { "id": "ripd", "name": "IFSC-DTIC-CGD: Form2RIPD", "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Gerador de Relatórios para LGPD no IFSC" }
+      { "id": "ripd", "name": "IFSC-DTIC-CGD: Form2RIPD", "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Gerador de Relatórios para LGPD no IFSC" },
+      { "id": "mapeamento", "name": "Automação de Mapeamento de Dados LGPD", "url": "https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Plataforma do Instituto Federal de Santa Catarina (IFSC)." }
     ]
   },
   {
@@ -22,7 +23,6 @@
     "name": "SIADS",
     "iconKey": "siads",
     "apps": [
-      { "id": "mapeamento", "name": "Automação de Mapeamento de Dados LGPD", "url": "https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Plataforma do Instituto Federal de Santa Catarina (IFSC)." },
       { "id": "padronizacao", "name": "Ferramenta de Padronização de Inventário", "url": "https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente." },
       { "id": "siads", "name": "SIADS - Agregador de Inventário com IA", "url": "https://ai.studio/apps/drive/1yZm3Z3PbrXS0316yJVm12ScHfSqxFFJ0?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Agregador de Inventário com IA" }
     ]
