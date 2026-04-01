@@ -10,11 +10,12 @@
     <meta property="og:title" content="Gerador de Molduras - IFSC">
     <meta property="og:description" content="Personalize sua foto com a moldura oficial do I Seminário de IA do IFSC.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="https://apps.ifsc.edu.br/icon.png"> <!-- Fallback icon if exists -->
     <meta name="theme-color" content="#32a041">
 
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <!-- Preconnect to external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -29,7 +30,21 @@
             width: 100%;
             overflow: hidden;
             background-color: #f8fafc;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Full-screen iframe */
+        #app-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background: transparent;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         /* Loading Screen */
@@ -42,17 +57,17 @@
             justify-content: center;
             background-color: #ffffff;
             z-index: 100;
-            transition: opacity 0.5s ease, visibility 0.5s;
+            transition: opacity 0.5s ease;
         }
 
         .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid #e2e8f0;
-            border-top: 5px solid var(--ifsc-green);
+            width: 48px;
+            height: 48px;
+            border: 4px solid #f1f5f9;
+            border-top: 4px solid var(--ifsc-green);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 16px;
         }
 
         @keyframes spin {
@@ -63,65 +78,56 @@
         #loader p {
             color: var(--ifsc-dark);
             font-weight: 600;
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin: 0;
         }
 
-        /* iframe styling */
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
+        .loaded #loader {
+            opacity: 0;
+            pointer-events: none;
         }
 
-        .hidden {
-            opacity: 0;
-            visibility: hidden;
+        .loaded #app-iframe {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
     <div id="loader">
         <div class="spinner"></div>
-        <p>Carregando Aplicativo...</p>
+        <p>Iniciando Gerador de Molduras...</p>
     </div>
 
     <!-- 
-        Boas Práticas de iframe:
-        1. allow: habilitando permissões necessárias para apps de foto (câmera, clipboard)
-        2. loading="eager": Prioridade máxima para o conteúdo principal
-        3. title: Acessibilidade
-        4. sandbox: permitindo o necessário para o Lovable funcionar (scripts, forms, popups, downloads)
+        BOAS PRÁTICAS IFRAME:
+        - camera e clipboard são vitais para apps de foto (Lovable).
+        - allow-same-origin é necessário para o Vite/React do Lovable carregar corretamente (local storage, hooks, etc).
+        - loading="eager" por ser o conteúdo central.
     -->
     <iframe 
         id="app-iframe"
         src="https://pic-framing-buddy.lovable.app" 
-        title="Gerador de Molduras - IFSC"
-        allow="camera; microphone; display-capture; clipboard-write; clipboard-read; screen-wake-lock; web-share"
-        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads allow-modals"
+        title="Gerador de Molduras do I Seminário de IA do IFSC"
+        allow="camera; microphone; clipboard-write; clipboard-read; display-capture; web-share"
+        sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-downloads allow-modals allow-top-navigation-by-user-activation"
         loading="eager"
         allowfullscreen>
     </iframe>
 
     <script>
         const iframe = document.getElementById('app-iframe');
-        const loader = document.getElementById('loader');
+        
+        // Remove o estado de carregamento quando o iframe carregar
+        iframe.onload = () => {
+            document.body.classList.add('loaded');
+        };
 
-        // Remove o loader quando o iframe terminar de carregar
-        iframe.addEventListener('load', () => {
-            loader.classList.add('hidden');
-        });
-
-        // Fallback para remover o loader caso o 'load' demore demais (15s) ou erro de conexão
+        // Fallback de segurança: oculta o loader após 12 segundos se o evento 'load' falhar
         setTimeout(() => {
-            if (loader) {
-                loader.classList.add('hidden');
+            if (!document.body.classList.contains('loaded')) {
+                document.body.classList.add('loaded');
             }
-        }, 15000);
+        }, 12000);
     </script>
 </body>
 </html>
