@@ -3,35 +3,35 @@
     "name": "LGPD",
     "iconKey": "lgpd",
     "apps": [
-      { "id": "guardiao", "name": "Guardião LGPD - IFSC", "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC. #atalho" },
-      { "id": "chatbot", "name": "Chatbot LGPD para Geração de Relatórios", "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente Conversacional para Conformidade no IFSC #atalho" },
-      { "id": "ripd", "name": "IFSC-DTIC-CGD: Form2RIPD", "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Gerador de Relatórios para LGPD no IFSC #atalho" }
+      { "id": "guardiao", "name": "Guardião LGPD - IFSC", "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC." },
+      { "id": "chatbot", "name": "Chatbot LGPD para Geração de Relatórios", "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente Conversacional para Conformidade no IFSC" },
+      { "id": "ripd", "name": "IFSC-DTIC-CGD: Form2RIPD", "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Gerador de Relatórios para LGPD no IFSC" },
+      { "id": "mapeamento", "name": "Automação de Mapeamento de Dados LGPD", "url": "https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Plataforma do Instituto Federal de Santa Catarina (IFSC)." }
     ]
   },
   {
     "name": "BPMN",
     "iconKey": "bpmn",
     "apps": [
-      { "id": "sezio", "name": "sez.iO - Agente IA", "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente de Modelagem de Processos e Relatórios LGPD. #atalho" },
-      { "id": "lardic", "name": "LaRDiC - Laboratório de Roteirização e Documentação com IA", "url": "https://ai.studio/apps/drive/1UDGQ0KWeFrb47zM5koH2NJooFXos7Q46?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Sistema CProc: BPMN/DMN->ProcessoIFSC->DocX #atalho" },
-      { "id": "pedemeia", "name": "Pé-de-Meia", "url": "https://ai.studio/apps/c3f584f3-25d8-48b5-b8af-dd0ac9e001d9?fullscreenApplet=true", "description": "Assistente de formatação SGP - Pé-de-Meia #atalho" },
-      { "id": "processo", "name": "Texto -> Processo -> Especificação de Sistema", "url": "https://ai.studio/apps/drive/1GvqPgG2sjuoaw2XM89jj7Hfk3z4V9GO9?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Mapeador de Processos Automágico com IA #atalho" }
+      { "id": "sezio", "name": "sez.iO - Agente IA", "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente de Modelagem de Processos e Relatórios LGPD." },
+      { "id": "lardic", "name": "LaRDiC - Laboratório de Roteirização e Documentação com IA", "url": "https://ai.studio/apps/drive/1UDGQ0KWeFrb47zM5koH2NJooFXos7Q46?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Sistema CProc: BPMN/DMN->ProcessoIFSC->DocX" },
+      { "id": "pedemeia", "name": "Pé-de-Meia", "url": "https://ai.studio/apps/c3f584f3-25d8-48b5-b8af-dd0ac9e001d9?fullscreenApplet=true", "description": "Assistente de formatação SGP - Pé-de-Meia" },
+      { "id": "processo", "name": "Texto -> Processo -> Especificação de Sistema", "url": "https://ai.studio/apps/drive/1GvqPgG2sjuoaw2XM89jj7Hfk3z4V9GO9?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Mapeador de Processos Automágico com IA" }
     ]
   },
   {
     "name": "SIADS",
     "iconKey": "siads",
     "apps": [
-      { "id": "mapeamento", "name": "Automação de Mapeamento de Dados LGPD", "url": "https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Plataforma do Instituto Federal de Santa Catarina (IFSC). #atalho" },
-      { "id": "padronizacao", "name": "Ferramenta de Padronização de Inventário", "url": "https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente. #atalho" },
-      { "id": "siads", "name": "SIADS - Agregador de Inventário com IA", "url": "https://ai.studio/apps/drive/1yZm3Z3PbrXS0316yJVm12ScHfSqxFFJ0?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Agregador de Inventário com IA #atalho" }
+      { "id": "padronizacao", "name": "Ferramenta de Padronização de Inventário", "url": "https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente." },
+      { "id": "siads", "name": "SIADS - Agregador de Inventário com IA", "url": "https://ai.studio/apps/drive/1yZm3Z3PbrXS0316yJVm12ScHfSqxFFJ0?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Agregador de Inventário com IA" }
     ]
   },
   {
     "name": "RSC-TAE",
     "iconKey": "rsctae",
     "apps": [
-      { "id": "rsctae", "name": "RSC-TAE - Assistente AI", "url": "https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true", "description": "Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial. #atalho" }
+      { "id": "rsctae", "name": "RSC-TAE - Assistente AI", "url": "https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true", "description": "Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial." }
     ]
   }
 ]
