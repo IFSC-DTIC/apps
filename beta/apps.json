@@ -1,0 +1,33 @@
+[
+  {
+    "name": "LGPD",
+    "iconKey": "lgpd",
+    "theme": "green",
+    "apps": [
+      { "id": "lgpd-1", "name": "Guardião LGPD - IFSC", "url": "https://ai.studio/apps/drive/1M1hyJa3d3JFzhXOpZVoVRFsWJZLiUXwv?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Ferramenta de Anonimização de Dados para o Contexto do IFSC.", "isNew": true },
+      { "id": "lgpd-2", "name": "sez.iO - Agente IA", "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente de Modelagem de Processos e Relatórios LGPD.", "isNew": false },
+      { "id": "lgpd-3", "name": "Chatbot LGPD para Geração de Relatórios", "url": "https://ai.studio/apps/drive/1Dgn-dkUoaGxiGLFwFXDBrEGPuu1kzUPR?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente Conversacional para Conformidade no IFSC", "isNew": false },
+      { "id": "lgpd-4", "name": "IFSC-DTIC-CGD: Form2RIPD", "url": "https://ai.studio/apps/drive/1fv20kTnlkPYefuOFIXP2bEo3ld8p8th7?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Gerador de Relatórios para LGPD no IFSC", "isNew": true }
+    ]
+  },
+  {
+    "name": "Processos",
+    "iconKey": "processos",
+    "theme": "blue",
+    "apps": [
+      { "id": "proc-1", "name": "LaRDiC - Laboratório de Roteirização e Documentação com IA", "url": "https://ai.studio/apps/drive/1UDGQ0KWeFrb47zM5koH2NJooFXos7Q46?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Sistema CProc: BPMN/DMN->ProcessoIFSC->DocX", "isNew": false },
+      { "id": "proc-2", "name": "Pé-de-Meia", "url": "https://ai.studio/apps/drive/1Of7DeM0MJBRxAg__VdQWfzXo3C2OL5L6?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente de formatação SGP - Pé-de-Meia", "isNew": false },
+      { "id": "proc-3", "name": "Texto -> Processo -> Especificação de Sistema", "url": "https://ai.studio/apps/drive/1GvqPgG2sjuoaw2XM89jj7Hfk3z4V9GO9?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Mapeador de Processos Automágico com IA", "isNew": false }
+    ]
+  },
+  {
+    "name": "Dados",
+    "iconKey": "dados",
+    "theme": "yellow",
+    "apps": [
+      { "id": "data-1", "name": "Automação de Mapeamento de Dados LGPD", "url": "https://ai.studio/apps/drive/1EvvVk2lZ0-4HHPokSV-ZBQHkwbHELDxA?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Plataforma do Instituto Federal de Santa Catarina (IFSC).", "isNew": false },
+      { "id": "data-2", "name": "Ferramenta de Padronização de Inventário", "url": "https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente.", "isNew": true },
+      { "id": "data-3", "name": "SIADS - Agregador de Inventário com IA", "url": "https://ai.studio/apps/drive/1yZm3Z3PbrXS0316yJVm12ScHfSqxFFJ0?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Agregador de Inventário com IA", "isNew": false }
+    ]
+  }
+]
