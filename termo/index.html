@@ -166,7 +166,7 @@
                                 <span class="flex flex-1">
                                     <span class="flex flex-col">
                                         <span class="block text-sm font-bold text-gray-900 uppercase">Somente Biometria</span>
-                                        <span class="mt-2 text-sm text-gray-500">Apenas consentimento LGPD para biometria facial das catracas.</span>
+                                        <span class="mt-2 text-sm text-gray-500">Apenas consentimento LGPD para biometria de acesso a catracas e laboratórios.</span>
                                     </span>
                                 </span>
                                 <svg v-if="form.tipo === 'biometria'" class="h-6 w-6 text-[#2F9E41]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
@@ -265,7 +265,7 @@
                                     B. Biometria para Acesso Físico (Catracas)
                                 </div>
                                 <div class="p-5 space-y-3">
-                                    <p class="text-sm text-gray-600 mb-4">A coleta facial e/ou digital tem fim exclusivo de controle de entradas e saídas físicas do Campus. O dado é guardado de forma segura e não é compartilhado com terceiros, sob a égide da LGPD.</p>
+                                    <p class="text-sm text-gray-600 mb-4">A coleta biométrica (facial, digital, reconhecimento palmar ou tecnologias correlatas) tem fim exclusivo de controle de acesso físico ao Campus, como entradas e laboratórios. O dado é guardado de forma segura e não é compartilhado com terceiros, sob a égide da LGPD.</p>
                                     
                                     <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-[#2F9E41] bg-green-50': form.auth_biometria === 'autorizo'}">
                                         <input type="radio" v-model="form.auth_biometria" value="autorizo" required class="w-5 h-5 text-[#2F9E41]">
@@ -333,7 +333,7 @@
                     <!-- Seção B: Biometria (Mostra se for 'ambos' ou 'biometria') -->
                     <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'">
                         <h2 class="pdf-section-title">B. Sistemas de Biometria e Acesso Físico</h2>
-                        <p class="pdf-p"><strong>Finalidade e Segurança (LGPD):</strong> O recolhimento de traços fotográficos e/ou biométricos destina-se unicamente ao controle das catracas e laboratórios do Campus. Os dados brutos geram um padrão numérico (template geométrico) que é criptografado. O IFSC não repassa estes dados ao mercado ou entes terceiros, garantindo o apagamento imediato após a conclusão do curso ou término de vínculo, em respeito ao Princípio da Necessidade.</p>
+                        <p class="pdf-p"><strong>Finalidade e Segurança (LGPD):</strong> O recolhimento de dados biométricos (tais como geometria facial, impressões digitais, mapeamento palmar ou tecnologias correlatas) destina-se unicamente ao controle de acesso físico às catracas e laboratórios do Campus. Os dados brutos geram um padrão numérico (template matemático) que é criptografado. O IFSC não repassa estes dados ao mercado ou entes terceiros, garantindo o apagamento imediato após a conclusão do curso ou término de vínculo, em respeito ao Princípio da Necessidade.</p>
                         <ul class="pdf-ul">
                             <li>O consentimento pode ser revogado a qualquer instante, solicitando formalmente via protocolo do Campus, mediante ciência de que um método de acesso paralelo poderá acarretar diferenças nas filas de catracas.</li>
                             <li>A guarda de registros de acesso (logs brutos) atende exclusivamente às tabelas de temporalidade do Arquivo Nacional e à política interna de rastreabilidade para proteção institucional.</li>
@@ -357,7 +357,7 @@
                         <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'">
                             <strong>B. Biometria de Catracas / Acesso Físico:</strong>
                             <div class="pdf-option">
-                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> o processamento do facial/digital exclusivamente para segurança do campus.
+                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> o processamento de meus dados biométricos exclusivamente para segurança e controle de acesso do campus.
                             </div>
                             <div class="pdf-option">
                                 [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] NÃO AUTORIZO. Receberei do campus dispositivo avulso de acesso.
