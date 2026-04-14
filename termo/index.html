@@ -163,7 +163,7 @@
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                                     </div>
                                     <span class="flex flex-col">
-                                        <span class="block text-sm font-bold text-gray-900 uppercase">Menor de Idade (Até 17 anos)</span>
+                                        <span class="block text-sm font-bold text-gray-900 uppercase">Menor de Idade (Antes de completar 18 anos)</span>
                                         <span class="mt-1 text-xs text-gray-500">Responsável legal deve assinar. (Aplica-se Regras LGPD e ECA Digital).</span>
                                     </span>
                                 </span>
@@ -341,7 +341,7 @@
             </footer>
 
             <!-- Área oculta para renderização do PDF pelo html2pdf -->
-            <div style="display:none;" aria-hidden="true">
+            <div style="position: absolute; left: -9999px; top: 0;" aria-hidden="true">
                 <div id="pdf-render-area" ref="pdfArea" class="pdf-page bg-white">
                     <div style="text-align: center; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
                         <p style="margin: 0; font-size: 10pt;">MINISTÉRIO DA EDUCAÇÃO</p>
@@ -549,7 +549,7 @@
                             margin: [15, 12, 15, 12],
                             filename: nomeArquivo,
                             image: { type: 'jpeg', quality: 0.98 },
-                            html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                            html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
                             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
                         };
 
