@@ -126,8 +126,15 @@
             <div v-show="!success" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
                 
                 <div class="p-6 md:p-8 bg-blue-50/50 border-b border-blue-100">
-                    <p class="text-blue-900 leading-relaxed text-sm md:text-base">
-                        Para garantir a segurança, privacidade e desenvolvimento educacional, disponibilizamos este formulário para geração do Termo de Consentimento em aderência à <strong>LGPD (Lei 13.709/2018)</strong> e, quando aplicável a menores, à legislação do <strong>ECA Digital (Lei 15.211/2025)</strong>.
+                    <h3 class="text-blue-900 font-bold mb-2 uppercase text-sm md:text-base tracking-wide flex items-center gap-2">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Aviso de Privacidade: Geração de Termo Digital
+                    </h3>
+                    <p class="text-blue-900 leading-relaxed text-sm md:text-base mb-4 text-justify">
+                        Os dados preenchidos neste formulário (Nome e CPF) servem exclusivamente para gerar o PDF de consentimento para assinatura no <strong>gov.br</strong>. Estes dados pessoais <span class="font-bold underline cursor-help" title="Conforme Decreto nº 10.543/2020 e Art. 11 da LGPD">não ficam armazenados</span> em nosso banco de dados após a geração do arquivo e não são compartilhados com terceiros.
+                    </p>
+                    <p class="text-blue-900 leading-relaxed text-sm md:text-base text-justify">
+                        O tratamento do formulário segue estritamente as diretrizes de segurança e finalidade da Lei Geral de Proteção de Dados (LGPD). Quando aplicável a menores, a legislação do <strong>ECA Digital (Lei 15.211/2025)</strong> é agregada à finalidade exigindo preenchimento dos responsáveis para plataformas de nuvem.
                     </p>
                 </div>
 
@@ -279,18 +286,18 @@
                                 <!-- Decisão Nuvem (Apenas Menores e Se Selecionado) -->
                                 <div v-if="form.idade_perfil === 'menor' && (form.tipo === 'ambos' || form.tipo === 'nuvem')" class="bg-white border rounded-xl overflow-hidden shadow-sm">
                                     <div class="bg-gray-100 p-4 border-b font-bold text-gray-800">
-                                        A. Plataformas Educacionais (Google / Microsoft 365)
+                                        A. Plataformas Educacionais (Google Workspace / Microsoft 365)
                                     </div>
                                     <div class="p-5 space-y-3">
-                                        <p class="text-sm text-gray-600 mb-4">A autorização visa regulamentar a criação de contas de e-mail e acesso aos ambientes virtuais, adequando a inserção do menor sob as regras do ECA Digital (Lei 15.211) baseada na supervisão parental.<br><em>A restrição inviabilizará o fluxo de ensino remoto padrão da instituição e deve buscar alternativas físicas.</em></p>
+                                        <p class="text-sm text-gray-600 mb-4">O IFSC utiliza essas ferramentas operando como Controlador dos dados em um ecossistema seguro e sem anúncios (em linha com o ECA Digital), garantindo o desenvolvimento e comunicação dos estudantes que necessitam de contas institucionais.</p>
                                         
                                         <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-[#2F9E41] bg-green-50': form.auth_nuvem === 'autorizo'}">
                                             <input type="radio" v-model="form.auth_nuvem" value="autorizo" required class="w-5 h-5 text-[#2F9E41]">
-                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO a criação de contas e ferramentas educacionais.</span>
+                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO a criação de conta e o acesso restrito às plataformas Microsoft/Google institucionais.</span>
                                         </label>
                                         <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-red-500 bg-red-50': form.auth_nuvem === 'nao_autorizo'}">
                                             <input type="radio" v-model="form.auth_nuvem" value="nao_autorizo" class="w-5 h-5 text-red-600">
-                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO (O aluno não terá acesso ao e-mail institucional e ambientes virtuais).</span>
+                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO e solicitarei o acesso físico isolado no Campus para estudos.</span>
                                         </label>
                                     </div>
                                 </div>
@@ -298,18 +305,18 @@
                                 <!-- Decisão Biometria -->
                                 <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'" class="bg-white border rounded-xl overflow-hidden shadow-sm">
                                     <div class="bg-gray-100 p-4 border-b font-bold text-gray-800">
-                                        {{ form.idade_perfil === 'menor' && (form.tipo === 'ambos') ? 'B. ' : '' }}Biometria para Acesso Físico e Institucional
+                                        {{ form.idade_perfil === 'menor' && (form.tipo === 'ambos') ? 'B. ' : '' }}Biometria para Acesso Físico (Catracas e Laboratórios)
                                     </div>
                                     <div class="p-5 space-y-3">
-                                        <p class="text-sm text-gray-600 mb-4">A coleta biométrica (facial, digital, reconhecimento palmar ou tecnologias correlatas) tem fim restrito de controle de acesso ao Campus, como entradas e laboratórios especializados. O dado matemático final não é vendido ou repassado sob nenhuma hipótese pela fundação, zelando pela base rígida do artigo 11 da LGPD.</p>
+                                        <p class="text-sm text-gray-600 mb-4">A imagem facial ou impressão digital será garantida por criptografia em servidores próprios do DATACENTER IFSC. Tem uso exclusivo de segurança e proteção à comunidade do campus, sem compartilhamento ou venda externa e os dados morrem após o fim do curso (LGPD Princípio da Necessidade).</p>
                                         
                                         <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-[#2F9E41] bg-green-50': form.auth_biometria === 'autorizo'}">
                                             <input type="radio" v-model="form.auth_biometria" value="autorizo" required class="w-5 h-5 text-[#2F9E41]">
-                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO o processamento biométrico para acesso físico.</span>
+                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO o tratamento da biometria facial/digital para controle físico.</span>
                                         </label>
                                         <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-red-500 bg-red-50': form.auth_biometria === 'nao_autorizo'}">
                                             <input type="radio" v-model="form.auth_biometria" value="nao_autorizo" class="w-5 h-5 text-red-600">
-                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO (Acessarei o campus via registro ou crachá manual de visita).</span>
+                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO e gerirei acessos junto às portarias.</span>
                                         </label>
                                     </div>
                                 </div>
@@ -346,85 +353,95 @@
                     <div style="text-align: center; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
                         <p style="margin: 0; font-size: 10pt;">MINISTÉRIO DA EDUCAÇÃO</p>
                         <p style="margin: 0; font-size: 10pt;">SECRETARIA DE EDUCAÇÃO PROFISSIONAL E TECNOLÓGICA</p>
-                        <p style="margin: 0; font-weight: bold; font-size: 11pt;">INSTITUTO FEDERAL DE SANTA CATARINA - IFSC</p>
+                        <p style="margin: 0; font-weight: bold; font-size: 11pt;">INSTITUTO FEDERAL DE SANTA CATARINA - {{ form.campus ? 'CAMPUS ' + form.campus.toUpperCase() : 'IFSC' }}</p>
                     </div>
                     
-                    <h1 class="pdf-title">Termo de Consentimento para Tratamento de Dados Pessoais</h1>
-                    
-                    <p class="pdf-p">
-                        O Instituto Federal de Santa Catarina (IFSC) utiliza recursos tecnológicos para promover a integridade, segurança informacional e de acesso à permanência institucional e acadêmica. Em estrita conformidade técnica e jurídica com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018)</strong>
-                        <span v-if="form.idade_perfil === 'menor'"> e os escopos mandatórios do <strong>Estatuto da Criança e do Adolescente - ECA Digital (Lei nº 15.211/2025)</strong>, demandamos a representação autônoma para chancelar as condutas abaixo descritas para a execução fática dos vínculos estudantis.</span><span v-else>, garantido o Princípio da Transparência, recolhemos o aceite legal da operação biométrica necessária à segurança infraestrutural das localidades e laboratórios, dispensadas validações protetivas do público infantil (ECA) em vista da maioridade assinalada.</span>
-                    </p>
-                    
-                    <div style="margin: 20px 0; border: 1px dotted #aaa; padding: 10px; background-color: #fafafa;">
-                        <div v-if="form.idade_perfil === 'menor'">
-                            <p style="margin-bottom: 5px;"><strong>Representante Legal (Titular Consentinte):</strong> {{ form.responsavel_nome }} (CPF: {{ form.responsavel_cpf }})</p>
-                            <p><strong>Estudante (Titular dos Dados):</strong> {{ form.estudante_nome }} (CPF: {{ form.estudante_cpf }})</p>
+                    <!-- MODELO PARA MAIORES DE IDADE -->
+                    <template v-if="form.idade_perfil === 'maior'">
+                        <h1 class="pdf-title">TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS BIOMÉTRICOS</h1>
+                        
+                        <p class="pdf-p">
+                            Pelo presente instrumento, eu, <strong>{{ form.estudante_nome }}</strong>, inscrito no CPF sob o nº <strong>{{ form.estudante_cpf }}</strong>, na qualidade de Titular dos Dados, <strong>AUTORIZO</strong> de forma livre, informada e inequívoca que a instituição supra realize a coleta e o processamento da minha biometria (facial, digital, reconhecimento palmar ou tecnologias correlatas), observando as seguintes condições:
+                        </p>
+                        
+                        <div style="margin-top: 15px;">
+                            <p class="pdf-p"><strong>Finalidade:</strong> Os dados serão utilizados exclusivamente para controle de acesso às dependências do campus, visando a segurança dos estudantes, servidores e da comunidade em geral.</p>
+                            <p class="pdf-p"><strong>Forma de Tratamento:</strong> A biometria capturada será convertida em um vetor matemático (template biométrico) criptografado para fins de autenticação. A imagem original do padrão não será armazenada de forma permanente para esta finalidade, exceto se houver outra base legal.</p>
+                            <p class="pdf-p"><strong>Compartilhamento:</strong> Os dados biométricos não serão compartilhados com terceiros, salvo para empresas prestadoras de serviço de suporte tecnológico estritamente vinculadas a esta finalidade.</p>
+                            <p class="pdf-p"><strong>Direitos do Titular:</strong> Tenho ciência de que posso, a qualquer momento, solicitar o acesso, à correção ou a revogação deste consentimento através do canal oficial: encarregado.lgpd@ifsc.edu.br</p>
+                            <p class="pdf-p"><strong>Retenção:</strong> Os dados serão mantidos enquanto perdurar o vínculo acadêmico com a instituição ou até que este respectivo consentimento seja formalmente revogado.</p>
                         </div>
-                        <div v-if="form.idade_perfil === 'maior'">
-                            <p><strong>Estudante Signatário:</strong> {{ form.estudante_nome }} (CPF: {{ form.estudante_cpf }})</p>
-                            <p style="font-size: 9pt; color: #555; margin-top: 5px;">* Assinatura fundamentada pela autodeclaração de maioridade civil ou emancipação legal vigente.</p>
+                        
+                        <p style="margin-top: 40px; text-align: right; margin-bottom: 60px;">{{ form.campus || 'Local' }}, {{ currentDate }}.</p>
+                        
+                        <div style="text-align: center;">
+                            <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px; margin: 0;">Assinatura do Titular</p>
+                            <p style="font-size: 9pt; margin-top: 5px;">{{ form.estudante_nome }}</p>
                         </div>
-                    </div>
+                    </template>
 
-                    <!-- Seção A: Nuvem (Só menores + se selecionado nuvem ou ambos) -->
-                    <div v-if="form.idade_perfil === 'menor' && (form.tipo === 'ambos' || form.tipo === 'nuvem')">
-                        <h2 class="pdf-section-title">A. Plataformas Educacionais Digitais</h2>
-                        <p class="pdf-p"><strong>Finalidade e Marco Legal:</strong> Para viabilizar a fluidez nas dependências intelectuais (EaD e colaborativas), mantemos ecossistemas isolados no Google Workspace for Education e Microsoft 365 Education. Atendendo à normatização rígida da proteção psicossocial na internet (ECA Digital), configuram-se em ambientes fechados para coibir coleta de metadados para fins mercadológicos contra o menor.</p>
-                        <p class="pdf-p"><strong>Transmissão Estrita:</strong> O IFSC, operante como Controlador central, espelha nome padronizado e a entidade associativa (matrícula) para compor a identidade em e-mail institucional na esfera dos Operadores transnacionais, regidos sob salvaguarda contratual de não repasse.</p>
-                    </div>
+                    <!-- MODELO PARA MENORES DE IDADE -->
+                    <template v-if="form.idade_perfil === 'menor'">
+                        <h1 class="pdf-title">TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS DA CRIANÇA E/OU ADOLESCENTE</h1>
+                        
+                        <p class="pdf-p">
+                            Eu, <strong>{{ form.responsavel_nome }}</strong>, responsável legal pelo(a) menor <strong>{{ form.estudante_nome }}</strong>, CPF nº <strong>{{ form.estudante_cpf }}</strong>, portador(a) do CPF nº <strong>{{ form.responsavel_cpf }}</strong>, por meio deste documento, manifesto meu consentimento livre, informado e inequívoco para a coleta e o tratamento de dados pelo Instituto Federal de Santa Catarina (IFSC), nas condições a seguir:
+                        </p>
+                        
+                        <!-- SEÇÃO A: NUVEM (ECA DIGITAL) -->
+                        <div v-if="form.tipo === 'ambos' || form.tipo === 'nuvem'" style="margin-top: 15px;">
+                            <h2 class="pdf-section-title">A. Uso de Plataformas Educacionais em Nuvem</h2>
+                            
+                            <p class="pdf-p"><strong>Finalidade:</strong> Para viabilizar as atividades pedagógicas, a comunicação e a colaboração, o IFSC utiliza plataformas educacionais parceiras, como o Google Workspace for Education (Sala de Aula, Drive, Gmail) e o Microsoft 365 Education (Teams, OneDrive). O uso dessas ferramentas promove a cidadania digital em um ambiente seguro, em linha com os direitos e garantias processuais do ECA Digital.</p>
+                            
+                            <p class="pdf-p" style="margin-bottom: 5px;"><strong>Tratamento e Compartilhamento Regulamentado:</strong></p>
+                            <ul class="pdf-ul" style="font-size: 10pt;">
+                                <li><strong>Dados Compartilhados:</strong> Para a criação da conta educacional, o IFSC compartilha o nome completo do estudante com estas organizações a fim de gerar um e-mail institucional seguro, isento de escaneamento de anúncios.</li>
+                                <li><strong>Controlador e Operador:</strong> Nesta relação técnica, o IFSC é o Controlador único definindo a finalidade (exclusivamente educacional) enquanto que o Google e a Microsoft configuram-se como Operadores, mantendo contrato que lhes impõem obrigações globais de segurança da privacidade infantil.</li>
+                                <li><strong>Ambiente Restrito:</strong> Funcionalidades não necessárias, assim como exposições a aplicações e comunidades externas, são filtradas de acordo com as melhores e mais severas regras educacionais para menores.</li>
+                            </ul>
 
-                    <!-- Seção B: Biometria -->
-                    <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'">
-                        <h2 class="pdf-section-title">{{ form.idade_perfil === 'menor' && (form.tipo === 'ambos') ? 'B. ' : '' }}Sistemas de Biometria e Acesso Físico</h2>
-                        <p class="pdf-p"><strong>Tratamento e Natureza (LGPD):</strong> O recolhimento de dados geométricos-biométricos (tais como mapeamentos faciais, impressões digitais, palma da mão ou tecnologias assemelhadas de reconhecimento padrão corpóreo) orienta-se imperativamente e sem exclusividade abusiva para a regência do acesso unificado. As capturas fotográficas atrelam-se à transformação matemática reversível apenas pelos datacenters do Instituto e a liberação de travamentos mecânicos de acesso livre e de laboratórios específicos e de alto custo ou restrição de risco (química, tecnologia da informação, radiologia, etc).</p>
-                        <ul class="pdf-ul">
-                            <li>O consentimento pode ser revertido por notificação perante o DPO ou setor acadêmico, compreendendo adaptação do modelo à via protocolar e emissão de cartões avulsos suscetíveis a filas.</li>
-                            <li>Em consonância com as regulações federais e determinações do Arquivo Nacional, os logaritmos que formam os dados sensíveis serão sumariamente expurgados tão logo cesse o amparo de vínculo acadêmico com o Campus emitente.</li>
-                        </ul>
-                    </div>
-
-                    <!-- Expressão Conclusiva -->
-                    <h2 class="pdf-section-title" style="margin-top: 25px;">Exposição Clara da Vontade</h2>
-                    <p class="pdf-p" v-if="form.idade_perfil === 'menor'">
-                        Eu, na condição de representante insofismável do(a) menor discente retroidentificado, expresso formalmente minha autorização perante as alternativas subscritas:
-                    </p>
-                    <p class="pdf-p" v-if="form.idade_perfil === 'maior'">
-                        Eu, {{ form.estudante_nome }}, declaro minha voluntariedade como titular de dados ciente da legalidade proposta e assumo a responsabilidade por manifestar formalmente o seguinte padrão de aceite:
-                    </p>
-                    
-                    <div class="pdf-box">
-                        <div v-if="form.idade_perfil === 'menor' && (form.tipo === 'ambos' || form.tipo === 'nuvem')" style="margin-bottom: 15px;">
-                            <strong>A. Integração Nuvem Tecnológica Educacional:</strong>
-                            <div class="pdf-option" style="margin-top: 5px;">
-                                [{{ form.auth_nuvem === 'autorizo' ? 'X' : '  ' }}] O(A) menor <b>POSSUI AUTORIZAÇÃO</b> para acessar infraestrutura externa vinculada.
+                            <div class="pdf-option" style="margin-top: 12px; margin-bottom: 5px">
+                                [{{ form.auth_nuvem === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> a criação de contas controladas e o uso das suítes institucionais Microsoft e Google.
                             </div>
                             <div class="pdf-option">
-                                [{{ form.auth_nuvem === 'nao_autorizo' ? 'X' : '  ' }}] <b>NEGADO ASSENTIMENTO</b>, abstendo-se a escola das implantações lógicas.
+                                [{{ form.auth_nuvem === 'nao_autorizo' ? 'X' : '  ' }}] <b>NÃO AUTORIZO</b> o acesso do(a) discente às plataformas, buscando recursos de compensação offline na Instituição.
                             </div>
                         </div>
 
-                        <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'">
-                            <strong>{{ form.idade_perfil === 'menor' && (form.tipo === 'ambos') ? 'B. ' : '' }}Controle Físico por Biometrias Múltiplas:</strong>
-                            <div class="pdf-option" style="margin-top: 5px;">
-                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <b>ACEITO IRRESTRITAMENTE</b> a coleta do material biométrico aos propósitos cabais do IFSC.
+                        <!-- SEÇÃO B: BIOMETRIA (TEXTO DA CHEFIA) -->
+                        <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'" style="margin-top: 15px;">
+                            <h2 class="pdf-section-title">{{ form.tipo === 'ambos' ? 'B. ' : '' }}Uso de Sistemas de Biometria para Acesso</h2>
+                            
+                            <p class="pdf-p"><strong>Finalidade Específica:</strong> Os dados biométricos (imagem facial, impressão digital, entre outros permitidos) são utilizados com finalidade exclusiva de controlar o acesso físico às dependências do campus principal (catracas) e a ambientes restritos como laboratórios de segurança ou alta tecnologia. O objetivo é assegurar o(a) estudante, proteger a vida da comunidade e resguardar o patrimônio da União.</p>
+                            
+                            <p class="pdf-p"><strong>Tratamento e Segurança:</strong> O dado capturado será unicamente submetido a algoritmos internos das equipes de Tecnologia que o converterão num vetor (template matemático) criptografado dentro dos datacenters do próprio Instituto Federal. Esses dados <strong>não</strong> serão compartilhados a título analítico com terceiros de fora da instituição, mitigados pelas hipóteses expressas de força de lei (como autoridades judiciais).</p>
+
+                            <p class="pdf-p" style="margin-top: 15px; margin-bottom: 5px"><strong>Declaração de Ciência e Impacto:</strong> Fico ciente de que:</p>
+                            <ul class="pdf-ul" style="font-size: 10pt;">
+                                <li><strong>Guarda e Eliminação do dado principal:</strong> O material físico capturado (Templates) seguirá o princípio basilar do Artigo da Necessidade da LGPD, sendo permanentemente eliminado assim que encerrado o vínculo institucional do acadêmico. Já os horários numéricos anotados na base textual (logs em tabela), obedecem aos critérios estaduais previstos de Tabela de Temporalidade do Arquivo Nacional.</li>
+                                <li>O uso dos dados visa exclusivamente garantir a inibição ou identificação imediata de malfeitos a terceiros ocorridos nos campi da fundação, não devendo a revogação sem justo motivo servir para descumprir tais ritos onde instalados por Regimento Interno. A qualquer momento, se eu optar por suspender ou negar o tratamento por ofício via portal/Setor LGPD, me ciente dos atrasos eventuais gerados na transição contínua manual da logística nas catracas.</li>
+                            </ul>
+
+                            <div class="pdf-option" style="margin-top: 12px; margin-bottom: 5px;">
+                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <strong style="text-decoration: underline">AUTORIZO</strong> o tratamento da biometria facial/física sob essas amarras legais descritas.
                             </div>
-                            <div class="pdf-option">
-                                [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] <b>OPOSIÇÃO</b>, solicitando-se regramentos contíguos baseados no uso predeterminado de catracas visuais ou de passes analógicos.
+                            <div class="pdf-option" style="margin-bottom: 12px;">
+                                [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] <strong style="color: #c00;">NÃO AUTORIZO</strong> e assumo o compromisso regular em guarita humana identificada.
                             </div>
                         </div>
-                    </div>
 
-                    <p class="pdf-p" style="margin-top: 25px; font-size: 9.5pt; text-align: justify">
-                        Por fim, concordo que este instrumento seja legitimado pela utilização de minha assinatura baseada no ICP-Brasil digitalmente (Plataforma Gov.br), cuja rubrica é inquestionável perante à Lei Federal 14.063/2020.
-                    </p>
-
-                    <p style="margin-top: 40px; text-align: right; margin-bottom: 70px;">{{ form.campus || '_________________________' }}, {{ currentDate }}.</p>
-                    
-                    <div style="text-align: center;">
-                        <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px; margin: 0;">Assinatura do Detentor Legal da Autorização e Maioridade</p>
-                        <p style="font-size: 9pt; margin-top: 5px;">{{ form.idade_perfil === 'menor' ? form.responsavel_nome : form.estudante_nome }}</p>
-                    </div>
+                        <p class="pdf-p" style="font-size: 10pt; text-align: justify; margin-top: 18px;">
+                            Concedo meu consentimento nos termos da Lei Geral de Proteção de Dados Pessoais (LGPD), do ECA Digital e demais legislações, declarando estrita consonância em favor das políticas integrativas baseando-se no melhor interesse do discente tutelado.
+                        </p>
+                        
+                        <p style="margin-top: 25px; text-align: right; margin-bottom: 40px;">{{ form.campus || '_________________________' }}, {{ currentDate }}.</p>
+                        
+                        <div style="text-align: center;">
+                            <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px; margin: 0;">Assinatura do Responsável Legal</p>
+                            <p style="font-size: 9pt; margin-top: 5px;">{{ form.responsavel_nome }}</p>
+                        </div>
+                    </template>
                 </div>
             </div>
 
