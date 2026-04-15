@@ -361,15 +361,15 @@
                         <h1 class="pdf-title">TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS BIOMÉTRICOS</h1>
                         
                         <p class="pdf-p">
-                            Pelo presente instrumento, eu, <strong>{{ form.estudante_nome }}</strong>, inscrito no CPF sob o nº <strong>{{ form.estudante_cpf }}</strong>, na qualidade de Titular dos Dados, <strong>AUTORIZO</strong> de forma livre, informada e inequívoca que a instituição supra realize a coleta e o processamento da minha biometria (facial, digital, reconhecimento palmar ou tecnologias correlatas), observando as seguintes condições:
+                            Pelo presente termo, eu, <strong>{{ form.estudante_nome }}</strong>, titular do CPF nº <strong>{{ form.estudante_cpf }}</strong>, sendo maior de idade, <strong>AUTORIZO</strong> de forma clara e objetiva que o IFSC colete e utilize meus dados biométricos (como leitura facial ou impressão digital), conforme as diretrizes da Lei Geral de Proteção de Dados Pessoais (LGPD).
                         </p>
                         
                         <div style="margin-top: 15px;">
-                            <p class="pdf-p"><strong>Finalidade:</strong> Os dados serão utilizados exclusivamente para controle de acesso às dependências do campus, visando a segurança dos estudantes, servidores e da comunidade em geral.</p>
-                            <p class="pdf-p"><strong>Forma de Tratamento:</strong> A biometria capturada será convertida em um vetor matemático (template biométrico) criptografado para fins de autenticação. A imagem original do padrão não será armazenada de forma permanente para esta finalidade, exceto se houver outra base legal.</p>
-                            <p class="pdf-p"><strong>Compartilhamento:</strong> Os dados biométricos não serão compartilhados com terceiros, salvo para empresas prestadoras de serviço de suporte tecnológico estritamente vinculadas a esta finalidade.</p>
-                            <p class="pdf-p"><strong>Direitos do Titular:</strong> Tenho ciência de que posso, a qualquer momento, solicitar o acesso, à correção ou a revogação deste consentimento através do canal oficial: encarregado.lgpd@ifsc.edu.br</p>
-                            <p class="pdf-p"><strong>Retenção:</strong> Os dados serão mantidos enquanto perdurar o vínculo acadêmico com a instituição ou até que este respectivo consentimento seja formalmente revogado.</p>
+                            <p class="pdf-p"><strong>Para que serve:</strong> Os dados serão usados apenas para controlar a entrada e saída nas dependências do campus, garantindo a minha segurança física e a de toda a comunidade.</p>
+                            <p class="pdf-p"><strong>Como é protegido:</strong> A biometria não é guardada como uma foto comum. Ela é transformada em um código matemático seguro e criptografado nos servidores de tecnologia do próprio IFSC, protegendo a minha privacidade.</p>
+                            <p class="pdf-p"><strong>Compartilhamento:</strong> O IFSC não venderá, repassará nem usará meus dados para fins comerciais. O compartilhamento técnico só pode ocorrer com empresas de suporte do próprio sistema de catracas, sob rigoroso contrato de confidencialidade.</p>
+                            <p class="pdf-p"><strong>Meus Direitos:</strong> Tenho ciência de que posso pedir para verificar, alterar ou cancelar esta autorização a qualquer momento, enviando um e-mail para: encarregado.lgpd@ifsc.edu.br.</p>
+                            <p class="pdf-p"><strong>Tempo de Guarda (Necessidade):</strong> Entendo que meus dados biométricos serão excluídos dos sistemas de catraca assim que eu não for mais aluno da instituição ou se eu cancelar formalmente esta autorização.</p>
                         </div>
                         
                         <p style="margin-top: 40px; text-align: right; margin-bottom: 60px;">{{ form.campus || 'Local' }}, {{ currentDate }}.</p>
@@ -385,54 +385,39 @@
                         <h1 class="pdf-title">TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS PESSOAIS DA CRIANÇA E/OU ADOLESCENTE</h1>
                         
                         <p class="pdf-p">
-                            Eu, <strong>{{ form.responsavel_nome }}</strong>, responsável legal pelo(a) menor <strong>{{ form.estudante_nome }}</strong>, CPF nº <strong>{{ form.estudante_cpf }}</strong>, portador(a) do CPF nº <strong>{{ form.responsavel_cpf }}</strong>, por meio deste documento, manifesto meu consentimento livre, informado e inequívoco para a coleta e o tratamento de dados pelo Instituto Federal de Santa Catarina (IFSC), nas condições a seguir:
+                            Eu, <strong>{{ form.responsavel_nome }}</strong>, CPF nº <strong>{{ form.responsavel_cpf }}</strong>, como responsável legal pelo(a) estudante menor de idade <strong>{{ form.estudante_nome }}</strong>, CPF nº <strong>{{ form.estudante_cpf }}</strong>, <strong>AUTORIZO</strong> de forma clara e objetiva o Instituto Federal de Santa Catarina (IFSC) a tratar os dados do aluno conforme as finalidades abaixo:
                         </p>
                         
                         <!-- SEÇÃO A: NUVEM (ECA DIGITAL) -->
                         <div v-if="form.tipo === 'ambos' || form.tipo === 'nuvem'" style="margin-top: 15px;">
-                            <h2 class="pdf-section-title">A. Uso de Plataformas Educacionais em Nuvem</h2>
+                            <h2 class="pdf-section-title">A. Plataformas Educacionais em Nuvem (ECA Digital)</h2>
                             
-                            <p class="pdf-p"><strong>Finalidade:</strong> Para viabilizar as atividades pedagógicas, a comunicação e a colaboração, o IFSC utiliza plataformas educacionais parceiras, como o Google Workspace for Education (Sala de Aula, Drive, Gmail) e o Microsoft 365 Education (Teams, OneDrive). O uso dessas ferramentas promove a cidadania digital em um ambiente seguro, em linha com os direitos e garantias processuais do ECA Digital.</p>
+                            <p class="pdf-p">Para garantir os estudos, recebimento de materiais e o contato com os professores de forma segura, o IFSC utiliza as plataformas Google Workspace e Microsoft 365, seguindo regras rígidas de segurança infantil do <strong>ECA Digital (Lei 15.211)</strong>.</p>
                             
-                            <p class="pdf-p" style="margin-bottom: 5px;"><strong>Tratamento e Compartilhamento Regulamentado:</strong></p>
-                            <ul class="pdf-ul" style="font-size: 10pt;">
-                                <li><strong>Dados Compartilhados:</strong> Para a criação da conta educacional, o IFSC compartilha o nome completo do estudante com estas organizações a fim de gerar um e-mail institucional seguro, isento de escaneamento de anúncios.</li>
-                                <li><strong>Controlador e Operador:</strong> Nesta relação técnica, o IFSC é o Controlador único definindo a finalidade (exclusivamente educacional) enquanto que o Google e a Microsoft configuram-se como Operadores, mantendo contrato que lhes impõem obrigações globais de segurança da privacidade infantil.</li>
-                                <li><strong>Ambiente Restrito:</strong> Funcionalidades não necessárias, assim como exposições a aplicações e comunidades externas, são filtradas de acordo com as melhores e mais severas regras educacionais para menores.</li>
-                            </ul>
-
-                            <div class="pdf-option" style="margin-top: 12px; margin-bottom: 5px">
-                                [{{ form.auth_nuvem === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> a criação de contas controladas e o uso das suítes institucionais Microsoft e Google.
+                            <div class="pdf-option" style="margin-top: 10px; margin-bottom: 8px;">
+                                [{{ form.auth_nuvem === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> a criação da conta e o acesso do aluno ao e-mail e sistemas da Microsoft e Google. Entendo que o ambiente é livre de anúncios comerciais, restrito à escola e protegido.
                             </div>
                             <div class="pdf-option">
-                                [{{ form.auth_nuvem === 'nao_autorizo' ? 'X' : '  ' }}] <b>NÃO AUTORIZO</b> o acesso do(a) discente às plataformas, buscando recursos de compensação offline na Instituição.
+                                [{{ form.auth_nuvem === 'nao_autorizo' ? 'X' : '  ' }}] <b>NÃO AUTORIZO</b> o acesso do menor a estas plataformas institucionais conectadas à nuvem.
                             </div>
                         </div>
 
                         <!-- SEÇÃO B: BIOMETRIA (TEXTO DA CHEFIA) -->
                         <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'" style="margin-top: 15px;">
-                            <h2 class="pdf-section-title">{{ form.tipo === 'ambos' ? 'B. ' : '' }}Uso de Sistemas de Biometria para Acesso</h2>
+                            <h2 class="pdf-section-title">{{ form.tipo === 'ambos' ? 'B. ' : '' }}Cadastro de Biometria e Acesso Seguro</h2>
                             
-                            <p class="pdf-p"><strong>Finalidade Específica:</strong> Os dados biométricos (imagem facial, impressão digital, entre outros permitidos) são utilizados com finalidade exclusiva de controlar o acesso físico às dependências do campus principal (catracas) e a ambientes restritos como laboratórios de segurança ou alta tecnologia. O objetivo é assegurar o(a) estudante, proteger a vida da comunidade e resguardar o patrimônio da União.</p>
+                            <p class="pdf-p" style="margin-bottom: 8px">Focado no <strong>melhor interesse do menor</strong>, o IFSC cadastra a biometria para ter controle rápido e seguro de quem entra nas catracas do campus e laboratórios, evitando pessoas estranhas no ambiente escolar. Esse controle atende a LGPD e garante a segurança física dos alunos.</p>
                             
-                            <p class="pdf-p"><strong>Tratamento e Segurança:</strong> O dado capturado será unicamente submetido a algoritmos internos das equipes de Tecnologia que o converterão num vetor (template matemático) criptografado dentro dos datacenters do próprio Instituto Federal. Esses dados <strong>não</strong> serão compartilhados a título analítico com terceiros de fora da instituição, mitigados pelas hipóteses expressas de força de lei (como autoridades judiciais).</p>
-
-                            <p class="pdf-p" style="margin-top: 15px; margin-bottom: 5px"><strong>Declaração de Ciência e Impacto:</strong> Fico ciente de que:</p>
-                            <ul class="pdf-ul" style="font-size: 10pt;">
-                                <li><strong>Guarda e Eliminação do dado principal:</strong> O material físico capturado (Templates) seguirá o princípio basilar do Artigo da Necessidade da LGPD, sendo permanentemente eliminado assim que encerrado o vínculo institucional do acadêmico. Já os horários numéricos anotados na base textual (logs em tabela), obedecem aos critérios estaduais previstos de Tabela de Temporalidade do Arquivo Nacional.</li>
-                                <li>O uso dos dados visa exclusivamente garantir a inibição ou identificação imediata de malfeitos a terceiros ocorridos nos campi da fundação, não devendo a revogação sem justo motivo servir para descumprir tais ritos onde instalados por Regimento Interno. A qualquer momento, se eu optar por suspender ou negar o tratamento por ofício via portal/Setor LGPD, me ciente dos atrasos eventuais gerados na transição contínua manual da logística nas catracas.</li>
-                            </ul>
-
-                            <div class="pdf-option" style="margin-top: 12px; margin-bottom: 5px;">
-                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <strong style="text-decoration: underline">AUTORIZO</strong> o tratamento da biometria facial/física sob essas amarras legais descritas.
+                            <div class="pdf-option" style="margin-bottom: 8px;">
+                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <strong style="text-decoration: underline">AUTORIZO</strong> a coleta da biometria facial/digital do aluno para liberação das catracas. Entendo que o dado vira um código criptografado protegido nos servidores do próprio IFSC, sem comercialização com terceiros, e morre ao final do vínculo com a instituição.
                             </div>
                             <div class="pdf-option" style="margin-bottom: 12px;">
-                                [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] <strong style="color: #c00;">NÃO AUTORIZO</strong> e assumo o compromisso regular em guarita humana identificada.
+                                [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] <strong style="color: #c00;">NÃO AUTORIZO</strong> a biometria e o estudante fará o registro manual nas portarias.
                             </div>
                         </div>
 
-                        <p class="pdf-p" style="font-size: 10pt; text-align: justify; margin-top: 18px;">
-                            Concedo meu consentimento nos termos da Lei Geral de Proteção de Dados Pessoais (LGPD), do ECA Digital e demais legislações, declarando estrita consonância em favor das políticas integrativas baseando-se no melhor interesse do discente tutelado.
+                        <p class="pdf-p" style="font-size: 10pt; text-align: justify; margin-top: 15px;">
+                            Declaro estar ciente de que, como responsável, posso solicitar a revisão ou o cancelamento desta autorização a qualquer momento, bastando contatar o encarregado de proteção de dados no e-mail: encarregado.lgpd@ifsc.edu.br.
                         </p>
                         
                         <p style="margin-top: 25px; text-align: right; margin-bottom: 40px;">{{ form.campus || '_________________________' }}, {{ currentDate }}.</p>
