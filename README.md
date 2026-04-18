@@ -12,6 +12,7 @@ Este portal é uma vitrine centralizada para as diversas ferramentas e sistemas 
 - **Busca Instantânea:** Encontre rapidamente a aplicação que você precisa com a barra de pesquisa.
 - **Responsivo:** Acesso e visualização otimizados para desktops, tablets e smartphones.
 - **Colaborativo:** Projeto aberto a contribuições da comunidade IFSC.
+- **Segurança e Evolução:** [Diretrizes de Segurança](./SEGURANCA.md) e [Sugestões de Funcionalidades](./FUNCIONALIDADES.md) para evolução contínua do portal.
 
 ## Tecnologias Utilizadas
 
