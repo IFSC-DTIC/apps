@@ -147,6 +147,9 @@
         <h2 class="text-xl font-black text-gray-900 dark:text-white mb-2">Agentes Especialistas</h2>
         <p class="text-sm text-gray-500 dark:text-gray-400">Assistentes usando Gemini (Gems) treinados na documentação interna de setores específicos do IFSC usando NotebookLM como base de RAG (Retrieval-Augmented Generation).</p>
       </div>
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div id="filter-experts-container" class="filter-btn-group flex flex-wrap gap-2"></div>
+      </div>
       <div id="experts-grid" class="app-grid mb-20">
         <!-- Skeleton Loading -->
         <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
@@ -252,16 +255,21 @@
         bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">schema</span><span>BPMN</span></div>`, 
         siads: `<div class="category-icon bg-gradient-to-br from-amber-500 to-orange-600"><span class="material-icons-round text-xl mb-0.5">inventory_2</span><span>SIADS</span></div>`, 
         rsctae: `<div class="category-icon bg-gradient-to-br from-purple-500 to-indigo-700"><span class="material-icons-round text-xl mb-0.5">assignment_ind</span><span>RSC</span></div>`,
-        especialistas: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-xl mb-0.5">psychology</span><span>EXP</span></div>`
+        especialistas: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-xl mb-0.5">psychology</span><span>EXP</span></div>`,
+        taes: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-xl mb-0.5">badge</span><span>TAEs</span></div>`,
+        professores: `<div class="category-icon bg-gradient-to-br from-indigo-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">school</span><span>PROF</span></div>`,
+        alunos: `<div class="category-icon bg-gradient-to-br from-pink-500 to-rose-700"><span class="material-icons-round text-xl mb-0.5">face</span><span>ALU</span></div>`
       };
 
       const appGrid = document.getElementById('app-grid');
       const filterContainer = document.getElementById('filter-container');
+      const filterExpertsContainer = document.getElementById('filter-experts-container');
       const quicksearch = document.getElementById('quicksearch');
       const slugify = str => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
       let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       let categoriesData = [];
+      let gemsCategoriesData = [];
       let expertsData = [];
       let allApps = [];
       let activeTab = 'tools';
@@ -347,10 +355,14 @@
             else item.classList.add('hidden');
           });
         } else {
+          const activeFilter = filterExpertsContainer.querySelector('.active')?.dataset.filter || 'all';
           const items = document.getElementById('experts-grid').querySelectorAll('.app-item');
           items.forEach(item => {
+            const catMatch = activeFilter === 'all' || 
+                             item.dataset.category === activeFilter ||
+                             (activeFilter === 'favs' && favorites.includes(item.dataset.id));
             const searchMatch = item.dataset.name.includes(searchText);
-            if (searchMatch) item.classList.remove('hidden');
+            if (catMatch && searchMatch) item.classList.remove('hidden');
             else item.classList.add('hidden');
           });
         }
@@ -363,12 +375,16 @@
       ])
       .then(([appsData, gemsData]) => {
           categoriesData = appsData;
+          gemsCategoriesData = gemsData;
           
-          if (gemsData && gemsData.length > 0) {
-            const expCat = gemsData[0];
-            if (expCat && expCat.apps) {
-              expertsData = expCat.apps.map(a => ({ ...a, category: 'especialistas', iconKey: expCat.iconKey }));
-            }
+          if (gemsCategoriesData && gemsCategoriesData.length > 0) {
+            gemsCategoriesData.forEach(c => {
+               if(c.apps) {
+                 c.apps.forEach(a => {
+                   expertsData.push({ ...a, category: slugify(c.name), iconKey: c.iconKey });
+                 });
+               }
+            });
           }
 
           categoriesData.forEach(c => {
@@ -390,12 +406,33 @@
             </button>
           `).join('');
 
+          // Render Filters for Experts
+          const filterExpertsButtons = [
+            { name: 'Todos', filter: 'all' }, 
+            { name: '⭐ Favoritos', filter: 'favs' },
+            ...(gemsCategoriesData ? gemsCategoriesData.map(c => ({ name: c.name, filter: slugify(c.name) })) : [])
+          ];
+          
+          filterExpertsContainer.innerHTML = filterExpertsButtons.map((b, i) => `
+            <button data-filter="${b.filter}" class="text-sm font-semibold py-2 px-5 rounded-full border bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 transition-all ${i === 0 ? 'active' : ''}">
+              ${b.name}
+            </button>
+          `).join('');
+
           renderApps();
           applyFilters();
           
           filterContainer.addEventListener('click', (e) => {
             if (e.target.tagName === 'BUTTON') {
               filterContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+              e.target.classList.add('active');
+              applyFilters();
+            }
+          });
+
+          filterExpertsContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+              filterExpertsContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
               e.target.classList.add('active');
               applyFilters();
             }
