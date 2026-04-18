@@ -14,7 +14,7 @@ Este portal funciona como uma vitrine de inteligência artificial aplicada. Ele 
 - **Grid Responsivo e Moderno:** Interface visual rica com suporte a "Dark Mode" nativo (Modo Claro/Escuro), utilizando a tecnologia Tailwind CSS via CDN.
 - **Leitura Dinâmica de Dados (Data-Driven):** O portal é totalmente alimentado por arquivos JSON independentes (`apps.json` e `agents.json`). Adicionar uma ferramenta não requer tocar no HTML principal.
 - **Cache Busting Automático:** O carregamento dos dados inclui controle automático de versão (timestamp) nas requisições HTTP (`fetch`) para garantir que os usuários sempre recebam o catálogo mais atual das ferramentas, sem problemas persistentes de cache local nos navegadores.
-- **Categorização e Filtros:** Filtros de navegação independentes para cada aba (ex: LGPD, BPMN, TAEs, Professores, Alunos).
+- **Categorização e Filtros:** Filtros de navegação independentes para cada aba (ex: Processos, Administrativo, Gestão de Pessoas, Servidores, Professores, Alunos).
 - **Integração Fluida:** Botão de ação direto para o ambiente onde a ferramenta/agente está hospedado e Deep Linking nativo.
 
 ---
@@ -27,6 +27,16 @@ Este projeto foi desenhado sob o princípio arquitetural "*Zero-Build*" ou "*Van
 - **Iconografia:** Google Material Icons.
 - **Armazenamento de Estado:** `localStorage` (para salvar preferências de Tema Escuro e sistema de Favoritos [⭐]).
 - **Armazenamento de Dados:** Arquivos de registro estáticos JSON.
+
+---
+
+## 📚 Documentação e Governança
+
+Para desenvolvedores, colaboradores e futuros agentes autônomos que desejam trabalhar no repositório, consulte nossos Guias Estruturais antes de enviar _Pull Requests_ ou executar alterações arquiteturais:
+
+- 🏛️ **[ARQUITETURA.md](ARQUITETURA.md)**: Regras de engajamento multi-agentes e padrões do sistema *zero-backend*.
+- 🛡️ **[SEGURANCA.md](SEGURANCA.md)**: Análise de vulnerabilidades, limites do *GitHub Pages*, *SRI*, *CSP* e proteção de menores e adequação a LGPD.
+- 💡 **[FUNCIONALIDADES.md](FUNCIONALIDADES.md)**: Roadmap de novas soluções, como buscas offline, *BYOK (Bring Your Own Key)*, processamento focado em *Client-Side* apenas.
 
 ---
 
@@ -52,14 +62,14 @@ A inclusão de novos agentes/aplicativos não exige alteração do Javascript do
    - Se for um novo utilitário geral ou automação sistêmica: edite o arquivo **`apps.json`**.
    - Se for um novo Assistente/Gem especializado baseado num RAG normativo (ex: Assistente de Legislação PROEN): edite o arquivo **`agents.json`**.
 3. **Cadastre as Informações Necessárias:**
-   Escolha a categoria correta dentro do arquivo JSON (ex: `TAEs`, `Professores` ou `LGPD`), e anexe seu objeto informando:
+   Escolha a categoria correta dentro do arquivo JSON (ex: `Servidores`, `Professores` ou `LGPD`), e anexe seu objeto informando:
    ```json
    {
      "id": "identificador_unico_sem_espacos",
      "name": "Nome da Sua Ferramenta",
      "url": "https://link-da-ferramenta.com",
      "description": "Explicação detalhada (até 2-3 frases curtas) sobre o que essa IA resolve.",
-     "tags": ["TAEs"]
+     "tags": ["Servidores"]
    }
    ```
 4. **Commit e Pull Request:** Salve suas edições e solicite um _Pull Request_ para o repositório principal da DTIC. Após a curadoria e revisão da gerência, seu projeto estará no ar imediatamente para toda a comunidade!
