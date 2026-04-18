@@ -358,7 +358,7 @@
 
       Promise.all([
         fetch('apps.json').then(res => res.json()),
-        fetch('gems.json').then(res => res.json())
+        fetch('agents.json').then(res => res.json())
       ])
       .then(([appsData, gemsData]) => {
           categoriesData = appsData;
