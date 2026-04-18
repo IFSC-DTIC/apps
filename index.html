@@ -450,8 +450,15 @@
             } 
             if(id) { 
               id = id.toLowerCase(); 
+              
+              if (['agents', 'gems', 'especialistas'].includes(id)) {
+                setTab('experts');
+                return;
+              }
+
               [...allApps, ...expertsData].some(a => { 
                 if (a.id.toLowerCase() === id) {
+                  if (expertsData.some(e => e.id === a.id)) setTab('experts');
                   if(p.get('redirect')==='true') window.location.href = a.url; 
                   else openModal(a.id, encodeURIComponent(a.name), encodeURIComponent(a.description), a.url, a.iconKey); 
                   return true; 
