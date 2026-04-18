@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Termo de Consentimento - IFSC (LGPD/ECA)</title>
+    <title>Termo de Consentimento - IFSC</title>
     
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T49JX2YJMT"></script>
@@ -11,363 +11,604 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-T49JX2YJMT');
     </script>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "wddq8jjbkx");
+    </script>
+
     
-    <!-- Meta tags para SEO e segurança -->
-    <meta name="description" content="Gerador de Termo de Consentimento para coleta de dados biométricos de menores e uso de serviços de nuvem no IFSC, em conformidade com a LGPD e o ECA.">
+    <meta name="description" content="Portal de serviços do IFSC: Gerador de Termos de Consentimento (LGPD / ECA Digital).">
     <meta name="author" content="IFSC">
     
-    <!-- Carrega Tailwind CSS para estilização -->
+    <!-- Tailwind CSS e Vue.js -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     
-    <!-- Carrega a biblioteca html2pdf.js para geração de PDF -->
+    <!-- html2pdf.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Estilos e fontes customizadas -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ifsc: {
+                            green: '#32BF5E',
+                            red: '#C8191E',
+                            dark: '#1f2937'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            @apply bg-gray-100 text-gray-800;
+            background-color: #f3f4f6;
+            color: #1f2937;
         }
 
-        /* Força a visibilidade do cursor de texto (caret) nos inputs */
-        input:focus {
-            caret-color: auto;
+        .fade-enter-active, .fade-leave-active {
+            transition: opacity 0.3s ease;
+        }
+        .fade-enter-from, .fade-leave-to {
+            opacity: 0;
         }
 
-        @media print {
-            body { background-color: white; color: black; }
-            .no-print { display: none !important; }
-            #pdf-content { margin: 0; padding: 0; border: none; box-shadow: none; max-width: 100%; }
+        /* Estilos PDF */
+        .pdf-page {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            line-height: 1.4;
+            color: #000;
+            padding: 10mm;
+            box-sizing: border-box;
+            width: 100%;
         }
+        .pdf-title { font-size: 13pt; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
+        .pdf-section-title { font-weight: bold; font-size: 11.5pt; background-color: #f3f4f6; border-left: 4px solid #32BF5E; padding: 4px 8px; margin-top: 15px; margin-bottom: 10px; }
+        .pdf-p { text-align: justify; margin-bottom: 12px; }
+        .pdf-ul { list-style-type: disc; padding-left: 25px; text-align: justify; margin-bottom: 12px; }
+        .pdf-ul li { margin-bottom: 6px; }
+        .pdf-box { border: 1px solid #d1d5db; padding: 12px; margin-top: 15px; border-radius: 4px; }
+        .pdf-option { font-family: 'Courier New', Courier, monospace; margin-bottom: 8px; padding-left: 20px; text-indent: -20px; font-size: 10pt; }
     </style>
-    
 </head>
-<body class="min-h-screen">
-
-    <main class="p-4 sm:p-6 lg:p-8">
-        <div class="max-w-3xl mx-auto bg-white rounded-2xl shadow-lg border border-gray-200">
-            
-            <header class="text-center p-6 border-b border-gray-200">
-                <h1 class="text-2xl font-bold text-green-700">IFSC: Gerador de Termo (LGPD e ECA)</h1>
-                <p class="text-gray-600">Consentimento para Biometria e Serviços de Nuvem</p>
-            </header>
-            
-            <div class="p-6 md:p-8">
-                <div class="no-print p-4 mb-8 bg-blue-50 border-l-4 border-blue-500 text-sm text-blue-800">
-                    <p class="font-bold mb-2">Prezados pais ou responsáveis de alunos menores de idade que estudam no IFSC,</p>
-                    <p>O Instituto Federal de Santa Catarina (IFSC), no seu compromisso com a inovação e a segurança, utiliza tecnologias para aprimorar a experiência educacional. Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD) e o Estatuto da Criança e do Adolescente (ECA), este documento visa obter sua autorização formal para o tratamento de dados pessoais do(a) estudante em duas frentes: (A) Plataformas Educacionais Digitais e (B) Sistemas de Segurança e Acesso Físico.</p>
+<body>
+    <div id="app" class="min-h-screen flex flex-col">
+        
+        <!-- Header IFSC -->
+        <header class="bg-[#2F9E41] text-white shadow-lg border-b-4 border-[#C8191E]">
+            <div class="max-w-5xl mx-auto px-4 py-6 flex flex-col md:flex-row items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <div class="border-2 border-white p-2 rounded-lg text-center font-bold tracking-widest bg-white text-[#2F9E41]">
+                        <div class="text-2xl leading-none">IFSC</div>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl md:text-3xl font-bold tracking-tight">Gerador de Termos</h1>
+                        <p class="text-green-100 font-medium">Consentimento de Dados (LGPD e ECA Digital)</p>
+                    </div>
                 </div>
+            </div>
+        </header>
 
-                <form id="consent-form" class="no-print space-y-8">
-                    <fieldset>
-                        <legend class="text-lg font-semibold text-green-700 mb-2">1. Dados do Responsável Legal</legend>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="responsavel_nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" id="responsavel_nome" name="responsavel_nome" required autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="responsavel_cpf" class="block text-sm font-medium text-gray-700">CPF</label>
-                                <input type="text" id="responsavel_cpf" name="responsavel_cpf" required placeholder="000.000.000-00" inputmode="numeric" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend class="text-lg font-semibold text-green-700 mb-2">2. Dados do Menor de Idade</legend>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label for="menor_nome" class="block text-sm font-medium text-gray-700">Nome Completo</label>
-                                <input type="text" id="menor_nome" name="menor_nome" required autocomplete="name" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            </div>
-                            <div>
-                                <label for="menor_cpf" class="block text-sm font-medium text-gray-700">CPF</label>
-                                <input type="text" id="menor_cpf" name="menor_cpf" required placeholder="000.000.000-00" inputmode="numeric" class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            </div>
-                        </div>
-                    </fieldset>
-
-                    <fieldset>
-                        <legend class="text-lg font-semibold text-green-700 mb-2">3. Informações do Campus</legend>
-                         <div>
-                            <label for="campus_selecionado" class="block text-sm font-medium text-gray-700">Campus (digite para buscar)</label>
-                            <input list="campus-list" id="campus_selecionado" name="campus_selecionado" required class="mt-1 block w-full rounded-md border-gray-300 bg-gray-50 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
-                            <datalist id="campus-list"></datalist>
-                        </div>
-                    </fieldset>
-
-                     <fieldset class="space-y-5">
-                        <legend class="text-lg font-semibold text-green-700 mb-4">4. Declaração de Consentimento</legend>
-                        <div class="p-4 border rounded-md">
-                            <p class="font-semibold text-gray-800">A. Plataformas Educacionais Digitais (Google e Microsoft)</p>
-                             <div class="mt-2 space-y-2">
-                                <div class="flex items-center">
-                                    <input id="nuvem_sim" name="auth_nuvem" type="radio" required value="autorizo" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                                    <label for="nuvem_sim" class="ml-3 block text-sm text-gray-700"><b>AUTORIZO</b> a criação de contas educacionais para o(a) estudante.</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="nuvem_nao" name="auth_nuvem" type="radio" value="nao_autorizo" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                    <label for="nuvem_nao" class="ml-3 block text-sm text-gray-700"><b>NÃO AUTORIZO</b> o uso das plataformas. (Ciente de que deverei procurar a coordenação de TI para desativar todas as plataformas e não terei acesso a e-mail ou outras ferramentas educacionais desses provedores).</label>
-                                </div>
-                            </div>
-                       </div>
-                        <div class="p-4 border rounded-md">
-                             <p class="font-semibold text-gray-800">B. Sistemas de Biometria (Acesso Físico)</p>
-                             <div class="mt-2 space-y-2">
-                                 <div class="flex items-center">
-                                     <input id="biometria_sim" name="auth_biometria" type="radio" required value="autorizo" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500" checked>
-                                     <label for="biometria_sim" class="ml-3 block text-sm text-gray-700"><b>AUTORIZO</b> a coleta dos dados biométricos para controle de acesso e segurança.</label>
-                                 </div>
-                                 <div class="flex items-center">
-                                     <input id="biometria_nao" name="auth_biometria" type="radio" value="nao_autorizo" class="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500">
-                                     <label for="biometria_nao" class="ml-3 block text-sm text-gray-700"><b>NÃO AUTORIZO</b> a coleta. (Ciente de que o IFSC fornecerá um método alternativo, como crachá).</label>
-                                 </div>
-                             </div>
-                        </div>
-                    </fieldset>
-
-                    <div id="error-message" role="alert" aria-live="polite" class="text-red-600 text-sm font-medium pt-2 hidden"></div>
-
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg transition duration-150 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">
-                        Gerar e Baixar PDF do Termo
-                    </button>
-                </form>
-
-                <section id="signing-instructions-section" aria-labelledby="signing-title" class="no-print mt-8">
-                    <h2 id="signing-title" class="text-lg font-semibold text-gray-800 mb-3">Orientações para Assinatura Eletrônica via Gov.br</h2>
-                    <div class="p-4 bg-gray-50 rounded-lg shadow-inner">
-                        <p class="text-sm text-gray-700 mb-4">Este documento poderá ser assinado eletronicamente por meio da plataforma Gov.br.</p>
-                        <p class="text-sm text-gray-700 mb-2">Para isso, siga os passos abaixo:</p>
-                        <ol class="list-decimal list-inside space-y-3 text-sm text-gray-600">
-                            <li>Acesse <a href="https://assinador.iti.br/" target="_blank" rel="noopener noreferrer" class="font-medium text-blue-600 hover:underline">assinador.iti.br</a> com seu CPF e senha de acesso ao Gov.br;</li>
-                            <li>Certifique-se de ter uma conta Gov.br nível <strong>Prata</strong> ou <strong>Ouro</strong>. Caso não tenha, é possível elevar o nível da sua conta utilizando biometria facial do TSE no aplicativo do Gov.br;</li>
-                            <li>Envie o documento para sua assinatura na plataforma. Selecione o ponto em que a assinatura deve ser colocada ao final do documento.</li>
-                            <li>Siga as instruções na tela para revisar o documento e confirmar sua assinatura utilizando seu login e senha do Gov.br, e, se solicitado, segundo fator como código de verificação.</li>
-                        </ol>
-                        <p class="text-sm text-gray-700 mt-4">A assinatura eletrônica via Gov.br tem a mesma validade jurídica de uma assinatura física, conforme o Decreto nº 10.543/2020.</p>
-                    </div>
-                    <div class="mt-4 p-3 bg-yellow-50 border-l-4 border-yellow-500 text-yellow-800 text-sm">
-                        <p><strong>Importante:</strong> Este gerador não armazena nenhuma informação preenchida. Após baixar, o documento deve ser assinado digitalmente e enviado ao seu campus, conforme as orientações recebidas. <strong>Documentos impressos não têm validade para este fim.</strong></p>
-                    </div>
-                </section>
+        <!-- Main Content -->
+        <main class="flex-grow max-w-5xl mx-auto px-4 py-8 w-full" v-cloak>
+            
+            <div v-if="success" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 text-center p-12">
+                <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Termo Gerado com Sucesso!</h2>
+                <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">O download do PDF foi iniciado. Assine-o através do <strong>gov.br</strong> e envie à coordenadoria responsável no seu campus.</p>
                 
-                <div id="re-generate-container" class="no-print mt-6 text-center hidden">
-                    <button onclick="location.reload()" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 shadow-md hover:shadow-lg">
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-8 text-left inline-block max-w-2xl mx-auto">
+                    <h3 class="font-bold text-yellow-800 mb-1">Próximos Passos (Assinatura Eletrônica):</h3>
+                    <ol class="list-decimal list-inside text-yellow-800 space-y-1 mt-2">
+                        <li>Acesse o <a href="https://assinador.iti.br/" target="_blank" class="underline font-bold">Assinador Gov.br (assinador.iti.br)</a>.</li>
+                        <li>Envie o arquivo PDF baixado.</li>
+                        <li>Posicione a assinatura no final da página.</li>
+                        <li>Confirme usando sua conta Prata ou Ouro.</li>
+                    </ol>
+                </div>
+                
+                <div class="mt-4">
+                    <button @click="resetForm" class="bg-gray-800 hover:bg-gray-900 text-white font-bold py-3 px-8 rounded-xl transition shadow hover:shadow-lg">
                         Preencher Novo Termo
                     </button>
                 </div>
             </div>
+
+            <div v-show="!success" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100">
+                
+                <div class="p-6 md:p-8 bg-blue-50/50 border-b border-blue-100">
+                    <h3 class="text-blue-900 font-bold mb-2 uppercase text-sm md:text-base tracking-wide flex items-center gap-2">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        Aviso de Privacidade: Geração de Termo Digital
+                    </h3>
+                    <p class="text-blue-900 leading-relaxed text-sm md:text-base mb-4 text-justify">
+                        Os dados preenchidos neste formulário (Nome e CPF) servem exclusivamente para gerar o PDF de consentimento para assinatura no <strong>gov.br</strong>. Estes dados pessoais <span class="font-bold underline cursor-help" title="Conforme Decreto nº 10.543/2020 e Art. 11 da LGPD">não ficam armazenados</span> em nosso banco de dados após a geração do arquivo e não são compartilhados com terceiros.
+                    </p>
+                    <p class="text-blue-900 leading-relaxed text-sm md:text-base text-justify">
+                        O tratamento do formulário segue estritamente as diretrizes de segurança e finalidade da Lei Geral de Proteção de Dados (LGPD). Quando aplicável a menores, a legislação do <strong>ECA Digital (Lei 15.211/2025)</strong> é agregada à finalidade exigindo preenchimento dos responsáveis para plataformas de nuvem.
+                    </p>
+                </div>
+
+                <form @submit.prevent="generatePDF" class="p-6 md:p-8 space-y-8">
+                    
+                    <!-- Passo 1: Perfil de Idade -->
+                    <section>
+                        <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <span class="bg-[#2F9E41] text-white w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">1</span> 
+                            Maioridade do Estudante
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all"
+                                   :class="form.idade_perfil === 'maior' ? 'border-[#2F9E41] ring-1 ring-[#2F9E41] bg-green-50' : 'border-gray-300 hover:bg-gray-50'">
+                                <input type="radio" value="maior" v-model="form.idade_perfil" class="sr-only" @change="handleIdadeChange">
+                                <span class="flex flex-1 items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-700">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                                    </div>
+                                    <span class="flex flex-col">
+                                        <span class="block text-sm font-bold text-gray-900 uppercase">Maior de Idade (18+ anos)</span>
+                                        <span class="mt-1 text-xs text-gray-500">O próprio estudante assume e assina este termo (Aplica-se apenas Regras LGPD).</span>
+                                    </span>
+                                </span>
+                            </label>
+
+                            <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all"
+                                   :class="form.idade_perfil === 'menor' ? 'border-[#2F9E41] ring-1 ring-[#2F9E41] bg-green-50' : 'border-gray-300 hover:bg-gray-50'">
+                                <input type="radio" value="menor" v-model="form.idade_perfil" class="sr-only" @change="handleIdadeChange">
+                                <span class="flex flex-1 items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                                    </div>
+                                    <span class="flex flex-col">
+                                        <span class="block text-sm font-bold text-gray-900 uppercase">Menor de Idade (Antes de completar 18 anos)</span>
+                                        <span class="mt-1 text-xs text-gray-500">Responsável legal deve assinar. (Aplica-se Regras LGPD e ECA Digital).</span>
+                                    </span>
+                                </span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <div v-if="form.idade_perfil" class="fade-enter-active">
+                        <!-- Passo 2: O que deseja gerar (Somente visível/editável para Menores, Maiores forçam Biometria) -->
+                        <section v-if="form.idade_perfil === 'menor'" class="mt-8">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <span class="bg-[#2F9E41] text-white w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">2</span> 
+                                Finalidade do Termo
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all"
+                                    :class="form.tipo === 'ambos' ? 'border-[#2F9E41] ring-1 ring-[#2F9E41] bg-green-50' : 'border-gray-300 hover:bg-gray-50'">
+                                    <input type="radio" value="ambos" v-model="form.tipo" class="sr-only">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col">
+                                            <span class="block text-sm font-bold text-gray-900 uppercase">Completo (Recomendado)</span>
+                                            <span class="mt-2 text-xs text-gray-500">Inclui Biometria (Acesso Físico - LGPD) e Nuvem/ECA Digital (Plataformas Digitais).</span>
+                                        </span>
+                                    </span>
+                                </label>
+
+                                <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all"
+                                    :class="form.tipo === 'biometria' ? 'border-[#2F9E41] ring-1 ring-[#2F9E41] bg-green-50' : 'border-gray-300 hover:bg-gray-50'">
+                                    <input type="radio" value="biometria" v-model="form.tipo" class="sr-only">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col">
+                                            <span class="block text-sm font-bold text-gray-900 uppercase">Somente Biometria</span>
+                                            <span class="mt-2 text-xs text-gray-500">Apenas LGPD para biometria física de catracas/laboratórios.</span>
+                                        </span>
+                                    </span>
+                                </label>
+                                
+                                <label class="relative flex cursor-pointer rounded-xl border p-4 shadow-sm focus:outline-none transition-all"
+                                    :class="form.tipo === 'nuvem' ? 'border-[#2F9E41] ring-1 ring-[#2F9E41] bg-green-50' : 'border-gray-300 hover:bg-gray-50'">
+                                    <input type="radio" value="nuvem" v-model="form.tipo" class="sr-only">
+                                    <span class="flex flex-1">
+                                        <span class="flex flex-col">
+                                            <span class="block text-sm font-bold text-gray-900 uppercase">Somente Nuvem Educacional</span>
+                                            <span class="mt-2 text-xs text-gray-500">Apenas permissão de uso de contas sob base no ECA Digital (Lei 15.211).</span>
+                                        </span>
+                                    </span>
+                                </label>
+                            </div>
+                        </section>
+
+                        <section v-else class="mt-8">
+                            <div class="bg-gray-50 border-l-4 border-blue-500 p-4 rounded-r-lg text-sm text-gray-700">
+                                <strong>Nota Jurídica (Maioridade Civil):</strong> Como titular maior de idade e civilmente capaz, os requisitos excepcionais do ECA Digital e de supervisão parental para contas de nuvem não se aplicam. A finalidade do termo agora será exclusivamente o Consentimento LGPD para coleta de seus <strong>Dados Biométricos</strong> (acesso seguro ao campus). <br/>*(Para acesso às plataformas digitais de ensino, as adesões ocorrem via Termos de Serviço padrão durante os primeiros acessos aos sistemas institucionais).*
+                            </div>
+                        </section>
+
+                        <!-- Passo 3: Identificação -->
+                        <section class="bg-gray-50 rounded-xl p-6 border border-gray-200 mt-8">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <span class="bg-[#2F9E41] text-white w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">{{ form.idade_perfil === 'menor' ? '3' : '2' }}</span> 
+                                Identificação Institucional
+                            </h2>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                
+                                <!-- Se Menor, pede dados do Responsavel -->
+                                <div v-if="form.idade_perfil === 'menor'" class="space-y-4">
+                                    <h3 class="font-semibold text-gray-700">Responsável Legal do Aluno</h3>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo (Responsável)</label>
+                                        <input type="text" v-model="form.responsavel_nome" :required="form.idade_perfil === 'menor'" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">CPF (Responsável)</label>
+                                        <input type="text" v-model="form.responsavel_cpf" @input="formatCPF('responsavel_cpf')" :required="form.idade_perfil === 'menor'" placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.responsavel_cpf}">
+                                        <span v-if="errors.responsavel_cpf" class="text-xs text-red-600 mt-1">CPF Inválido</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Estudante (sempre) -->
+                                <div class="space-y-4">
+                                    <h3 class="font-semibold text-gray-700">Dados do Estudante</h3>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
+                                        <input type="text" v-model="form.estudante_nome" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
+                                        <input type="text" v-model="form.estudante_cpf" @input="formatCPF('estudante_cpf')" required placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.estudante_cpf}">
+                                        <span v-if="errors.estudante_cpf" class="text-xs text-red-600 mt-1">CPF Inválido</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="md:col-span-2 mt-2">
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Campus</label>
+                                    <select v-model="form.campus" required class="w-full md:w-1/2 rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border bg-white">
+                                        <option value="" disabled selected>Selecione um campus...</option>
+                                        <option v-for="c in campusList" :key="c" :value="c">{{ c }}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Passo 4: Decisões -->
+                        <section class="mt-8">
+                            <h2 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                                <span class="bg-[#2F9E41] text-white w-7 h-7 rounded-full inline-flex items-center justify-center text-sm">{{ form.idade_perfil === 'menor' ? '4' : '3' }}</span> 
+                                Tomada de Decisão
+                            </h2>
+
+                            <div class="space-y-6">
+                                <!-- Decisão Nuvem (Apenas Menores e Se Selecionado) -->
+                                <div v-if="form.idade_perfil === 'menor' && (form.tipo === 'ambos' || form.tipo === 'nuvem')" class="bg-white border rounded-xl overflow-hidden shadow-sm">
+                                    <div class="bg-gray-100 p-4 border-b font-bold text-gray-800">
+                                        A. Plataformas Educacionais (Google Workspace / Microsoft 365)
+                                    </div>
+                                    <div class="p-5 space-y-3">
+                                        <p class="text-sm text-gray-600 mb-4">O IFSC utiliza essas ferramentas operando como Controlador dos dados em um ecossistema seguro e sem anúncios (em linha com o ECA Digital), garantindo o desenvolvimento e comunicação dos estudantes que necessitam de contas institucionais.</p>
+                                        
+                                        <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-[#2F9E41] bg-green-50': form.auth_nuvem === 'autorizo'}">
+                                            <input type="radio" v-model="form.auth_nuvem" value="autorizo" required class="w-5 h-5 text-[#2F9E41]">
+                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO a criação de conta e o acesso restrito às plataformas Microsoft/Google institucionais.</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-red-500 bg-red-50': form.auth_nuvem === 'nao_autorizo'}">
+                                            <input type="radio" v-model="form.auth_nuvem" value="nao_autorizo" class="w-5 h-5 text-red-600">
+                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO e solicitarei o acesso físico isolado no Campus para estudos.</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- Decisão Biometria -->
+                                <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'" class="bg-white border rounded-xl overflow-hidden shadow-sm">
+                                    <div class="bg-gray-100 p-4 border-b font-bold text-gray-800">
+                                        {{ form.idade_perfil === 'menor' && (form.tipo === 'ambos') ? 'B. ' : '' }}Biometria para Acesso Físico (Catracas e Laboratórios)
+                                    </div>
+                                    <div class="p-5 space-y-3">
+                                        <p class="text-sm text-gray-600 mb-4">A imagem facial ou impressão digital será garantida por criptografia em servidores próprios do DATACENTER IFSC. Tem uso exclusivo de segurança e proteção à comunidade do campus, sem compartilhamento ou venda externa e os dados morrem após o fim do curso (LGPD Princípio da Necessidade).</p>
+                                        
+                                        <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-[#2F9E41] bg-green-50': form.auth_biometria === 'autorizo'}">
+                                            <input type="radio" v-model="form.auth_biometria" value="autorizo" required class="w-5 h-5 text-[#2F9E41]">
+                                            <span class="ml-3 font-medium text-gray-800">AUTORIZO o tratamento da biometria facial/digital para controle físico.</span>
+                                        </label>
+                                        <label class="flex items-center p-3 border rounded hover:bg-gray-50 cursor-pointer" :class="{'border-red-500 bg-red-50': form.auth_biometria === 'nao_autorizo'}">
+                                            <input type="radio" v-model="form.auth_biometria" value="nao_autorizo" class="w-5 h-5 text-red-600">
+                                            <span class="ml-3 font-medium text-gray-800">NÃO AUTORIZO e gerirei acessos junto às portarias.</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <div v-if="hasGeneralError" class="text-[#C8191E] font-medium p-4 bg-red-50 rounded-lg text-sm border border-red-200 text-center mt-6">
+                            Corrija os erros (CPFs inválidos) ou preencha todos os campos obrigatórios antes de gerar o termo.
+                        </div>
+
+                        <button type="submit" 
+                                class="mt-8 w-full flex justify-center items-center gap-2 bg-[#C8191E] hover:bg-red-800 text-white font-bold py-4 px-6 rounded-xl transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
+                                :disabled="isGenerating">
+                            <svg v-if="!isGenerating" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <span v-if="isGenerating" class="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></span>
+                            {{ isGenerating ? 'Gerando Documento...' : 'Gerar e Baixar PDF do Termo' }}
+                        </button>
+                    </div> 
+                    <!-- end v-if form.idade_perfil -->
+
+                </form>
+            </div>
             
-            <div id="pdf-container-for-render" class="hidden">
-                <div id="pdf-content"></div>
+            <footer class="mt-10 text-center text-gray-500 text-sm">
+                <p class="font-bold mb-1">Aviso Institucional:</p>
+                <p class="mb-2 max-w-3xl mx-auto">Nenhum dado trafega na internet. O PDF é construído localmente (<i lang="en">client-side script</i>). Em conformidade com o <b>Decreto nº 10.543/2020</b>, assinaturas eletrônicas padrão Gov.br têm imediata validade presuntiva para aceite em sistemas educacionais.</p>
+                <p>Proteção de Dados: <a href="mailto:encarregado.lgpd@ifsc.edu.br" class="text-[#2F9E41] hover:underline">encarregado.lgpd@ifsc.edu.br</a> | Dúvidas: <a href="mailto:coord.gestao.dados@ifsc.edu.br" class="text-[#2F9E41] hover:underline">coord.gestao.dados@ifsc.edu.br</a></p>
+                <p class="mt-2 text-xs">Desenvolvido pela Coordenadoria de Gestão de Dados (CGD / DTIC / Reitoria).</p>
+            </footer>
+
+            <!-- Área oculta para renderização do PDF pelo html2pdf -->
+            <div style="position: absolute; left: -9999px; top: 0;" aria-hidden="true">
+                <div id="pdf-render-area" ref="pdfArea" class="pdf-page bg-white">
+                    <div style="text-align: center; border-bottom: 2px solid #ccc; padding-bottom: 10px; margin-bottom: 15px;">
+                        <p style="margin: 0; font-size: 10pt;">MINISTÉRIO DA EDUCAÇÃO</p>
+                        <p style="margin: 0; font-size: 10pt;">SECRETARIA DE EDUCAÇÃO PROFISSIONAL E TECNOLÓGICA</p>
+                        <p style="margin: 0; font-weight: bold; font-size: 11pt;">INSTITUTO FEDERAL DE SANTA CATARINA - {{ form.campus ? 'CAMPUS ' + form.campus.toUpperCase() : 'IFSC' }}</p>
+                    </div>
+                    
+                    <!-- MODELO PARA MAIORES DE IDADE -->
+                    <template v-if="form.idade_perfil === 'maior'">
+                        <h1 class="pdf-title">TERMO DE CONSENTIMENTO PARA TRATAMENTO DE DADOS BIOMÉTRICOS</h1>
+                        
+                        <p class="pdf-p">
+                            Pelo presente termo, eu, <strong>{{ form.estudante_nome }}</strong>, titular do CPF nº <strong>{{ form.estudante_cpf }}</strong>, sendo maior de idade, <strong>AUTORIZO</strong> de forma clara e objetiva que o IFSC colete e utilize meus dados biométricos (como leitura facial ou impressão digital), conforme as diretrizes da Lei Geral de Proteção de Dados Pessoais (LGPD).
+                        </p>
+                        
+                        <div style="margin-top: 15px;">
+                            <p class="pdf-p"><strong>Para que serve:</strong> A coleta da minha biometria atende exclusivamente à finalidade de controlar o acesso físico às catracas e ambientes restritos (laboratórios) do Campus, visando garantir a segurança da comunidade acadêmica e resguardar o patrimônio do IFSC.</p>
+                            
+                            <p class="pdf-p"><strong>Como é protegido (Tratamento):</strong> O dado coletado (imagem facial ou impressão digital) não é mantido como uma foto comum. Ele é convertido pela equipe de TI em um código matemático seguro (criptografado) armazenado somente em servidores próprios restritos do IFSC. Não há venda nem compartilhamento de biometria com organizações externas, públicas ou privadas, exceto por ordem judicial.</p>
+                            
+                            <p class="pdf-p"><strong>Tempo de Guarda (Necessidade LGPD):</strong> A biometria protegida é excluída permanentemente dos sistemas de catraca assim que o meu vínculo com a instituição for encerrado. Relatórios em texto de passagem em catraca (logs) seguirão os prazos legais de guarda definidos pelo Arquivo Nacional.</p>
+
+                            <p class="pdf-p"><strong>Meus Direitos:</strong> Tenho ciência de que o IFSC tratará meus dados de maneira segura e compatível com a LGPD. Entendo também que poderei solicitar verificação, alteração ou revogar minha autorização a qualquer momento pelo e-mail: encarregado.lgpd@ifsc.edu.br.</p>
+                        </div>
+                        
+                        <p style="margin-top: 40px; text-align: right; margin-bottom: 60px;">{{ form.campus || 'Local' }}, {{ currentDate }}.</p>
+                        
+                        <div style="text-align: center;">
+                            <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px; margin: 0;">Assinatura do Titular</p>
+                            <p style="font-size: 9pt; margin-top: 5px;">{{ form.estudante_nome }}</p>
+                        </div>
+                    </template>
+
+                    <!-- MODELO PARA MENORES DE IDADE -->
+                    <template v-if="form.idade_perfil === 'menor'">
+                        <h1 class="pdf-title">TERMO DE CONSENTIMENTO DE DADOS DE MENORES</h1>
+                        
+                        <p class="pdf-p">
+                            <strong>Prezados pais ou responsáveis,</strong><br>
+                            O Instituto Federal de Santa Catarina (IFSC) utiliza tecnologias para aprimorar a segurança e a experiência educacional. Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018) e o ECA Digital, este documento visa obter sua autorização formal para tratar os dados do(a) estudante em duas frentes distintas: (A) Plataformas Educacionais e (B) Segurança e Acesso Físico.
+                        </p>
+                        
+                        <p class="pdf-p">
+                            <strong>Responsável Legal:</strong> {{ form.responsavel_nome }} (CPF: {{ form.responsavel_cpf }})<br>
+                            <strong>Estudante:</strong> {{ form.estudante_nome }} (CPF: {{ form.estudante_cpf }})
+                        </p>
+                        
+                        <!-- SEÇÃO A: NUVEM (ECA DIGITAL) -->
+                        <div v-if="form.tipo === 'ambos' || form.tipo === 'nuvem'" style="margin-top: 15px;">
+                            <h2 class="pdf-section-title">A. Plataformas Educacionais em Nuvem (ECA Digital)</h2>
+                            
+                            <p class="pdf-p"><strong>Para que serve:</strong> O IFSC utiliza plataformas de empresas parceiras (Google Workspace e Microsoft 365) para viabilizar as atividades pedagógicas, envio de trabalhos e contato seguro com professores. O uso promove a cidadania digital em um ambiente escolar controlado.</p>
+                            
+                            <p class="pdf-p"><strong>Como os dados são tratados:</strong> Para criar a conta, o IFSC repassa apenas o nome do aluno gerando o e-mail oficial (sem direcionamento de anúncios publicitários). O próprio estudante gera o conteúdo (arquivos, atividades). O IFSC é o Controlador dos dados e a Microsoft/Google são Operadores submetidos a leis globais de segurança infantil.</p>
+
+                            <p class="pdf-p"><strong>Ambiente Digital Seguro:</strong> Diferente de contas comuns, o IFSC configura essas plataformas restringindo funcionalidades que não condizem com a escola, protegendo o estudante de exposições públicas desnecessárias.</p>
+
+                            <div class="pdf-option" style="margin-top: 10px; margin-bottom: 8px;">
+                                [{{ form.auth_nuvem === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> a criação da conta e o acesso do aluno ao e-mail e sistemas da Microsoft e Google.
+                            </div>
+                            <div class="pdf-option">
+                                [{{ form.auth_nuvem === 'nao_autorizo' ? 'X' : '  ' }}] <b>NÃO AUTORIZO</b> o acesso do menor a estas plataformas educacionais conectadas à nuvem.
+                            </div>
+                        </div>
+
+                        <!-- SEÇÃO B: BIOMETRIA -->
+                        <div v-if="form.tipo === 'ambos' || form.tipo === 'biometria'" style="margin-top: 15px;">
+                            <h2 class="pdf-section-title">{{ form.tipo === 'ambos' ? 'B. ' : '' }}Cadastro de Biometria e Acesso Seguro</h2>
+                            
+                            <p class="pdf-p"><strong>Para que serve:</strong> Focado no melhor interesse do menor, a biometria atende exclusivamente à finalidade de controlar o acesso físico às catracas e laboratórios, protegendo o estudante de acesso de terceiros não autorizados ao Campus.</p>
+                            
+                            <p class="pdf-p"><strong>Como é protegido (Tratamento):</strong> O dado coletado é convertido pela equipe de TI em um código matemático criptografado (seguro), armazenado somente em servidores restritos do IFSC. Não há compartilhamento com organizações externas.</p>
+
+                            <p class="pdf-p"><strong>Tempo de Guarda (Necessidade LGPD):</strong> A biometria criptografada será apagada de forma permanente assim que o aluno concluir o curso ou perder o vínculo com a escola. Serão mantidos por maior prazo apenas os registros em texto dos relatórios de passagem da catraca para eventual segurança e controle legal.</p>
+
+                            <div class="pdf-option" style="margin-top: 10px; margin-bottom: 8px;">
+                                [{{ form.auth_biometria === 'autorizo' ? 'X' : '  ' }}] <b>AUTORIZO</b> a coleta da biometria facial/digital do aluno para liberação rápida e segura de acesso físico.
+                            </div>
+                            <div class="pdf-option" style="margin-bottom: 12px;">
+                                [{{ form.auth_biometria === 'nao_autorizo' ? 'X' : '  ' }}] <b>NÃO AUTORIZO</b> a biometria e o estudante fará o registro manual de documentação nas portarias.
+                            </div>
+                        </div>
+
+                        <p class="pdf-p" style="font-size: 10pt; text-align: justify; margin-top: 15px; border: 1px solid #d1d5db; padding: 10px; border-radius: 4px; background-color: #f9fafb;">
+                            <strong>Declaração de Consentimento:</strong><br>
+                            Eu, pai, mãe ou responsável legal identificado acima, declaro que compreendi as finalidades informadas e dou minha decisão (X) de forma livre e inequívoca. Tenho ciência de que, a qualquer tempo, poderei solicitar revisão ou revogar esta autorização entrando em contato com o encarregado oficial de dados no e-mail: encarregado.lgpd@ifsc.edu.br.
+                        </p>
+                        
+                        <p style="margin-top: 25px; text-align: right; margin-bottom: 40px;">{{ form.campus || '_________________________' }}, {{ currentDate }}.</p>
+                        
+                        <div style="text-align: center;">
+                            <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px; margin: 0;">Assinatura do Responsável Legal</p>
+                            <p style="font-size: 9pt; margin-top: 5px;">{{ form.responsavel_nome }}</p>
+                        </div>
+                    </template>
+                </div>
             </div>
 
-        </div>
-    </main>
-
-    <footer class="text-center p-4 mt-4 text-xs text-gray-600 border-t border-gray-200 max-w-3xl mx-auto">
-        <p class="font-bold mb-1">Aviso:</p>
-        <p class="mb-2">Esta ferramenta é um desenvolvimento experimental. Os artefatos gerados devem ser obrigatoriamente validados nos sistemas de assinatura por um Servidor Público Federal antes de qualquer uso oficial.</p>
-        <p class="text-gray-500">Desenvolvido por FLM na Coordenadoria de Gestão de Dados (CGD) da DTIC (Diretoria de Tecnologia da Informação e Comunicação) do IFSC - Reitoria.</p>
-        <p class="text-gray-500">Dúvidas ou sugestões, entre em contato pelo e-mail: <a href="mailto:coord.gestao.dados@ifsc.edu.br" class="text-green-700 hover:underline">coord.gestao.dados@ifsc.edu.br</a></p>
-    </footer>
-
-    <!-- Template do PDF, fica oculto na página e é usado pelo script -->
-    <div id="pdf-template-container" class="hidden">
-        
-        <div style="font-family: 'Times New Roman', Times, serif; font-size: 10pt; line-height: 1.3; color: #000; padding: 0 5px;">
-            <div style="text-align: center; margin-bottom: 12px; border-bottom: 1px solid #ccc; padding-bottom: 8px;">
-                <p style="margin: 0; font-size: 9pt;">MINISTÉRIO DA EDUCAÇÃO</p>
-                <p style="margin: 0; font-size: 9pt;">SECRETARIA DE EDUCAÇÃO PROFISSIONAL E TECNOLÓGICA</p>
-                <p style="margin: 0; font-weight: bold; font-size: 10pt;">INSTITUTO FEDERAL DE EDUCAÇÃO, CIÊNCIA E TECNOLOGIA DE SANTA CATARINA</p>
-            </div>
-            <h1 style="font-size: 11pt; font-weight: bold; text-align: center; margin-bottom: 15px;">TERMO DE CONSENTIMENTO DE DADOS DE MENORES</h1>
-            
-            <p style="font-size: 10pt; text-align: justify; margin-bottom: 12px;"><strong>Prezados pais ou responsáveis,</strong><br>
-            O Instituto Federal de Santa Catarina (IFSC) utiliza tecnologias para aprimorar a segurança e a experiência educacional de seus estudantes. Em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018), este documento visa obter sua autorização formal para o tratamento de dados pessoais do(a) estudante identificado(a) abaixo em duas frentes distintas: (A) Plataformas Educacionais Digitais e (B) Sistemas de Segurança e Acesso Físico.</p>
-            
-            <p style="text-align: justify; margin-bottom: 5px;"><strong>Responsável Legal:</strong> __RESPONSAVEL_NOME__ (CPF: __RESPONSAVEL_CPF__)</p>
-            <p style="text-align: justify; margin-bottom: 15px;"><strong>Estudante:</strong> __MENOR_NOME__ (CPF: __MENOR_CPF__)</p>
-
-            <h2 style="font-weight: bold; font-size: 10pt; background-color: #f2f2f2; padding: 3px; margin-top: 12px; margin-bottom: 6px;">A. Autorização para o Uso de Plataformas Educacionais Digitais</h2>
-            <p style="font-size: 10pt; text-align: justify;"><strong>Finalidade:</strong> Para viabilizar as atividades pedagógicas, a comunicação e a colaboração, o IFSC utiliza as seguintes plataformas educacionais fornecidas por empresas parceiras: Google Workspace for Education (incluindo Google Sala de Aula, Drive, Gmail, etc.) e Microsoft 365 Education (incluindo Teams, OneDrive, Outlook, etc.). O uso destas ferramentas é realizado em um ambiente controlado, buscando promover a cidadania digital e garantir um espaço seguro para o desenvolvimento educacional, em linha com os direitos dos estudantes.</p>
-            <p style="font-size: 10pt; text-align: justify;"><strong>Tratamento e Compartilhamento de Dados:</strong><br><strong>Dados Compartilhados:</strong> Para criar a conta educacional, o IFSC compartilha o nome completo do(a) estudante com as plataformas para gerar um e-mail institucional. O(A) próprio(a) estudante irá gerar outros dados ao utilizar as ferramentas (trabalhos, e-mails, arquivos).<br><strong>Controlador e Operador:</strong> Nesta relação, o IFSC é o Controlador dos dados, definindo a finalidade de uso (exclusivamente educacional). O Google e a Microsoft são os Operadores, responsáveis por processar os dados em seus servidores, conforme contrato firmado com o IFSC, que impõe obrigações de segurança e privacidade.<br><strong>Ambiente Digital Seguro:</strong> O IFSC configura e gerencia estas plataformas buscando aplicar as melhores práticas de segurança e privacidade para o público infanto-juvenil, restringindo funcionalidades e a exposição de dados que não sejam estritamente necessários para os fins educacionais.</p>
-            <p style="font-size: 10pt; text-align: justify;"><strong>Políticas de Privacidade de Terceiros:</strong> Recomendamos a leitura dos avisos de privacidade dos fornecedores:<br>Aviso de Privacidade do Google Workspace for Education: https://workspace.google.com/terms/education_privacy.html<br>Política de Privacidade da Microsoft: https://privacy.microsoft.com/pt-br/privacystatement</p>
-
-            <h2 style="font-weight: bold; font-size: 10pt; background-color: #f2f2f2; padding: 3px; margin-top: 12px; margin-bottom: 6px;">B. Autorização para o Uso de Sistemas de Biometria</h2>
-            <p style="font-size: 10pt; text-align: justify;"><strong>Finalidade:</strong> Os dados biométricos (imagem facial e/ou impressão digital) são utilizados com a finalidade exclusiva de controlar o acesso físico às dependências do campus (catracas) e a ambientes restritos (laboratórios). O objetivo é garantir a segurança do(a) estudante, proteger a comunidade acadêmica e resguardar o patrimônio público.</p>
-            <p style="font-size: 10pt; text-align: justify;"><strong>Tratamento e Segurança dos Dados:</strong> A imagem facial e/ou a impressão digital será coletada pela equipe de TI do campus. O dado biométrico é convertido em um modelo matemático (template) e armazenado de forma criptografada em servidores próprios e seguros, localizados nos datacenters do IFSC. Os dados biométricos não serão compartilhados com nenhuma organização externa, pública ou privada, salvo por força de lei ou ordem judicial, e serão permanentemente eliminados dos nossos sistemas ao término do vínculo do(a) estudante com o IFSC.</p>
-            
-            <p style="font-size: 10pt; text-align: justify; margin-top: 12px;"><strong>Declaração de Ciência e Consentimento:</strong></p>
-            <p style="font-size: 10pt; text-align: justify;">
-                Eu, <span style="text-decoration: underline;">&nbsp;__RESPONSAVEL_NOME__&nbsp;</span>, responsável legal pelo(a) menor <span style="text-decoration: underline;">&nbsp;__MENOR_NOME__&nbsp;</span>, portador(a) do CPF <span style="text-decoration: underline;">&nbsp;__MENOR_CPF__&nbsp;</span>, por meio deste documento, manifesto meu consentimento livre, informado e inequívoco para a coleta e o tratamento da biometria facial do(a) referido(a) menor pelo Instituto Federal de Santa Catarina (IFSC), exclusivamente para fins de controle de acesso físico às dependências do Campus e eventual acesso a salas específicas do Campus. Declaro estar ciente de que:
-            </p>
-            <ul style="list-style-type: disc; padding-left: 20px; text-align: justify; font-size: 9.5pt; margin-top: 5px;">
-                <li style="margin-bottom: 5px;">A biometria facial será utilizada somente para autenticação e autorização de entrada física no Campus do IFSC e, se aplicável, em salas específicas, visando garantir a segurança dos(as) alunos(as), servidores(as) e do patrimônio da instituição.</li>
-                <li style="margin-bottom: 5px;"><strong>Guarda e Eliminação (Conformidade LGPD e Arquivo Nacional):</strong> As imagens faciais capturadas e os dados biométricos derivados (templates matemáticos) serão utilizados exclusivamente para a finalidade de autenticação, sendo permanentemente eliminados dos sistemas assim que o vínculo do(a) aluno(a) com o IFSC for encerrado (Princípio da Necessidade da LGPD). Já os registros de acesso e frequência (logs) seguirão os prazos de guarda e destinação estabelecidos nas Tabelas de Temporalidade e Destinação de Documentos relativas às atividades-meio e fim, aprovadas pelo Arquivo Nacional.</li>
-                <li style="margin-bottom: 5px;">Os dados serão mantidos de forma segura e protegida, com acesso restrito a pessoas autorizadas e mediante aplicação de medidas técnicas e organizacionais compatíveis com a Lei Geral de Proteção de Dados Pessoais (LGPD) pelo tempo necessário.</li>
-                <li style="margin-bottom: 5px;">A qualquer momento, poderei revogar este consentimento, mediante solicitação formal enviada ao canal oficial de atendimento do IFSC ou ao Encarregado de Proteção de Dados (DPO) da instituição, ciente de que isso poderá impactar o acesso do(a) menor às dependências ou a determinadas salas do Campus.</li>
-                <li style="margin-bottom: 5px;">Os dados biométricos do(a) menor não serão compartilhados com terceiros, exceto quando necessário para cumprimento de obrigações legais ou regulatórias.</li>
-                <li>Terei acesso, sempre que solicitado, às informações sobre o tratamento dos dados do(a) menor, incluindo a possibilidade de retificação, exclusão ou limitação do uso, conforme previsto na LGPD.</li>
-            </ul>
-            <p style="font-size: 10pt; text-align: justify; margin-top: 10px;">
-                Concedo meu consentimento de forma livre, informada, expressa e inequívoca, nos termos da Lei Geral de Proteção de Dados Pessoais (LGPD), da Lei nº 15.211/2025 (ECA Digital) e demais legislações pertinentes, visando o melhor interesse do(a) menor.
-            </p>
-
-            <h2 style="font-weight: bold; font-size: 10pt; background-color: #f2f2f2; padding: 3px; margin-top: 20px; margin-bottom: 10px;">3. Declaração de Consentimento</h2>
-            <p style="font-size: 10pt; text-align: justify;">Eu, o pai, mãe ou responsável legal identificado acima, declaro que li e compreendi as informações contidas neste documento. Entendo as finalidades e as condições do tratamento dos dados pessoais do(a) estudante e, de forma livre, informada e inequívoca, manifesto minha decisão abaixo:</p>
-            <div style="border: 1px solid #ccc; padding: 8px; margin-top: 10px; font-size: 10pt;">
-                <strong>Marque as opções desejadas:</strong><br><br>
-                <strong>A. Plataformas Educacionais Digitais (Google e Microsoft):</strong>
-                <p style="font-family: 'Courier New', monospace; margin: 4px 0;">__NUVEM_AUTH__ AUTORIZO a criação de contas e o tratamento dos dados do(a) estudante nas plataformas Google Workspace for Education e Microsoft 365 Education para fins exclusivamente educacionais.</p>
-                <p style="font-family: 'Courier New', monospace; margin: 4px 0;">__NUVEM_NAO_AUTH__ NÃO AUTORIZO o uso das plataformas. Estou ciente de que deverei procurar a coordenação do curso para discutir métodos alternativos para a entrega de atividades e participação do(a) estudante, o que pode gerar fluxos de trabalho distintos.</p>
-                <br>
-                <strong>B. Sistemas de Biometria (Acesso Físico):</strong>
-                <p style="font-family: 'Courier New', monospace; margin: 4px 0;">__BIOMETRIA_AUTH__ AUTORIZO a coleta e o tratamento dos dados biométricos do(a) estudante para as finalidades de controle de acesso e segurança descritas.</p>
-                <p style="font-family: 'Courier New', monospace; margin: 4px 0;">__BIOMETRIA_NAO_AUTH__ NÃO AUTORIZO a coleta dos dados biométricos. Estou ciente de que o IFSC fornecerá um método de acesso alternativo (ex: crachá de identificação) que deverá ser utilizado pelo(a) estudante.</p>
-            </div>
-            <p style="font-size: 9.5pt; text-align: justify; margin-top: 10px;"><strong>Direito de Revogação:</strong> Estou ciente de que posso revogar este consentimento a qualquer momento, para uma ou ambas as finalidades, mediante solicitação formal junto à secretaria do campus, ciente das implicações operacionais de tal decisão.</p>
-
-            <p style="margin-top: 25px; text-align: right;">__CIDADE__, __DATA__.</p>
-            <div style="margin-top: 50px; text-align: center;">
-                <p style="border-top: 1px solid #000; display: inline-block; padding: 0 40px;">Assinatura do Responsável Legal</p>
-                <p style="font-size: 8pt;">(__RESPONSAVEL_NOME__)</p>
-            </div>
-
-        </div>
+        </main>
     </div>
 
-
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
+        const { createApp } = Vue;
 
-            const campusData = {
-                "Araranguá": "Araranguá", "Caçador": "Caçador", "Canoinhas": "Canoinhas", "Chapecó": "Chapecó",
-                "Criciúma": "Criciúma", "Concórdia": "Concórdia", "Florianópolis - Centro": "Florianópolis",
-                "Florianópolis - Continente": "Florianópolis", "Gaspar": "Gaspar", "Itajaí": "Itajaí",
-                "Jaraguá do Sul - Centro": "Jaraguá do Sul", "Jaraguá do Sul - Rau": "Jaraguá do Sul",
-                "Joinville": "Joinville", "Lages": "Lages", "Palhoça": "Palhoça", "São Carlos": "São Carlos",
-                "São Francisco do Sul": "São Francisco do Sul", "São José": "São José",
-                "São Lourenço do Oeste": "São Lourenço do Oeste", "Tijucas": "Tijucas", "Tubarão": "Tubarão",
-                "Urupema": "Urupema", "Xanxerê": "Xanxerê"
-            };
-
-            const campusInput = document.getElementById('campus_selecionado');
-            const campusList = document.getElementById('campus-list');
-            Object.keys(campusData).forEach(campus => {
-                const option = document.createElement('option');
-                option.value = campus;
-                campusList.appendChild(option);
-            });
-
-            function validateCPF(cpf) {
-                cpf = cpf.replace(/[^\d]+/g, '');
-                if (cpf === '' || cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
-                let add = 0;
-                for (let i = 0; i < 9; i++) add += parseInt(cpf.charAt(i)) * (10 - i);
-                let rev = 11 - (add % 11);
-                if (rev >= 10) rev = 0;
-                if (rev !== parseInt(cpf.charAt(9))) return false;
-                add = 0;
-                for (let i = 0; i < 10; i++) add += parseInt(cpf.charAt(i)) * (11 - i);
-                rev = 11 - (add % 11);
-                if (rev >= 10) rev = 0;
-                if (rev !== parseInt(cpf.charAt(10))) return false;
-                return true;
-            }
-
-            document.querySelectorAll('input[name$="_cpf"]').forEach(input => {
-                input.addEventListener('input', (e) => {
-                    let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+        createApp({
+            data() {
+                return {
+                    form: {
+                        idade_perfil: '',
+                        tipo: 'ambos',
+                        responsavel_nome: '',
+                        responsavel_cpf: '',
+                        estudante_nome: '',
+                        estudante_cpf: '',
+                        campus: '',
+                        auth_nuvem: 'autorizo',
+                        auth_biometria: 'autorizo'
+                    },
+                    errors: {
+                        responsavel_cpf: false,
+                        estudante_cpf: false
+                    },
+                    campusList: [
+                        "Araranguá", "Caçador", "Canoinhas", "Chapecó", "Criciúma", "Concórdia", 
+                        "Florianópolis", "Gaspar", "Itajaí", "Jaraguá do Sul", "Joinville", 
+                        "Lages", "Palhoça", "São Carlos", "São Francisco do Sul", "São José", 
+                        "São Lourenço do Oeste", "Tijucas", "Tubarão", "Urupema", "Xanxerê"
+                    ],
+                    success: false,
+                    isGenerating: false,
+                    hasGeneralError: false
+                }
+            },
+            computed: {
+                currentDate() {
+                    return new Date().toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+                }
+            },
+            methods: {
+                handleIdadeChange() {
+                    if (this.form.idade_perfil === 'maior') {
+                        // Maiores não precisam de ECA Digital/Nuvem no termo
+                        this.form.tipo = 'biometria';
+                        // Limpa campos que não serão usados no backend real, só pra não confundir form
+                        this.form.responsavel_cpf = '';
+                        this.form.responsavel_nome = '';
+                        this.errors.responsavel_cpf = false;
+                    } else {
+                        // Reseta para padrão recomendado
+                        this.form.tipo = 'ambos';
+                    }
+                },
+                formatCPF(field) {
+                    let value = this.form[field].replace(/\D/g, '').slice(0, 11);
                     value = value.replace(/(\d{3})(\d)/, '$1.$2');
                     value = value.replace(/(\d{3})(\d)/, '$1.$2');
                     value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-                    e.target.value = value;
-                });
-            });
-
-            const consentForm = document.getElementById('consent-form');
-            const errorMessage = document.getElementById('error-message');
-            consentForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                errorMessage.classList.add('hidden');
-                let isValid = true;
-                
-                if (!this.checkValidity() || !campusData[campusInput.value]) {
-                    errorMessage.textContent = 'Por favor, preencha todos os campos e selecione um campus válido da lista.';
-                    isValid = false;
-                }
-
-                ['responsavel_cpf', 'menor_cpf'].forEach(id => {
-                    if (!isValid) return;
-                    const input = document.getElementById(id);
-                    if (!validateCPF(input.value)) {
-                       const label = document.querySelector(`label[for='${id}']`).textContent;
-                       errorMessage.textContent = `O CPF informado para "${label}" é inválido. Verifique o número.`;
-                       input.focus();
-                       isValid = false;
+                    this.form[field] = value;
+                    this.errors[field] = false;
+                    this.hasGeneralError = false;
+                },
+                isValidCPF(cpf) {
+                    if(!cpf) return false;
+                    let cleanCpf = cpf.replace(/[^\d]+/g, '');
+                    if (cleanCpf === '' || cleanCpf.length !== 11 || /^(\d)\1{10}$/.test(cleanCpf)) return false;
+                    let add = 0;
+                    for (let i = 0; i < 9; i++) add += parseInt(cleanCpf.charAt(i)) * (10 - i);
+                    let rev = 11 - (add % 11);
+                    if (rev >= 10) rev = 0;
+                    if (rev !== parseInt(cleanCpf.charAt(9))) return false;
+                    add = 0;
+                    for (let i = 0; i < 10; i++) add += parseInt(cleanCpf.charAt(i)) * (11 - i);
+                    rev = 11 - (add % 11);
+                    if (rev >= 10) rev = 0;
+                    if (rev !== parseInt(cleanCpf.charAt(10))) return false;
+                    return true;
+                },
+                validateForm() {
+                    let isValid = true;
+                    
+                    if (!this.isValidCPF(this.form.estudante_cpf)) {
+                        this.errors.estudante_cpf = true;
+                        isValid = false;
                     }
-                });
-                
-                if (!isValid) {
-                    errorMessage.classList.remove('hidden');
-                    return;
+                    if (!this.form.estudante_nome || !this.form.campus) {
+                        isValid = false;
+                    }
+
+                    if (this.form.idade_perfil === 'menor') {
+                        if (!this.isValidCPF(this.form.responsavel_cpf)) {
+                            this.errors.responsavel_cpf = true;
+                            isValid = false;
+                        }
+                        if (!this.form.responsavel_nome) {
+                            isValid = false;
+                        }
+                    }
+
+                    return isValid;
+                },
+                generatePDF() {
+                    if (!this.validateForm()) {
+                        this.hasGeneralError = true;
+                        return;
+                    }
+                    
+                    this.isGenerating = true;
+                    this.hasGeneralError = false;
+
+                    this.$nextTick(() => {
+                        const element = this.$refs.pdfArea;
+                        
+                        let nomeArquivo = `Termo_IFSC_${this.form.idade_perfil}_${this.form.estudante_nome.split(' ')[0]}.pdf`;
+                        nomeArquivo = nomeArquivo.replace(/\s/g, '_');
+
+                        const opt = {
+                            margin: [15, 12, 15, 12],
+                            filename: nomeArquivo,
+                            image: { type: 'jpeg', quality: 0.98 },
+                            html2canvas: { scale: 2, useCORS: true, letterRendering: true, scrollY: 0 },
+                            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                        };
+
+                        html2pdf().from(element).set(opt).save().then(() => {
+                            this.success = true;
+                            this.isGenerating = false;
+                        }).catch(err => {
+                            console.error("Erro na geração do PDF:", err);
+                            this.isGenerating = false;
+                            alert("Ocorreu um erro ao gerar o PDF. Verifique o console.");
+                        });
+                    });
+                },
+                resetForm() {
+                    this.success = false;
+                    this.form = {
+                        idade_perfil: '',
+                        tipo: 'ambos',
+                        responsavel_nome: '',
+                        responsavel_cpf: '',
+                        estudante_nome: '',
+                        estudante_cpf: '',
+                        campus: '',
+                        auth_nuvem: 'autorizo',
+                        auth_biometria: 'autorizo'
+                    };
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
-
-                const formData = new FormData(this);
-                const data = Object.fromEntries(formData.entries());
-                Object.keys(data).forEach(key => data[key] = data[key].trim());
-                generateAndDownloadPDF(data);
-            });
-            
-            function generateAndDownloadPDF(data) {
-                const today = new Date();
-                const formattedDate = today.toLocaleString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
-                const cidade = campusData[data.campus_selecionado];
-
-                const biometriaAuth = data.auth_biometria === 'autorizo' ? '[X]' : '[&nbsp;&nbsp;]';
-                const biometriaNaoAuth = data.auth_biometria === 'nao_autorizo' ? '[X]' : '[&nbsp;&nbsp;]';
-                const nuvemAuth = data.auth_nuvem === 'autorizo' ? '[X]' : '[&nbsp;&nbsp;]';
-                const nuvemNaoAuth = data.auth_nuvem === 'nao_autorizo' ? '[X]' : '[&nbsp;&nbsp;]';
-
-                const templateHTML = document.getElementById('pdf-template-container').innerHTML;
-
-                let pdfHTMLContent = templateHTML
-                    .replace(/__RESPONSAVEL_NOME__/g, data.responsavel_nome)
-                    .replace(/__RESPONSAVEL_CPF__/g, data.responsavel_cpf)
-                    .replace(/__MENOR_NOME__/g, data.menor_nome)
-                    .replace(/__MENOR_CPF__/g, data.menor_cpf)
-                    .replace(/__CIDADE__/g, cidade)
-                    .replace(/__DATA__/g, formattedDate)
-                    .replace(/__BIOMETRIA_AUTH__/g, biometriaAuth)
-                    .replace(/__BIOMETRIA_NAO_AUTH__/g, biometriaNaoAuth)
-                    .replace(/__NUVEM_AUTH__/g, nuvemAuth)
-                    .replace(/__NUVEM_NAO_AUTH__/g, nuvemNaoAuth);
-
-                const pdfContentDiv = document.getElementById('pdf-content');
-                pdfContentDiv.innerHTML = pdfHTMLContent;
-
-                const pdfOptions = {
-                    margin: [20, 15, 20, 15],
-                    filename: `Termo_Consentimento_${data.menor_nome.replace(/\s/g, '_')}.pdf`,
-                    image: { type: 'jpeg', quality: 0.98 },
-                    html2canvas: { scale: 2, useCORS: true },
-                    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-                };
-
-                html2pdf().from(pdfContentDiv).set(pdfOptions).save();
-                consentForm.classList.add('hidden');
-                document.getElementById('signing-instructions-section').classList.add('hidden');
-                document.getElementById('re-generate-container').classList.remove('hidden');
             }
-        });
+        }).mount('#app');
     </script>
 </body>
 </html>

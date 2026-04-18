@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portal de Apps criados com IA</title>
+  <title>Agregador de Ferramentas com IA</title>
   
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T49JX2YJMT"></script>
@@ -16,6 +16,15 @@
     gtag('config', 'G-T49JX2YJMT');
   </script>
 
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wddq8jjbkx");
+  </script>
+
   <script>
     (function() {
       const theme = localStorage.getItem('theme');
@@ -25,56 +34,16 @@
         document.documentElement.classList.remove('dark');
       }
     })();
-    window.tailwind = { config: { darkMode: 'class' } }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' }
+  </script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
   <style>
     :root {
       --ifsc-green: #32a041;
-      --app-bg: #f8fafc;
-      --card-bg: #ffffff;
-      --modal-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --border-color: #e2e8f0;
-    }
-    html.dark {
-      --app-bg: #0d1117;
-      --card-bg: #161b22;
-      --modal-bg: #0d1117;
-      --text-main: #f8fafc;
-      --text-muted: #8b949e;
-      --border-color: #30363d;
-    }
-    
-    body { 
-      font-family: 'Inter', sans-serif; 
-      background-color: var(--app-bg) !important; 
-      color: var(--text-main) !important;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    
-    .app-card-bg { 
-      background-color: var(--card-bg) !important; 
-      border: 1px solid var(--border-color) !important;
-      color: var(--text-main) !important;
-    }
-    
-    .modal-card-bg { 
-      background-color: var(--modal-bg) !important; 
-      border: 1px solid var(--border-color) !important;
-      color: var(--text-main) !important;
-    }
-
-    h1, h2, h3 { color: var(--text-main) !important; }
-    p, .text-gray-500, .text-gray-600 { color: var(--text-muted) !important; }
-    
-    .filter-btn-bg { 
-      background-color: var(--card-bg) !important; 
-      color: var(--text-muted) !important; 
-      border: 1px solid var(--border-color) !important; 
     }
     
     .filter-btn-group button.active { 
@@ -127,7 +96,7 @@
   </style>
 </head>
 
-<body class="selection:bg-green-100 selection:text-green-900 transition-colors duration-500">
+<body style="font-family: 'Inter', sans-serif;" class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 selection:bg-green-100 selection:text-green-900 transition-colors duration-500">
   <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between gap-4">
       <div class="flex items-center gap-3 text-left">
@@ -135,8 +104,8 @@
           <span class="text-white material-icons-round text-2xl">apps</span>
         </div>
         <div>
-          <h1 class="text-lg sm:text-xl font-black text-gray-900 dark:text-white leading-none">Portal de Apps criados com IA</h1>
-          <p class="text-[10px] sm:text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-widest mt-1">Aplicativos cocriados com Inteligência Artificial</p>
+          <h1 class="text-lg sm:text-xl font-black text-gray-900 dark:text-white leading-none">Agregador de Ferramentas com IA</h1>
+          <p class="text-[10px] sm:text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-widest mt-1">Aplicativos e Agentes cocriados com Inteligência Artificial</p>
         </div>
       </div>
       <div class="flex-grow max-w-md hidden sm:block">
@@ -156,28 +125,72 @@
     </div>
   </header>
   <main class="max-w-7xl mx-auto px-4 py-8 sm:py-12">
-    <div class="mb-10">
-      <div id="filter-container" class="filter-btn-group flex flex-wrap gap-2"></div>
+    <!-- Tab Switcher -->
+    <div class="flex justify-center mb-10">
+      <div class="bg-gray-100 dark:bg-gray-800 p-1 rounded-2xl inline-flex shadow-inner">
+        <button id="tab-tools" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all focus:outline-none bg-white dark:bg-gray-700 shadow text-green-600 dark:text-green-400">Ferramentas (Apps)</button>
+        <button id="tab-experts" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all focus:outline-none text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Especialistas (Gems)</button>
+      </div>
     </div>
-    <div id="app-grid" class="app-grid mb-20">
-      <!-- Skeleton Loading -->
-      <div class="animate-pulse app-card-bg rounded-2xl h-48 sm:h-52"></div>
-      <div class="animate-pulse app-card-bg rounded-2xl h-48 sm:h-52"></div>
-      <div class="animate-pulse app-card-bg rounded-2xl h-48 sm:h-52"></div>
+
+    <!-- View: Tools -->
+    <div id="view-tools">
+      <div class="mb-8 text-center max-w-2xl mx-auto">
+        <h2 class="text-xl font-black text-gray-900 dark:text-white mb-2">Ferramentas (Apps)</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Aplicativos criados em Google IA Studio para automatizar e otimizar tarefas administrativas e acadêmicas.</p>
+      </div>
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div id="filter-container" class="filter-btn-group flex flex-wrap gap-2"></div>
+      </div>
+      <div id="app-grid" class="app-grid mb-20">
+        <!-- Skeleton Loading -->
+        <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
+        <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
+        <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
+      </div>
+    </div>
+
+    <!-- View: Experts -->
+    <div id="view-experts" class="hidden">
+      <div class="mb-10 text-center max-w-2xl mx-auto">
+        <h2 class="text-xl font-black text-gray-900 dark:text-white mb-2">Agentes Especialistas</h2>
+        <p class="text-sm text-gray-500 dark:text-gray-400">Assistentes usando Gemini (Gems) treinados na documentação interna de setores específicos do IFSC usando NotebookLM como base de RAG (Retrieval-Augmented Generation).</p>
+      </div>
+      <div class="mb-8 flex flex-wrap items-center justify-between gap-4">
+        <div id="filter-experts-container" class="filter-btn-group flex flex-wrap gap-2"></div>
+      </div>
+      <div id="experts-grid" class="app-grid mb-20">
+        <!-- Skeleton Loading -->
+        <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
+      </div>
     </div>
 
     <!-- Footer / Disclaimer Section -->
     <footer class="border-t border-gray-200 dark:border-gray-800 pt-12 pb-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div class="space-y-4">
-          <h3 class="text-xl font-black">Quer adicionar sua aplicação?</h3>
-          <p class="text-sm font-medium leading-relaxed opacity-80">
-            Este portal é um projeto colaborativo. Se você desenvolveu uma aplicação de interesse para a comunidade IFSC, contribua!
-          </p>
-          <a href="https://github.com/IFSC-DTIC/apps" target="_blank" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-bold text-sm transition-transform hover:scale-105">
-            <span class="material-icons-round text-lg">code</span>
-            Contribua no GitHub
-          </a>
+        <div class="space-y-5 flex flex-col justify-center h-full">
+          <div>
+            <h3 class="text-xl font-black mb-2">Quer adicionar sua aplicação?</h3>
+            <p class="text-sm font-medium leading-relaxed opacity-80">
+              Este portal é colaborativo. Siga os passos para incluir sua ferramenta de IA na comunidade!
+            </p>
+          </div>
+          
+          <div class="space-y-3">
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">1</div>
+              <p class="text-[13px] leading-relaxed text-gray-600 dark:text-gray-400 font-medium">Faça um <span class="font-bold text-gray-900 dark:text-gray-200">Fork</span> do repositório <a href="https://github.com/IFSC-DTIC/apps" class="text-blue-600 dark:text-blue-400 hover:underline">IFSC-DTIC/apps</a> no GitHub.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">2</div>
+              <p class="text-[13px] leading-relaxed text-gray-600 dark:text-gray-400 font-medium">Edite o <code class="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 px-1.5 py-0.5 rounded text-xs font-mono text-gray-800 dark:text-gray-300">apps.json</code> adicionando as informações (Nome, URL) na categoria adequada.</p>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">3</div>
+              <p class="text-[13px] leading-relaxed text-gray-600 dark:text-gray-400 font-medium">Abra um <span class="font-bold text-gray-900 dark:text-gray-200">Pull Request</span> solicitando autorização da DTIC para aprovar e incluir no ar.</p>
+            </div>
+          </div>
+
         </div>
         
         <div class="space-y-4">
@@ -224,7 +237,7 @@
   </main>
   <div id="app-modal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 opacity-0 pointer-events-none transition-all duration-300">
     <div class="absolute inset-0 bg-gray-950/60 backdrop-blur-sm transition-opacity"></div>
-    <div id="app-modal-content" class="modal-card-bg w-full max-w-2xl rounded-3xl shadow-2xl relative z-10 scale-95 transition-transform duration-300 overflow-hidden">
+    <div id="app-modal-content" class="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 w-full max-w-2xl rounded-3xl shadow-2xl relative z-10 scale-95 transition-transform duration-300 overflow-hidden">
       <div class="p-6 sm:p-8 flex flex-col items-center text-center">
         <button id="close-modal-btn" class="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-400 transition-colors"><span class="material-icons-round">close</span></button>
         <div id="modal-app-icon-container" class="w-20 h-20 mb-6 transition-transform duration-500"></div>
@@ -248,19 +261,54 @@
 
       const icons = { 
         lgpd: `<div class="category-icon bg-gradient-to-br from-green-500 to-green-700"><span class="material-icons-round text-xl mb-0.5">privacy_tip</span><span>LGPD</span></div>`, 
-        bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">schema</span><span>BPMN</span></div>`, 
-        siads: `<div class="category-icon bg-gradient-to-br from-amber-500 to-orange-600"><span class="material-icons-round text-xl mb-0.5">inventory_2</span><span>SIADS</span></div>`, 
-        rsctae: `<div class="category-icon bg-gradient-to-br from-purple-500 to-indigo-700"><span class="material-icons-round text-xl mb-0.5">assignment_ind</span><span>RSC</span></div>` 
+        bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">schema</span><span>PROC</span></div>`, 
+        siads: `<div class="category-icon bg-gradient-to-br from-amber-500 to-orange-600"><span class="material-icons-round text-xl mb-0.5">inventory_2</span><span>ADM</span></div>`, 
+        rsctae: `<div class="category-icon bg-gradient-to-br from-purple-500 to-indigo-700"><span class="material-icons-round text-xl mb-0.5">assignment_ind</span><span>GP</span></div>`,
+        especialistas: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-xl mb-0.5">psychology</span><span>EXP</span></div>`,
+        taes: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-xl mb-0.5">badge</span><span>SERV</span></div>`,
+        professores: `<div class="category-icon bg-gradient-to-br from-indigo-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">school</span><span>PROF</span></div>`,
+        alunos: `<div class="category-icon bg-gradient-to-br from-pink-500 to-rose-700"><span class="material-icons-round text-xl mb-0.5">face</span><span>ALU</span></div>`
       };
 
       const appGrid = document.getElementById('app-grid');
       const filterContainer = document.getElementById('filter-container');
+      const filterExpertsContainer = document.getElementById('filter-experts-container');
       const quicksearch = document.getElementById('quicksearch');
       const slugify = str => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
 
       let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       let categoriesData = [];
+      let gemsCategoriesData = [];
+      let expertsData = [];
       let allApps = [];
+      let activeTab = 'tools';
+
+      const tabTools = document.getElementById('tab-tools');
+      const tabExperts = document.getElementById('tab-experts');
+      const viewTools = document.getElementById('view-tools');
+      const viewExperts = document.getElementById('view-experts');
+
+      const setTab = (tab) => {
+        activeTab = tab;
+        const activeClasses = ['bg-white', 'dark:bg-gray-700', 'shadow', 'text-green-600', 'dark:text-green-400'];
+        const inactiveClasses = ['text-gray-500', 'hover:text-gray-700', 'dark:text-gray-400', 'dark:hover:text-gray-200'];
+        
+        if (tab === 'tools') {
+          tabTools.classList.add(...activeClasses); tabTools.classList.remove(...inactiveClasses);
+          tabExperts.classList.remove(...activeClasses); tabExperts.classList.add(...inactiveClasses);
+          viewTools.classList.remove('hidden');
+          viewExperts.classList.add('hidden');
+        } else {
+          tabExperts.classList.add(...activeClasses); tabExperts.classList.remove(...inactiveClasses);
+          tabTools.classList.remove(...activeClasses); tabTools.classList.add(...inactiveClasses);
+          viewExperts.classList.remove('hidden');
+          viewTools.classList.add('hidden');
+        }
+        applyFilters();
+      };
+
+      tabTools.addEventListener('click', () => setTab('tools'));
+      tabExperts.addEventListener('click', () => setTab('experts'));
 
       const updateFavorites = (appId) => {
         const index = favorites.indexOf(appId);
@@ -271,59 +319,90 @@
         applyFilters();
       };
 
-      const renderApps = () => {
-        appGrid.innerHTML = allApps.map(a => {
-          const isFav = favorites.includes(a.id);
-          return `
-            <div class="app-item shadow-sm hover:shadow-md rounded-2xl overflow-hidden flex flex-col p-5 text-center app-card-bg h-48 sm:h-52" 
-                 data-category="${a.category}" 
-                 data-id="${a.id}"
-                 data-name="${a.name.toLowerCase()}">
-              <button onclick="event.stopPropagation(); window.toggleFavorite('${a.id}')" 
-                      class="favorite-btn ${isFav ? 'active' : 'text-gray-300 dark:text-gray-600'}">
-                <span class="material-icons-round text-2xl">${isFav ? 'star' : 'star_outline'}</span>
-              </button>
-              <div onclick="openModal('${a.id}', '${encodeURIComponent(a.name)}', '${encodeURIComponent(a.description)}', '${a.url}', '${a.iconKey}')" class="flex flex-col flex-grow cursor-pointer mt-2">
-                <div class="w-12 h-12 mb-4 mx-auto">${icons[a.iconKey]}</div>
-                <div class="flex flex-col flex-grow overflow-hidden">
-                  <h3 class="text-sm font-bold font-inter leading-tight mb-2 line-clamp-2">${a.name}</h3>
-                  <p class="text-[11px] mt-1 line-clamp-3 font-semibold opacity-80 leading-relaxed">${a.description}</p>
-                </div>
+      const createCardHTML = (a) => {
+        const isFav = favorites.includes(a.id);
+        return `
+          <div class="app-item shadow-sm hover:shadow-md rounded-2xl overflow-hidden flex flex-col p-5 text-center bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 h-48 sm:h-52" 
+               data-category="${a.category}" 
+               data-id="${a.id}"
+               data-name="${a.name.toLowerCase()}">
+            <button onclick="event.stopPropagation(); window.toggleFavorite('${a.id}')" 
+                    class="favorite-btn ${isFav ? 'active' : 'text-gray-300 dark:text-gray-600'}">
+              <span class="material-icons-round text-2xl">${isFav ? 'star' : 'star_outline'}</span>
+            </button>
+            <div onclick="openModal('${a.id}', '${encodeURIComponent(a.name)}', '${encodeURIComponent(a.description)}', '${a.url}', '${a.iconKey}')" class="flex flex-col flex-grow cursor-pointer mt-2">
+              <div class="w-12 h-12 mb-4 mx-auto">${icons[a.iconKey]}</div>
+              <div class="flex flex-col flex-grow overflow-hidden">
+                <h3 class="text-sm font-bold font-inter leading-tight mb-2 line-clamp-2">${a.name}</h3>
+                ${a.tags ? `<div class="flex gap-1 justify-center mb-2">${a.tags.map(t => `<span class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">${t}</span>`).join('')}</div>` : ''}
+                <p class="text-[11px] mt-1 line-clamp-3 font-semibold opacity-80 leading-relaxed">${a.description}</p>
               </div>
             </div>
-          `;
-        }).join('');
+          </div>
+        `;
+      };
+
+      const renderApps = () => {
+        document.getElementById('app-grid').innerHTML = allApps.map(createCardHTML).join('');
+        document.getElementById('experts-grid').innerHTML = expertsData.map(createCardHTML).join('');
       };
 
       window.toggleFavorite = updateFavorites;
 
       const applyFilters = () => {
-        const activeFilter = filterContainer.querySelector('.active').dataset.filter;
         const searchText = quicksearch.value.toLowerCase().trim();
-        const items = document.querySelectorAll('.app-item');
-
-        items.forEach(item => {
-          const catMatch = activeFilter === 'all' || 
-                           item.dataset.category === activeFilter ||
-                           (activeFilter === 'favs' && favorites.includes(item.dataset.id));
-          const searchMatch = item.dataset.name.includes(searchText);
-          
-          if (catMatch && searchMatch) item.classList.remove('hidden');
-          else item.classList.add('hidden');
-        });
+        
+        if (activeTab === 'tools') {
+          const activeFilter = filterContainer.querySelector('.active')?.dataset.filter || 'all';
+          const items = document.getElementById('app-grid').querySelectorAll('.app-item');
+          items.forEach(item => {
+            const catMatch = activeFilter === 'all' || 
+                             item.dataset.category === activeFilter ||
+                             (activeFilter === 'favs' && favorites.includes(item.dataset.id));
+            const searchMatch = item.dataset.name.includes(searchText);
+            if (catMatch && searchMatch) item.classList.remove('hidden');
+            else item.classList.add('hidden');
+          });
+        } else {
+          const activeFilter = filterExpertsContainer.querySelector('.active')?.dataset.filter || 'all';
+          const items = document.getElementById('experts-grid').querySelectorAll('.app-item');
+          items.forEach(item => {
+            const catMatch = activeFilter === 'all' || 
+                             item.dataset.category === activeFilter ||
+                             (activeFilter === 'favs' && favorites.includes(item.dataset.id));
+            const searchMatch = item.dataset.name.includes(searchText);
+            if (catMatch && searchMatch) item.classList.remove('hidden');
+            else item.classList.add('hidden');
+          });
+        }
       };
 
-      fetch('apps.json')
-        .then(res => res.json())
-        .then(data => {
-          categoriesData = data;
+      const ts = new Date().getTime();
+      Promise.all([
+        fetch(`apps.json?v=${ts}`).then(res => res.json()),
+        fetch(`agents.json?v=${ts}`).then(res => res.json())
+      ])
+      .then(([appsData, gemsData]) => {
+          categoriesData = appsData;
+          gemsCategoriesData = gemsData;
+          
+          if (gemsCategoriesData && gemsCategoriesData.length > 0) {
+            gemsCategoriesData.forEach(c => {
+               if(c.apps) {
+                 c.apps.forEach(a => {
+                   expertsData.push({ ...a, category: slugify(c.name), iconKey: c.iconKey });
+                 });
+               }
+            });
+          }
+
           categoriesData.forEach(c => {
             c.apps.forEach(a => {
               allApps.push({ ...a, category: slugify(c.name), iconKey: c.iconKey });
             });
           });
 
-          // Render Filters
+          // Render Filters for Tools
           const filterButtons = [
             { name: 'Todos', filter: 'all' }, 
             { name: '⭐ Favoritos', filter: 'favs' },
@@ -331,16 +410,38 @@
           ];
           
           filterContainer.innerHTML = filterButtons.map((b, i) => `
-            <button data-filter="${b.filter}" class="text-sm font-semibold py-2 px-5 rounded-full border filter-btn-bg transition-all ${i === 0 ? 'active' : ''}">
+            <button data-filter="${b.filter}" class="text-sm font-semibold py-2 px-5 rounded-full border bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 transition-all ${i === 0 ? 'active' : ''}">
+              ${b.name}
+            </button>
+          `).join('');
+
+          // Render Filters for Experts
+          const filterExpertsButtons = [
+            { name: 'Todos', filter: 'all' }, 
+            { name: '⭐ Favoritos', filter: 'favs' },
+            ...(gemsCategoriesData ? gemsCategoriesData.map(c => ({ name: c.name, filter: slugify(c.name) })) : [])
+          ];
+          
+          filterExpertsContainer.innerHTML = filterExpertsButtons.map((b, i) => `
+            <button data-filter="${b.filter}" class="text-sm font-semibold py-2 px-5 rounded-full border bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-400 border-gray-200 dark:border-gray-700 transition-all ${i === 0 ? 'active' : ''}">
               ${b.name}
             </button>
           `).join('');
 
           renderApps();
+          applyFilters();
           
           filterContainer.addEventListener('click', (e) => {
             if (e.target.tagName === 'BUTTON') {
               filterContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+              e.target.classList.add('active');
+              applyFilters();
+            }
+          });
+
+          filterExpertsContainer.addEventListener('click', (e) => {
+            if (e.target.tagName === 'BUTTON') {
+              filterExpertsContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
               e.target.classList.add('active');
               applyFilters();
             }
@@ -358,8 +459,15 @@
             } 
             if(id) { 
               id = id.toLowerCase(); 
-              allApps.some(a => { 
+              
+              if (['agents', 'gems', 'especialistas'].includes(id)) {
+                setTab('experts');
+                return;
+              }
+
+              [...allApps, ...expertsData].some(a => { 
                 if (a.id.toLowerCase() === id) {
+                  if (expertsData.some(e => e.id === a.id)) setTab('experts');
                   if(p.get('redirect')==='true') window.location.href = a.url; 
                   else openModal(a.id, encodeURIComponent(a.name), encodeURIComponent(a.description), a.url, a.iconKey); 
                   return true; 

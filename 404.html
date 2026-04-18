@@ -16,6 +16,15 @@
     gtag('config', 'G-T49JX2YJMT');
   </script>
 
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wddq8jjbkx");
+  </script>
+
   <script>
     (function() {
       const theme = localStorage.getItem('theme');
@@ -114,20 +123,41 @@
     document.addEventListener('DOMContentLoaded', () => {
       const icons = { 
         lgpd: `<div class="category-icon bg-gradient-to-br from-green-500 to-green-700"><span class="material-icons-round text-2xl mb-1">privacy_tip</span><span>LGPD</span></div>`, 
-        bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-2xl mb-1">schema</span><span>BPMN</span></div>`, 
-        siads: `<div class="category-icon bg-gradient-to-br from-amber-500 to-orange-600"><span class="material-icons-round text-2xl mb-1">inventory_2</span><span>SIADS</span></div>`, 
-        rsctae: `<div class="category-icon bg-gradient-to-br from-purple-500 to-indigo-700"><span class="material-icons-round text-2xl mb-1">assignment_ind</span><span>RSC</span></div>` 
+        bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-2xl mb-1">schema</span><span>PROC</span></div>`, 
+        siads: `<div class="category-icon bg-gradient-to-br from-amber-500 to-orange-600"><span class="material-icons-round text-2xl mb-1">inventory_2</span><span>ADM</span></div>`, 
+        rsctae: `<div class="category-icon bg-gradient-to-br from-purple-500 to-indigo-700"><span class="material-icons-round text-2xl mb-1">assignment_ind</span><span>GP</span></div>`,
+        especialistas: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-2xl mb-1">psychology</span><span>EXP</span></div>`,
+        taes: `<div class="category-icon bg-gradient-to-br from-teal-500 to-cyan-700"><span class="material-icons-round text-2xl mb-1">badge</span><span>SERV</span></div>`,
+        professores: `<div class="category-icon bg-gradient-to-br from-indigo-500 to-blue-700"><span class="material-icons-round text-2xl mb-1">school</span><span>PROF</span></div>`,
+        alunos: `<div class="category-icon bg-gradient-to-br from-pink-500 to-rose-700"><span class="material-icons-round text-2xl mb-1">face</span><span>ALU</span></div>`
       };
 
-      fetch('apps.json')
-        .then(res => res.json())
-        .then(data => {
+      Promise.all([
+        fetch('apps.json').then(res => res.json()),
+        fetch('agents.json').then(res => res.json()).catch(() => []) 
+      ])
+        .then(([appsData, agentsData]) => {
           const allApps = [];
-          data.forEach(c => {
-            c.apps.forEach(a => {
-              allApps.push({ ...a, iconKey: c.iconKey });
+          
+          if(appsData) {
+            appsData.forEach(c => {
+              if (c.apps) {
+                c.apps.forEach(a => {
+                  allApps.push({ ...a, iconKey: c.iconKey });
+                });
+              }
             });
-          });
+          }
+
+          if(agentsData) {
+            agentsData.forEach(c => {
+              if (c.apps) {
+                c.apps.forEach(a => {
+                  allApps.push({ ...a, iconKey: c.iconKey });
+                });
+              }
+            });
+          }
 
           const p = new URL(window.location.href).searchParams; 
           let id = p.get('app') || (window.location.hash ? window.location.hash.substring(1) : null); 
@@ -139,6 +169,13 @@
           
           if(id) { 
             id = id.toLowerCase(); 
+
+            // Hardcode routing to experts tab
+            if (['agents', 'gems', 'especialistas'].includes(id)) {
+              window.location.href = '/?app=' + id;
+              return;
+            }
+
             const app = allApps.find(a => a.id.toLowerCase() === id);
             
             if(app) {
@@ -166,7 +203,7 @@
             }
           }
           
-          // If no app found after 1 second, go home
+          // If no app found after 1.5 seconds, go home
           setTimeout(() => { if (id && !allApps.find(a => a.id.toLowerCase() === id)) window.location.href = '/'; }, 1500);
         })
         .catch(() => window.location.href = '/');

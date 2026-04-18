@@ -10,7 +10,7 @@
     ]
   },
   {
-    "name": "BPMN",
+    "name": "Processos",
     "iconKey": "bpmn",
     "apps": [
       { "id": "sezio", "name": "sez.iO - Agente IA", "url": "https://ai.studio/apps/drive/1z-e1wW2LvCStdG9ElsIeNt3x4-Q5tqOZ?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "Assistente de Modelagem de Processos e Relatórios LGPD." },
@@ -20,7 +20,7 @@
     ]
   },
   {
-    "name": "SIADS",
+    "name": "Administrativo",
     "iconKey": "siads",
     "apps": [
       { "id": "padronizacao", "name": "Ferramenta de Padronização de Inventário", "url": "https://ai.studio/apps/drive/12kTlPi2J1wxLKOskn_xAeb-CwJsBMv09?showAssistant=true&showPreview=true&fullscreenApplet=true", "description": "SIADS - Unifique e limpe seus dados de inventário de múltiplos campi de forma inteligente." },
@@ -28,7 +28,7 @@
     ]
   },
   {
-    "name": "RSC-TAE",
+    "name": "Gestão de Pessoas",
     "iconKey": "rsctae",
     "apps": [
       { "id": "rsctae", "name": "RSC-TAE - Assistente AI", "url": "https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true", "description": "Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial." }
