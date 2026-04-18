@@ -356,9 +356,10 @@
         }
       };
 
+      const ts = new Date().getTime();
       Promise.all([
-        fetch('apps.json').then(res => res.json()),
-        fetch('agents.json').then(res => res.json())
+        fetch(`apps.json?v=${ts}`).then(res => res.json()),
+        fetch(`agents.json?v=${ts}`).then(res => res.json())
       ])
       .then(([appsData, gemsData]) => {
           categoriesData = appsData;
