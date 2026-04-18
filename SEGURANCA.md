@@ -1,51 +1,54 @@
-# 🛡️ Análise de Segurança e Guia de Implementação
+# 🛡️ Análise de Segurança e Guia de Implementação (Foco: GitHub Pages & LGPD)
 
-Este documento apresenta uma análise técnica da postura de segurança atual do Portal de Aplicações IFSC-DTIC-CGD e fornece diretrizes estruturadas para o **Antigravity** realizar as correções necessárias.
+Este documento apresenta uma análise técnica da postura de segurança atual do Portal de Aplicações IFSC-DTIC-CGD, adaptada para hospedagem estática e conformidade com a LGPD.
 
 ---
 
-## 📋 Checklist de Segurança
+## 📋 Checklist de Segurança e Privacidade
 
 | Status | Item de Segurança | Descrição | Impacto |
 | :---: | :--- | :--- | :--- |
-| [ ] | **Subresource Integrity (SRI)** | Scripts externos (Tailwind, Material Icons, Isotope) não possuem hashes de integridade. | Alto (Risco de Supply Chain Attack) |
-| [ ] | **Content Security Policy (CSP)** | Ausência de meta tag CSP restringindo as origens de recursos. | Alto (Injeção de Scripts/XSS) |
-| [ ] | **Segurança de Links Externos** | Links para aplicações externas não utilizam `rel="noopener noreferrer"`. | Médio (Tabnabbing / Vazamento de Referer) |
-| [ ] | **Sanitização de Dados (XSS)** | O uso de `innerHTML` para renderizar `apps.json` pode permitir injeção de script caso o JSON seja comprometido. | Alto (XSS de Persistência/DOM) |
-| [ ] | **Segurança de Cabeçalhos HTTP** | Embora estático (GitHub Pages), pode-se configurar cabeçalhos via `jekyll-redirect-from` ou meta tags. | Baixo |
+| [ ] | **Gestão de Segredos (Tokens/Keys)** | Garantir que nenhuma API Key ou Token seja exposto no código público. | Crítico |
+| [ ] | **Conformidade LGPD** | Implementar avisos de privacidade e garantir que dados sensíveis não sejam logados. | Crítico |
+| [ ] | **Proteção de Menores** | Filtros de conteúdo e avisos claros para usuários menores de idade. | Crítico |
+| [ ] | **Subresource Integrity (SRI)** | Scripts externos sem hashes de integridade. | Alto |
+| [ ] | **Content Security Policy (CSP)** | Ausência de restrição de origens de recursos via meta tag. | Alto |
+| [ ] | **Sanitização de Dados (XSS)** | Risco de injeção via `innerHTML` ao processar o `apps.json`. | Alto |
 
 ---
 
 ## 🚀 Prompts para o Antigravity
 
-Use os prompts abaixo para instruir o agente a realizar as melhorias de forma segura e eficiente.
+### 1. Auditoria de Segredos e Prevenção de Vazamento
+**Persona:** Auditor de Segurança Cloud/DevSecOps.
+**Contexto:** O projeto é público no GitHub e utiliza GitHub Pages. Qualquer segredo (tokens, chaves de IA) colocado no JS será visível para todos.
+**Tarefa:** Analise todo o repositório em busca de strings que pareçam chaves de API ou tokens. Crie um guia no README instruindo como os contribuidores devem usar variáveis de ambiente (se houver build process) ou como configurar chaves de forma que o usuário final forneça a sua própria chave no navegador (armazenada apenas no LocalStorage do usuário).
+**Resultado:** Repositório livre de segredos expostos e documentação de "Bring Your Own Key" (BYOK).
 
-### 1. Implementação de SRI e Atualização de Dependências
+### 2. Implementação de Privacy-by-Design (LGPD)
+**Persona:** Consultor Jurídico-Tecnológico (LGPD).
+**Contexto:** O IFSC lida com dados de alunos, muitos dos quais são menores de idade. O portal deve ser um exemplo de privacidade.
+**Tarefa:** Implemente um banner de "Aviso de Privacidade" que explique que o portal não coleta dados pessoais e que toda a inteligência artificial é processada em servidores externos (Google AI Studio), alertando para não inserir dados sensíveis ou de identificação de menores nos prompts.
+**Resultado:** Portal em conformidade ética e legal com a LGPD.
+
+### 3. Fortalecimento Técnico (SRI & CSP)
 **Persona:** Especialista em Segurança Web.
-**Contexto:** O projeto carrega scripts críticos de CDNs (Tailwind, Isotope, Google Fonts) sem verificar a integridade dos arquivos.
-**Tarefa:** Adicione os atributos `integrity` (SRI) e `crossorigin` a todas as tags `<script>` e `<link>` que apontam para recursos externos no `index.html` e `beta/index.html`.
-**Resultado Esperado:** Código atualizado com hashes SHA-384/512 válidos para as versões atuais das bibliotecas.
-
-### 2. Configuração de Content Security Policy (CSP)
-**Persona:** Arquiteto de Software com foco em Defesa em Profundidade.
-**Contexto:** O portal é uma aplicação estática que precisa se comunicar com domínios específicos (Google Fonts, Google Tag Manager, CDNs e os apps no ai.studio).
-**Tarefa:** Crie e insira uma meta tag `<meta http-equiv="Content-Security-Policy" content="...">` que permita apenas scripts e estilos de domínios confiáveis, bloqueando execuções de terceiros não autorizados.
-**Resultado Esperado:** Meta tag configurada sem quebrar as funcionalidades de análise (GA) e estilização (Tailwind).
-
-### 3. Proteção de Links e Navegação
-**Persona:** Desenvolvedor Frontend Sênior.
-**Contexto:** O portal abre várias aplicações externas em novas abas.
-**Tarefa:** Varra o código JavaScript e HTML e garanta que todo link (`<a>`) ou redirecionamento via `window.open` que aponte para fora do domínio `ifsc.edu.br` inclua `rel="noopener noreferrer"`.
-**Resultado Esperado:** Prevenção de ataques de acesso ao objeto `window.opener`.
-
-### 4. Refatoração para Prevenção de XSS no DOM
-**Persona:** Especialista em Segurança JavaScript.
-**Contexto:** A função `renderApps` utiliza template strings e injeta o conteúdo diretamente no DOM via `innerHTML` a partir de um arquivo `apps.json`.
-**Tarefa:** Refatore o processo de renderização para usar métodos mais seguros como `textContent`, `createElement` ou implemente uma biblioteca de sanitização leve (ex: DOMPurify) antes da inserção.
-**Resultado Esperado:** Código resiliente a entradas maliciosas no arquivo de configuração de apps.
+**Contexto:** Hospedagem no GitHub Pages limita o controle sobre cabeçalhos HTTP.
+**Tarefa:** Adicione SRI a todas as CDNs e implemente uma meta tag CSP rigorosa que bloqueie `eval()` e limite `script-src` apenas aos domínios estritamente necessários (Google Analytics e as URLs do AI Studio).
+**Resultado:** Proteção contra ataques de injeção e comprometimento de CDNs.
 
 ---
 
-## 🛠️ Notas Técnicas para o Desenvolvedor
-- **GitHub Pages:** Lembre-se que as opções de cabeçalhos de resposta HTTP são limitadas. Foque em proteções baseadas em meta tags e integridade de arquivos.
-- **Isotope.js:** A versão beta utiliza uma versão via `unpkg`. Garanta que a versão seja fixa (ex: `v3.0.6`) para gerar um hash SRI estável.
+## 🛡️ Segurança em Ambiente Estático (Zero Backend)
+
+Como o portal roda no **GitHub Pages**, todas as melhorias devem ser **Client-Side**:
+1.  **Persistência:** Use apenas `LocalStorage` ou `IndexedDB`. Nunca tente enviar dados para um banco de dados externo a menos que haja uma API autenticada e segura (não recomendada para este escopo).
+2.  **Processamento:** Se houver necessidade de salvar configurações, elas devem permanecer no navegador do usuário.
+3.  **Privacidade de Menores:** Garanta que as descrições dos apps não contenham links para conteúdos inadequados e que haja um aviso de "Uso Educacional Supervisionado".
+
+---
+
+## 🛠️ Notas Técnicas
+- **NUNCA** submeta arquivos `.env` ou chaves no código-fonte.
+- **DADOS DE MENORES:** Se um app sugerido for voltado para menores, ele deve seguir a regra de "Coleta Zero" de dados pessoais.
+- **XSS:** Substitua `element.innerHTML = ...` por `element.textContent = ...` ou use métodos de criação de elementos do DOM para evitar execução de scripts maliciosos injetados via JSON.

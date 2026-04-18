@@ -1,60 +1,53 @@
-# 💡 Sugestões de Funcionalidades e Inovações
+# 💡 Sugestões de Funcionalidades (Foco: Processamento Local e Privacidade)
 
-Este documento explora melhorias de Experiência do Usuário (UX) e novas ideias de aplicações de IA que fazem sentido para o contexto do IFSC, focando em utilidade pública e produtividade acadêmica sem a necessidade de acoplamento com sistemas internos sensíveis.
+Este documento detalha funcionalidades inovadoras que respeitam a natureza estática do portal (GitHub Pages), garantindo que os dados permaneçam sob controle do usuário (Local-First).
 
 ---
 
-## 📋 Checklist de Evolução
+## 📋 Checklist de Funcionalidades Éticas e Seguras
 
-| Status | Funcionalidade | Descrição | Objetivo |
+| Status | Funcionalidade | Descrição | Foco |
 | :---: | :--- | :--- | :--- |
-| [ ] | **Busca Avançada (Fuzzy)** | Implementar busca por aproximação de caracteres (Fuse.js). | Melhorar descoberta de apps com erros de digitação. |
-| [ ] | **Categorização por Perfil** | Filtros para "Docentes", "Discentes", "TAEs" e "Comunidade Externa". | Direcionar o usuário para o que é relevante para ele. |
-| [ ] | **Assistente de Editais** | App de IA para resumir editais de pesquisa e extensão do IFSC. | Facilitar a leitura de documentos longos e complexos. |
-| [ ] | **Guia de Normas Acadêmicas** | Chatbot baseado nas normas de TCC e formatação do IFSC. | Auxiliar estudantes na produção científica. |
-| [ ] | **Feedback de Utilidade** | Sistema simples de "Like/Dislike" ou "Útil/Não Útil" (armazenado localmente). | Entender quais ferramentas são mais valiosas para a comunidade. |
+| [ ] | **Busca Fuzzy Local** | Pesquisa resiliente a erros usando Fuse.js sem chamadas de API. | UX / Privacidade |
+| [ ] | **Cofre de Prompts Pessoal** | Salvar prompts favoritos apenas no LocalStorage do usuário. | Utilidade / Segurança |
+| [ ] | **Filtro de Idade/Perfil** | Tags claras para apps adequados para menores de idade. | Proteção de Dados |
+| [ ] | **Dashboard de Uso Local** | Estatísticas de quais apps o usuário mais abre (apenas no browser dele). | Produtividade |
+| [ ] | **Validador de Privacidade** | Pequena ferramenta que verifica se um prompt contém dados sensíveis antes de enviar para a IA. | Prevenção LGPD |
 
 ---
 
 ## 🚀 Prompts para o Antigravity
 
-Use estes prompts para expandir as capacidades do portal.
+### 1. Sistema de Busca "Zero Latência" com Fuse.js
+**Persona:** Desenvolvedor Frontend Sênior.
+**Contexto:** Precisamos de uma busca potente que funcione offline e sem banco de dados.
+**Tarefa:** Integre a Fuse.js carregada via CDN (com SRI). Configure-a para indexar o `apps.json` localmente. A busca deve considerar `name`, `description` e uma nova chave `tags` que adicionaremos ao JSON.
+**Resultado:** Busca rápida, inteligente e privada.
 
-### 1. Implementação de Busca Fuzzy (Fuse.js)
-**Persona:** Especialista em UX/UI.
-**Contexto:** Atualmente a busca é baseada em `includes()` simples, o que exige digitação exata.
-**Tarefa:** Integre a biblioteca `Fuse.js` (via CDN com SRI) para permitir que a barra de pesquisa encontre aplicativos mesmo com pequenos erros ortográficos ou buscas por sinônimos definidos no `apps.json`.
-**Resultado Esperado:** Uma experiência de busca muito mais fluida e tolerante a erros.
+### 2. Implementação do "Cofre Local" (BYOK & Prompts)
+**Persona:** Especialista em UX e Segurança.
+**Contexto:** Usuários querem salvar seus prompts, mas não queremos um banco de dados centralizado por razões de custo e privacidade.
+**Tarefa:** Crie uma interface de "Configurações" no portal que use o `LocalStorage`. O usuário pode salvar seus prompts favoritos e até mesmo sua própria API Key do Google AI Studio (criptografada localmente com uma senha simples via biblioteca JS de criptografia, se necessário).
+**Resultado:** Personalização avançada sem necessidade de login ou servidor.
 
-### 2. Sistema de Favoritos Persistente (Melhorado)
-**Persona:** Desenvolvedor Web Fullstack.
-**Contexto:** Já existe um sistema básico de favoritos no LocalStorage.
-**Tarefa:** Melhore o sistema para incluir uma seção visual de "Destaques" ou "Mais Acessados" baseada no uso local, e garanta que o estado visual dos favoritos seja sincronizado instantaneamente entre a grid e o modal.
-**Resultado Esperado:** Maior engajamento e personalização da home do portal.
-
-### 3. Gerador de Prompt para Novos Apps (IA Tool)
-**Persona:** Engenheiro de Prompt.
-**Contexto:** O portal incentiva a contribuição de novos apps criados com IA.
-**Tarefa:** Crie uma funcionalidade (pode ser um novo app na lista ou um modal especial) que ajude o usuário a estruturar um prompt para o Google AI Studio, seguindo os padrões de segurança e utilidade do IFSC.
-**Resultado Esperado:** Aumento na quantidade e qualidade das contribuições da comunidade.
-
-### 4. Modo Offline Completo (PWA)
-**Persona:** Desenvolvedor PWA Sênior.
-**Contexto:** A versão beta já possui um `service-worker.js`.
-**Tarefa:** Melhore o cache do Service Worker para garantir que a lista de apps, ícones e fontes funcionem perfeitamente mesmo sem conexão à internet (offline-first), permitindo a consulta rápida de descrições e IDs dos apps.
-**Resultado Esperado:** Aplicativo instalável com robustez offline.
+### 3. Badge de Conformidade e Classificação
+**Persona:** Designer de Produto / Especialista em Ética IA.
+**Contexto:** Precisamos sinalizar quais apps são seguros para menores e quais seguem a LGPD rigorosamente.
+**Tarefa:** Adicione ao `apps.json` um campo `safety_rating` e implemente ícones/badges visuais nos cards dos apps (ex: "🛡️ LGPD OK", "👶 Seguro para Menores"). Crie um filtro na barra lateral para estes critérios.
+**Resultado:** Navegação segura e informada para a comunidade acadêmica.
 
 ---
 
-## 🌟 Ideias de "Apps IA" para o IFSC (Fora da Caixa)
+## 🌟 Ideias de "Apps IA" Locais para o IFSC
 
-1.  **Simplificador de Linguagem Administrativa:** Uma ferramenta para traduzir memorandos e resoluções complexas em linguagem simples para os alunos.
-2.  **Sugestor de Bibliografia IFSC:** IA que, baseada na ementa de um curso, sugere livros disponíveis na biblioteca (Pergamum) ou recursos abertos.
-3.  **Assistente de Acessibilidade:** Ferramenta para gerar textos alternativos (Alt-text) para imagens de materiais didáticos produzidos por professores.
-4.  **Mapa de Projetos de Extensão:** IA que analisa os nomes dos projetos de extensão e gera tags de interesse para facilitar a conexão entre diferentes campi.
+1.  **Anonimizador de Documentos (Client-Side):** Um app que usa Regex e processamento local para remover nomes e CPFs de um texto antes que o usuário o cole em uma IA externa.
+2.  **Organizador de Estudos Offline:** IA que ajuda a estruturar cronogramas de estudo baseados nos calendários do IFSC, salvando tudo no navegador.
+3.  **Tradutor de Siglas IFSC:** Um pequeno glossário inteligente para novos alunos e servidores entenderem a "sopa de letrinhas" institucional (TAE, RNP, SUAP, etc).
+4.  **Verificador de Referências ABNT:** Ferramenta que ajuda a formatar citações acadêmicas localmente antes da submissão de trabalhos.
 
 ---
 
 ## 🛠️ Notas para Implementação
-- **Performance:** Ao adicionar Fuse.js ou outras bibliotecas, monitore o tempo de carregamento (LCP).
-- **Sem Back-end:** Todas as funcionalidades devem ser pensadas para rodar Client-Side (JavaScript no navegador), mantendo a facilidade de hospedagem no GitHub Pages.
+- **Performance:** O portal deve permanecer leve. Evite bibliotecas pesadas.
+- **Privacidade:** Nunca use scripts de rastreamento de terceiros que capturem o que o usuário digita na busca.
+- **Transparência:** Sempre que algo for salvo no `LocalStorage`, informe o usuário via um pequeno aviso no rodapé ou na página de configurações.
