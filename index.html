@@ -354,13 +354,18 @@
         }
       };
 
-      fetch('apps.json')
-        .then(res => res.json())
-        .then(data => {
-          categoriesData = data.filter(c => c.name !== 'Especialistas');
-          const expCat = data.find(c => c.name === 'Especialistas');
-          if (expCat) {
-            expertsData = expCat.apps.map(a => ({ ...a, category: 'especialistas', iconKey: expCat.iconKey }));
+      Promise.all([
+        fetch('apps.json').then(res => res.json()),
+        fetch('gems.json').then(res => res.json())
+      ])
+      .then(([appsData, gemsData]) => {
+          categoriesData = appsData;
+          
+          if (gemsData && gemsData.length > 0) {
+            const expCat = gemsData[0];
+            if (expCat && expCat.apps) {
+              expertsData = expCat.apps.map(a => ({ ...a, category: 'especialistas', iconKey: expCat.iconKey }));
+            }
           }
 
           categoriesData.forEach(c => {

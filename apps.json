@@ -33,13 +33,5 @@
     "apps": [
       { "id": "rsctae", "name": "RSC-TAE - Assistente AI", "url": "https://ai.studio/apps/da771d45-41e2-413d-b159-67aed31b50c4?fullscreenApplet=true", "description": "Atenção: A regulamentação do RSC-TAE ainda não foi concluída. Este aplicativo deve ser utilizado exclusivamente como fonte de referência para auxiliar na extração e organização de dados, não possuindo caráter normativo ou oficial." }
     ]
-  },
-  {
-    "name": "Especialistas",
-    "iconKey": "especialistas",
-    "apps": [
-      { "id": "sibi", "name": "Especialista SiBI", "url": "https://gemini.google.com/gem/98588692d34c", "description": "Assistente interno para uso pelos profissionais do Sistema de Bibliotecas Integradas do IFSC (SiBI). Focado em normalização de trabalhos, consultas ao SophiA e políticas de acervo institucional.", "tags": ["TAEs"] },
-      { "id": "silvia", "name": "Silv.IA - Compras e Licitações", "url": "https://gemini.google.com/gem/10GI7VXwtapdgUxFfCp-14-kKJULn7Ord?usp=sharing", "description": "Assistente virtual para Gestão Pública. Automatiza a geração de ARPs pelo SIPAC e fornece consultoria técnica sobre compras e licitações baseada na Lei nº 14.133/2021.", "tags": ["TAEs"] }
-    ]
   }
 ]
