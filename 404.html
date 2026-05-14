@@ -18,7 +18,11 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-T49JX2YJMT');
+    gtag('config', 'G-T49JX2YJMT', {
+      'anonymize_ip': true,
+      'allow_google_signals': false,
+      'allow_ad_personalization_signals': false
+    });
   </script>
 
   <!-- Microsoft Clarity -->
@@ -119,6 +123,9 @@
             <span id="share-btn-text">Compartilhar</span>
           </button>
           <a id="modal-open-app-btn" href="#" target="_blank" class="flex-1 px-6 py-3.5 rounded-2xl bg-green-600 hover:bg-green-700 text-white font-bold shadow-lg shadow-green-500/30 flex items-center justify-center group transition-all order-1 sm:order-3">Abrir App</a>
+        </div>
+        <div class="mt-6 text-xs text-gray-400 dark:text-gray-500 w-full text-center">
+          <a href="https://www.ifsc.edu.br/politica-de-privacidade" target="_blank" class="hover:text-green-600 transition-colors underline">Política de Privacidade</a>
         </div>
       </div>
     </div>

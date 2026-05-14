@@ -28,7 +28,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-T49JX2YJMT');
+      gtag('config', 'G-T49JX2YJMT', {
+        'anonymize_ip': true,
+        'allow_google_signals': false,
+        'allow_ad_personalization_signals': false
+      });
     </script>
 
     <!-- Microsoft Clarity -->
@@ -366,7 +370,7 @@
             <footer class="mt-10 text-center text-gray-500 text-sm">
                 <p class="font-bold mb-1">Aviso Institucional:</p>
                 <p class="mb-2 max-w-3xl mx-auto">Nenhum dado trafega na internet. O PDF é construído localmente (<i lang="en">client-side script</i>). Em conformidade com o <b>Decreto nº 10.543/2020</b>, assinaturas eletrônicas padrão Gov.br têm imediata validade presuntiva para aceite em sistemas educacionais.</p>
-                <p>Proteção de Dados: <a href="mailto:encarregado.lgpd@ifsc.edu.br" class="text-[#2F9E41] hover:underline">encarregado.lgpd@ifsc.edu.br</a> | Dúvidas: <a href="mailto:coord.gestao.dados@ifsc.edu.br" class="text-[#2F9E41] hover:underline">coord.gestao.dados@ifsc.edu.br</a></p>
+                <p>Proteção de Dados: <a href="https://www.ifsc.edu.br/politica-de-privacidade" target="_blank" class="text-[#2F9E41] hover:underline">Política de Privacidade do IFSC</a> | Dúvidas: <a href="mailto:coord.gestao.dados@ifsc.edu.br" class="text-[#2F9E41] hover:underline">coord.gestao.dados@ifsc.edu.br</a></p>
                 <p class="mt-2 text-xs">Desenvolvido pela Coordenadoria de Gestão de Dados (CGD / DTIC / Reitoria).</p>
             </footer>
 
