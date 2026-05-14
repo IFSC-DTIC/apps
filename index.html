@@ -29,7 +29,11 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-T49JX2YJMT');
+    gtag('config', 'G-T49JX2YJMT', {
+      'anonymize_ip': true,
+      'allow_google_signals': false,
+      'allow_ad_personalization_signals': false
+    });
   </script>
 
   <!-- Microsoft Clarity -->
@@ -242,6 +246,8 @@
           <span>&copy; 2026 Instituto Federal de Santa Catarina</span>
           <span class="hidden sm:block">|</span>
           <a href="https://www.ifsc.edu.br" target="_blank" class="hover:text-green-600 transition-colors">Site Oficial do IFSC</a>
+          <span class="hidden sm:block">|</span>
+          <a href="https://www.ifsc.edu.br/politica-de-privacidade" target="_blank" class="hover:text-green-600 transition-colors">Política de Privacidade</a>
         </div>
         <div class="flex flex-col items-center sm:items-end gap-1 text-center sm:text-right normal-case tracking-normal">
           <p class="font-bold text-amber-600 dark:text-amber-400 mb-1">Aviso Importante: Esta ferramenta é um desenvolvimento experimental.</p>

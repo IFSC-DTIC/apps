@@ -51,6 +51,16 @@ A arquitetura do portal exige responsabilidade contínua. Por tratar com potenci
 
 ---
 
+## ⚖️ Privacidade e LGPD
+
+Este portal e suas ferramentas internas (como o Gerador de Termos) são projetados com foco na privacidade e conformidade com a LGPD:
+- **Anonimização de IP:** O Google Analytics está configurado para anonimizar endereços IP (`anonymize_ip: true`).
+- **Sem Rastreamento Publicitário:** Sinais do Google e personalização de anúncios estão desativados.
+- **Processamento Local (Client-Side):** Ferramentas como o Gerador de Termos processam dados sensíveis inteiramente no navegador do usuário, sem tráfego de dados pessoais para servidores externos.
+- **Transparência:** Links diretos para a [Política de Privacidade Oficial do IFSC](https://www.ifsc.edu.br/politica-de-privacidade) estão presentes em todas as interfaces, incluindo informações de contato do Encarregado de Dados (DPO).
+
+---
+
 ## 🤝 Como Contribuir
 
 A manutenção e enriquecimento deste ecossistema depende das inovações dos próprios servidores, alunos e professores! 
