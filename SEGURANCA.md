@@ -39,12 +39,13 @@ Este documento apresenta uma análise técnica da postura de segurança atual do
 
 ---
 
-## 🛡️ Segurança em Ambiente Estático (Zero Backend)
+## 🛡️ Segurança em Ambiente Estático e Delegação de Plataforma (Zero Backend)
 
-Como o portal roda no **GitHub Pages**, todas as melhorias devem ser **Client-Side**:
-1.  **Persistência:** Use apenas `LocalStorage` ou `IndexedDB`. Nunca tente enviar dados para um banco de dados externo a menos que haja uma API autenticada e segura (não recomendada para este escopo).
-2.  **Processamento:** Se houver necessidade de salvar configurações, elas devem permanecer no navegador do usuário.
-3.  **Privacidade de Menores:** Garanta que as descrições dos apps não contenham links para conteúdos inadequados e que haja um aviso de "Uso Educacional Supervisionado".
+Como o portal roda no **GitHub Pages**, todas as melhorias devem ser **Client-Side** e a segurança operacional é fundamentalmente baseada na delegação e no redirecionamento:
+1.  **Portal como Diretório:** O portal é estritamente um hub de agregação e links rápidos. Ele não se conecta a bancos de dados centrais, não coleta credenciais e não intercepta dados inseridos nos chats/prompts das ferramentas. A proteção de dados e a segurança das APIs de IA são tarefas integralmente resolvidas nas plataformas de destino (Google AI Studio, Gemini, etc.).
+2.  **Persistência Local:** Qualquer persistência de preferências de interface (como modo escuro e favoritos) é salva exclusivamente no `LocalStorage` ou `IndexedDB` do próprio navegador do usuário.
+3.  **Processamento Isolado:** O preenchimento e a geração de termos (como no Gerador de Termos) ocorrem inteiramente no ambiente do cliente (navegador). Nenhuma informação é transmitida ou salva em servidores do IFSC ou de terceiros.
+4.  **Privacidade de Menores:** Garanta que as descrições dos apps não contenham links para conteúdos inadequados e que haja avisos em conformidade com o ECA Digital e a LGPD.
 
 ---
 

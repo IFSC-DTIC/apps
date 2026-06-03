@@ -4,24 +4,31 @@
     "iconKey": "taes",
     "apps": [
       {
-        "id": "sibi",
+        "id": "agent-sibi",
         "name": "Especialista SiBI",
         "url": "https://gemini.google.com/gem/98588692d34c",
         "description": "Assistente interno para uso pelos profissionais do Sistema de Bibliotecas Integradas do IFSC (SiBI). Focado em normalização de trabalhos, consultas ao SophiA e políticas de acervo institucional.",
         "tags": ["Servidores"]
       },
       {
-        "id": "silvia",
+        "id": "agent-srp",
         "name": "Silv.IA - Compras e Licitações",
         "url": "https://gemini.google.com/gem/10GI7VXwtapdgUxFfCp-14-kKJULn7Ord?usp=sharing",
         "description": "Assistente virtual para Gestão Pública. Automatiza a geração de ARPs pelo SIPAC e fornece consultoria técnica sobre compras e licitações baseada na Lei nº 14.133/2021.",
         "tags": ["Servidores"]
       },
       {
-        "id": "dgp",
+        "id": "agent-dgp",
         "name": "DGP (FAQs - Tira Dúvidas)",
         "url": "https://gemini.google.com/gem/1qDLyL7Tm_wuF-1zhFVK7ZZV7xcI4p41I?usp=sharing",
         "description": "Consultor especializado em Gestão de Pessoas do IFSC. Auxilia na interpretação da Resolução Consup nº 11/2019 e nas FAQs da DGP sobre normas, desenvolvimento de pessoas, progressão funcional e licença capacitação.",
+        "tags": ["Servidores"]
+      },
+      {
+        "id": "agent-cgd",
+        "name": "CGD - Governança de TI",
+        "url": "https://gemini.google.com/gem/1QNvQjzJVhZF8B71gJBdX_0G3_HrU4Fyb?usp=sharing",
+        "description": "Especialista em Governança de TI do IFSC. Fornece respostas técnicas e precisas estritamente baseadas nas normativas oficiais do IFSC utilizando NotebookLM para pesquisa e referência direta.",
         "tags": ["Servidores"]
       }
     ]
