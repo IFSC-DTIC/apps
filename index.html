@@ -81,14 +81,14 @@
     @media (min-width: 640px) {
       .app-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.5rem; }
     }
-
+ 
     .app-item { 
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease, box-shadow 0.3s ease; 
       position: relative;
     }
     .app-item:hover { transform: translateY(-4px); }
     .app-item.hidden { display: none; opacity: 0; }
-
+ 
     .category-icon {
       width: 48px;
       height: 48px;
@@ -103,7 +103,7 @@
       line-height: 1;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
-
+ 
     .favorite-btn {
       position: absolute;
       top: 1rem;
@@ -115,7 +115,7 @@
     .favorite-btn.active { color: #fbbf24; }
   </style>
 </head>
-
+ 
 <body style="font-family: 'Inter', sans-serif;" class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 selection:bg-green-100 selection:text-green-900 transition-colors duration-500">
   <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 dark:border-gray-800">
     <div class="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between gap-4">
@@ -152,7 +152,7 @@
         <button id="tab-experts" class="px-6 py-2.5 rounded-xl font-bold text-sm transition-all focus:outline-none text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">Especialistas (Gems)</button>
       </div>
     </div>
-
+ 
     <!-- View: Tools -->
     <div id="view-tools">
       <div class="mb-8 text-center max-w-2xl mx-auto">
@@ -169,7 +169,7 @@
         <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
       </div>
     </div>
-
+ 
     <!-- View: Experts -->
     <div id="view-experts" class="hidden">
       <div class="mb-10 text-center max-w-2xl mx-auto">
@@ -184,7 +184,7 @@
         <div class="animate-pulse bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl h-48 sm:h-52"></div>
       </div>
     </div>
-
+ 
     <!-- Footer / Disclaimer Section -->
     <footer class="border-t border-gray-200 dark:border-gray-800 pt-12 pb-20">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -210,7 +210,7 @@
               <p class="text-[13px] leading-relaxed text-gray-600 dark:text-gray-400 font-medium">Abra um <span class="font-bold text-gray-900 dark:text-gray-200">Pull Request</span> solicitando autorização da DTIC para aprovar e incluir no ar.</p>
             </div>
           </div>
-
+ 
         </div>
         
         <div class="space-y-4">
@@ -240,7 +240,7 @@
           </div>
         </div>
       </div>
-
+ 
       <div class="mt-16 flex flex-col sm:flex-row items-center justify-between gap-6 opacity-60 text-[10px] font-bold uppercase tracking-widest">
         <div class="flex flex-col sm:flex-row items-center gap-4">
           <span>&copy; 2026 Instituto Federal de Santa Catarina</span>
@@ -280,7 +280,7 @@
     document.addEventListener('DOMContentLoaded', () => {
       const themeToggle = document.getElementById('theme-toggle');
       themeToggle.onclick = () => { const isDark = document.documentElement.classList.toggle('dark'); localStorage.setItem('theme', isDark ? 'dark' : 'light'); };
-
+ 
       const icons = { 
         lgpd: `<div class="category-icon bg-gradient-to-br from-green-500 to-green-700"><span class="material-icons-round text-xl mb-0.5">privacy_tip</span><span>LGPD</span></div>`, 
         bpmn: `<div class="category-icon bg-gradient-to-br from-blue-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">schema</span><span>PROC</span></div>`, 
@@ -291,25 +291,25 @@
         professores: `<div class="category-icon bg-gradient-to-br from-indigo-500 to-blue-700"><span class="material-icons-round text-xl mb-0.5">school</span><span>PROF</span></div>`,
         alunos: `<div class="category-icon bg-gradient-to-br from-pink-500 to-rose-700"><span class="material-icons-round text-xl mb-0.5">face</span><span>ALU</span></div>`
       };
-
+ 
       const appGrid = document.getElementById('app-grid');
       const filterContainer = document.getElementById('filter-container');
       const filterExpertsContainer = document.getElementById('filter-experts-container');
       const quicksearch = document.getElementById('quicksearch');
       const slugify = str => str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
-
+ 
       let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
       let categoriesData = [];
       let gemsCategoriesData = [];
       let expertsData = [];
       let allApps = [];
       let activeTab = 'tools';
-
+ 
       const tabTools = document.getElementById('tab-tools');
       const tabExperts = document.getElementById('tab-experts');
       const viewTools = document.getElementById('view-tools');
       const viewExperts = document.getElementById('view-experts');
-
+ 
       const setTab = (tab) => {
         activeTab = tab;
         const activeClasses = ['bg-white', 'dark:bg-gray-700', 'shadow', 'text-green-600', 'dark:text-green-400'];
@@ -328,10 +328,10 @@
         }
         applyFilters();
       };
-
+ 
       tabTools.addEventListener('click', () => setTab('tools'));
       tabExperts.addEventListener('click', () => setTab('experts'));
-
+ 
       const updateFavorites = (appId) => {
         const index = favorites.indexOf(appId);
         if (index > -1) favorites.splice(index, 1);
@@ -340,7 +340,7 @@
         renderApps();
         applyFilters();
       };
-
+ 
       const createCardHTML = (a) => {
         const isFav = favorites.includes(a.id);
         return `
@@ -363,14 +363,14 @@
           </div>
         `;
       };
-
+ 
       const renderApps = () => {
         document.getElementById('app-grid').innerHTML = allApps.map(createCardHTML).join('');
         document.getElementById('experts-grid').innerHTML = expertsData.map(createCardHTML).join('');
       };
-
+ 
       window.toggleFavorite = updateFavorites;
-
+ 
       const applyFilters = () => {
         const searchText = quicksearch.value.toLowerCase().trim();
         
@@ -398,7 +398,7 @@
           });
         }
       };
-
+ 
       const ts = new Date().getTime();
       Promise.all([
         fetch(`apps.json?v=${ts}`).then(res => res.json()),
@@ -417,13 +417,13 @@
                }
             });
           }
-
+ 
           categoriesData.forEach(c => {
             c.apps.forEach(a => {
               allApps.push({ ...a, category: slugify(c.name), iconKey: c.iconKey });
             });
           });
-
+ 
           // Render Filters for Tools
           const filterButtons = [
             { name: 'Todos', filter: 'all' }, 
@@ -436,7 +436,7 @@
               ${b.name}
             </button>
           `).join('');
-
+ 
           // Render Filters for Experts
           const filterExpertsButtons = [
             { name: 'Todos', filter: 'all' }, 
@@ -449,7 +449,7 @@
               ${b.name}
             </button>
           `).join('');
-
+ 
           renderApps();
           applyFilters();
           
@@ -460,7 +460,7 @@
               applyFilters();
             }
           });
-
+ 
           filterExpertsContainer.addEventListener('click', (e) => {
             if (e.target.tagName === 'BUTTON') {
               filterExpertsContainer.querySelectorAll('button').forEach(b => b.classList.remove('active'));
@@ -468,9 +468,9 @@
               applyFilters();
             }
           });
-
+ 
           quicksearch.addEventListener('input', applyFilters);
-
+ 
           // Deep Linking and Auto-Open
           setTimeout(() => { 
             const p = new URL(window.location.href).searchParams; 
@@ -486,7 +486,7 @@
                 setTab('experts');
                 return;
               }
-
+ 
               [...allApps, ...expertsData].some(a => { 
                 if (a.id.toLowerCase() === id) {
                   if (expertsData.some(e => e.id === a.id)) setTab('experts');
@@ -499,11 +499,11 @@
             } 
           }, 300);
         });
-
+ 
       const modal = document.getElementById('app-modal');
       const shareBtn = document.getElementById('modal-share-btn');
       let currentAppId = null;
-
+ 
       window.openModal = (id, n, d, u, i) => { 
         currentAppId = id;
         document.getElementById('modal-app-name').textContent = decodeURIComponent(n); 
@@ -519,7 +519,7 @@
         document.getElementById('app-modal-content').classList.remove('scale-95'); 
         document.getElementById('app-modal-content').classList.add('scale-100'); 
       };
-
+ 
       shareBtn.onclick = () => {
         if (!currentAppId) return;
         const shareUrl = `${window.location.origin}/${currentAppId}`;
@@ -529,14 +529,14 @@
           setTimeout(() => { btnText.textContent = 'Compartilhar'; }, 2000);
         });
       };
-
+ 
       const closeModal = () => { 
         modal.classList.remove('opacity-100'); 
         document.getElementById('app-modal-content').classList.remove('scale-100'); 
         document.getElementById('app-modal-content').classList.add('scale-95'); 
         modal.classList.add('pointer-events-none'); 
       };
-
+ 
       document.getElementById('close-modal-btn').onclick = closeModal;
       document.getElementById('close-modal-footer-btn').onclick = closeModal;
       modal.onclick = (e) => { if(e.target === modal || e.target.classList.contains('backdrop-blur-sm')) closeModal(); };

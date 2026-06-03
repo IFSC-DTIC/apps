@@ -269,11 +269,11 @@
                                     <h3 class="font-semibold text-gray-700">Responsável Legal do Aluno</h3>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo (Responsável)</label>
-                                        <input type="text" v-model="form.responsavel_nome" :required="form.idade_perfil === 'menor'" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
+                                        <input type="text" v-model="form.responsavel_nome" :required="form.idade_perfil === 'menor'" data-clarity-mask="true" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">CPF (Responsável)</label>
-                                        <input type="text" v-model="form.responsavel_cpf" @input="formatCPF('responsavel_cpf')" :required="form.idade_perfil === 'menor'" placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.responsavel_cpf}">
+                                        <input type="text" v-model="form.responsavel_cpf" @input="formatCPF('responsavel_cpf')" :required="form.idade_perfil === 'menor'" data-clarity-mask="true" placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.responsavel_cpf}">
                                         <span v-if="errors.responsavel_cpf" class="text-xs text-red-600 mt-1">CPF Inválido</span>
                                     </div>
                                 </div>
@@ -283,11 +283,11 @@
                                     <h3 class="font-semibold text-gray-700">Dados do Estudante</h3>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">Nome Completo</label>
-                                        <input type="text" v-model="form.estudante_nome" required class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
+                                        <input type="text" v-model="form.estudante_nome" required data-clarity-mask="true" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border">
                                     </div>
                                     <div>
                                         <label class="block text-sm font-medium text-gray-700 mb-1">CPF</label>
-                                        <input type="text" v-model="form.estudante_cpf" @input="formatCPF('estudante_cpf')" required placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.estudante_cpf}">
+                                        <input type="text" v-model="form.estudante_cpf" @input="formatCPF('estudante_cpf')" required data-clarity-mask="true" placeholder="000.000.000-00" maxlength="14" class="w-full rounded-lg border-gray-300 shadow-sm focus:border-[#2F9E41] focus:ring-[#2F9E41] px-4 py-2 border" :class="{'border-red-500': errors.estudante_cpf}">
                                         <span v-if="errors.estudante_cpf" class="text-xs text-red-600 mt-1">CPF Inválido</span>
                                     </div>
                                 </div>
