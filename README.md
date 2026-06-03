@@ -6,6 +6,9 @@ Este portal funciona como uma vitrine de inteligência artificial aplicada. Ele 
 1. **Ferramentas (Apps):** Aplicações construídas majoritariamente em plataformas como Google AI Studio para automatizar e otimizar tarefas administrativas e acadêmicas (ex: geradores de termos, formatação de textos).
 2. **Agentes Especialistas (Gems):** Assistentes conversacionais baseados no Gemini (Gems), treinados com documentação institucional específica de setores do IFSC (ex: DGP, SiBI, Licitações). Operam utilizando frequentemente o NotebookLM como base de RAG (Retrieval-Augmented Generation).
 
+> [!IMPORTANT]  
+> **Papel do Portal:** Este site é **estritamente um agregador/diretório de links (hub)** e funciona de modo **100% serverless/estático** (GitHub Pages). O portal **não processa, não executa, não armazena e não tem contato direto** com qualquer motor de inteligência artificial ou dados dos prompts. Todo o processamento algorítmico, autenticação e execução da IA são delegados diretamente e exclusivamente para as plataformas hospedeiras (Google AI Studio, Google Gemini, NotebookLM, etc.) sob os termos de uso de cada provedora.
+
 ---
 
 ## 🚀 Funcionalidades
@@ -47,7 +50,7 @@ A arquitetura do portal exige responsabilidade contínua. Por tratar com potenci
 1. **NUNCA exponha chaves de API (API Keys):** Este frontend opera 100% no cliente (no navegador). Jamais insira variáveis de ambiente, _tokens_ do Google AI Studio, da OpenAI ou senhas de banco de dados no `index.html` ou arquivos `.json`.
 2. **Delegação de Segurança:** Todo o processamento algorítmico, o RAG documental e autenticações são delegados às plataformas hospedeiras (Google Gemini, AI Studio, etc.). O portal funciona **estritamente como um agregador/diretório de _links_ (hub)**.
 3. **Validação de Links Submetidos:** No arquivo `.json`, todas as URLs de destino (`url`) fornecidas devem pertencer a ecossistemas institucionalmente seguros e autorizados ou domínios da bigtech fornecedora (como `gemini.google.com/gem/...`).
-4. **Proteção contra XSS Frameworks:** O design do código nativo realiza a separação entre conteúdo de dado estrito (`JSON`) e injeção do HTML. Evite adicionar novas funcionalidades visuais que imprimam texto cru inserido pelo usuário diretamente no DOM via `innerHTML` sem a devida sanitização. As descrições atualmente exibidas devem ser sempre cadastradas via JSON e controladas via Pull Request.
+4. **Proteção contra XSS Frameworks:** O design do código nativo realiza a separação entre conteúdo de dado estrito (`JSON`) e injeção do HTML. Evite adicionar novas funcionalidades visuais que imprimam texto cru inserido pelo usuário diretamente no DOM via `innerHTML` sem a devida sanitização. As descrições autalmente exibidas devem ser sempre cadastradas via JSON e controladas via Pull Request.
 
 ---
 

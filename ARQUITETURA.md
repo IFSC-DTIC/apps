@@ -5,7 +5,7 @@ Este documento define a arquitetura estática do portal, o fluxo de dados e, sob
 ---
 
 ## 1. Arquitetura do Sistema (Local-First e Estática)
-O portal foi concebido sob a filosofia **Zero-Backend (Vanilla)**. Por estar hospedado primariamente no *GitHub Pages*, não existe um servidor processando dados do usuário, bancos de dados ativos ou complexidade de infraestrutura. 
+O portal foi concebido sob a filosofia **Zero-Backend (Vanilla)**. Por estar hospedado primariamente no *GitHub Pages*, não existe um servidor processando dados do usuário, bancos de dados ativos ou complexidade de infraestrutura. O portal atua estritamente como um **diretório/hub de redirecionamento**, e toda a lógica de inteligência artificial ou processamento de prompts é de responsabilidade e execução exclusivas das plataformas proprietárias externas (Google AI Studio, NotebookLM, Gemini, etc.).
 
 *   **Linguagens Core:** HTML5, CSS e JS (ES6+) puros.
 *   **Estilização:** Tailwind CSS (via script CDN).
@@ -19,7 +19,7 @@ O portal foi concebido sob a filosofia **Zero-Backend (Vanilla)**. Por estar hos
 Para manter um ecossistema estável quando múltiplos agentes de codificação ou humanos trabalharem no código de forma concorrente ou contínua, os seguintes princípios **DEVERÃO** ser rigorosamente respeitados:
 
 ### A. Sincronização Obrigatória (Rebase/Pull)
-Antes de desenvolver qualquer nova funcionalidade ou realizar audições de segurança, o Agente Inteligente **deve** usar seus comandos Git/Shell para realizar o `git pull origin main` (ou equivalente na ramificação de trabalho) garantindo que está desenvolvendo em cima da versão mais contemporânea.
+Antes de desenvolver qualquer nova funcionalidade ou realizar audições de segurança, o Agente Inteligente **deve** usar seus comandos Git/Shell para realizar o `git pull origin main` (ou equivalente na ramificação de trabalho) garantindo que está underdog em cima da versão mais contemporânea.
 
 ### B. Isolamento de Responsabilidade (Componentização)
 *   **Edições de Interface:** Devem ocorrer puramente em `index.html` (e suas ramificações, como `404.html` de deep linking).
