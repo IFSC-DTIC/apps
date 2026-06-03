@@ -8,8 +8,8 @@ Este documento apresenta uma análise técnica da postura de segurança atual do
 
 | Status | Item de Segurança | Descrição | Impacto |
 | :---: | :--- | :--- | :--- |
-| [ ] | **Gestão de Segredos (Tokens/Keys)** | Garantir que nenhuma API Key ou Token seja exposto no código público. | Crítico |
-| [ ] | **Conformidade LGPD** | Implementar avisos de privacidade e garantir que dados sensíveis não sejam logados. | Crítico |
+| [x] | **Gestão de Segredos (Tokens/Keys)** | Verificado em 02/06/2026. Zero chaves ou segredos expostos na árvore e histórico do Git. | Crítico |
+| [x] | **Conformidade LGPD** | Anonimização de IP configurada no GA, aviso de privacidade no gerador de termos ativo. | Crítico |
 | [ ] | **Proteção de Menores** | Filtros de conteúdo e avisos claros para usuários menores de idade. | Crítico |
 | [ ] | **Subresource Integrity (SRI)** | Scripts externos sem hashes de integridade. | Alto |
 | [ ] | **Content Security Policy (CSP)** | Ausência de restrição de origens de recursos via meta tag. | Alto |
