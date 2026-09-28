@@ -22,14 +22,14 @@
     <meta property="og:url" content="https://apps.ifsc.edu.br/" />
     <meta property="og:title" content="Portal de Inteligência Artificial e Aplicações - IFSC (OT 04/2025)" />
     <meta property="og:description" content="Portal oficial de ferramentas, diretrizes e agentes de Inteligência Artificial do IFSC. Em conformidade com a Orientação Técnica nº 04/2025 da DTIC/CGD, Google Education e Microsoft A1." />
-    <meta property="og:image" content="https://apps.ifsc.edu.br/assets/brand/IFSC_horizontal_fundo_transparente.png" />
+    <meta property="og:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg" />
     <meta property="og:image:alt" content="Logotipo Oficial do Instituto Federal de Santa Catarina" />
 
     <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Portal de Inteligência Artificial e Aplicações - IFSC (OT 04/2025)" />
     <meta name="twitter:description" content="Diretrizes da OT 04/2025, ferramentas e agentes de IA homologados para a comunidade do Instituto Federal de Santa Catarina." />
-    <meta name="twitter:image" content="https://apps.ifsc.edu.br/assets/brand/IFSC_horizontal_fundo_transparente.png" />
+    <meta name="twitter:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg" />
 
     <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets) -->
     <script type="application/ld+json">
@@ -47,7 +47,7 @@
             "name": "Instituto Federal de Santa Catarina",
             "alternateName": "IFSC",
             "url": "https://www.ifsc.edu.br",
-            "logo": "https://apps.ifsc.edu.br/assets/brand/IFSC_horizontal_fundo_transparente.png"
+            "logo": "https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg"
           },
           "inLanguage": "pt-BR"
         },
@@ -93,9 +93,9 @@
       })(window, document, "clarity", "script", "wddq8jjbkx");
     </script>
     
-    <!-- Favicon Oficial do Instituto Federal -->
+    <!-- Favicon Oficial do Instituto Federal (SVG Responsivo e Fallback) -->
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
-    <link rel="alternate icon" type="image/png" href="./assets/brand/IFSC_vertical_fundo_transparente.png">
+    <link rel="alternate icon" type="image/x-icon" href="https://www.ifsc.edu.br/o/ifsc-internet-lf6_2-theme/images/favicon.ico">
     
     <!-- Tailwind CSS via CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -158,14 +158,16 @@
           <div class="flex items-center gap-3.5">
             <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" title="Ir para o portal do IFSC" class="flex items-center hover:opacity-95 transition-opacity">
               <!-- Versão Horizontal Colorida com Texto Preto (Modo Claro) -->
-              <img src="./assets/brand/IFSC_horizontal_fundo_transparente.png" 
+              <img src="./public/img/ifsc-logo-horizontal.svg" 
                    alt="Instituto Federal de Santa Catarina" 
-                   class="h-9 sm:h-11 w-auto object-contain block dark:hidden" />
+                   class="h-9 sm:h-11 w-auto object-contain block dark:hidden"
+                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
               
               <!-- Versão Horizontal Colorida com Texto Branco (Modo Escuro) -->
-              <img src="./assets/brand/IFSC_horizontal_texto_branco_fundo_transparente.png" 
+              <img src="./public/img/ifsc-logo-horizontal-white.svg" 
                    alt="Instituto Federal de Santa Catarina" 
-                   class="h-9 sm:h-11 w-auto object-contain hidden dark:block" />
+                   class="h-9 sm:h-11 w-auto object-contain hidden dark:block"
+                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
             </a>
 
             <!-- Divisor Vertical Institucional -->
@@ -561,14 +563,16 @@
           <div class="lg:col-span-4 flex items-start gap-4">
             <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" class="shrink-0 hover:opacity-95 transition-opacity" title="Portal Oficial do IFSC">
               <!-- Versão Vertical Colorida com Texto Preto (Modo Claro) -->
-              <img src="./assets/brand/IFSC_vertical_fundo_transparente.png" 
+              <img src="./public/img/ifsc-logo-vertical.svg" 
                    alt="Instituto Federal de Santa Catarina" 
-                   class="h-24 w-auto object-contain block dark:hidden" />
+                   class="h-24 w-auto object-contain block dark:hidden"
+                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
               
               <!-- Versão Vertical Colorida com Texto Branco (Modo Escuro) -->
-              <img src="./assets/brand/IFSC_vertical_texto_branco_fundo_transparente.png" 
+              <img src="./public/img/ifsc-logo-vertical-white.svg" 
                    alt="Instituto Federal de Santa Catarina" 
-                   class="h-24 w-auto object-contain hidden dark:block" />
+                   class="h-24 w-auto object-contain hidden dark:block"
+                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
             </a>
             <div class="text-xs text-gray-600 dark:text-gray-400 space-y-1">
               <p class="font-extrabold text-gray-900 dark:text-white leading-tight">Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina</p>
