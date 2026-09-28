@@ -17,10 +17,14 @@
     <meta property="og:description" content="Gerador digital simplificado para Termos de Consentimento LGPD e ECA Digital dos alunos e servidores do IFSC.">
     <meta property="og:image" content="https://www.ifsc.edu.br/o/ifsc-theme/images/favicon.ico">
     
-    <link rel="canonical" href="https://apps.ifsc.edu.br/termo/">
-    <link rel="icon" type="image/x-icon" href="https://www.ifsc.edu.br/o/ifsc-theme/images/favicon.ico">
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://unpkg.com https://cdnjs.cloudflare.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://*.clarity.ms https://c.bing.com; frame-src 'self' https:;" />
 
-    <title>Termo de Consentimento - IFSC</title>
+    <link rel="canonical" href="https://apps.ifsc.edu.br/termo/">
+    <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+    <link rel="alternate icon" type="image/x-icon" href="https://www.ifsc.edu.br/o/ifsc-internet-lf6_2-theme/images/favicon.ico">
+
+    <title>Termo de Consentimento (LGPD / ECA Digital) - IFSC</title>
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-T49JX2YJMT"></script>
@@ -113,15 +117,21 @@
             <div class="max-w-5xl mx-auto px-4 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-4 sm:gap-6 flex-wrap sm:flex-nowrap justify-center sm:justify-start text-center sm:text-left">
                     <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" title="Instituto Federal de Santa Catarina" class="flex-shrink-0 transition-transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-white/50 rounded-lg p-1">
-                        <img src="img/IFSC_horizontal_branco_fundo_transparente.png" 
+                        <img src="../public/img/ifsc-logo-horizontal-white.svg" 
                              alt="Logo Instituto Federal de Santa Catarina" 
                              class="h-10 sm:h-12 md:h-14 w-auto object-contain"
-                             width="1200" height="411" />
+                             onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
                     </a>
                     <div class="border-t sm:border-t-0 sm:border-l border-white/25 pt-2 sm:pt-0 sm:pl-6">
                         <h1 class="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight">Gerador de Termos</h1>
                         <p class="text-xs sm:text-sm text-green-100 font-medium">Consentimento de Dados (LGPD e ECA Digital)</p>
                     </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="../" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition-colors border border-white/30" title="Voltar ao Portal de Apps e IA">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                        <span>Portal de Apps com IA</span>
+                    </a>
                 </div>
             </div>
         </header>
