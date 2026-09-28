@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 380 90" width="380" height="90">
+  <g transform="translate(8, 8) scale(1.65)">
+    <circle cx="5" cy="5" r="5" fill="#C8191E"/>
+    <rect x="11.5" y="0" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="23" y="0" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="0" y="11.5" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="11.5" y="11.5" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="0" y="23" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="11.5" y="23" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="23" y="23" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="0" y="34.5" width="10" height="10" rx="2" fill="#32A041"/>
+    <rect x="11.5" y="34.5" width="10" height="10" rx="2" fill="#32A041"/>
+  </g>
+  <text x="80" y="43" font-family="'Inter', system-ui, -apple-system, sans-serif" font-weight="900" font-size="23" letter-spacing="-0.5" fill="#0f172a">INSTITUTO FEDERAL</text>
+  <text x="80" y="73" font-family="'Inter', system-ui, -apple-system, sans-serif" font-weight="600" font-size="21" letter-spacing="-0.3" fill="#32A041">Santa Catarina</text>
+</svg>
