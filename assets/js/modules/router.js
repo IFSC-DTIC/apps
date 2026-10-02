@@ -1,5 +1,5 @@
 /**
- * Módulo de Roteamento SPA e Resolução de Deep Linking
+ * Modulo de Roteamento SPA e Resolucao de Deep Linking
  * Trata rotas de prefixo (/gem/, /lgpd/, /google/) e atalhos diretos
  */
 
@@ -37,7 +37,18 @@ export const aliases = {
   'siads': 'siads',
   'padronizacao': 'padronizacao',
   'rsctae': 'rsctae',
-  'processo': 'processo'
+  'processo': 'processo',
+  'canva': 'partner-canva-edu',
+  'githubcopilot': 'partner-github-copilot',
+  'github-copilot': 'partner-github-copilot',
+  'gh-copilot': 'partner-github-copilot',
+  'notion': 'partner-notion-ai',
+  'notion-ai': 'partner-notion-ai',
+  'grammarly': 'partner-grammarly-edu',
+  'adobe': 'partner-adobe-cc',
+  'firefly': 'partner-adobe-cc',
+  'perplexity': 'partner-perplexity-pro',
+  'perplexity-pro': 'partner-perplexity-pro'
 };
 
 export class AppRouter {
@@ -57,8 +68,9 @@ export class AppRouter {
     if (this.catalog.appMap['g-' + clean]) return this.catalog.appMap['g-' + clean];
     if (this.catalog.appMap['ms-' + clean]) return this.catalog.appMap['ms-' + clean];
     if (this.catalog.appMap['agent-' + clean]) return this.catalog.appMap['agent-' + clean];
+    if (this.catalog.appMap['partner-' + clean]) return this.catalog.appMap['partner-' + clean];
 
-    // 3. Tabela de sinonímias
+    // 3. Tabela de sinonimias
     if (aliases[clean] && this.catalog.appMap[aliases[clean]]) {
       return this.catalog.appMap[aliases[clean]];
     }
@@ -82,7 +94,8 @@ export class AppRouter {
     if (!reqApp) {
       const pathParts = window.location.pathname.split('/').filter(Boolean);
       const lastPart = pathParts[pathParts.length - 1];
-      if (lastPart && !['index.html', '404.html', 'termo', 'alpha', 'beta'].includes(lastPart)) {
+      const ignoredPaths = ['index.html', '404.html', 'termo', 'alpha', 'beta', 'apps', 'portal', 'portal-ifsc---apps-e-ia-education'];
+      if (lastPart && !ignoredPaths.includes(lastPart.toLowerCase())) {
         reqApp = lastPart;
       }
     }
@@ -97,6 +110,7 @@ export class AppRouter {
       else if (['experts', 'gems', 'agentes', 'especialistas'].includes(t)) initialTab = 'experts';
       else if (['google', 'gsuite', 'workspace'].includes(t)) initialTab = 'google';
       else if (['microsoft', 'ms', 'copilot', 'office'].includes(t)) initialTab = 'microsoft';
+      else if (['partnerships', 'parcerias', 'estudantes', 'oportunidades', 'beneficios'].includes(t)) initialTab = 'partnerships';
     }
     this.ui.switchTab(initialTab);
 
@@ -111,11 +125,13 @@ export class AppRouter {
             this.ui.switchTab('google');
           } else if (this.catalog.allMicrosoft.some(m => m.id === target.id)) {
             this.ui.switchTab('microsoft');
+          } else if (this.catalog.allPartnerships && this.catalog.allPartnerships.some(p => p.id === target.id)) {
+            this.ui.switchTab('partnerships');
           } else {
             this.ui.switchTab('tools');
           }
 
-          // Abre a caixa descritiva com instruções de domínio
+          // Abre a caixa descritiva com instrucoes de dominio
           this.ui.openAppModal(target.id);
         }
       }, 300);
