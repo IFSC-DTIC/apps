@@ -1,103 +1,153 @@
-# Agregador de Ferramentas com IA - IFSC
+# Portal de Inteligência Artificial e Aplicações - IFSC
 
-🛡️ Um portal dinâmico desenvolvido para centralizar, apresentar e facilitar o acesso a **Ferramentas Virtuais (Apps)** e **Agentes Especialistas (Gems/RAG)** criados pela comunidade do Instituto Federal de Santa Catarina (IFSC), com foco na automação acadêmica e administrativa.
+[![Status: Homologado OT 04/2025](https://img.shields.io/badge/IFSC-OT%2004%2F2025-00823B.svg)](https://www.ifsc.edu.br/web/portal-do-servidor/gestao-de-dados)
+[![Arquitetura: Zero-Backend](https://img.shields.io/badge/Arquitetura-Zero--Backend-blue.svg)](ARQUITETURA.md)
+[![Conformidade: LGPD & ECA](https://img.shields.io/badge/Conformidade-LGPD%20%26%20ECA-success.svg)](SEGURANCA.md)
+[![Hospedagem: GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-informational.svg)](https://apps.ifsc.edu.br/)
+[![Analytics: GA4 + Clarity](https://img.shields.io/badge/Telemetria-GA4%20%2B%20Clarity-orange.svg)](#-observabilidade-telemetria-ética--seo)
 
-Este portal funciona como uma vitrine de inteligência artificial aplicada. Ele agrega duas frentes principais:
-1. **Ferramentas (Apps):** Aplicações construídas majoritariamente em plataformas como Google AI Studio para automatizar e otimizar tarefas administrativas e acadêmicas (ex: geradores de termos, formatação de textos).
-2. **Agentes Especialistas (Gems):** Assistentes conversacionais baseados no Gemini (Gems), treinados com documentação institucional específica de setores do IFSC (ex: DGP, SiBI, Licitações). Operam utilizando frequentemente o NotebookLM como base de RAG (Retrieval-Augmented Generation).
+🛡️ **Portal oficial de diretrizes, ferramentas homologadas e agentes especialistas de Inteligência Artificial (IA)** do Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina (IFSC), mantido e coordenado pela **Diretoria de Tecnologia da Informação e Comunicação (DTIC)** e pela **Coordenadoria de Gestão de Dados (CGD)**.
 
-> [!IMPORTANT]  
-> **Papel do Portal:** Este site é **estritamente um agregador/diretório de links (hub)** e funciona de modo **100% serverless/estático** (GitHub Pages). O portal **não processa, não executa, não armazena e não tem contato direto** com qualquer motor de inteligência artificial ou dados dos prompts. Todo o processamento algorítmico, autenticação e execução da IA são delegados diretamente e exclusivamente para as plataformas hospedeiras (Google AI Studio, Google Gemini, NotebookLM, etc.) sob os termos de uso de cada provedora.
-
----
-
-## 🚀 Funcionalidades
-
-- **Duas Abas Especializadas:** O sistema separa claramente as ferramentas utilitárias ("Ferramentas Apps") dos agentes consultivos ("Agentes Especialistas").
-- **Grid Responsivo e Moderno:** Interface visual rica com suporte a "Dark Mode" nativo (Modo Claro/Escuro), utilizando a tecnologia Tailwind CSS via CDN.
-- **Leitura Dinâmica de Dados (Data-Driven):** O portal é totalmente alimentado por arquivos JSON independentes (`apps.json` e `agents.json`). Adicionar uma ferramenta não requer tocar no HTML principal.
-- **Cache Busting Automático:** O carregamento dos dados inclui controle automático de versão (timestamp) nas requisições HTTP (`fetch`) para garantir que os usuários sempre recebam o catálogo mais atual das ferramentas, sem problemas persistentes de cache local nos navegadores.
-- **Categorização e Filtros:** Filtros de navegação independentes para cada aba (ex: Processos, Administrativo, Gestão de Pessoas, Servidores, Professores, Alunos).
-- **Integração Fluida:** Botão de ação direto para o ambiente onde a ferramenta/agente está hospedado e Deep Linking nativo.
+Disponível publicamente em: **[https://apps.ifsc.edu.br/](https://apps.ifsc.edu.br/)**
 
 ---
 
-## 🛠 Tecnologias Utilizadas
+## 🏛️ Orientação Técnica nº 04/2025 (CGD / DTIC - IFSC)
 
-Este projeto foi desenhado sob o princípio arquitetural "*Zero-Build*" ou "*Vanilla*", priorizando manutenção simplificada sem esteiras complexas de NPM/Node:
-- **Frontend / Lógica:** HTML5, JavaScript (Vanilla ES6+).
-- **Estilização e UI:** [Tailwind CSS](https://tailwindcss.com/) (importação via script CDN).
-- **Iconografia:** Google Material Icons.
-- **Armazenamento de Estado:** `localStorage` (para salvar preferências de Tema Escuro e sistema de Favoritos [⭐]).
-- **Armazenamento de Dados:** Arquivos de registro estáticos JSON.
+Este portal foi concebido e estruturado para operacionalizar as diretrizes da **Orientação Técnica nº 04/2025**, elaborada pela Coordenadoria de Gestão de Dados (CGD/DTIC/PRODIN) do IFSC, normatizando o uso seguro, ético e responsável de IA por toda a comunidade acadêmica (estudantes, docentes e servidores técnico-administrativos):
 
----
-
-## 📚 Documentação e Governança
-
-Para desenvolvedores, colaboradores e futuros agentes autônomos que desejam trabalhar no repositório, consulte nossos Guias Estruturais antes de enviar _Pull Requests_ ou executar alterações arquiteturais:
-
-- 🏛️ **[ARQUITETURA.md](ARQUITETURA.md)**: Regras de engajamento multi-agentes e padrões do sistema *zero-backend*.
-- 🛡️ **[SEGURANCA.md](SEGURANCA.md)**: Análise de vulnerabilidades, limites do *GitHub Pages*, *SRI*, *CSP* e proteção de menores e adequação a LGPD.
-- 💡 **[FUNCIONALIDADES.md](FUNCIONALIDADES.md)**: Roadmap de novas soluções, como buscas offline, *BYOK (Bring Your Own Key)*, processamento focado em *Client-Side* apenas.
+1. **Priorização de Plataformas Homologadas:** Servidores e alunos devem priorizar o uso das ferramentas integradas às suas contas institucionais (`@ifsc.edu.br` e `@aluno.ifsc.edu.br`) nos ecossistemas **Google for Education** e **Microsoft 365 Education (A1)**. Nesses ambientes, os acordos institucionais asseguram que dados e prompts **não sejam utilizados no treinamento de modelos públicos de IA**.
+2. **Proibição de "Shadow AI" e Proteção de Dados (LGPD / ECA Digital):** É terminantemente vedada a inserção ou processamento de dados pessoais (nomes, CPFs, contatos, dados de menores de idade, dados acadêmicos ou de saúde) e documentos sigilosos em ferramentas externas pessoais não homologadas.
+3. **Primazia da Decisão Humana (*Human-in-the-Loop*):** A IA atua estritamente como suporte ao ensino, pesquisa, extensão e administração. Toda informação ou resultado gerado por IA deve ser **obrigatoriamente validado por um ser humano**.
+4. **Transparência Acadêmica e Não-Coautoria:** A IA não possui autoria nem coautoria em produções acadêmicas. O uso de IA deve ser declarado expressamente, sob pena de caracterização de má conduta acadêmica.
+5. **Filosofia *Local-First* e Governança:** O portal opera sob o princípio *Zero-Backend*, sem banco de dados intermediário, sem coleta ou retenção de prompts ou dados de usuários.
 
 ---
 
-## 🔒 Segurança e Boas Práticas (CUIDADOS IMPORTANTES)
+## 🚀 Funcionalidades do Portal
 
-A arquitetura do portal exige responsabilidade contínua. Por tratar com potenciais fluxos de inteligência artificial, regras essenciais de segurança devem ser observadas no desenvolvimento e na avaliação dos Pull Requests:
+### 1. 5 Abas Temáticas Homologadas (Navegação em Fichário)
+- 🛠️ **Aplicações com IA (ai.studio):** Ferramentas públicas desenvolvidas para automação de processos, auditoria e apoio administrativo (Guardião LGPD, sez.iO, LaRDiC, Form2RIPD, Mapeamento de Dados, SIADS, etc.). **Acesso público aberto para qualquer conta `@gmail.com` ou institucional.**
+- 🤖 **Agentes Especialistas (Gems & RAG):** Assistentes inteligentes no Gemini treinados na documentação e rotinas do IFSC (SiBI, Silv.IA Licitações, DGP, CGD Governança TI). **Acesso restrito e exclusivo para contas do domínio IFSC (`@ifsc.edu.br` para servidores e `@aluno.ifsc.edu.br` para alunos). Não abrem com @gmail.com pessoal.**
+- 🤝 **Parcerias Oficiais para Estudantes:** Hub de ferramentas de ponta com planos educacionais e gratuidades verificadas por e-mail `@aluno.ifsc.edu.br` ou `@edu.br`:
+  - **Google AI Pro (Gemini Advanced):** Gemini 2.5 Pro, Veo 3 Fast, Flow, Whisk, NotebookLM expandido e 2 TB de armazenamento.
+  - **Microsoft Copilot:** Assistente de IA integrado ao MS365 na licença educacional A1.
+  - **Canva para Educação (Canva Pro):** Acesso a Magic Write e Magic Media para discentes e docentes.
+  - **GitHub Copilot (Education Pack):** Autocomplete e pair programming inteligente para estudantes.
+  - **Notion AI (Plano Plus):** Assistente de redação e organização acadêmica com IA.
+  - **Perplexity Pro (Parceria RNP):** Assinatura Pro de busca conversacional com fontes acadêmicas via RNP.
+  - **Adobe Creative Cloud & Firefly:** Descontos educacionais superiores a 60% com IA generativa.
+  - **Grammarly for Education:** Revisor inteligente de redação, estilo e clareza.
+- 🎓 **Google for Education (Workspace IFSC):** Recursos de IA integrados com suporte institucional e garantia contratual de não-treinamento sob login `@ifsc.edu.br` (AI Studio, Gemini, NotebookLM, Colab com GPU T4, Jules, Antigravity, Opal, Pomelli, Stitch).
+- 💼 **Microsoft 365 Education (A1):** Copilot Web, Office Web, Teams, OneDrive (**100 GB por usuário**, conforme política global da Microsoft de 2024), Power BI e guia de autocadastro institucional.
 
-1. **NUNCA exponha chaves de API (API Keys):** Este frontend opera 100% no cliente (no navegador). Jamais insira variáveis de ambiente, _tokens_ do Google AI Studio, da OpenAI ou senhas de banco de dados no `index.html` ou arquivos `.json`.
-2. **Delegação de Segurança:** Todo o processamento algorítmico, o RAG documental e autenticações são delegados às plataformas hospedeiras (Google Gemini, AI Studio, etc.). O portal funciona **estritamente como um agregador/diretório de _links_ (hub)**.
-3. **Validação de Links Submetidos:** No arquivo `.json`, todas as URLs de destino (`url`) fornecidas devem pertencer a ecossistemas institucionalmente seguros e autorizados ou domínios da bigtech fornecedora (como `gemini.google.com/gem/...`).
-4. **Proteção contra XSS Frameworks:** O design do código nativo realiza a separação entre conteúdo de dado estrito (`JSON`) e injeção do HTML. Evite adicionar novas funcionalidades visuais que imprimam texto cru inserido pelo usuário diretamente no DOM via `innerHTML` sem a devida sanitização. As descrições autalmente exibidas devem ser sempre cadastradas via JSON e controladas via Pull Request.
+### 2. Filtros Unificados e Responsivos
+- **Segmentação por Público-Alvo:** Filtros em linha única para `Todos`, `Servidores`, `Alunos` e `Comunidade`, permitindo refinar o catálogo de forma instantânea sem poluição visual.
+- **Categorias Dinâmicas & Favoritos:** Filtros por categoria funcional e aba exclusiva de favoritos salvos localmente.
+
+### 3. Segurança e Privacidade no Cliente
+- **Proteção Anti-Scraping de E-mails com JS/Base64:** Todos os e-mails institucionais exibidos no portal são ofuscados no HTML estático e reconstruídos dinamicamente apenas durante a interação do navegador, neutralizando bots coletores de spam.
+- **Gerador de Termos de Consentimento ([`/termo/`](termo/index.html)):** Aplicação 100% client-side (Vue 3 + html2pdf) para emissão de termos LGPD e ECA Digital em PDF, sem transmissão de dados para servidores externos.
+- **Deep Linking e Roteamento Inteligente ([`404.html`](404.html)):** Suporte a links diretos para ferramentas (`apps.ifsc.edu.br/?app=guardiao`) e abas (`apps.ifsc.edu.br/?tab=partnerships`) em servidores estáticos do GitHub Pages.
 
 ---
 
-## ⚖️ Privacidade e LGPD
+## 🔒 Auditoria de Segurança, Riscos e Privacidade
 
-Este portal e suas ferramentas internas (como o Gerador de Termos) são projetados com foco na privacidade e conformidade com a LGPD:
-- **Anonimização de IP:** O Google Analytics está configurado para anonimizar endereços IP (`anonymize_ip: true`).
-- **Sem Rastreamento Publicitário:** Sinais do Google e personalização de anúncios estão desativados.
-- **Processamento Local (Client-Side):** Ferramentas como o Gerador de Termos processam dados sensíveis inteiramente no navegador do usuário, sem tráfego de dados pessoais para servidores externos.
-- **Transparência:** Links diretos para a [Política de Privacidade Oficial do IFSC](https://www.ifsc.edu.br/politica-de-privacidade) estão presentes em todas as interfaces, incluindo informações de contato do Encarregado de Dados (DPO).
+| Critério | Status | Implementação |
+| :--- | :---: | :--- |
+| **Zero Secrets / API Keys** | ✅ Conforme | Nenhuma credencial ou token privado está versionada no repositório. Uso estrito de BYOK (*Bring Your Own Key*) quando aplicável. |
+| **Zero PII de Desenvolvedores** | ✅ Conforme | Nenhum dado pessoal (CPF, e-mails privados, telefones, caminhos locais) de desenvolvedores ou servidores consta nos códigos estáticos públicos. |
+| **Proteção contra Spam** | ✅ Conforme | E-mails institucionais protegidos por codificação Base64 e hidratados via JavaScript no cliente (`js-safe-email`). |
+| **Content Security Policy (CSP)** | ✅ Ativo | Meta tags restritivas em `index.html`, `404.html` e `termo/index.html` limitando fontes de scripts, estilos, conexões e fontes externas. |
+| **Anonimização de Telemetria** | ✅ Conforme | Google Analytics 4 com `anonymize_ip: true` e flags de personalização desligadas; Microsoft Clarity com máscara para privacidade total. |
+| **Hospedagem Estática Segura** | ✅ Conforme | Execução exclusiva via GitHub Pages com arquivo `.nojekyll`, eliminando riscos de vulnerabilidades do lado servidor. |
 
 ---
 
-## 🤝 Como Contribuir
+## 📊 Observabilidade, Telemetria Ética & SEO
 
-A manutenção e enriquecimento deste ecossistema depende das inovações dos próprios servidores, alunos e professores! 
+O portal conta com infraestrutura de observabilidade e otimização para motores de busca devidamente homologada:
 
-A inclusão de novos agentes/aplicativos não exige alteração do Javascript do `index.html`. Basta mexer nos arquivos de dados (`.json`):
+- **Google Analytics 4 (GA4):**
+  - **ID de Medição:** `G-T49JX2YJMT`
+  - **Configuração:** `anonymize_ip: true`, `allow_google_signals: false`, `allow_ad_personalization_signals: false`.
+  - **Eventos Homologados:** Cliques em ferramentas (`app_click`), alternância de abas (`tab_view`), buscas realizadas (`search`), cliques na OT 04/2025 (`ot04_document_access`) e filtros de público (`filter_audience_change`).
+- **Microsoft Clarity:**
+  - **ID de Projeto:** `wddq8jjbkx`
+  - **Configuração:** Heatmaps e métricas de navegação com mascaramento automático de campos sensíveis para conformidade LGPD.
+- **SEO & Indexação:**
+  - **`robots.txt`:** Regras para Googlebot, Bingbot, Applebot, bloqueio de rotas de diagnóstico interno e indicação do sitemap canônico.
+  - **`sitemap.xml`:** Catálogo XML atualizado com prioridades, datas de modificação e rotas diretas para todas as 5 abas e ferramentas.
+  - **Open Graph & Twitter Cards:** Imagem em formato raster PNG oficial (`ifsc-logo-oficial-colorido.png`) em resolução 1200x630 para exibição correta em WhatsApp, LinkedIn e redes sociais.
+  - **Schema.org (JSON-LD):** Metadados estruturados de `WebSite` e `GovernmentService` vinculando formalmente o portal à DTIC e ao IFSC.
 
-1. **Faça um Fork:** Crie uma cópia deste repositório para a sua conta via GitHub.
-2. **Edite as Fontes de Dados:**
-   - Se for um novo utilitário geral ou automação sistêmica: edite o arquivo **`apps.json`**.
-   - Se for um novo Assistente/Gem especializado baseado num RAG normativo (ex: Assistente de Legislação PROEN): edite o arquivo **`agents.json`**.
-3. **Cadastre as Informações Necessárias:**
-   Escolha a categoria correta dentro do arquivo JSON (ex: `Servidores`, `Professores` ou `LGPD`), e anexe seu objeto informando:
-   ```json
-   {
-     "id": "identificador_unico_sem_espacos",
-     "name": "Nome da Sua Ferramenta",
-     "url": "https://link-da-ferramenta.com",
-     "description": "Explicação detalhada (até 2-3 frases curtas) sobre o que essa IA resolve.",
-     "tags": ["Servidores"]
-   }
+---
+
+## 📁 Estrutura do Repositório
+
+```text
+├── index.html                   # Portal principal (5 abas, filtros unificados, modais da OT 04)
+├── 404.html                     # Roteador SPA e deep-linking resiliente para GitHub Pages
+├── apps.json                    # Catálogo JSON das Aplicações com IA
+├── agents.json                  # Catálogo JSON dos Agentes Especialistas Gems IFSC
+├── partnerships.json            # Catálogo JSON das Parcerias Oficiais para Estudantes
+├── robots.txt                   # Regras de rastreamento e indexação otimizadas
+├── sitemap.xml                  # Mapa XML do site completo e atualizado
+├── favicon.svg                  # Favicon vetorial com o logo oficial do IFSC
+├── CNAME                        # Domínio canônico de produção (apps.ifsc.edu.br)
+├── .nojekyll                    # Instrução para GitHub Pages ignorar Jekyll
+├── .gitignore                   # Bloqueio de arquivos locais, segredos e logs
+├── termo/                       # Módulo do Gerador de Termos de Consentimento (LGPD / ECA)
+│   └── index.html               # Aplicação SPA client-side com geração de PDF
+├── assets/
+│   ├── css/
+│   │   └── portal.css           # Estilos e customizações do design system do IFSC
+│   └── js/
+│       ├── app.js               # Ponto de entrada modular do frontend
+│       ├── data/
+│       │   └── catalog.js       # Fonte de dados local-first com fallback resiliente
+│       └── modules/
+│           ├── analytics.js     # Módulo de telemetria ética (GA4 e Clarity)
+│           ├── router.js        # Gerenciamento de rotas e deep-linking
+│           └── ui.js            # Renderização de componentes, acessibilidade e temas
+└── public/
+    └── img/                     # Identidade visual oficial do IFSC e logos homologados
+```
+
+---
+
+## 💻 Desenvolvimento Local
+
+Para executar o portal localmente:
+
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/IFSC-DTIC/apps.git
+   cd apps
    ```
-4. **Commit e Pull Request:** Salve suas edições e solicite um _Pull Request_ para o repositório principal da DTIC. Após a curadoria e revisão da gerência, seu projeto estará no ar imediatamente para toda a comunidade!
+2. Inicie um servidor HTTP estático (por exemplo, com Python):
+   ```bash
+   python3 -m http.server 8080
+   ```
+3. Acesse `http://localhost:8080/` no seu navegador. O portal funcionará completamente offline graças ao catálogo embutido de fallback.
 
 ---
 
-## 🖥 Onde/Como Executar Localmente
+## 🤝 Como Contribuir (Governança de Dados)
 
-Sua simplicidade extrema dispensa containers locais complicados.
-- Baixe/clone o repósitorio.
-- Como o projeto faz requisições por `fetch` aos arquivos JSON locais (imposto pela política CORS de browsers modernos), **não** é possível dar dois cliques no `index.html` (o arquivo `file:///...` bloqueará a requisição JSON).
-- Utilize qualquer servidor local microscópico para testar:
-  - Ex: Extensão "Live Server" do VS Code.
-  - Ex: Com Python instalado: execute `python -m http.server 8000` na pasta.
-  - Ex: Com PHP instalado: execute `php -S localhost:8000`.
+Conforme as diretrizes de governança do IFSC, **não altere a estrutura do HTML diretamente** para cadastrar ou modificar ferramentas:
+
+1. Faça um Fork deste repositório.
+2. Edite os arquivos JSON correspondentes:
+   - Aplicações institucionais: [`apps.json`](apps.json)
+   - Agentes especialistas (Gems): [`agents.json`](agents.json)
+   - Benefícios educacionais: [`partnerships.json`](partnerships.json)
+3. Siga o esquema padrão e garanta conformidade com a Orientação Técnica nº 04/2025.
+4. Abra um Pull Request para validação da equipe técnica da DTIC/CGD.
 
 ---
-*Portal gerido e orquestrado pela equipe da Diretoria de Tecnologia da Informação e Comunicação (DTIC).*
+
+## 📄 Licença
+
+Distribuído sob a licença de software livre e aberto. Desenvolvido para a comunidade do Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina (IFSC).

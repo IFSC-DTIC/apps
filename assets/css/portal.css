@@ -1,0 +1,230 @@
+/**
+ * Portal de Inteligência Artificial e Aplicações - IFSC
+ * Manual de Identidade Visual do IFSC & Diretrizes OT nº 04/2025
+ */
+
+:root {
+  --ifsc-green: #32a041;
+  --ifsc-green-hover: #247a30;
+  --ifsc-red: #c8191e;
+  --app-bg: #f8fafc;
+  --card-bg: #ffffff;
+  --modal-bg: #ffffff;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+}
+
+html.dark {
+  --app-bg: #0b0f17;
+  --card-bg: #121824;
+  --modal-bg: #161b22;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --border-color: #1e293b;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--app-bg) !important;
+  color: var(--text-main) !important;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ocultação elegante de barra de rolagem para abas horizontais no mobile */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Ícones de Categorias Institucionais */
+.category-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
+}
+
+.category-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 9px;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+}
+
+.filter-btn-group button.active {
+  background-color: var(--ifsc-green) !important;
+  color: white !important;
+  border-color: var(--ifsc-green) !important;
+  box-shadow: 0 4px 12px rgba(50, 160, 65, 0.28);
+}
+
+/* Efeito Hover nos Cards */
+.app-card {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.app-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+/* Animação suave para renderização de listas */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
+/* Estados Focados e Acessibilidade (WCAG 2.1 AA) */
+button:focus-visible, a:focus-visible, input:focus-visible {
+  outline: 2px solid var(--ifsc-green);
+  outline-offset: 2px;
+}
+
+/* ========================================================
+   Abas Estilo Fichário / Pasta (Folder Tabs Design)
+   ======================================================== */
+.tabs-binder-rail {
+  position: relative;
+  margin-bottom: -1px;
+}
+
+.tab-binder {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-bottom: none;
+  margin-bottom: -1px;
+}
+
+@media (min-width: 640px) {
+  .tab-binder {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Aba Ativa: conecta diretamente com o painel abaixo */
+.tab-binder.active {
+  background-color: var(--app-bg) !important;
+  color: #247a30 !important;
+  border-color: var(--border-color) !important;
+  border-top: 2.5px solid var(--ifsc-green) !important;
+  border-bottom: 1px solid var(--app-bg) !important;
+  font-weight: 700;
+  z-index: 10;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.03);
+}
+
+html.dark .tab-binder.active {
+  background-color: var(--app-bg) !important;
+  color: #34d399 !important;
+  border-color: var(--border-color) !important;
+  border-top: 2.5px solid var(--ifsc-green) !important;
+  border-bottom: 1px solid var(--app-bg) !important;
+}
+
+/* Aba Inativa: recuada no fundo do fichário */
+.tab-binder:not(.active) {
+  background-color: rgba(226, 232, 240, 0.5) !important;
+  color: var(--text-muted) !important;
+  border-color: transparent !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  font-weight: 500;
+}
+
+html.dark .tab-binder:not(.active) {
+  background-color: rgba(30, 41, 59, 0.45) !important;
+  color: #94a3b8 !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+.tab-binder:not(.active):hover {
+  background-color: rgba(226, 232, 240, 0.9) !important;
+  color: var(--text-main) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+html.dark .tab-binder:not(.active):hover {
+  background-color: rgba(51, 65, 85, 0.6) !important;
+  color: #f1f5f9 !important;
+}
+
+/* ==============================================================================
+ * Barra Institucional do Governo Federal (GOVBR-DS • Padrão Digital de Governo)
+ * Diretrizes Oficiais: https://www.gov.br/ds
+ * ============================================================================== */
+
+#barra-govbr {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: Rawline, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  z-index: 40;
+}
+
+#barra-govbr a {
+  text-decoration: none;
+}
+
+#barra-govbr a:hover {
+  text-decoration: underline;
+}

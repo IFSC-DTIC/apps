@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Símbolo Oficial do Instituto Federal - Manual da Marca 2024 -->
+  <g transform="translate(8.7, 3.3)">
+    <!-- Coluna 1 -->
+    <circle cx="4.5" cy="4.5" r="4.95" fill="#c8191e"/>
+    <rect x="0" y="10.8" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="0" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="0" y="32.4" width="9" height="9" rx="0.9" fill="#32a041"/>
+
+    <!-- Coluna 2 -->
+    <rect x="10.8" y="0" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="10.8" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="32.4" width="9" height="9" rx="0.9" fill="#32a041"/>
+
+    <!-- Coluna 3 -->
+    <rect x="21.6" y="0" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="21.6" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
+  </g>
+</svg>
