@@ -1,6 +1,6 @@
 /**
- * Módulo de Rastreamento e Telemetria Institucional (GA4 & Microsoft Clarity)
- * IDs homologados em produção no portal apps.ifsc.edu.br
+ * Modulo de Rastreamento e Telemetria Institucional (GA4 & Microsoft Clarity)
+ * IDs homologados em producao no portal apps.ifsc.edu.br
  */
 
 export const Analytics = {
@@ -19,7 +19,7 @@ export const Analytics = {
         app_category: app.categoryName || app.category || 'Geral',
         app_url: app.url,
         access_scope: app.access_scope || 'publico_gmail',
-        event_category: 'Aplicações IA IFSC',
+        event_category: 'Aplicacoes IA IFSC',
         event_label: app.name,
         transport_type: 'beacon'
       });
@@ -36,14 +36,14 @@ export const Analytics = {
   },
 
   /**
-   * Rastreia a navegação entre abas
+   * Rastreia a navegacao entre abas
    * @param {string} tabId Identificador da aba
    */
   trackTabSwitch(tabId) {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'tab_view', {
         tab_name: tabId,
-        event_category: 'Navegação Abas',
+        event_category: 'Navegacao Abas',
         event_label: tabId
       });
     }
@@ -69,18 +69,34 @@ export const Analytics = {
   },
 
   /**
-   * Rastreia o clique direto para a Orientação Técnica nº 04/2025
+   * Rastreia o clique direto para a Orientacao Tecnica n. 04/2025
    */
   trackOt04Access() {
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'ot04_document_access', {
-        document_name: 'OT_04_2025_Assinado.pdf',
+        document_name: 'OT_04_2025_Oficial.pdf',
         event_category: 'Documentos Oficiais',
         transport_type: 'beacon'
       });
     }
     if (typeof window.clarity === 'function') {
       window.clarity('event', 'ot04_accessed');
+    }
+  },
+
+  /**
+   * Rastreia selecoes de filtros de publico (Todos, Servidores, Alunos, Comunidade)
+   * @param {string} audience 
+   */
+  trackAudienceFilter(audience) {
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'filter_audience_change', {
+        audience: audience,
+        event_category: 'Filtros Catalogo'
+      });
+    }
+    if (typeof window.clarity === 'function') {
+      window.clarity('set', 'filter_audience', audience);
     }
   }
 };
