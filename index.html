@@ -241,36 +241,55 @@
       Pular para o conteúdo principal
     </a>
 
-    <!-- Barra Brasil (Padrão de Identidade do Governo Federal no IFSC) -->
-    <div id="barra-brasil" class="w-full bg-[#f1f1f1] dark:bg-[#0d1117] border-b border-[#dfdfdf] dark:border-[#21262d] text-[12px] font-bold">
-      <div id="wrapper-barra-brasil" class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1600px] w-full h-[32px] flex items-center justify-between relative">
-        <div class="brasil-flag flex items-center h-full border-r-2 border-[#dfdfdf] dark:border-[#21262d] pr-4 shrink-0">
-          <a href="https://gov.br" class="link-barra" target="_blank" rel="noopener noreferrer">Brasil</a>
+    <!-- Barra Institucional do Governo Federal (GOVBR-DS • Padrão Digital de Governo • https://www.gov.br/ds) -->
+    <section id="barra-govbr" aria-label="Barra Institucional do Governo Federal" class="w-full bg-[#f8fafc] dark:bg-[#0d1117] border-b border-gray-200 dark:border-gray-800 text-[12px] transition-colors duration-200">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1600px] w-full h-[38px] flex items-center justify-between">
+        
+        <!-- Identidade Oficial gov.br e Assinatura do Órgão -->
+        <div class="flex items-center gap-2.5 min-w-0">
+          <a href="https://www.gov.br" target="_blank" rel="noopener noreferrer" class="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-[#1351b4] rounded" title="Portal do Governo Federal - gov.br" aria-label="Portal do Governo Federal - gov.br">
+            <img src="https://cdngovbr-ds.estaleiro.serpro.gov.br/design-system/images/logo-positive.png" alt="gov.br" class="h-4.5 w-auto object-contain dark:hidden" loading="eager" onerror="this.style.display='none'; document.getElementById('govbr-fallback-text').classList.remove('hidden');" />
+            <img src="https://cdngovbr-ds.estaleiro.serpro.gov.br/design-system/images/logo-negative.png" alt="gov.br" class="h-4.5 w-auto object-contain hidden dark:block" loading="eager" onerror="this.style.display='none'; document.getElementById('govbr-fallback-text').classList.remove('hidden');" />
+            <span id="govbr-fallback-text" class="hidden text-sm font-black tracking-tight text-[#1351b4] dark:text-blue-400">gov.br</span>
+          </a>
+
+          <span class="h-3.5 w-px bg-gray-300 dark:bg-gray-700 hidden sm:inline-block" aria-hidden="true"></span>
+
+          <span class="text-[11px] font-semibold text-gray-600 dark:text-gray-400 truncate hidden sm:inline">
+            Ministério da Educação / IFSC
+          </span>
         </div>
-        <div class="flex items-center h-full">
-          <nav class="hidden md:flex items-center h-full">
-            <ul id="lista-barra-brasil" class="list flex items-center h-full m-0 p-0">
-              <li class="list-item first border-l-2 border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
-                <a href="https://www.gov.br/pt-br/orgaos-do-governo" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Órgãos do Governo</a>
-              </li>
-              <li class="list-item border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
-                <a href="https://www.gov.br/acessoainformacao/pt-br" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Acesso à informação</a>
-              </li>
-              <li class="list-item border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
-                <a href="https://www.planalto.gov.br/legislacao" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Legislação</a>
-              </li>
-            </ul>
+
+        <!-- Links Institucionais Obrigatórios do Padrão Digital de Governo e Acessibilidade -->
+        <div class="flex items-center gap-3 sm:gap-4 shrink-0 text-[11px] font-semibold">
+          <nav aria-label="Navegação Governamental" class="hidden md:flex items-center gap-3 lg:gap-4">
+            <a href="https://www.gov.br/pt-br/orgaos-do-governo" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-[#1351b4] dark:hover:text-blue-400 transition-colors">
+              Órgãos do Governo
+            </a>
+            <span class="h-3 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true"></span>
+            <a href="https://www.gov.br/acessoainformacao/pt-br" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-[#1351b4] dark:hover:text-blue-400 transition-colors">
+              Acesso à Informação
+            </a>
+            <span class="h-3 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true"></span>
+            <a href="https://www.planalto.gov.br/legislacao" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-[#1351b4] dark:hover:text-blue-400 transition-colors">
+              Legislação
+            </a>
+            <span class="h-3 w-px bg-gray-200 dark:bg-gray-800" aria-hidden="true"></span>
+            <a href="https://www.gov.br/governodigital/pt-br/acessibilidade-digital" target="_blank" rel="noopener noreferrer" class="text-gray-600 dark:text-gray-400 hover:text-[#1351b4] dark:hover:text-blue-400 transition-colors">
+              Acessibilidade
+            </a>
           </nav>
-          <div id="brasil-vlibras" class="relative flex items-center h-full pl-2">
-            <a class="logo-vlibras block w-[32px] h-[32px]" id="logovlibras" href="#" aria-label="Acesso ao VLibras"></a>
-            <div class="link-vlibras">
-              <img src="https://www.ifsc.edu.br/o/ifsc-internet-lf6_2-theme/images/vlibras.gif" width="132" height="116" alt="VLibras" class="mb-1" />
-              <span>O conteúdo desse portal pode ser acessível em Libras usando o <a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer" class="text-[#32a041] dark:text-emerald-400 font-bold underline">VLibras</a></span>
-            </div>
-          </div>
+
+          <span class="h-3.5 w-px bg-gray-300 dark:bg-gray-700 hidden md:inline-block" aria-hidden="true"></span>
+
+          <!-- Atalho Acessibilidade em Libras (VLibras Oficial) -->
+          <a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-2 py-1 rounded text-gray-700 dark:text-gray-300 hover:text-[#1351b4] dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="Conteúdo acessível em Libras pelo VLibras" aria-label="Acessível em Libras pelo VLibras">
+            <i class="bi bi-universal-access text-sm text-[#1351b4] dark:text-blue-400"></i>
+            <span class="text-[11px] font-bold">VLibras</span>
+          </a>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Top Accent Line (Verde e Vermelho Institucionais IFSC) -->
     <div class="h-1 bg-gradient-to-r from-[#c8191e] via-[#32a041] to-[#32a041] w-full shrink-0"></div>
@@ -780,6 +799,26 @@
         </div>
       </div>
     </footer>
+
+    <!-- Widget de Acessibilidade VLibras (Governo Federal) -->
+    <div vw class="enabled">
+      <div vw-access-button class="active"></div>
+      <div vw-plugin-wrapper>
+        <div class="vw-plugin-top-wrapper"></div>
+      </div>
+    </div>
+    <script src="https://vlibras.gov.br/app/vlibras-plugin.js" defer></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', function() {
+        if (window.VLibras && window.VLibras.Widget) {
+          try {
+            new window.VLibras.Widget('https://vlibras.gov.br/app');
+          } catch (e) {
+            console.debug('VLibras Widget:', e);
+          }
+        }
+      });
+    </script>
 
     <!-- Script de Inicialização Modular -->
     <script type="module" src="./assets/js/app.js"></script>
