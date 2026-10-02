@@ -5,31 +5,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portal de Inteligência Artificial e Aplicações - IFSC | DTIC / CGD (OT 04/2025)</title>
     
-    <!-- Content Security Policy (Blindagem GitHub Pages) -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://unpkg.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net data:; img-src 'self' data: https: blob:; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://*.clarity.ms https://c.bing.com https://ai.studio https://gemini.google.com; frame-src 'self' https:;" />
+    <!-- Content Security Policy (Blindagem Ampla e Compatível com Extensões e GitHub Pages) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' https: http: data: blob:; connect-src 'self' https: http: ws: wss:; frame-src 'self' https:;" />
 
-    <!-- SEO & Indexação Estratégica para Motores de Busca (Googlebot) -->
-    <meta name="description" content="Portal oficial de ferramentas, diretrizes e agentes de Inteligência Artificial (IA) do Instituto Federal de Santa Catarina (IFSC). Catálogo homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD, Google for Education e Microsoft 365 A1." />
-    <meta name="keywords" content="Inteligência Artificial IFSC, IA IFSC, IA no IFSC, OT 04/2025 IFSC, Orientação Técnica 04 IFSC, DTIC IFSC, CGD IFSC, Google for Education IFSC, Microsoft Copilot IFSC, Agentes IA IFSC, LGPD IFSC, Guardião LGPD, ECA Digital IFSC, apps ifsc, portal ia ifsc, ferramentas ia ifsc, gems ifsc" />
+    <!-- Captura de Erros do Cliente para Diagnóstico em Tempo Real -->
+    <script>
+      window.addEventListener('error', function(e) {
+        try {
+          fetch('/__client_log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'error',
+              message: e.message,
+              filename: e.filename,
+              lineno: e.lineno,
+              colno: e.colno,
+              stack: e.error ? e.error.stack : null
+            })
+          }).catch(function() {});
+        } catch (_) {}
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        try {
+          fetch('/__client_log', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              type: 'unhandledrejection',
+              reason: e.reason ? (e.reason.stack || e.reason.message || String(e.reason)) : 'rejection'
+            })
+          }).catch(function() {});
+        } catch (_) {}
+      });
+    </script>
+
+    <!-- Recursos Pré-Conexão para Otimização de Performance Web (LCP/FID) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://www.clarity.ms" />
+
+    <!-- SEO & Indexação Estratégica para Motores de Busca (Googlebot, Bingbot) -->
+    <meta name="description" content="Portal oficial de ferramentas, diretrizes e agentes de Inteligência Artificial (IA) do Instituto Federal de Santa Catarina (IFSC). Catálogo homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD, com parcerias educacionais, Google for Education e Microsoft 365." />
+    <meta name="keywords" content="Inteligência Artificial IFSC, IA IFSC, IA no IFSC, OT 04/2025 IFSC, Orientação Técnica 04 IFSC, DTIC IFSC, CGD IFSC, Parcerias IA IFSC, Google AI Pro IFSC, Microsoft Copilot IFSC, Agentes IA IFSC, LGPD IFSC, Guardião LGPD, ECA Digital IFSC, apps ifsc, portal ia ifsc, ferramentas ia ifsc, gems ifsc" />
     <meta name="author" content="Instituto Federal de Santa Catarina - DTIC / CGD" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <meta name="theme-color" content="#247a30" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
     <link rel="canonical" href="https://apps.ifsc.edu.br/" />
 
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+    <!-- Open Graph (WhatsApp, Facebook, LinkedIn, Discord) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Portal de Inteligência Artificial - IFSC" />
     <meta property="og:url" content="https://apps.ifsc.edu.br/" />
     <meta property="og:title" content="Portal de Inteligência Artificial e Aplicações - IFSC (OT 04/2025)" />
-    <meta property="og:description" content="Portal oficial de ferramentas, diretrizes e agentes de Inteligência Artificial do IFSC. Em conformidade com a Orientação Técnica nº 04/2025 da DTIC/CGD, Google Education e Microsoft A1." />
-    <meta property="og:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg" />
+    <meta property="og:description" content="Portal oficial de ferramentas, parcerias oficiais e agentes de Inteligência Artificial do IFSC. Em conformidade com a Orientação Técnica nº 04/2025 da DTIC/CGD." />
+    <meta property="og:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta property="og:image:secure_url" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Logotipo Oficial do Instituto Federal de Santa Catarina" />
 
-    <!-- Twitter Cards -->
+    <!-- Twitter Cards (X) -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Portal de Inteligência Artificial e Aplicações - IFSC (OT 04/2025)" />
-    <meta name="twitter:description" content="Diretrizes da OT 04/2025, ferramentas e agentes de IA homologados para a comunidade do Instituto Federal de Santa Catarina." />
-    <meta name="twitter:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg" />
+    <meta name="twitter:description" content="Diretrizes da OT 04/2025, parcerias educacionais, ferramentas e agentes de IA homologados para a comunidade do Instituto Federal de Santa Catarina." />
+    <meta name="twitter:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta name="twitter:image:alt" content="Logotipo Oficial do Instituto Federal de Santa Catarina" />
 
     <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets) -->
     <script type="application/ld+json">
@@ -41,7 +87,7 @@
           "@id": "https://apps.ifsc.edu.br/#website",
           "url": "https://apps.ifsc.edu.br/",
           "name": "Portal de Inteligência Artificial e Aplicações - IFSC",
-          "description": "Portal institucional de ferramentas, diretrizes e agentes de Inteligência Artificial do Instituto Federal de Santa Catarina (IFSC), homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD.",
+          "description": "Portal institucional de ferramentas, diretrizes, parcerias oficiais e agentes de Inteligência Artificial do Instituto Federal de Santa Catarina (IFSC), homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD.",
           "publisher": {
             "@type": "EducationalOrganization",
             "name": "Instituto Federal de Santa Catarina",
@@ -63,7 +109,7 @@
           "termsOfService": "https://apps.ifsc.edu.br/termo/",
           "audience": {
             "@type": "Audience",
-            "audienceType": "Servidores, Docentes e Discentes do Instituto Federal de Santa Catarina"
+            "audienceType": "Servidores, Docentes, Estudantes e Comunidade Externa do Instituto Federal de Santa Catarina"
           }
         }
       ]
@@ -121,22 +167,71 @@
       }
     </script>
     
-    <!-- Google Fonts Inter & Biblioteca Pública de Ícones (Bootstrap Icons) -->
+    <!-- Google Fonts Inter & Open Sans (Manual da Marca IFSC) & Biblioteca Pública de Ícones -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     
     <!-- Folha de Estilos Modular Oficial do Portal -->
     <link rel="stylesheet" href="./assets/css/portal.css">
 
-    <!-- Theme Manager Script -->
+    <!-- Theme Manager Script (Detecção Automática do Navegador e Persistência) -->
     <script>
-      if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      (function() {
+        function getInitialTheme() {
+          const stored = localStorage.getItem('theme') || localStorage.getItem('color-theme');
+          if (stored === 'dark' || stored === 'light') return stored;
+          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        const initial = getInitialTheme();
+        if (initial === 'dark') {
           document.documentElement.classList.add('dark');
-      } else {
+        } else {
           document.documentElement.classList.remove('dark');
-      }
+        }
+
+        window.updateThemeUI = function() {
+          const isDark = document.documentElement.classList.contains('dark');
+          const darkIcon = document.getElementById('theme-toggle-dark-icon');
+          const lightIcon = document.getElementById('theme-toggle-light-icon');
+          if (darkIcon && lightIcon) {
+            if (isDark) {
+              lightIcon.classList.remove('hidden');
+              darkIcon.classList.add('hidden');
+            } else {
+              darkIcon.classList.remove('hidden');
+              lightIcon.classList.add('hidden');
+            }
+          }
+        };
+
+        window.toggleTheme = function() {
+          const willBeDark = !document.documentElement.classList.contains('dark');
+          if (willBeDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+          localStorage.setItem('theme', willBeDark ? 'dark' : 'light');
+          localStorage.setItem('color-theme', willBeDark ? 'dark' : 'light');
+          window.updateThemeUI();
+        };
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+          if (!localStorage.getItem('theme') && !localStorage.getItem('color-theme')) {
+            if (e.matches) {
+              document.documentElement.classList.add('dark');
+            } else {
+              document.documentElement.classList.remove('dark');
+            }
+            window.updateThemeUI();
+          }
+        });
+
+        document.addEventListener('DOMContentLoaded', window.updateThemeUI);
+      })();
     </script>
 </head>
 <body class="bg-[#f8fafc] dark:bg-[#0b0f17] text-gray-800 dark:text-gray-100 antialiased flex flex-col min-h-screen selection:bg-green-100 selection:text-green-900 transition-colors duration-200">
@@ -146,12 +241,43 @@
       Pular para o conteúdo principal
     </a>
 
+    <!-- Barra Brasil (Padrão de Identidade do Governo Federal no IFSC) -->
+    <div id="barra-brasil" class="w-full bg-[#f1f1f1] dark:bg-[#0d1117] border-b border-[#dfdfdf] dark:border-[#21262d] text-[12px] font-bold">
+      <div id="wrapper-barra-brasil" class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1600px] w-full h-[32px] flex items-center justify-between relative">
+        <div class="brasil-flag flex items-center h-full border-r-2 border-[#dfdfdf] dark:border-[#21262d] pr-4 shrink-0">
+          <a href="https://gov.br" class="link-barra" target="_blank" rel="noopener noreferrer">Brasil</a>
+        </div>
+        <div class="flex items-center h-full">
+          <nav class="hidden md:flex items-center h-full">
+            <ul id="lista-barra-brasil" class="list flex items-center h-full m-0 p-0">
+              <li class="list-item first border-l-2 border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
+                <a href="https://www.gov.br/pt-br/orgaos-do-governo" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Órgãos do Governo</a>
+              </li>
+              <li class="list-item border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
+                <a href="https://www.gov.br/acessoainformacao/pt-br" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Acesso à informação</a>
+              </li>
+              <li class="list-item border-r-2 border-[#dfdfdf] dark:border-[#21262d] h-full flex items-center">
+                <a href="https://www.planalto.gov.br/legislacao" class="link-barra px-3" target="_blank" rel="noopener noreferrer">Legislação</a>
+              </li>
+            </ul>
+          </nav>
+          <div id="brasil-vlibras" class="relative flex items-center h-full pl-2">
+            <a class="logo-vlibras block w-[32px] h-[32px]" id="logovlibras" href="#" aria-label="Acesso ao VLibras"></a>
+            <div class="link-vlibras">
+              <img src="https://www.ifsc.edu.br/o/ifsc-internet-lf6_2-theme/images/vlibras.gif" width="132" height="116" alt="VLibras" class="mb-1" />
+              <span>O conteúdo desse portal pode ser acessível em Libras usando o <a href="https://www.vlibras.gov.br" target="_blank" rel="noopener noreferrer" class="text-[#32a041] dark:text-emerald-400 font-bold underline">VLibras</a></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Top Accent Line (Verde e Vermelho Institucionais IFSC) -->
     <div class="h-1 bg-gradient-to-r from-[#c8191e] via-[#32a041] to-[#32a041] w-full shrink-0"></div>
 
     <!-- ===== Cabeçalho Oficial do IFSC ===== -->
     <header class="bg-white/95 dark:bg-[#121824]/95 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-30 shadow-xs">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-2.5 max-w-[1600px] w-full">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-2.5 pb-0 max-w-[1600px] w-full">
         <div class="flex items-center justify-between gap-4">
           
           <!-- Logo Oficial do Manual da Marca IFSC + Identificação da Unidade -->
@@ -175,11 +301,8 @@
 
             <!-- Título do Portal e Unidade Gestora -->
             <div class="hidden sm:flex flex-col justify-center">
-              <div class="flex items-center gap-2">
-                <span class="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">Portal de Apps com IA</span>
-                <span class="bg-[#eaf6ec] dark:bg-emerald-950/70 text-[#247a30] dark:text-emerald-300 text-[10px] font-extrabold px-1.5 py-0.5 rounded uppercase border border-emerald-200/80 dark:border-emerald-800/60">DTIC-CGD</span>
-              </div>
-              <span class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">Aplicativos usando Inteligência Artificial</span>
+              <span class="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">Portal de IA do IFSC</span>
+              <span class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">Catálogo de Ferramentas de IA Homologadas</span>
             </div>
           </div>
 
@@ -196,18 +319,13 @@
 
           <!-- Ações Institucionais do Topo -->
           <div class="flex items-center space-x-2">
-            <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" class="hidden lg:inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors" title="Acessar o portal oficial www.ifsc.edu.br">
-              <i class="bi bi-box-arrow-up-right text-[10px] text-[#32a041]"></i>
-              <span>www.ifsc.edu.br</span>
-            </a>
-
-            <a href="https://github.com/IFSC-DTIC" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-semibold text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 transition-colors" title="Repositório GitHub do IFSC DTIC">
-              <i class="bi bi-github text-xs"></i>
-              <span>DTIC</span>
-            </a>
+            <button type="button" onclick="window.openOt04Modal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/70 dark:hover:bg-emerald-900/70 text-[#247a30] dark:text-emerald-300 border border-emerald-300/80 dark:border-emerald-700/80 transition-colors cursor-pointer shadow-2xs group" title="Ver Diretrizes conforme Orientação Técnica nº 04/2025">
+              <i class="bi bi-shield-check text-[#32a041] text-xs"></i>
+              <span>Diretrizes conforme OT 04/2025</span>
+            </button>
 
             <!-- Alternador de Tema Escuro / Claro -->
-            <button id="theme-toggle" type="button" aria-label="Alternar tema" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors">
+            <button id="theme-toggle" type="button" aria-label="Alternar tema" onclick="window.toggleTheme()" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors cursor-pointer" title="Alternar tema (Claro / Escuro)">
               <i id="theme-toggle-dark-icon" class="bi bi-moon-stars hidden text-base"></i>
               <i id="theme-toggle-light-icon" class="bi bi-sun hidden text-base"></i>
             </button>
@@ -224,130 +342,88 @@
             </button>
           </div>
         </div>
+
+        <!-- Barra Superior de Navegação por Abas (Estilo Fichário / Pasta) -->
+        <div class="mt-2.5 tabs-binder-rail">
+          <nav class="flex items-end space-x-1 sm:space-x-1.5 overflow-x-auto no-scrollbar scroll-smooth" role="tablist" aria-label="Seções do Catálogo">
+            
+            <!-- Aba 1: Aplicações com IA -->
+            <button id="tab-tools" type="button" role="tab" aria-selected="true" class="tab-binder active" title="Aplicações de IA do IFSC com acesso aberto">
+              <img src="./favicon.svg" alt="IFSC" class="w-4 h-4 object-contain shrink-0" />
+              <span>Aplicações com IA</span>
+              <span class="hidden md:inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-100/90 dark:bg-emerald-950/80 px-1.5 py-0.2 rounded-full"><i class="bi bi-globe2 text-[9px]"></i>Público</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950 text-[#247a30] dark:text-emerald-300 font-extrabold" id="tab-tools-count">12</span>
+            </button>
+
+            <!-- Aba 2: Agentes Especialistas -->
+            <button id="tab-experts" type="button" role="tab" aria-selected="false" class="tab-binder" title="Assistentes Especialistas nas normas e processos do IFSC">
+              <img src="https://www.gstatic.com/images/branding/productlogos/gemini/v1/web-96dp/logo_gemini_color_1x_web_96dp.png" alt="Gemini" class="w-4 h-4 object-contain shrink-0" />
+              <span>Agentes Especialistas</span>
+              <span class="hidden md:inline-flex items-center gap-1 text-[10px] font-semibold text-purple-700 dark:text-purple-300 bg-purple-100/90 dark:bg-purple-950/80 px-1.5 py-0.2 rounded-full"><i class="bi bi-lock-fill text-[9px]"></i>@ifsc</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-200/80 dark:bg-gray-700/60 text-gray-600 dark:text-gray-400 font-bold" id="tab-experts-count">4</span>
+            </button>
+
+            <!-- Aba 3: Google Education -->
+            <button id="tab-google" type="button" role="tab" aria-selected="false" class="tab-binder" title="Aplicações de IA do ecossistema Google Education">
+              <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png" alt="Google" class="w-4 h-4 object-contain shrink-0" />
+              <span>Google Education</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-200/80 dark:bg-gray-700/60 text-gray-600 dark:text-gray-400 font-bold" id="tab-google-count">15</span>
+            </button>
+
+            <!-- Aba 4: Microsoft 365 Copilot -->
+            <button id="tab-microsoft" type="button" role="tab" aria-selected="false" class="tab-binder" title="Microsoft 365 Education Plano A1 e Copilot">
+              <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-copilot.png" alt="Microsoft Copilot" class="w-4 h-4 object-contain shrink-0" />
+              <span>Microsoft 365</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-200/80 dark:bg-gray-700/60 text-gray-600 dark:text-gray-400 font-bold" id="tab-microsoft-count">13</span>
+            </button>
+
+            <!-- Aba 5: Parcerias Oficiais & Benefícios -->
+            <button id="tab-partnerships" type="button" role="tab" aria-selected="false" class="tab-binder" title="Parcerias Oficiais, Gratuidade e Benefícios de IA">
+              <i class="bi bi-award-fill text-amber-500 text-sm shrink-0"></i>
+              <span>Parcerias Oficiais</span>
+              <span class="hidden md:inline-flex items-center gap-1 text-[10px] font-semibold text-amber-700 dark:text-amber-300 bg-amber-100/90 dark:bg-amber-950/80 px-1.5 py-0.2 rounded-full"><i class="bi bi-mortarboard-fill text-[9px]"></i>Estudantes</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-200/80 dark:bg-gray-700/60 text-gray-600 dark:text-gray-400 font-bold" id="tab-partnerships-count">8</span>
+            </button>
+
+          </nav>
+        </div>
       </div>
     </header>
 
     <!-- ===== Área Principal de Aplicações ===== -->
-    <main id="main-content" class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-5 flex-grow max-w-[1600px] w-full">
-      
-      <!-- Identificação Institucional e Título do Catálogo -->
-      <div class="mb-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-gray-100 dark:border-gray-800/80">
-        <div>
-          <h1 class="text-xl sm:text-2xl font-black text-gray-900 dark:text-white tracking-tight">
-            Portal de Aplicações e Inteligência Artificial
-          </h1>
-          <p class="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-0.5">
-            Instituto Federal de Santa Catarina &bull; Diretoria de Tecnologia da Informação e Comunicação (DTIC)
-          </p>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200/80 dark:border-emerald-800/60 text-emerald-800 dark:text-emerald-300 text-[11px] font-bold">
-            <i class="bi bi-shield-check text-[#32a041]"></i>
-            <span>Conforme OT 04/2025</span>
-          </span>
-          <button type="button" onclick="window.openOt04Modal()" class="inline-flex items-center gap-1 text-[11px] font-bold text-gray-600 dark:text-gray-300 hover:text-[#32a041] dark:hover:text-emerald-400 px-2 py-1 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="Ver resumo das diretrizes de IA">
-            <i class="bi bi-info-circle text-xs"></i>
-            <span>Diretrizes</span>
-          </button>
-        </div>
-      </div>
+    <main id="main-content" class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-4 flex-grow max-w-[1600px] w-full">
 
-      <!-- Navegação por Abas Institucionais (Tabs Semânticas e Responsivas) -->
-      <div class="border-b border-gray-200 dark:border-gray-800 mb-5">
-        <nav class="flex space-x-1 sm:space-x-3 lg:space-x-6 overflow-x-auto no-scrollbar scroll-smooth" role="tablist" aria-label="Seções do Catálogo">
-          
-          <!-- Aba 1: Aplicações com IA -->
-          <button id="tab-tools" type="button" role="tab" aria-selected="true" class="tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-bold border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-[#32a041] text-[#247a30] dark:text-emerald-400 cursor-pointer">
-            <img src="./favicon.svg" alt="IFSC" class="w-4 h-4 object-contain shrink-0" />
-            <span>Aplicações com IA</span>
-            <span class="hidden md:inline-flex items-center gap-1 text-[10px] font-semibold text-emerald-700 dark:text-emerald-300 bg-emerald-100/90 dark:bg-emerald-950/80 px-2 py-0.5 rounded-full"><i class="bi bi-globe2 text-[9px]"></i>Público (@gmail)</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950 text-[#247a30] dark:text-emerald-300 font-extrabold" id="tab-tools-count">12</span>
-          </button>
-
-          <!-- Aba 2: Agentes Especialistas -->
-          <button id="tab-experts" type="button" role="tab" aria-selected="false" class="tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-medium border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white cursor-pointer">
-            <img src="https://www.gstatic.com/images/branding/productlogos/gemini/v1/web-96dp/logo_gemini_color_1x_web_96dp.png" alt="Gemini" class="w-4 h-4 object-contain shrink-0" />
-            <span>Agentes Especialistas</span>
-            <span class="hidden md:inline-flex items-center gap-1 text-[10px] font-semibold text-purple-700 dark:text-purple-300 bg-purple-100/90 dark:bg-purple-950/80 px-2 py-0.5 rounded-full"><i class="bi bi-lock-fill text-[9px]"></i>Exclusivo @ifsc</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold" id="tab-experts-count">4</span>
-          </button>
-
-          <!-- Aba 3: Google for Education -->
-          <button id="tab-google" type="button" role="tab" aria-selected="false" class="tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-medium border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white cursor-pointer" title="Aplicações de IA do Google for Education e Google Labs">
-            <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png" alt="Google" class="w-4 h-4 object-contain shrink-0" />
-            <span>Google for Education</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold" id="tab-google-count">15</span>
-          </button>
-
-          <!-- Aba 4: Microsoft 365 Copilot -->
-          <button id="tab-microsoft" type="button" role="tab" aria-selected="false" class="tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-medium border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white cursor-pointer" title="Microsoft 365 Education Plano A1 - Office Web">
-            <img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-copilot.png" alt="Microsoft Copilot" class="w-4 h-4 object-contain shrink-0" />
-            <span>Microsoft 365 Copilot</span>
-            <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold" id="tab-microsoft-count">13</span>
-          </button>
-
-        </nav>
-      </div>
-
-      <!-- Cabeçalho Dinâmico da Aba Ativa -->
-      <div id="section-header" class="mb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <!-- Cabeçalho Dinâmico da Aba Ativa (Resumido) -->
+      <div id="section-header" class="mb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-1.5">
         <div>
           <h2 id="section-title" class="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white flex items-center gap-2">
-            Aplicações Institucionais com IA (ai.studio)
+            Aplicações com IA
           </h2>
           <p id="section-desc" class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            Aplicativos desenvolvidos com IA para automação de processos, auditoria e apoio administrativo no IFSC.
+            Automação, conformidade e auditoria institucional no IFSC. Acesso público via @gmail ou institucional.
           </p>
         </div>
         <div id="active-category-indicator" class="text-xs text-gray-500 dark:text-gray-400 font-medium shrink-0"></div>
       </div>
 
-      <!-- Banner Institucional Resumido no Topo (Office 365 Educação & Autocadastro IFSC) -->
-      <div id="ms-alert-banner" class="hidden mb-4 p-3.5 sm:p-4 rounded-2xl bg-amber-50/90 dark:bg-[#1c1810] border border-amber-300 dark:border-amber-700/80 shadow-xs transition-all">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-          <div class="flex items-start sm:items-center gap-3">
-            <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-              <i class="bi bi-key-fill text-base"></i>
-            </div>
-            <div class="text-xs">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="font-extrabold text-amber-950 dark:text-amber-100 text-xs sm:text-sm">
-                  Office 365 Educação &bull; Acesso IFSC
-                </span>
-                <span class="bg-amber-200/80 dark:bg-amber-900/80 text-amber-900 dark:text-amber-200 text-[10px] px-1.5 py-0.2 rounded font-extrabold uppercase">
-                  Licença A1 Gratuita
-                </span>
-              </div>
-              <div class="mt-1 text-[11px] sm:text-xs text-amber-950 dark:text-amber-100 space-y-1">
-                <p class="leading-relaxed">
-                  Disponível para <strong>toda a comunidade IFSC</strong> via autocadastro com e-mail institucional:
-                </p>
-                <ul class="list-disc pl-4 space-y-0.5 text-[11px] text-amber-900 dark:text-amber-200">
-                  <li><strong>Servidores (Técnicos Administrativos e Professores):</strong> Cadastre-se usando <code class="bg-amber-200/80 dark:bg-amber-900/80 px-1 py-0.2 rounded font-mono font-bold text-amber-950 dark:text-amber-100">@ifsc.edu.br</code>.</li>
-                  <li><strong>Alunos e Estudantes:</strong> Cadastre-se usando <code class="bg-amber-200/80 dark:bg-amber-900/80 px-1 py-0.2 rounded font-mono font-bold text-amber-950 dark:text-amber-100">@aluno.ifsc.edu.br</code>.</li>
-                </ul>
-                <p class="text-[11px] font-bold text-red-700 dark:text-red-300 flex items-center gap-1 mt-1">
-                  <i class="bi bi-exclamation-circle-fill text-xs shrink-0"></i>
-                  <span>A senha é criada no autocadastro da Microsoft e NÃO é a mesma do SIGAA/SIPAC.</span>
-                </p>
-              </div>
+      <!-- Banner Institucional Resumido no Topo (Office 365 Educação) -->
+      <div id="ms-alert-banner" class="hidden mb-3.5 px-3.5 py-2.5 rounded-xl bg-amber-50/90 dark:bg-[#1c1810] border border-amber-300/80 dark:border-amber-700/80 shadow-2xs transition-all">
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+          <div class="flex items-center gap-2 text-xs">
+            <i class="bi bi-key-fill text-amber-600 dark:text-amber-400 text-sm shrink-0"></i>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <strong class="font-bold text-amber-950 dark:text-amber-100">Office 365 Educação (Plano A1):</strong>
+              <span class="text-amber-900 dark:text-amber-200">Autocadastro com <code class="font-mono text-[11px] font-bold">@ifsc.edu.br</code> (servidores) ou <code class="font-mono text-[11px] font-bold">@aluno.ifsc.edu.br</code> (alunos). Senha própria da Microsoft.</span>
             </div>
           </div>
-          
-          <div class="flex items-center gap-2 shrink-0 self-end md:self-center">
-            <button type="button" onclick="window.openMsInfoModal()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-xs border border-gray-300 dark:border-gray-600 transition-colors shadow-2xs">
-              <i class="bi bi-info-circle text-amber-600 dark:text-amber-400"></i>
-              <span>Ver Detalhes da Licença</span>
+          <div class="flex items-center gap-1.5 shrink-0 self-end sm:self-center">
+            <button type="button" onclick="window.openMsInfoModal()" class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-xs border border-gray-300 dark:border-gray-600 transition-colors shadow-2xs">
+              <i class="bi bi-info-circle text-amber-600 dark:text-amber-400 text-[11px]"></i>
+              <span>Instruções</span>
             </button>
-            <a href="https://ifsc.edu.br/en/web/guest/servicos-de-tecnologia#:~:text=emitida%20pelo%20IFSC-,Office%20365%20Educa%C3%A7%C3%A3o,-Utilizando%20a%20conta" 
-               target="_blank" rel="noopener noreferrer" 
-               class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#32a041] hover:bg-[#247a30] text-white font-bold text-xs shadow-xs transition-colors" title="Página oficial de serviços de tecnologia do IFSC">
-              <span>Portal IFSC</span>
-              <i class="bi bi-box-arrow-up-right text-[9px]"></i>
-            </a>
             <a href="https://www.microsoft.com/pt-br/education/products/office" 
                target="_blank" rel="noopener noreferrer" 
-               class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-xs transition-colors" title="Página oficial de autocadastro da Microsoft">
+               class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-2xs transition-colors" title="Página oficial de autocadastro da Microsoft">
               <span>Autocadastro</span>
               <i class="bi bi-box-arrow-up-right text-[9px]"></i>
             </a>
@@ -355,8 +431,8 @@
         </div>
       </div>
 
-      <!-- Filtros por Categoria -->
-      <div class="flex items-center flex-wrap gap-1.5 mb-5 filter-btn-group" id="filter-container">
+      <!-- Filtros Aglutinados (Público + Área na mesma linha) -->
+      <div class="flex items-center flex-wrap gap-2 mb-4 filter-btn-group" id="filter-container">
         <!-- Preenchido via JavaScript -->
       </div>
 
@@ -415,8 +491,8 @@
             <ul class="space-y-1.5 text-[11px] text-amber-900/90 dark:text-amber-200 list-disc pl-4 leading-relaxed">
               <li><strong>Servidores (Técnicos e Professores):</strong> Têm direito ao Office 365 Educação realizando o autocadastro com seu e-mail institucional <code class="font-mono font-bold text-amber-950 dark:text-amber-100">@ifsc.edu.br</code>.</li>
               <li><strong>Alunos e Estudantes:</strong> Têm direito ao mesmo pacote realizando o autocadastro com o e-mail institucional <code class="font-mono font-bold text-amber-950 dark:text-amber-100">@aluno.ifsc.edu.br</code>.</li>
-              <li><strong>Aplicações Inclusas:</strong> Versões online do Word, Excel, PowerPoint, OneNote, Microsoft Teams e OneDrive com 1 TB de armazenamento na nuvem (Office Web sem instalador desktop).</li>
-              <li><strong>Power Apps e Power BI:</strong> Ativados no primeiro acesso ao Microsoft Teams ou abrindo chamado para <a href="mailto:suporte.ti@ifsc.edu.br?subject=Solicita%C3%A7%C3%A3o%20de%20Licen%C3%A7a%20Microsoft%20A1%20IFSC" class="font-bold underline text-[#32a041] dark:text-emerald-400">suporte.ti@ifsc.edu.br</a>.</li>
+              <li><strong>Aplicações Inclusas:</strong> Versões online do Word, Excel, PowerPoint, OneNote, Microsoft Teams e OneDrive com 100 GB de armazenamento na nuvem (limite oficial da licença A1 gratuita desde 2024; Office Web sem instalador desktop).</li>
+              <li><strong>Power Apps e Power BI:</strong> Ativados no primeiro acesso ao Microsoft Teams ou abrindo chamado para <span class="js-safe-email font-bold underline text-[#32a041] dark:text-emerald-400 cursor-pointer" data-u="c3Vwb3J0ZS50aQ==" data-d="aWZzYy5lZHUuYnI=" data-sub="Solicitação de Licença Microsoft A1 IFSC" title="Clique para entrar em contato com suporte">[carregando contato...]</span>.</li>
               <li><strong>Senha de Acesso:</strong> Definida por você no autocadastro da Microsoft. <span class="font-bold text-red-700 dark:text-red-300">NÃO é a mesma do SIGAA/SIPAC/Intranet</span>.</li>
             </ul>
 
@@ -474,6 +550,18 @@
           <button id="close-ot04-modal-btn" type="button" aria-label="Fechar modal" class="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
             <i class="bi bi-x-lg text-lg"></i>
           </button>
+        </div>
+
+        <!-- Banner com Acesso Direto à OT 04/2025 -->
+        <div class="mb-4 p-3 rounded-2xl bg-emerald-50/90 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+          <div class="flex items-center gap-2 text-xs font-semibold text-emerald-950 dark:text-emerald-200">
+            <i class="bi bi-file-earmark-check-fill text-base text-[#32a041]"></i>
+            <span>Normativa Oficial vigente para toda a comunidade IFSC</span>
+          </div>
+          <a href="https://www.ifsc.edu.br/documents/d/acesso-a-informacao/orientacao_tecnica_n4_de_2025_-_inteligencia_artificial_assinado" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-xl bg-[#32a041] hover:bg-[#247a30] text-white font-bold text-xs inline-flex items-center gap-1.5 transition-colors shadow-2xs shrink-0" title="Acessar o documento oficial da OT nº 04/2025">
+            <i class="bi bi-box-arrow-up-right text-[11px]"></i>
+            <span>Acessar Documento Oficial da OT nº 04/2025</span>
+          </a>
         </div>
 
         <div class="overflow-y-auto space-y-4 pr-1 text-xs sm:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -535,9 +623,15 @@
         </div>
 
         <div class="mt-5 pt-3 border-t border-gray-200 dark:border-gray-800 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3">
+          <div class="flex items-center gap-3 flex-wrap">
+            <a href="https://www.ifsc.edu.br/documents/d/acesso-a-informacao/orientacao_tecnica_n4_de_2025_-_inteligencia_artificial_assinado" target="_blank" rel="noopener noreferrer" class="text-xs text-[#247a30] dark:text-emerald-400 hover:underline font-bold inline-flex items-center gap-1">
+              <i class="bi bi-file-earmark-text-fill text-xs"></i>
+              <span>Documento Oficial da OT nº 04/2025</span>
+              <i class="bi bi-box-arrow-up-right text-[10px]"></i>
+            </a>
+            <span class="text-gray-300 dark:text-gray-700">&bull;</span>
             <a href="https://www.ifsc.edu.br/web/portal-do-servidor/gestao-de-dados" target="_blank" rel="noopener noreferrer" class="text-xs text-[#247a30] dark:text-emerald-400 hover:underline font-bold inline-flex items-center gap-1">
-              <span>Página Oficial de Gestão de Dados (CGD)</span>
+              <span>Página de Gestão de Dados (CGD)</span>
               <i class="bi bi-box-arrow-up-right text-[10px]"></i>
             </a>
             <span class="text-gray-300 dark:text-gray-700">&bull;</span>
@@ -557,147 +651,99 @@
     <!-- ===== Rodapé Institucional Conforme Diretrizes IFSC ===== -->
     <footer class="bg-white border-t border-gray-200 dark:bg-[#121824] dark:border-gray-800 pt-8 pb-6 mt-auto">
       <div class="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 max-w-[1600px] w-full">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pb-8 border-b border-gray-100 dark:border-gray-800/80">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 pb-8 border-b border-gray-100 dark:border-gray-800/80 items-stretch">
           
-          <!-- Coluna 1: Marca Vertical Oficial do IFSC & Coordenação (Esquerda) -->
-          <div class="lg:col-span-4 flex items-start gap-4">
-            <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" class="shrink-0 hover:opacity-95 transition-opacity" title="Portal Oficial do IFSC">
-              <!-- Versão Vertical Colorida com Texto Preto (Modo Claro) -->
-              <img src="./public/img/ifsc-logo-vertical.svg" 
-                   alt="Instituto Federal de Santa Catarina" 
-                   class="h-24 w-auto object-contain block dark:hidden"
-                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
-              
-              <!-- Versão Vertical Colorida com Texto Branco (Modo Escuro) -->
-              <img src="./public/img/ifsc-logo-vertical-white.svg" 
-                   alt="Instituto Federal de Santa Catarina" 
-                   class="h-24 w-auto object-contain hidden dark:block"
-                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
-            </a>
-            <div class="text-xs text-gray-600 dark:text-gray-400 space-y-1">
-              <p class="font-extrabold text-gray-900 dark:text-white leading-tight">Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina</p>
-              <p class="text-[11px] text-gray-500 dark:text-gray-400">Diretoria de Tecnologia da Informação e Comunicação &bull; DTIC</p>
-              <p class="text-[11px] font-semibold text-gray-700 dark:text-gray-300">Coordenadoria de Gestão de Dados (CGD) &bull; Reitoria</p>
-              <div class="pt-2 text-[11px] text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-800/80 leading-relaxed">
-                <p>Desenvolvido pela Coordenadoria de Gestão de Dados (CGD) da DTIC do IFSC — Reitoria.</p>
-                <p class="mt-1">Dúvidas ou sugestões, entre em contato pelo e-mail: <a href="mailto:coord.gestao.dados@ifsc.edu.br" class="text-[#32a041] dark:text-emerald-400 font-semibold hover:underline">coord.gestao.dados@ifsc.edu.br</a></p>
+          <!-- Coluna 1: Institucional IFSC & Governança (Esquerda) -->
+          <div class="lg:col-span-4 p-5 rounded-2xl bg-gray-50/70 dark:bg-[#161f30]/60 border border-gray-200/80 dark:border-gray-800 flex flex-col justify-between space-y-4">
+            <div class="flex items-start gap-3.5">
+              <a href="https://www.ifsc.edu.br" target="_blank" rel="noopener noreferrer" class="shrink-0 hover:opacity-90 transition-opacity" title="Portal Oficial do IFSC">
+                <img src="./public/img/ifsc-logo-vertical.svg" 
+                     alt="Instituto Federal de Santa Catarina" 
+                     class="h-20 w-auto object-contain block dark:hidden"
+                     onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
+                <img src="./public/img/ifsc-logo-vertical-white.svg" 
+                     alt="Instituto Federal de Santa Catarina" 
+                     class="h-20 w-auto object-contain hidden dark:block"
+                     onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
+              </a>
+              <div class="space-y-1 text-xs">
+                <h4 class="font-bold text-gray-900 dark:text-white leading-tight">Instituto Federal de Santa Catarina</h4>
+                <p class="text-[11px] text-gray-500 dark:text-gray-400">Diretoria de TIC (DTIC) &bull; Reitoria</p>
+                <p class="text-[11px] font-semibold text-gray-700 dark:text-gray-300">Coordenadoria de Gestão de Dados (CGD)</p>
+                <p class="text-[11px] text-gray-500 dark:text-gray-400 pt-1">
+                  Contato: <span class="js-safe-email text-[#32a041] dark:text-emerald-400 font-semibold cursor-pointer hover:underline" data-u="Y29vcmQuZ2VzdGFvLmRhZG9z" data-d="aWZzYy5lZHUuYnI=" data-sub="Contato Portal IFSC" title="Enviar e-mail institucional">[carregando...]</span>
+                </p>
               </div>
+            </div>
+            <div class="pt-3 border-t border-gray-200/70 dark:border-gray-700/60 text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
+              <p>Desenvolvido em formato experimental pela CGD-DTIC sob licenças de uso livre e acadêmico.</p>
             </div>
           </div>
 
-          <!-- Coluna 2: Quer adicionar sua aplicação? (Meio) -->
-          <div class="lg:col-span-4 text-xs">
-            <div class="flex items-center gap-2 mb-1.5">
-              <span class="w-6 h-6 rounded-lg bg-[#32a041] text-white flex items-center justify-center text-xs shrink-0">
-                <i class="bi bi-plus-circle-fill"></i>
-              </span>
-              <h4 class="font-bold text-sm text-gray-900 dark:text-white">Quer adicionar sua aplicação?</h4>
+          <!-- Coluna 2: Como Contribuir (Centro) -->
+          <div class="lg:col-span-4 p-5 rounded-2xl bg-gray-50/70 dark:bg-[#161f30]/60 border border-gray-200/80 dark:border-gray-800 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-lg bg-[#32a041] text-white flex items-center justify-center text-xs shrink-0 shadow-2xs">
+                  <i class="bi bi-git"></i>
+                </span>
+                <h4 class="font-bold text-sm text-gray-900 dark:text-white">Como Contribuir</h4>
+              </div>
+              <p class="text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">
+                Portal colaborativo aberto à comunidade. Para sugerir ou incluir soluções institucionais:
+              </p>
+              <ol class="space-y-2 text-[11px] text-gray-700 dark:text-gray-300">
+                <li class="flex items-center gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">1</span>
+                  <span>Faça um Fork do repositório institucional</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">2</span>
+                  <span>Inclua os dados da ferramenta no catálogo</span>
+                </li>
+                <li class="flex items-center gap-2.5">
+                  <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">3</span>
+                  <span>Abra um Pull Request para validação da DTIC</span>
+                </li>
+              </ol>
             </div>
-            <p class="text-[11px] text-gray-500 dark:text-gray-400 mb-3 leading-relaxed">
-              Este portal é colaborativo. Siga os passos para incluir sua ferramenta de IA na comunidade!
-            </p>
-
-            <ol class="space-y-2 text-[11px] text-gray-700 dark:text-gray-300">
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">
-                  1
-                </span>
-                <span class="leading-snug">
-                  Faça um Fork do repositório <a href="https://github.com/IFSC-DTIC/apps" target="_blank" rel="noopener noreferrer" class="font-bold text-[#32a041] dark:text-emerald-400 underline hover:opacity-80">IFSC-DTIC/apps</a> no GitHub.
-                </span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">
-                  2
-                </span>
-                <span class="leading-snug">
-                  Edite o <code class="px-1 py-0.5 rounded bg-gray-100 dark:bg-gray-800 font-mono text-[10px] font-bold text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700">apps.json</code> adicionando as informações (Nome, URL) na categoria adequada.
-                </span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold flex items-center justify-center shrink-0 text-[10px] border border-emerald-300/60 dark:border-emerald-700/60">
-                  3
-                </span>
-                <span class="leading-snug">
-                  Abra um Pull Request solicitando autorização da DTIC para aprovar e incluir no ar.
-                </span>
-              </li>
-            </ol>
-
-            <div class="mt-3 pt-2">
-              <a href="https://github.com/IFSC-DTIC/apps" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-[11px] transition-colors border border-gray-200 dark:border-gray-700">
-                <i class="bi bi-github text-xs"></i>
-                <span>Repositório IFSC-DTIC/apps no GitHub</span>
-                <i class="bi bi-box-arrow-up-right text-[9px] text-gray-400"></i>
+            <div class="pt-3 border-t border-gray-200/70 dark:border-gray-700/60">
+              <a href="https://github.com/IFSC-DTIC/apps" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full px-3 py-2 rounded-xl bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-xs transition-colors border border-gray-200 dark:border-gray-700 shadow-2xs">
+                <i class="bi bi-github text-sm"></i>
+                <span>Repositório no GitHub</span>
+                <i class="bi bi-box-arrow-up-right text-[10px] text-gray-400"></i>
               </a>
             </div>
           </div>
 
-          <!-- Coluna 3: Avisos Institucionais, Ética & Licenciamento (Direita) -->
-          <div class="lg:col-span-4 space-y-3">
-            
-            <!-- Aviso Importante -->
-            <div class="p-3 rounded-xl bg-amber-50/80 dark:bg-amber-950/30 border border-amber-200/90 dark:border-amber-800/60 text-xs text-amber-900 dark:text-amber-200">
-              <div class="flex items-center gap-1.5 font-bold mb-1 text-amber-800 dark:text-amber-300">
-                <i class="bi bi-exclamation-triangle-fill text-amber-600 dark:text-amber-400"></i>
-                <span>Aviso Importante</span>
+          <!-- Coluna 3: Diretrizes de IA no IFSC • OT nº 04/2025 (Direita) -->
+          <div class="lg:col-span-4 p-5 rounded-2xl bg-gray-50/70 dark:bg-[#161f30]/60 border border-gray-200/80 dark:border-gray-800 flex flex-col justify-between space-y-4">
+            <div>
+              <div class="flex items-center gap-2 mb-2">
+                <span class="w-6 h-6 rounded-lg bg-emerald-700 text-white flex items-center justify-center text-xs shrink-0 shadow-2xs">
+                  <i class="bi bi-shield-check"></i>
+                </span>
+                <h4 class="font-bold text-sm text-gray-900 dark:text-white">Diretrizes de IA (OT 04/2025)</h4>
               </div>
-              <p class="text-[11px] leading-relaxed text-amber-900/90 dark:text-amber-200/90">
-                Resultados de Inteligência Artificial (IA) devem ser revisados por um humano antes da publicação para garantir a precisão e a adequação das informações antes de qualquer uso oficial.
+              <p class="text-[11px] text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+                Elaborada pela CGD-DTIC-PRODIN, orienta o uso ético, seguro e responsável de IA generativa no IFSC, em conformidade com a LGPD e o ECA Digital.
               </p>
-            </div>
-
-            <!-- Caráter Experimental & Licenciamento -->
-            <div class="p-3 rounded-xl bg-blue-50/80 dark:bg-blue-950/30 border border-blue-200/90 dark:border-blue-800/60 text-xs text-blue-900 dark:text-blue-200">
-              <div class="flex items-center gap-1.5 font-bold mb-1 text-blue-800 dark:text-blue-300">
-                <i class="bi bi-info-circle-fill text-blue-600 dark:text-blue-400"></i>
-                <span>Caráter Experimental & Licenciamento</span>
-              </div>
-              <p class="text-[11px] leading-relaxed text-blue-900/90 dark:text-blue-200/90">
-                Este portal utiliza o Google AI Studio sob licença educacional do Google Workspace. Todos os aplicativos sugeridos e integrados devem seguir estritamente as diretrizes deste licenciamento.
-              </p>
-              <p class="text-[10px] font-semibold text-blue-800 dark:text-blue-300 mt-1.5 pt-1.5 border-t border-blue-200/60 dark:border-blue-800/40">
-                Aviso Importante: Esta ferramenta é um desenvolvimento experimental.
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Citação Oficial: Orientação Técnica nº 04/2025 & Catálogo de Ferramentas de IA (Conformidade Institucional) -->
-        <div class="mt-8 pt-6 border-b border-gray-100 dark:border-gray-800/80 pb-6">
-          <div class="p-5 rounded-2xl bg-gray-50/80 dark:bg-gray-800/40 border border-gray-200/80 dark:border-gray-700/60 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-5">
-            <div class="flex items-start gap-3.5 flex-1">
-              <span class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 flex items-center justify-center shrink-0 text-base mt-0.5 border border-emerald-300/60 dark:border-emerald-700/60">
-                <i class="bi bi-shield-check"></i>
-              </span>
-              <div class="space-y-2">
-                <div class="flex items-center gap-2 flex-wrap">
-                  <span class="text-sm font-bold text-gray-900 dark:text-white">Orientação Técnica nº 04/2025 &bull; Diretrizes para Uso de Inteligência Artificial no IFSC</span>
-                  <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-950/70 text-[#247a30] dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800/60">Vigente</span>
-                </div>
-                <p class="text-xs text-gray-600 dark:text-gray-400 leading-relaxed">
-                  Elaborada pela CGD-DTIC-PRODIN, a OT 04/2025 orienta o uso ético, seguro e responsável de ferramentas de IA generativa por servidores e estudantes, em conformidade com a LGPD e o ECA Digital.
+              <div class="p-2.5 rounded-xl bg-white/90 dark:bg-gray-900/60 border border-gray-200/80 dark:border-gray-700/60 text-[11px] text-gray-700 dark:text-gray-300 space-y-1 shadow-2xs">
+                <p class="italic text-[10.5px] leading-snug">
+                  &ldquo;A CGD manterá o catálogo de ferramentas de IA sugeridas com licenciamento vinculado ao IFSC.&rdquo;
                 </p>
-                <div class="p-3.5 rounded-xl bg-white dark:bg-gray-900/60 border border-gray-200/90 dark:border-gray-700/70 text-xs text-gray-700 dark:text-gray-300 space-y-1.5 shadow-2xs">
-                  <p class="italic font-medium text-gray-800 dark:text-gray-200 leading-relaxed">
-                    &ldquo;A Coordenadoria de Gestão de Dados (CGD) manterá um Catálogo de Ferramentas de IA Sugeridas que possuam algum tipo de licenciamento vinculado ao IFSC, detalhando as soluções sugeridas e suas formas de acesso institucional mais seguro.&rdquo;
-                  </p>
-                  <div class="pt-1.5 flex items-center gap-2 flex-wrap">
-                    <a href="https://docs.google.com/spreadsheets/d/1cF_o-470dsuXmrYMyG8minQI2ku584pU0dtszoTZIdg/edit?gid=1479790672#gid=1479790672" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 font-bold text-[#32a041] dark:text-emerald-400 hover:underline">
-                      <i class="bi bi-file-earmark-spreadsheet-fill text-emerald-600 dark:text-emerald-400 text-sm"></i>
-                      <span>Acessar Planilha Oficial do Catálogo de Ferramentas de IA Homologadas</span>
-                      <i class="bi bi-box-arrow-up-right text-[10px]"></i>
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
-            <div class="shrink-0 flex flex-col sm:flex-row lg:flex-col gap-2 w-full lg:w-auto">
-              <a href="https://www.ifsc.edu.br/documents/d/acesso-a-informacao/orientacao_tecnica_n4_de_2025_-_inteligencia_artificial_assinado" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-xs border border-gray-200 dark:border-gray-700 transition-colors inline-flex items-center justify-center gap-2 shadow-2xs">
-                <i class="bi bi-file-earmark-pdf-fill text-sm text-[#c8191e]"></i>
-                <span>OT nº 04/2025 (PDF Assinado)</span>
-                <i class="bi bi-box-arrow-up-right text-[10px] text-gray-400"></i>
+            <div class="pt-3 border-t border-gray-200/70 dark:border-gray-700/60 flex items-center gap-2">
+              <a href="https://www.ifsc.edu.br/documents/d/acesso-a-informacao/orientacao_tecnica_n4_de_2025_-_inteligencia_artificial_assinado" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold text-[11px] transition-colors border border-gray-200 dark:border-gray-700 shadow-2xs">
+                <i class="bi bi-file-earmark-pdf-fill text-[#c8191e] text-xs"></i>
+                <span>PDF da OT 04</span>
+                <i class="bi bi-box-arrow-up-right text-[9px] text-gray-400"></i>
+              </a>
+              <a href="https://docs.google.com/spreadsheets/d/1cF_o-470dsuXmrYMyG8minQI2ku584pU0dtszoTZIdg/edit?gid=1479790672#gid=1479790672" target="_blank" rel="noopener noreferrer" class="flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-2 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 hover:bg-emerald-100 dark:hover:bg-emerald-900/60 text-[#247a30] dark:text-emerald-300 font-bold text-[11px] transition-colors border border-emerald-200/70 dark:border-emerald-800/70 shadow-2xs">
+                <i class="bi bi-file-earmark-spreadsheet-fill text-xs"></i>
+                <span>Planilha Oficial</span>
+                <i class="bi bi-box-arrow-up-right text-[9px]"></i>
               </a>
             </div>
           </div>
@@ -709,23 +755,23 @@
             <span>&copy; <span id="year"></span> Instituto Federal de Santa Catarina</span>
             <span class="text-gray-300 dark:text-gray-700">|</span>
             <a href="https://www.ifsc.edu.br/documents/d/acesso-a-informacao/orientacao_tecnica_n4_de_2025_-_inteligencia_artificial_assinado" target="_blank" rel="noopener noreferrer" class="hover:text-[#32a041] dark:hover:text-emerald-400 transition-colors font-bold underline">
-              OT nº 04/2025 (Diretrizes de IA)
+              OT nº 04/2025
             </a>
             <span class="text-gray-300 dark:text-gray-700">|</span>
             <a href="https://docs.google.com/spreadsheets/d/1cF_o-470dsuXmrYMyG8minQI2ku584pU0dtszoTZIdg/edit?gid=1479790672#gid=1479790672" target="_blank" rel="noopener noreferrer" class="hover:text-[#32a041] dark:hover:text-emerald-400 transition-colors font-medium">
-              Catálogo de IA (Planilha)
+              Catálogo de IA
             </a>
             <span class="text-gray-300 dark:text-gray-700">|</span>
             <a href="./termo/" class="hover:text-[#32a041] dark:hover:text-emerald-400 transition-colors font-semibold">
-              Termos de Consentimento (LGPD/ECA)
+              Termos de Uso (LGPD/ECA)
             </a>
             <span class="text-gray-300 dark:text-gray-700">|</span>
             <a href="https://www.ifsc.edu.br/web/portal-do-servidor/gestao-de-dados" target="_blank" rel="noopener noreferrer" class="hover:text-[#32a041] dark:hover:text-emerald-400 transition-colors">
-              Gestão de Dados (CGD)
+              Gestão de Dados
             </a>
             <span class="text-gray-300 dark:text-gray-700">|</span>
             <a href="https://www.ifsc.edu.br/politica-de-privacidade" target="_blank" rel="noopener noreferrer" class="hover:text-[#32a041] dark:hover:text-emerald-400 transition-colors">
-              Política de Privacidade
+              Privacidade
             </a>
           </div>
           <div class="flex items-center gap-2 font-medium">
