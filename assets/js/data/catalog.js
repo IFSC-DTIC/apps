@@ -437,7 +437,7 @@ export const googleEduCategories = [
         name: "Flow Music (MusicFX)",
         url: "https://www.flowmusic.app/",
         badge: "Música & Áudio IA",
-        iconUrl: `${CDN_ICONS}/google-gemini.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-gemini.png",
         description: "Criação e exploração musical generativa com IA do Google Labs e DeepMind a partir de prompts em linguagem natural."
       },
       {
@@ -459,7 +459,7 @@ export const googleEduCategories = [
         name: "Ditado e Digitação por Voz (Docs)",
         url: "https://docs.google.com/",
         badge: "Acessibilidade & Fala",
-        iconUrl: `${CDN_ICONS}/google-docs.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-docs.png",
         ot04_status: "Homologado OT 04",
         safety_rating: "LGPD OK",
         description: "Transcrição avançada de fala para texto no Google Docs com a conta institucional IFSC. Ideal para ditar relatórios e projetos de inclusão.",
@@ -470,7 +470,7 @@ export const googleEduCategories = [
         name: "Resumos Automáticos por IA (Docs/Chat)",
         url: "https://docs.google.com/",
         badge: "Síntese de Texto",
-        iconUrl: `${CDN_ICONS}/google-docs.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-docs.png",
         ot04_status: "Homologado OT 04",
         safety_rating: "LGPD OK",
         description: "Geração de resumos executivos automáticos no topo de documentos longos e recapitulações didáticas em canais do Google Chat.",
@@ -481,7 +481,7 @@ export const googleEduCategories = [
         name: "Legendas e Transcrição em Tempo Real (Meet)",
         url: "https://meet.google.com/",
         badge: "Legendas & Inclusão",
-        iconUrl: `${CDN_ICONS}/google-meet.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google-meet.png",
         ot04_status: "Homologado OT 04",
         safety_rating: "LGPD OK",
         description: "Legendas instantâneas com IA e tradução simultânea durante aulas, bancas de TCC e reuniões pedagógicas virtuais.",
@@ -492,7 +492,7 @@ export const googleEduCategories = [
         name: "Smart Compose e Respostas Inteligentes (Gmail)",
         url: "https://mail.google.com/",
         badge: "Comunicação Formal",
-        iconUrl: `${CDN_ICONS}/gmail.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/gmail.png",
         ot04_status: "Homologado OT 04",
         safety_rating: "LGPD OK",
         description: "Preenchimento preditivo de texto no e-mail institucional IFSC para agilizar respostas pedagógicas e comunicação formal.",
@@ -566,7 +566,7 @@ export const googleEduCategories = [
         name: "Google Labs (Hub Experimental)",
         url: "https://labs.google/",
         badge: "Hub Experimental",
-        iconUrl: `${CDN_ICONS}/google.png`,
+        iconUrl: "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png",
         description: "Hub de experimentos de IA (ImageFX, VideoFX, MusicFX, Pomelli, Opal). Nota: Nem todas as ferramentas estão disponíveis na licença IFSC ou podem exigir lista de espera."
       },
       {
@@ -707,12 +707,12 @@ export const microsoftCategories = [
       },
       {
         id: "ms-onedrive",
-        name: "Microsoft OneDrive (1 TB)",
+        name: "Microsoft OneDrive (100 GB)",
         url: "https://onedrive.live.com/",
-        badge: "Nuvem 1 TB",
+        badge: "Nuvem 100 GB",
         platform: "microsoft",
         iconUrl: `${CDN_ICONS}/microsoft-onedrive.png`,
-        description: "1 TB de armazenamento online gratuito institucional com pesquisa inteligente em PDFs, imagens e arquivos."
+        description: "100 GB de armazenamento online gratuito para arquivos acadêmicos (limite oficial do plano gratuito A1 desde 2024)."
       },
       {
         id: "ms-powerbi",
@@ -736,6 +736,273 @@ export const microsoftCategories = [
   }
 ];
 
+
+// Coleção de Parcerias Oficiais & Oportunidades Estudantis
+export const defaultPartnershipsCategories = [
+  {
+    "name": "IA & Produtividade",
+    "slug": "ia-produtividade",
+    "iconKey": "workspace",
+    "apps": [
+      {
+        "id": "partner-gemini-advanced",
+        "name": "Google AI Pro (Gemini Advanced)",
+        "url": "https://gemini.google/students/",
+        "iconUrl": "https://www.gstatic.com/images/branding/productlogos/gemini/v1/web-96dp/logo_gemini_color_1x_web_96dp.png",
+        "badge": "Gratuito @edu.br",
+        "category": "IA & Produtividade",
+        "description": "Gemini 2.5 Pro: Modelo de IA mais avançado do Google com Deep Research. Geração de Vídeo: Acesso ao Veo 3 Fast, Flow e Whisk (1.000 créditos/mês). NotebookLM: 5x mais resumos em áudio e mais cadernos de estudo. Gemini Integrado no Gmail, Docs e Vids. Inclui 2 TB de armazenamento em nuvem.",
+        "opportunity_plan": "GRATUITO para estudantes verificados através de e-mail institucional @edu.br / @aluno.ifsc.edu.br",
+        "ot04_status": "Parceria Oficial Estudantes",
+        "safety_rating": "Google Education",
+        "tags": [
+          "google",
+          "gemini",
+          "gemini advanced",
+          "ia pro",
+          "veo",
+          "notebooklm",
+          "2tb",
+          "estudantes",
+          "gratuito",
+          "deep research"
+        ],
+        "access_scope": "estudante_edubr",
+        "domain_requirement": "Gratuito para estudantes com e-mail institucional (@aluno.ifsc.edu.br ou @edu.br)"
+      },
+      {
+        "id": "partner-ms-copilot",
+        "name": "Microsoft Copilot para Estudantes",
+        "url": "https://www.microsoft.com/pt-br/education/students",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-copilot.png",
+        "badge": "Licença A1 / Gratuito",
+        "category": "IA & Produtividade",
+        "description": "Assistente de IA Copilot vinculado ao Microsoft 365: Apoio na pesquisa acadêmica, redação e estruturação de trabalhos, criação de conteúdo e resumos. Totalmente integrado ao ecossistema Microsoft (Word, Excel, PowerPoint e Teams).",
+        "opportunity_plan": "Versão gratuita e acesso ampliado para instituições de ensino via licença Microsoft 365 Education A1",
+        "ot04_status": "Homologado IFSC",
+        "safety_rating": "Microsoft A1",
+        "tags": [
+          "microsoft",
+          "copilot",
+          "office 365",
+          "a1",
+          "word",
+          "excel",
+          "estudantes",
+          "gratuito"
+        ],
+        "access_scope": "comunidade_ifsc",
+        "domain_requirement": "Disponível para servidores (@ifsc.edu.br) e estudantes (@aluno.ifsc.edu.br)"
+      }
+    ]
+  },
+  {
+    "name": "Desenvolvimento & Pesquisa",
+    "slug": "dev-pesquisa",
+    "iconKey": "especialistas",
+    "apps": [
+      {
+        "id": "partner-github-copilot",
+        "name": "GitHub Copilot",
+        "url": "https://education.github.com/pack",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/github-copilot.png",
+        "badge": "GitHub Pack Gratuito",
+        "category": "Desenvolvimento & Pesquisa",
+        "description": "Assistente de programação com inteligência artificial pioneiro mundial. Sugere código em tempo real no editor (VS Code, JetBrains), autocompletar inteligente de blocos inteiros, depuração e aceleração máxima de desenvolvimento de software.",
+        "opportunity_plan": "GRATUITO para estudantes via GitHub Student Developer Pack",
+        "ot04_status": "Parceria Oficial Estudantes",
+        "safety_rating": "GitHub Education",
+        "tags": [
+          "github",
+          "copilot",
+          "programação",
+          "código",
+          "desenvolvimento",
+          "vs code",
+          "gratuito",
+          "student pack"
+        ],
+        "access_scope": "estudante_verificado",
+        "domain_requirement": "Exige verificação como estudante no GitHub Education com comprovante ou e-mail escolar"
+      },
+      {
+        "id": "partner-perplexity-pro",
+        "name": "Perplexity Pro (Parceria RNP)",
+        "url": "https://rnpmais.rnp.br/perplexity-pro",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/perplexity.png",
+        "badge": "1 Ano Pro Grátis (RNP)",
+        "category": "Desenvolvimento & Pesquisa",
+        "description": "Motor de busca conversacional com IA de última geração. Respostas diretas e sintetizadas com fontes e citações acadêmicas explícitas, modo de pesquisa focado Pro (Pro Search), upload de múltiplos arquivos e PDFs para análise científica profunda.",
+        "opportunity_plan": "Assinatura de 1 ano do plano Perplexity Pro para estudantes e comunidade acadêmica via RNP+",
+        "ot04_status": "Parceria RNP / Rede Federal",
+        "safety_rating": "RNP Verificado",
+        "tags": [
+          "perplexity",
+          "pesquisa",
+          "busca",
+          "rnp",
+          "artigos",
+          "pdf",
+          "1 ano pro",
+          "gratuito",
+          "pro search"
+        ],
+        "access_scope": "estudante_rnp",
+        "domain_requirement": "Ativação no portal RNP+ com credenciais da Comunidade Acadêmica Federada (CAFe / IFSC)"
+      }
+    ]
+  },
+  {
+    "name": "Design & Criatividade",
+    "slug": "design-criatividade",
+    "iconKey": "professores",
+    "apps": [
+      {
+        "id": "partner-canva-edu",
+        "name": "Canva para Educação",
+        "url": "https://www.canva.com/education/",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/canva.png",
+        "badge": "Canva Pro Gratuito",
+        "category": "Design & Criatividade",
+        "description": "Acesso total gratuito a todos os recursos premium do Canva Pro para alunos e professores: ferramentas de IA generativa como Magic Write (geração e reescrita de texto), Magic Media (geração de imagem e vídeo), Magic Switch e removedor de fundo instantâneo.",
+        "opportunity_plan": "GRATUITO (todos os recursos do Canva Pro) para estudantes e professores",
+        "ot04_status": "Parceria Oficial Estudantes",
+        "safety_rating": "Canva Education",
+        "tags": [
+          "canva",
+          "design",
+          "apresentações",
+          "imagens",
+          "magic write",
+          "magic media",
+          "gratuito",
+          "professores",
+          "alunos"
+        ],
+        "access_scope": "estudante_professor",
+        "domain_requirement": "Validação rápida com e-mail institucional de ensino"
+      },
+      {
+        "id": "partner-adobe-cc",
+        "name": "Adobe Creative Cloud + Firefly",
+        "url": "https://www.adobe.com/br/creativecloud/buy/students.html",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/adobe-creative-cloud.png",
+        "badge": "60%+ Desconto",
+        "category": "Design & Criatividade",
+        "description": "IA Generativa Adobe Firefly integrada a toda a suíte criativa (Photoshop, Illustrator, Premiere Pro, InDesign, After Effects). Geração e edição generativa de imagens, efeitos de texto vetoriais e ferramentas de nível industrial para estudantes.",
+        "opportunity_plan": "Desconto especial de mais de 60% para estudantes e professores em todo o pacote Creative Cloud",
+        "ot04_status": "Desconto Educacional",
+        "safety_rating": "Adobe Education",
+        "tags": [
+          "adobe",
+          "firefly",
+          "photoshop",
+          "illustrator",
+          "premiere",
+          "design",
+          "criatividade",
+          "desconto 60%"
+        ],
+        "access_scope": "estudante_professor",
+        "domain_requirement": "Comprovação de matrícula estudantil na assinatura"
+      }
+    ]
+  },
+  {
+    "name": "Escrita & Organização",
+    "slug": "escrita-organizacao",
+    "iconKey": "alunos",
+    "apps": [
+      {
+        "id": "partner-notion-ai",
+        "name": "Notion AI para Estudantes",
+        "url": "https://www.notion.so/students",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/notion.png",
+        "badge": "Notion Plus Gratuito",
+        "category": "Escrita & Organização",
+        "description": "Plataforma de anotações e organização com assistente de escrita com IA nativo: sintetiza e resume aulas, gera estruturas de trabalhos e artigos, traduz conteúdos, responde a dúvidas sobre as suas anotações e automatiza cronogramas de estudo.",
+        "opportunity_plan": "Plano GRATUITO (Notion Plus) para estudantes e educadores",
+        "ot04_status": "Parceria Oficial Estudantes",
+        "safety_rating": "Notion Education",
+        "tags": [
+          "notion",
+          "anotações",
+          "produtividade",
+          "organização",
+          "resumos",
+          "notion plus",
+          "gratuito"
+        ],
+        "access_scope": "estudante_verificado",
+        "domain_requirement": "Cadastro com endereço de e-mail institucional acadêmico"
+      },
+      {
+        "id": "partner-grammarly-edu",
+        "name": "Grammarly Education",
+        "url": "https://www.grammarly.com/edu",
+        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/grammarly.png",
+        "badge": "Desconto / Parceria",
+        "category": "Escrita & Organização",
+        "description": "Revisor de escrita assistido por IA de alta precisão: correção profunda de gramática, ortografia, pontuação, concisão, clareza e ajustes de tom formal para artigos científicos e comunicações internacionais.",
+        "opportunity_plan": "Descontos especiais para estudantes e acesso educacional para instituições de ensino",
+        "ot04_status": "Parceria Educacional",
+        "safety_rating": "Grammarly Education",
+        "tags": [
+          "grammarly",
+          "inglês",
+          "redação",
+          "gramática",
+          "artigos",
+          "revisão",
+          "educacional",
+          "escrita"
+        ],
+        "access_scope": "estudante_docente",
+        "domain_requirement": "Verificação de elegibilidade institucional para estudantes e docentes"
+      }
+    ]
+  }
+];
+
+
+/**
+ * Dedução resiliente de públicos (servidores, alunos, comunidade)
+ */
+export function inferAudiences(app, cat = {}) {
+  if (app.audiences && Array.isArray(app.audiences) && app.audiences.length > 0) {
+    return app.audiences;
+  }
+  const id = (app.id || '').toLowerCase();
+  const tags = (app.tags || []).map(t => String(t).toLowerCase());
+  const slug = (cat.slug || '').toLowerCase();
+
+  const auds = new Set();
+
+  if (slug === 'alunos' || tags.includes('alunos') || tags.includes('estudantes') || id.includes('aluno') || id.includes('pedemeia') || id.includes('sibi') || id.startsWith('partner-') || id.startsWith('p-') || id.startsWith('g-') || id.startsWith('ms-')) {
+    auds.add('alunos');
+  }
+
+  if (slug === 'servidores' || slug === 'professores' || tags.includes('servidores') || tags.includes('professores') || id.includes('serv') || id.includes('siads') || id.includes('ripd') || id.includes('rsctae') || id.includes('dgp') || id.includes('cgd') || id.includes('srp') || id.startsWith('g-') || id.startsWith('ms-') || id.startsWith('partner-') || id.startsWith('p-')) {
+    auds.add('servidores');
+  }
+
+  const publicTools = [
+    'guardiao', 'chatbot', 'sezio', 'lardic', 'processo', 'bpmn-svg', 'manual',
+    'g-gemini', 'g-notebook', 'g-ai-studio', 'g-stitch', 'g-flowmusic', 'g-vids',
+    'g-colab', 'g-antigravity-2', 'g-antigravity-ide', 'g-antigravity-cli', 'g-jules',
+    'g-labs-hub', 'g-opal', 'g-pomelli', 'g-workspace-studio', 'ms-bing', 'ms-edge'
+  ];
+  if (app.access_scope === 'publico_gmail' || tags.includes('publico') || slug === 'lgpd' || publicTools.includes(id)) {
+    auds.add('comunidade');
+  }
+
+  if (auds.size === 0) {
+    auds.add('servidores');
+  }
+
+  return Array.from(auds);
+}
+
 // Utilitário para achatar coleções
 export function flattenCategories(categories) {
   const list = [];
@@ -746,7 +1013,8 @@ export function flattenCategories(categories) {
         ...app,
         categoryName: cat.name,
         categorySlug: cat.slug,
-        iconKey: cat.iconKey || app.iconKey
+        iconKey: cat.iconKey || app.iconKey,
+        audiences: inferAudiences(app, cat)
       });
     });
   });
@@ -760,11 +1028,13 @@ export async function loadCatalog() {
   const ts = Date.now();
   let toolsCategories = defaultToolsCategories;
   let gemsCategories = defaultGemsCategories;
+  let partnershipsCategories = defaultPartnershipsCategories;
 
   try {
-    const [appsRes, agentsRes] = await Promise.allSettled([
+    const [appsRes, agentsRes, partsRes] = await Promise.allSettled([
       fetch('./apps.json?v=' + ts).then(r => r.ok ? r.json() : null),
-      fetch('./agents.json?v=' + ts).then(r => r.ok ? r.json() : null)
+      fetch('./agents.json?v=' + ts).then(r => r.ok ? r.json() : null),
+      fetch('./partnerships.json?v=' + ts).then(r => r.ok ? r.json() : null)
     ]);
 
     if (appsRes.status === 'fulfilled' && Array.isArray(appsRes.value) && appsRes.value.length > 0) {
@@ -772,6 +1042,9 @@ export async function loadCatalog() {
     }
     if (agentsRes.status === 'fulfilled' && Array.isArray(agentsRes.value) && agentsRes.value.length > 0) {
       gemsCategories = agentsRes.value;
+    }
+    if (partsRes.status === 'fulfilled' && Array.isArray(partsRes.value) && partsRes.value.length > 0) {
+      partnershipsCategories = partsRes.value;
     }
   } catch (_) {
     // Fallback garantido
@@ -781,9 +1054,10 @@ export async function loadCatalog() {
   const allGems = flattenCategories(gemsCategories);
   const allGoogle = flattenCategories(googleEduCategories);
   const allMicrosoft = flattenCategories(microsoftCategories);
+  const allPartnerships = flattenCategories(partnershipsCategories);
 
   const appMap = {};
-  [...allTools, ...allGems, ...allGoogle, ...allMicrosoft].forEach(app => {
+  [...allTools, ...allGems, ...allGoogle, ...allMicrosoft, ...allPartnerships].forEach(app => {
     appMap[app.id] = app;
   });
 
@@ -792,10 +1066,12 @@ export async function loadCatalog() {
     gemsCategories,
     googleEduCategories,
     microsoftCategories,
+    partnershipsCategories,
     allTools,
     allGems,
     allGoogle,
     allMicrosoft,
+    allPartnerships,
     appMap
   };
 }

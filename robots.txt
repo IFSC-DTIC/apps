@@ -1,3 +1,35 @@
+# ==============================================================================
+# Portal de Inteligência Artificial e Aplicações - IFSC
+# Diretoria de Tecnologia da Informação e Comunicação (DTIC/CGD)
+# Orientação Técnica nº 04/2025 • Produção em GitHub Pages
+# ==============================================================================
+
 User-agent: *
 Allow: /
+Allow: /assets/
+Allow: /public/
+Allow: /termo/
+
+# Bloqueio de rotas internas, diagnóstico e arquivos de controle
+Disallow: /__client_log
+Disallow: /scratch/
+Disallow: /.git/
+Disallow: /apps_ifsc_live.html
+
+# Regras explícitas para robôs de busca e indexação
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /public/
+Allow: /assets/
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Host Canônico e Mapa do Site (Sitemap)
+Host: https://apps.ifsc.edu.br
 Sitemap: https://apps.ifsc.edu.br/sitemap.xml

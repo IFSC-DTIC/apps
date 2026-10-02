@@ -14,7 +14,21 @@
         "safety_rating": "LGPD OK",
         "access_scope": "exclusivo_ifsc",
         "domain_requirement": "Exclusivo @ifsc.edu.br e @aluno.ifsc.edu.br (Não abre com @gmail.com)",
-        "tags": ["sibi", "biblioteca", "abnt", "sophia", "livros", "acervo", "servidores", "ot04", "exclusivo-ifsc"]
+        "tags": [
+          "sibi",
+          "biblioteca",
+          "abnt",
+          "sophia",
+          "livros",
+          "acervo",
+          "servidores",
+          "ot04",
+          "exclusivo-ifsc"
+        ],
+        "audiences": [
+          "servidores",
+          "alunos"
+        ]
       },
       {
         "id": "agent-srp",
@@ -26,7 +40,19 @@
         "safety_rating": "Apoio Técnico",
         "access_scope": "exclusivo_ifsc",
         "domain_requirement": "Exclusivo @ifsc.edu.br e @aluno.ifsc.edu.br (Não abre com @gmail.com)",
-        "tags": ["licitações", "compras", "sipac", "arp", "lei 14.133", "servidores", "ot04", "exclusivo-ifsc"]
+        "tags": [
+          "licitações",
+          "compras",
+          "sipac",
+          "arp",
+          "lei 14.133",
+          "servidores",
+          "ot04",
+          "exclusivo-ifsc"
+        ],
+        "audiences": [
+          "servidores"
+        ]
       },
       {
         "id": "agent-dgp",
@@ -38,7 +64,19 @@
         "safety_rating": "Apoio Técnico",
         "access_scope": "exclusivo_ifsc",
         "domain_requirement": "Exclusivo @ifsc.edu.br e @aluno.ifsc.edu.br (Não abre com @gmail.com)",
-        "tags": ["dgp", "gestão de pessoas", "carreira", "progressão", "capacitação", "servidores", "ot04", "exclusivo-ifsc"]
+        "tags": [
+          "dgp",
+          "gestão de pessoas",
+          "carreira",
+          "progressão",
+          "capacitação",
+          "servidores",
+          "ot04",
+          "exclusivo-ifsc"
+        ],
+        "audiences": [
+          "servidores"
+        ]
       },
       {
         "id": "agent-cgd",
@@ -50,7 +88,19 @@
         "safety_rating": "LGPD OK",
         "access_scope": "exclusivo_ifsc",
         "domain_requirement": "Exclusivo @ifsc.edu.br e @aluno.ifsc.edu.br (Não abre com @gmail.com)",
-        "tags": ["cgd", "governança", "dtic", "ti", "dados", "ot04", "servidores", "exclusivo-ifsc"]
+        "tags": [
+          "cgd",
+          "governança",
+          "dtic",
+          "ti",
+          "dados",
+          "ot04",
+          "servidores",
+          "exclusivo-ifsc"
+        ],
+        "audiences": [
+          "servidores"
+        ]
       }
     ]
   },

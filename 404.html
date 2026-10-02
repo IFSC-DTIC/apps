@@ -114,11 +114,11 @@
   <header class="w-full border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-[#121824]/80 backdrop-blur-md py-3 px-4 sm:px-6">
     <div class="max-w-4xl mx-auto flex items-center justify-between">
       <a href="./" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
-        <img src="./public/img/ifsc-logo-vertical.svg" alt="IFSC" class="h-10 w-auto object-contain block dark:hidden" onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/0ce9691b-69b7-4c28-98bc-b2cf276707a0?t=1524147774000';" />
-        <img src="./public/img/ifsc-logo-vertical-white.svg" alt="IFSC" class="h-10 w-auto object-contain hidden dark:block" onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/0ce9691b-69b7-4c28-98bc-b2cf276707a0?t=1524147774000';" />
+        <img src="./public/img/ifsc-logo-vertical.svg" alt="IFSC" class="h-10 w-auto object-contain block dark:hidden" onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-colorido.png';" />
+        <img src="./public/img/ifsc-logo-vertical-white.svg" alt="IFSC" class="h-10 w-auto object-contain hidden dark:block" onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-branco.png';" />
         <div>
-          <span class="text-xs font-black tracking-wider uppercase text-gray-900 dark:text-white block">Portal de IA e Aplicações</span>
-          <span class="text-[10px] text-gray-500 dark:text-gray-400 block">DTIC &bull; Coordenadoria de Gestão de Dados (CGD)</span>
+          <span class="text-xs font-black tracking-wider uppercase text-gray-900 dark:text-white block">Portal de IA do IFSC</span>
+          <span class="text-[10px] text-gray-500 dark:text-gray-400 block">Ferramentas que usam Inteligência Artificial Generativa</span>
         </div>
       </a>
       <a href="./" class="text-xs font-bold text-[#32a041] dark:text-emerald-400 hover:underline flex items-center gap-1">
@@ -270,7 +270,17 @@
         'siads': { id: 'siads', tab: 'tools' },
         'padronizacao': { id: 'padronizacao', tab: 'tools' },
         'rsctae': { id: 'rsctae', tab: 'tools' },
-        'processo': { id: 'processo', tab: 'tools' }
+        'processo': { id: 'processo', tab: 'tools' },
+        'canva': { id: 'partner-canva-edu', tab: 'partnerships' },
+        'githubcopilot': { id: 'partner-github-copilot', tab: 'partnerships' },
+        'github-copilot': { id: 'partner-github-copilot', tab: 'partnerships' },
+        'notion': { id: 'partner-notion-ai', tab: 'partnerships' },
+        'notion-ai': { id: 'partner-notion-ai', tab: 'partnerships' },
+        'grammarly': { id: 'partner-grammarly-edu', tab: 'partnerships' },
+        'adobe': { id: 'partner-adobe-cc', tab: 'partnerships' },
+        'firefly': { id: 'partner-adobe-cc', tab: 'partnerships' },
+        'perplexity': { id: 'partner-perplexity-pro', tab: 'partnerships' },
+        'perplexity-pro': { id: 'partner-perplexity-pro', tab: 'partnerships' }
       };
 
       const params = new URLSearchParams(window.location.search);
@@ -294,6 +304,9 @@
           detectedApp = second || 'all';
         } else if (['ms', 'microsoft', 'm365'].includes(first)) {
           detectedTab = 'microsoft';
+          detectedApp = second || 'all';
+        } else if (['parcerias', 'partnerships', 'estudante', 'estudantes', 'oportunidades'].includes(first)) {
+          detectedTab = 'partnerships';
           detectedApp = second || 'all';
         } else if (['lgpd', 'bpmn', 'siads', 'rsctae', 'processos', 'ferramentas'].includes(first)) {
           detectedTab = 'tools';
@@ -342,14 +355,17 @@
         return [];
       };
 
-      Promise.all([fetchJson('apps.json'), fetchJson('agents.json')])
-        .then(([appsData, agentsData]) => {
+      Promise.all([fetchJson('apps.json'), fetchJson('agents.json'), fetchJson('partnerships.json')])
+        .then(([appsData, agentsData, partsData]) => {
           const catalog = [];
           if (Array.isArray(appsData)) {
             appsData.forEach(c => (c.apps || []).forEach(a => catalog.push({ ...a, iconKey: c.iconKey || a.iconKey })));
           }
           if (Array.isArray(agentsData)) {
             agentsData.forEach(c => (c.apps || []).forEach(a => catalog.push({ ...a, iconKey: c.iconKey || a.iconKey })));
+          }
+          if (Array.isArray(partsData)) {
+            partsData.forEach(c => (c.apps || []).forEach(a => catalog.push({ ...a, iconKey: c.iconKey || a.iconKey })));
           }
 
           const targetApp = catalog.find(a => 
@@ -387,11 +403,36 @@
               }
             };
 
-            document.getElementById('modal-app-icon-container').innerHTML = icons[targetApp.iconKey] || icons.bpmn;
+            if (targetApp.iconUrl) {
+              document.getElementById('modal-app-icon-container').innerHTML = `<div class="w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center"><img src="${targetApp.iconUrl}" class="w-10 h-10 object-contain" alt="${targetApp.name}"></div>`;
+            } else {
+              document.getElementById('modal-app-icon-container').innerHTML = icons[targetApp.iconKey] || icons.bpmn;
+            }
 
             const isGem = targetApp.id.startsWith('agent-') || targetApp.access_scope === 'exclusivo_ifsc';
             const complianceBox = document.getElementById('modal-compliance-box');
-            if (isGem) {
+            if (targetApp.opportunity_plan) {
+              complianceBox.innerHTML = `
+                <div class="w-full bg-amber-50 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/80 rounded-2xl p-3.5 text-left flex items-start gap-2.5">
+                  <span class="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center text-xs shrink-0 mt-0.5">
+                    <i class="bi bi-mortarboard-fill"></i>
+                  </span>
+                  <div>
+                    <div class="flex items-center gap-1.5 flex-wrap">
+                      <strong class="font-extrabold text-xs text-amber-950 dark:text-amber-100">Oportunidade para Estudantes</strong>
+                      <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 uppercase">${targetApp.badge || 'Benefício'}</span>
+                    </div>
+                    <p class="mt-1 text-xs text-amber-900 dark:text-amber-200 font-bold leading-relaxed">
+                      ${targetApp.opportunity_plan}
+                    </p>
+                    <p class="mt-1 text-[11px] text-amber-800 dark:text-amber-300 flex items-center gap-1">
+                      <i class="bi bi-check-circle-fill text-amber-600"></i>
+                      <span>${targetApp.domain_requirement || 'Acesso para estudantes com e-mail institucional acadêmico'}</span>
+                    </p>
+                  </div>
+                </div>
+              `;
+            } else if (isGem) {
               complianceBox.innerHTML = `
                 <div class="w-full bg-purple-50/90 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/70 rounded-2xl p-3.5 text-left flex items-start gap-2.5 text-purple-950 dark:text-purple-200">
                   <span class="w-6 h-6 rounded-lg bg-purple-600 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-2xs">

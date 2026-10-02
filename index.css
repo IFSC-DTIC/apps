@@ -1,0 +1,33 @@
+/* Estilos adicionais para o Portal de Aplicações IFSC */
+.app-item {
+  width: calc(50% - 16px);
+  margin: 8px;
+}
+
+@media (min-width: 640px) {
+  .app-item {
+    width: calc(33.333% - 16px);
+    margin: 8px;
+  }
+}
+
+@media (min-width: 768px) {
+  .app-item {
+    width: calc(25% - 16px);
+    margin: 8px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-item {
+    width: calc(20% - 16px);
+    margin: 8px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .app-item {
+    width: calc(16.666% - 16px);
+    margin: 8px;
+  }
+}

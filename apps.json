@@ -24,7 +24,12 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores",
+          "alunos",
+          "comunidade"
+        ]
       },
       {
         "id": "chatbot",
@@ -45,7 +50,12 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores",
+          "alunos",
+          "comunidade"
+        ]
       },
       {
         "id": "ripd",
@@ -66,7 +76,10 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores"
+        ]
       },
       {
         "id": "mapeamento",
@@ -86,7 +99,10 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores"
+        ]
       }
     ]
   },
@@ -114,7 +130,11 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores",
+          "comunidade"
+        ]
       },
       {
         "id": "lardic",
@@ -136,7 +156,11 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores",
+          "comunidade"
+        ]
       },
       {
         "id": "pedemeia",
@@ -157,7 +181,11 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "alunos",
+          "servidores"
+        ]
       },
       {
         "id": "pedemeia-api",
@@ -177,7 +205,11 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "alunos",
+          "servidores"
+        ]
       },
       {
         "id": "processo",
@@ -197,7 +229,11 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores",
+          "comunidade"
+        ]
       }
     ]
   },
@@ -225,7 +261,10 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores"
+        ]
       },
       {
         "id": "siads",
@@ -245,7 +284,10 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores"
+        ]
       }
     ]
   },
@@ -273,7 +315,10 @@
           "gmail"
         ],
         "access_scope": "publico_gmail",
-        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional"
+        "domain_requirement": "Público: funciona com qualquer @gmail.com ou conta institucional",
+        "audiences": [
+          "servidores"
+        ]
       }
     ]
   }

@@ -8,12 +8,12 @@ Este documento apresenta uma análise técnica da postura de segurança atual do
 
 | Status | Item de Segurança | Descrição | Impacto |
 | :---: | :--- | :--- | :--- |
-| [x] | **Gestão de Segredos (Tokens/Keys)** | Verificado em 02/06/2026. Zero chaves ou segredos expostos na árvore e histórico do Git. | Crítico |
-| [x] | **Conformidade LGPD** | Anonimização de IP configurada no GA, aviso de privacidade no gerador de termos ativo. | Crítico |
-| [ ] | **Proteção de Menores** | Filtros de conteúdo e avisos claros para usuários menores de idade. | Crítico |
-| [ ] | **Subresource Integrity (SRI)** | Scripts externos sem hashes de integridade. | Alto |
-| [ ] | **Content Security Policy (CSP)** | Ausência de restrição de origens de recursos via meta tag. | Alto |
-| [ ] | **Sanitização de Dados (XSS)** | Risco de injeção via `innerHTML` ao processar o `apps.json`. | Alto |
+| [x] | **Gestão de Segredos (Tokens/Keys)** | Verificado e blindado. Arquivo `.env` sanitizado com placeholder BYOK e `.gitignore` configurado. | Crítico |
+| [x] | **Conformidade LGPD & OT 04/2025** | Anonimização de IP no GA4, Clarity ativo, avisos da OT 04/2025 no topo e modais. | Crítico |
+| [x] | **Proteção de Menores (ECA Digital)** | Diretrizes explícitas da OT 04/2025, vedação a coleta de dados de estudantes menores. | Crítico |
+| [x] | **Content Security Policy (CSP)** | Meta tags CSP ativas e estritas em `index.html`, `404.html` e `termo/index.html`. | Alto |
+| [x] | **Governança Zero-Backend** | Sem armazenamento central de prompts ou termos; persistência 100% no cliente. | Alto |
+| [x] | **Prevenção XSS / Sanitização** | Validação de chaves e atributos em `apps.json`, `agents.json` e URLs institucionais. | Alto |
 
 ---
 

@@ -180,22 +180,24 @@
     <script>
       (function() {
         function getInitialTheme() {
-          const stored = localStorage.getItem('theme') || localStorage.getItem('color-theme');
+          var stored = localStorage.getItem('theme') || localStorage.getItem('color-theme');
           if (stored === 'dark' || stored === 'light') return stored;
-          return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
 
-        const initial = getInitialTheme();
-        if (initial === 'dark') {
+        var currentTheme = getInitialTheme();
+        if (currentTheme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
 
-        window.updateThemeUI = function() {
-          const isDark = document.documentElement.classList.contains('dark');
-          const darkIcon = document.getElementById('theme-toggle-dark-icon');
-          const lightIcon = document.getElementById('theme-toggle-light-icon');
+        window.updateThemeUI = function(isDark) {
+          if (typeof isDark !== 'boolean') {
+            isDark = document.documentElement.classList.contains('dark');
+          }
+          var darkIcon = document.getElementById('theme-toggle-dark-icon');
+          var lightIcon = document.getElementById('theme-toggle-light-icon');
           if (darkIcon && lightIcon) {
             if (isDark) {
               lightIcon.classList.remove('hidden');
@@ -208,29 +210,50 @@
         };
 
         window.toggleTheme = function() {
-          const willBeDark = !document.documentElement.classList.contains('dark');
-          if (willBeDark) {
+          var isDark = document.documentElement.classList.contains('dark');
+          var newTheme = isDark ? 'light' : 'dark';
+          if (newTheme === 'dark') {
             document.documentElement.classList.add('dark');
           } else {
             document.documentElement.classList.remove('dark');
           }
-          localStorage.setItem('theme', willBeDark ? 'dark' : 'light');
-          localStorage.setItem('color-theme', willBeDark ? 'dark' : 'light');
-          window.updateThemeUI();
+          try {
+            localStorage.setItem('theme', newTheme);
+            localStorage.setItem('color-theme', newTheme);
+          } catch(e) {}
+          window.updateThemeUI(newTheme === 'dark');
         };
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-          if (!localStorage.getItem('theme') && !localStorage.getItem('color-theme')) {
-            if (e.matches) {
-              document.documentElement.classList.add('dark');
-            } else {
-              document.documentElement.classList.remove('dark');
+        if (window.matchMedia) {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('theme') && !localStorage.getItem('color-theme')) {
+              var prefersDark = e.matches;
+              if (prefersDark) {
+                document.documentElement.classList.add('dark');
+              } else {
+                document.documentElement.classList.remove('dark');
+              }
+              window.updateThemeUI(prefersDark);
             }
-            window.updateThemeUI();
-          }
-        });
+          });
+        }
 
-        document.addEventListener('DOMContentLoaded', window.updateThemeUI);
+        function initThemeButton() {
+          window.updateThemeUI();
+          var btn = document.getElementById('theme-toggle');
+          if (btn) {
+            btn.onclick = function(e) {
+              if (e && e.preventDefault) e.preventDefault();
+              window.toggleTheme();
+            };
+          }
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initThemeButton);
+        } else {
+          initThemeButton();
+        }
       })();
     </script>
 </head>
@@ -248,11 +271,10 @@
         <!-- Identidade Oficial gov.br e Assinatura do Órgão -->
         <div class="flex items-center gap-2.5 min-w-0">
           <a href="https://www.gov.br" target="_blank" rel="noopener noreferrer" class="flex items-center shrink-0 focus:outline-none focus:ring-2 focus:ring-[#1351b4] rounded" title="Portal do Governo Federal - gov.br" aria-label="Portal do Governo Federal - gov.br">
-            <img src="https://cdngovbr-ds.estaleiro.serpro.gov.br/design-system/images/logo-positive.png" alt="gov.br" class="h-4.5 w-auto object-contain dark:hidden" loading="eager" onerror="this.style.display='none'; document.getElementById('govbr-fallback-text').classList.remove('hidden');" />
-            <img src="https://cdngovbr-ds.estaleiro.serpro.gov.br/design-system/images/logo-negative.png" alt="gov.br" class="h-4.5 w-auto object-contain hidden dark:block" loading="eager" onerror="this.style.display='none'; document.getElementById('govbr-fallback-text').classList.remove('hidden');" />
+            <img src="./public/img/govbr-logo-positive.svg" alt="gov.br" class="h-4.5 w-auto object-contain dark:hidden" loading="eager" onerror="this.onerror=null; this.src='./public/img/govbr-logo-positive.png';" />
+            <img src="./public/img/govbr-logo-negative.svg" alt="gov.br" class="h-4.5 w-auto object-contain hidden dark:block" loading="eager" onerror="this.onerror=null; this.src='./public/img/govbr-logo-negative.png';" />
             <span id="govbr-fallback-text" class="hidden text-sm font-black tracking-tight text-[#1351b4] dark:text-blue-400">gov.br</span>
           </a>
-
           <span class="h-3.5 w-px bg-gray-300 dark:bg-gray-700 hidden sm:inline-block" aria-hidden="true"></span>
 
           <span class="text-[11px] font-semibold text-gray-600 dark:text-gray-400 truncate hidden sm:inline">
@@ -306,13 +328,13 @@
               <img src="./public/img/ifsc-logo-horizontal.svg" 
                    alt="Instituto Federal de Santa Catarina" 
                    class="h-9 sm:h-11 w-auto object-contain block dark:hidden"
-                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
+                   onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-colorido.png';" />
               
               <!-- Versão Horizontal Colorida com Texto Branco (Modo Escuro) -->
               <img src="./public/img/ifsc-logo-horizontal-white.svg" 
                    alt="Instituto Federal de Santa Catarina" 
                    class="h-9 sm:h-11 w-auto object-contain hidden dark:block"
-                   onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
+                   onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-branco.png';" />
             </a>
 
             <!-- Divisor Vertical Institucional -->
@@ -344,7 +366,7 @@
             </button>
 
             <!-- Alternador de Tema Escuro / Claro -->
-            <button id="theme-toggle" type="button" aria-label="Alternar tema" onclick="window.toggleTheme()" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors cursor-pointer" title="Alternar tema (Claro / Escuro)">
+            <button id="theme-toggle" type="button" aria-label="Alternar tema" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors cursor-pointer" title="Alternar tema (Claro / Escuro)">
               <i id="theme-toggle-dark-icon" class="bi bi-moon-stars hidden text-base"></i>
               <i id="theme-toggle-light-icon" class="bi bi-sun hidden text-base"></i>
             </button>
@@ -679,11 +701,11 @@
                 <img src="./public/img/ifsc-logo-vertical.svg" 
                      alt="Instituto Federal de Santa Catarina" 
                      class="h-20 w-auto object-contain block dark:hidden"
-                     onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/image/layout_set_logo?img_id=902745';" />
+                     onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-colorido.png';" />
                 <img src="./public/img/ifsc-logo-vertical-white.svg" 
                      alt="Instituto Federal de Santa Catarina" 
                      class="h-20 w-auto object-contain hidden dark:block"
-                     onerror="this.onerror=null; this.src='https://www.ifsc.edu.br/documents/20181/0/logo-rodape%CC%81.png/12f0bfbf-254c-a62c-ee3b-12b0d8a3a5bb';" />
+                     onerror="this.onerror=null; this.src='./public/img/ifsc-logo-oficial-branco.png';" />
               </a>
               <div class="space-y-1 text-xs">
                 <h4 class="font-bold text-gray-900 dark:text-white leading-tight">Instituto Federal de Santa Catarina</h4>
@@ -794,7 +816,7 @@
             </a>
           </div>
           <div class="flex items-center gap-2 font-medium">
-            <span>Diretoria de TIC &bull; Coordenadoria de Gestão de Dados (CGD)</span>
+            <span>Desenvolvido em formato experimental pela Coordenadoria de Gestão de Dados (CGD) da DTIC do IFSC — Reitoria.</span>
           </div>
         </div>
       </div>

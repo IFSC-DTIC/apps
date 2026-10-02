@@ -7,28 +7,65 @@ import { Analytics } from './analytics.js';
 
 export const tabsMeta = {
   tools: {
-    title: "Aplicações Institucionais com IA (ai.studio)",
-    desc: "Aplicativos públicos para automação de processos, auditoria e apoio institucional. Funcionam com qualquer conta @gmail.com pessoal ou institucional do IFSC."
+    title: "Aplicações com IA",
+    desc: "Automação, conformidade e auditoria institucional no IFSC. Acesso público via @gmail ou institucional."
   },
   experts: {
-    title: "Agentes Especialistas (Gems & RAG)",
-    desc: "Assistentes inteligentes no Gemini treinados na documentação e rotinas do IFSC. ATENÇÃO: As Gems funcionam exclusivamente com contas institucionais (@ifsc.edu.br para servidores ou @aluno.ifsc.edu.br para alunos). Não abrem com @gmail.com pessoal."
+    title: "Agentes Especialistas (Gems)",
+    desc: "Assistentes treinados nas rotinas e normas do IFSC. Exclusivo para @ifsc.edu.br e @aluno.ifsc.edu.br."
   },
   google: {
     title: "Google AI & Education",
-    desc: "Ecossistema de IA do Google (Gemini, NotebookLM, AI Studio, Jules, Colab, Antigravity) e recursos inteligentes homologados para a comunidade IFSC."
+    desc: "Gemini, NotebookLM, AI Studio, Colab e Antigravity homologados para o ecossistema IFSC."
   },
   microsoft: {
-    title: "Microsoft 365 Copilot (Plano A1)",
-    desc: "Ambiente educacional Microsoft Office Web e IA Copilot disponível via autocadastro institucional para servidores (@ifsc.edu.br) e alunos (@aluno.ifsc.edu.br)."
+    title: "Microsoft 365 Copilot",
+    desc: "Office Web e Copilot (Plano A1) via autocadastro com e-mail institucional."
+  },
+  partnerships: {
+    title: "Parcerias Oficiais & Benefícios",
+    desc: "Ferramentas premium de IA com gratuidade ou planos educacionais para estudantes e servidores."
   }
 };
+
+/**
+ * Função global de proteção contra SPAM e scrapers estáticos (GitHub Pages)
+ * Reconstrói os e-mails ofuscados em Base64 apenas na execução interativa do navegador.
+ */
+export function initAntiSpamEmails() {
+  document.querySelectorAll('.js-safe-email').forEach(el => {
+    try {
+      const u = atob(el.dataset.u || '');
+      const d = atob(el.dataset.d || '');
+      const sub = el.dataset.sub ? `?subject=${encodeURIComponent(el.dataset.sub)}` : '';
+      if (!u || !d) return;
+      const email = `${u}@${d}`;
+      el.textContent = email;
+      el.setAttribute('role', 'link');
+      el.setAttribute('tabindex', '0');
+      const sendEmail = () => {
+        window.location.href = `mailto:${email}${sub}`;
+      };
+      el.onclick = sendEmail;
+      el.onkeydown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          sendEmail();
+        }
+      };
+    } catch (e) {
+      console.warn('Erro ao decodificar e-mail seguro:', e);
+    }
+  });
+}
 
 export class UIController {
   constructor(catalog) {
     this.catalog = catalog;
     this.currentTab = 'tools';
-    this.currentFilter = 'all';
+    this.currentAudience = 'all';  // 'all', 'servidores', 'alunos', 'comunidade'
+    this.currentCategory = 'all';  // 'all' ou slug da categoria
+    this.currentFilter = 'all';    // 'all' ou 'favs'
     this.searchQuery = '';
     this.favorites = JSON.parse(localStorage.getItem('ifsc_favorites') || '[]');
     this.currentModalApp = null;
@@ -41,6 +78,7 @@ export class UIController {
     this.tabExpertsBtn = document.getElementById('tab-experts');
     this.tabGoogleBtn = document.getElementById('tab-google');
     this.tabMicrosoftBtn = document.getElementById('tab-microsoft');
+    this.tabPartnershipsBtn = document.getElementById('tab-partnerships');
     this.msAlertBanner = document.getElementById('ms-alert-banner');
 
     this.filterContainer = document.getElementById('filter-container');
@@ -72,6 +110,9 @@ export class UIController {
     this.modalAccessNotice = document.getElementById('modal-access-notice');
   }
 
+  /**
+   * Renderiza ícone institucional IFSC exclusivamente para aplicações internas do instituto
+   */
   getIfscIconMarkup(iconKey) {
     const icons = {
       lgpd: `<div class="category-icon bg-gradient-to-br from-emerald-500 to-emerald-700"><i class="bi bi-shield-lock-fill text-lg mb-0.5"></i><span>LGPD</span></div>`,
@@ -83,6 +124,32 @@ export class UIController {
       alunos: `<div class="category-icon bg-gradient-to-br from-rose-500 to-pink-600"><i class="bi bi-backpack-fill text-lg mb-0.5"></i><span>ALU</span></div>`
     };
     return icons[iconKey] || `<div class="category-icon bg-[#32a041]"><i class="bi bi-grid-fill text-lg mb-0.5"></i><span>IFSC</span></div>`;
+  }
+
+  /**
+   * Evita a colocação indevida de logotipos ou ícones do IFSC em ferramentas de terceiros
+   */
+  getBrandOrGenericIconMarkup(app) {
+    const isGoogle = app.platform === 'google' || (app.id && app.id.startsWith('g-')) || (app.tags && app.tags.includes('google'));
+    const isMicrosoft = app.platform === 'microsoft' || (app.id && app.id.startsWith('ms-')) || (app.tags && app.tags.includes('microsoft'));
+    const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-')));
+
+    if (isGoogle) {
+      return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png" alt="Google" class="w-7 h-7 object-contain" /></div>`;
+    }
+    if (isMicrosoft) {
+      return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png" alt="Microsoft" class="w-7 h-7 object-contain" /></div>`;
+    }
+    if (isPartner) {
+      return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><i class="bi bi-stars text-xl text-amber-500"></i></div>`;
+    }
+
+    // Apenas ferramentas institucionais homologadas do próprio IFSC recebem o ícone IFSC
+    if (app.iconKey && ['lgpd', 'bpmn', 'siads', 'rsctae', 'taes', 'professores', 'alunos'].includes(app.iconKey)) {
+      return this.getIfscIconMarkup(app.iconKey);
+    }
+
+    return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><i class="bi bi-cpu text-xl text-emerald-600 dark:text-emerald-400"></i></div>`;
   }
 
   escapeHtml(str) {
@@ -115,9 +182,13 @@ export class UIController {
   createCardHTML(app) {
     const isFav = this.favorites.includes(app.id);
 
+    const isGoogle = app.platform === 'google' || (app.id && app.id.startsWith('g-')) || (app.tags && app.tags.includes('google'));
+    const isMicrosoft = app.platform === 'microsoft' || (app.id && app.id.startsWith('ms-')) || (app.tags && app.tags.includes('microsoft'));
+    const fallbackSrc = isGoogle ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png' : (isMicrosoft ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png' : './favicon.svg');
+
     const iconMarkup = app.iconUrl
-      ? `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-white dark:bg-gray-800/90 border border-gray-200/90 dark:border-gray-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="${app.iconUrl}" alt="${app.name}" class="w-8 h-8 object-contain" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='favicon.svg';" /></div>`
-      : this.getIfscIconMarkup(app.iconKey);
+      ? `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-white dark:bg-gray-800/90 border border-gray-200/90 dark:border-gray-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="${app.iconUrl}" alt="${app.name}" class="w-8 h-8 object-contain" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='${fallbackSrc}';" /></div>`
+      : this.getBrandOrGenericIconMarkup(app);
 
     const badgeText = app.badge || app.categoryName || 'Apoio';
 
@@ -147,6 +218,13 @@ export class UIController {
           <p class="text-xs text-gray-500 dark:text-gray-400 mt-1.5 line-clamp-2 leading-relaxed font-normal">
             ${app.description}
           </p>
+
+          ${app.opportunity_plan ? `
+          <div class="mt-2.5 p-2 rounded-xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 text-[11px] text-amber-900 dark:text-amber-200 font-semibold flex items-start gap-1.5 leading-snug">
+            <i class="bi bi-gift-fill text-amber-600 dark:text-amber-400 shrink-0 mt-0.5"></i>
+            <span class="line-clamp-2">${app.opportunity_plan}</span>
+          </div>
+          ` : ''}
         </div>
 
         <!-- Rodapé do Card: Ação discreta -->
@@ -174,34 +252,135 @@ export class UIController {
     } else if (this.currentTab === 'google') {
       categories = this.catalog.googleEduCategories;
       currentList = this.catalog.allGoogle;
-    } else {
+    } else if (this.currentTab === 'microsoft') {
       categories = this.catalog.microsoftCategories;
       currentList = this.catalog.allMicrosoft;
+    } else {
+      categories = this.catalog.partnershipsCategories || [];
+      currentList = this.catalog.allPartnerships || [];
     }
 
-    const activeBtnClasses = 'bg-[#32a041] text-white border-[#32a041] shadow-xs font-bold ring-1 ring-[#32a041]';
-    const inactiveBtnClasses = 'bg-white dark:bg-[#121824] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 font-semibold shadow-2xs';
+    // Contagem dinâmica por público na aba ativa
+    const countAll = currentList.length;
+    const countServ = currentList.filter(a => (a.audiences || []).includes('servidores')).length;
+    const countAlun = currentList.filter(a => (a.audiences || []).includes('alunos')).length;
+    const countComu = currentList.filter(a => (a.audiences || []).includes('comunidade')).length;
+    const countFavs = currentList.filter(a => this.favorites.includes(a.id)).length;
 
+    const isFavActive = this.currentFilter === 'favs';
+
+    const activeAudClasses = 'bg-[#32a041] text-white border-[#32a041] shadow-xs font-bold ring-1 ring-[#32a041]';
+    const inactiveAudClasses = 'bg-white dark:bg-[#121824] text-gray-700 dark:text-gray-300 border-gray-200 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-800 font-semibold shadow-2xs';
+
+    // Linha única unificada e aglutinada (Público + Área)
     let html = `
-      <button data-filter="all" class="text-xs py-1.5 px-3 rounded-xl border transition-all cursor-pointer ${this.currentFilter === 'all' ? activeBtnClasses : inactiveBtnClasses}">
-        Todos (${currentList.length})
-      </button>
-      <button data-filter="favs" class="text-xs py-1.5 px-3 rounded-xl border transition-all cursor-pointer flex items-center gap-1.5 ${this.currentFilter === 'favs' ? activeBtnClasses : inactiveBtnClasses}">
-        <i class="bi bi-star-fill text-[10px] ${this.currentFilter === 'favs' ? 'text-amber-200' : 'text-amber-500'}"></i>
-        <span>Favoritos</span>
-      </button>
+      <div class="w-full flex items-center flex-wrap gap-1.5 sm:gap-2">
+        <!-- Filtros de Público -->
+        <div class="flex items-center flex-wrap gap-1 sm:gap-1.5">
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-gray-400 dark:text-gray-500 mr-0.5 flex items-center gap-1 shrink-0">
+            <i class="bi bi-people-fill text-xs text-[#32a041]"></i>
+            <span>Público:</span>
+          </span>
+
+          <button type="button" data-audience="all" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer ${(!isFavActive && this.currentAudience === 'all') ? activeAudClasses : inactiveAudClasses}">
+            Todos <span class="opacity-80 text-[10px]">(${countAll})</span>
+          </button>
+
+          <button type="button" data-audience="servidores" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1 ${(!isFavActive && this.currentAudience === 'servidores') ? activeAudClasses : inactiveAudClasses}" title="Servidores do IFSC (TAEs e Docentes)">
+            <i class="bi bi-person-badge text-[11px]"></i>
+            <span>Servidores</span>
+            <span class="opacity-80 text-[10px]">(${countServ})</span>
+          </button>
+
+          <button type="button" data-audience="alunos" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1 ${(!isFavActive && this.currentAudience === 'alunos') ? activeAudClasses : inactiveAudClasses}" title="Estudantes do IFSC">
+            <i class="bi bi-backpack text-[11px]"></i>
+            <span>Alunos</span>
+            <span class="opacity-80 text-[10px]">(${countAlun})</span>
+          </button>
+
+          <button type="button" data-audience="comunidade" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1 ${(!isFavActive && this.currentAudience === 'comunidade') ? activeAudClasses : inactiveAudClasses}" title="Comunidade externa">
+            <i class="bi bi-globe2 text-[11px]"></i>
+            <span>Comunidade</span>
+            <span class="opacity-80 text-[10px]">(${countComu})</span>
+          </button>
+
+          <button type="button" data-filter="favs" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer flex items-center gap-1 ${isFavActive ? activeAudClasses : inactiveAudClasses}">
+            <i class="bi bi-star-fill text-[10px] ${isFavActive ? 'text-amber-200' : 'text-amber-500'}"></i>
+            <span>Favoritos</span>
+            <span class="opacity-80 text-[10px]">(${countFavs})</span>
+          </button>
+        </div>
     `;
 
-    categories.forEach(cat => {
-      const isCatActive = this.currentFilter === cat.slug;
+    // Divisor sutil e Filtros de Área na mesma linha
+    if (categories.length > 1) {
+      const activeCatClasses = 'bg-gray-800 dark:bg-gray-200 text-white dark:text-gray-900 border-gray-800 dark:border-gray-200 font-bold shadow-2xs';
+      const inactiveCatClasses = 'bg-gray-100/90 dark:bg-gray-800/60 text-gray-600 dark:text-gray-400 border-transparent hover:bg-gray-200 dark:hover:bg-gray-700 text-xs font-medium';
+
       html += `
-        <button data-filter="${cat.slug}" class="text-xs py-1.5 px-3 rounded-xl border transition-all cursor-pointer ${isCatActive ? activeBtnClasses : inactiveBtnClasses}">
-          ${cat.name} <span class="opacity-75 text-[10px]">(${cat.apps.length})</span>
-        </button>
+        <div class="h-4 w-px bg-gray-200 dark:bg-gray-700 hidden sm:block shrink-0 mx-0.5"></div>
+
+        <div class="flex items-center flex-wrap gap-1 sm:gap-1.5">
+          <span class="text-[11px] font-extrabold uppercase tracking-wider text-gray-400 dark:text-gray-500 mr-0.5 flex items-center gap-1 shrink-0">
+            <i class="bi bi-tag-fill text-[10px] text-emerald-600 dark:text-emerald-400"></i>
+            <span>Área:</span>
+          </span>
+
+          <button type="button" data-category="all" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer ${this.currentCategory === 'all' ? activeCatClasses : inactiveCatClasses}">
+            Todas
+          </button>
       `;
-    });
+
+      categories.forEach(cat => {
+        const isCatActive = this.currentCategory === cat.slug;
+        html += `
+          <button type="button" data-category="${cat.slug}" class="text-xs py-1 px-2.5 rounded-lg border transition-all cursor-pointer ${isCatActive ? activeCatClasses : inactiveCatClasses}">
+            ${cat.name} <span class="opacity-70 text-[10px]">(${cat.apps.length})</span>
+          </button>
+        `;
+      });
+
+      html += `</div>`;
+    }
+
+    html += `</div>`;
 
     this.filterContainer.innerHTML = html;
+    this.bindFilterEvents();
+  }
+
+  bindFilterEvents() {
+    // Event listeners para Filtro de Público
+    this.filterContainer.querySelectorAll('[data-audience]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const aud = e.currentTarget.getAttribute('data-audience');
+        this.currentAudience = aud;
+        this.currentFilter = 'all';
+        Analytics.trackAudienceFilter(aud);
+        this.renderFilterButtons();
+        this.renderView();
+      });
+    });
+
+    // Event listener para Favoritos
+    const favBtn = this.filterContainer.querySelector('[data-filter="favs"]');
+    if (favBtn) {
+      favBtn.addEventListener('click', () => {
+        this.currentFilter = (this.currentFilter === 'favs') ? 'all' : 'favs';
+        this.renderFilterButtons();
+        this.renderView();
+      });
+    }
+
+    // Event listeners para Filtro de Categoria / Área
+    this.filterContainer.querySelectorAll('[data-category]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const cat = e.currentTarget.getAttribute('data-category');
+        this.currentCategory = cat;
+        this.renderFilterButtons();
+        this.renderView();
+      });
+    });
   }
 
   checkOtherTabs(query) {
@@ -211,6 +390,7 @@ export class UIController {
       { key: 'experts', name: 'Agentes Especialistas (Gems)', list: this.catalog.allGems },
       { key: 'google', name: 'Google Education', list: this.catalog.allGoogle },
       { key: 'microsoft', name: 'Microsoft 365 Copilot', list: this.catalog.allMicrosoft },
+      { key: 'partnerships', name: 'Parcerias Oficiais (Estudantes)', list: this.catalog.allPartnerships || [] },
     ];
     const found = [];
     tabs.forEach(t => {
@@ -237,7 +417,8 @@ export class UIController {
     if (this.currentTab === 'tools') list = this.catalog.allTools;
     else if (this.currentTab === 'experts') list = this.catalog.allGems;
     else if (this.currentTab === 'google') list = this.catalog.allGoogle;
-    else list = this.catalog.allMicrosoft;
+    else if (this.currentTab === 'microsoft') list = this.catalog.allMicrosoft;
+    else list = this.catalog.allPartnerships || [];
 
     if (this.currentTab === 'microsoft') {
       this.msAlertBanner.classList.remove('hidden');
@@ -248,29 +429,54 @@ export class UIController {
     const q = this.searchQuery.toLowerCase().trim();
 
     const filtered = list.filter(app => {
-      const matchesCategory = this.currentFilter === 'all' ||
-        (this.currentFilter === 'favs' && this.favorites.includes(app.id)) ||
-        app.categorySlug === this.currentFilter;
+      // 1. Filtro de Favoritos
+      if (this.currentFilter === 'favs') {
+        if (!this.favorites.includes(app.id)) return false;
+      }
 
-      const matchesSearch = !q ||
-        app.name.toLowerCase().includes(q) ||
-        app.description.toLowerCase().includes(q) ||
-        (app.badge && app.badge.toLowerCase().includes(q)) ||
-        (app.categoryName && app.categoryName.toLowerCase().includes(q)) ||
-        (app.ot04_status && app.ot04_status.toLowerCase().includes(q)) ||
-        (app.tags && app.tags.some(t => t.toLowerCase().includes(q))) ||
-        (q.includes('ot') && (app.ot04_status || (app.tags && app.tags.includes('ot04'))));
+      // 2. Filtro por Público (Servidores, Alunos, Comunidade)
+      if (this.currentAudience && this.currentAudience !== 'all') {
+        if (!(app.audiences || []).includes(this.currentAudience)) return false;
+      }
 
-      return matchesCategory && matchesSearch;
+      // 3. Filtro por Categoria / Área
+      if (this.currentCategory && this.currentCategory !== 'all') {
+        if (app.categorySlug !== this.currentCategory && app.category !== this.currentCategory) return false;
+      }
+
+      // 4. Filtro por Busca de Texto
+      if (q) {
+        const matchesSearch =
+          app.name.toLowerCase().includes(q) ||
+          app.description.toLowerCase().includes(q) ||
+          (app.badge && app.badge.toLowerCase().includes(q)) ||
+          (app.categoryName && app.categoryName.toLowerCase().includes(q)) ||
+          (app.ot04_status && app.ot04_status.toLowerCase().includes(q)) ||
+          (app.tags && app.tags.some(t => t.toLowerCase().includes(q))) ||
+          (q.includes('ot') && (app.ot04_status || (app.tags && app.tags.includes('ot04'))));
+        if (!matchesSearch) return false;
+      }
+
+      return true;
     });
 
     if (this.activeCategoryIndicator) {
-      if (this.currentFilter === 'all') {
-        this.activeCategoryIndicator.textContent = `Mostrando todas as ${filtered.length} ferramentas`;
-      } else if (this.currentFilter === 'favs') {
-        this.activeCategoryIndicator.textContent = `Mostrando ${filtered.length} ferramentas`;
+      let parts = [];
+      if (this.currentFilter === 'favs') {
+        parts.push('Favoritos');
       } else {
-        this.activeCategoryIndicator.textContent = `Filtro ativo: ${this.currentFilter} (${filtered.length})`;
+        if (this.currentAudience && this.currentAudience !== 'all') {
+          const audLabels = { servidores: 'Servidores', alunos: 'Alunos', comunidade: 'Comunidade' };
+          parts.push(`Público: ${audLabels[this.currentAudience] || this.currentAudience}`);
+        }
+        if (this.currentCategory && this.currentCategory !== 'all') {
+          parts.push(`Área: ${this.currentCategory}`);
+        }
+      }
+      if (parts.length > 0) {
+        this.activeCategoryIndicator.textContent = `Filtros: ${parts.join(' • ')} (${filtered.length})`;
+      } else {
+        this.activeCategoryIndicator.textContent = `Mostrando todas as ${filtered.length} ferramentas`;
       }
     }
 
@@ -322,9 +528,11 @@ export class UIController {
 
   switchTab(tab) {
     this.currentTab = tab;
+    this.currentAudience = 'all';
+    this.currentCategory = 'all';
     this.currentFilter = 'all';
 
-    const tabs = ['tools', 'experts', 'google', 'microsoft'];
+    const tabs = ['tools', 'experts', 'google', 'microsoft', 'partnerships'];
 
     tabs.forEach(key => {
       const btn = document.getElementById(`tab-${key}`);
@@ -334,15 +542,15 @@ export class UIController {
 
       if (isActive) {
         btn.setAttribute('aria-selected', 'true');
-        btn.className = "tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-bold border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-[#32a041] text-[#247a30] dark:text-emerald-400 cursor-pointer";
+        btn.classList.add('active');
         if (countSpan) {
-          countSpan.className = "text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950 text-[#247a30] dark:text-emerald-300 font-extrabold";
+          countSpan.className = "text-[10px] px-1.5 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-950/80 text-[#247a30] dark:text-emerald-300 font-extrabold";
         }
       } else {
         btn.setAttribute('aria-selected', 'false');
-        btn.className = "tab-link pb-3 px-2 sm:px-3 text-xs sm:text-sm font-medium border-b-2 flex items-center gap-2 whitespace-nowrap transition-all border-transparent text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white cursor-pointer";
+        btn.classList.remove('active');
         if (countSpan) {
-          countSpan.className = "text-[10px] px-1.5 py-0.2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 font-bold";
+          countSpan.className = "text-[10px] px-1.5 py-0.2 rounded-full bg-gray-200/80 dark:bg-gray-700/60 text-gray-600 dark:text-gray-400 font-bold";
         }
       }
     });
@@ -353,6 +561,19 @@ export class UIController {
     if (secDesc && tabsMeta[tab]) secDesc.textContent = tabsMeta[tab].desc;
 
     Analytics.trackTabSwitch(tab);
+    this.renderFilterButtons();
+    this.renderView();
+  }
+
+  clearFilters() {
+    this.currentAudience = 'all';
+    this.currentCategory = 'all';
+    this.currentFilter = 'all';
+    this.searchQuery = '';
+    if (this.searchDesktop) this.searchDesktop.value = '';
+    if (this.searchMobile) this.searchMobile.value = '';
+    if (this.clearSearchDesktop) this.clearSearchDesktop.classList.add('hidden');
+    if (this.clearSearchMobile) this.clearSearchMobile.classList.add('hidden');
     this.renderFilterButtons();
     this.renderView();
   }
@@ -388,7 +609,28 @@ export class UIController {
     const isGoogle = this.catalog.allGoogle.some(g => g.id === app.id);
     const isMicrosoft = app.platform === 'microsoft' || this.catalog.allMicrosoft.some(m => m.id === app.id);
 
-    if (isGem) {
+    if (app.opportunity_plan) {
+      this.modalAccessNotice.innerHTML = `
+        <div class="p-3.5 rounded-2xl bg-amber-50/90 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-700/80 text-left text-xs text-amber-950 dark:text-amber-200 w-full flex items-start gap-3 shadow-2xs">
+          <span class="w-7 h-7 rounded-xl bg-amber-500 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs">
+            <i class="bi bi-mortarboard-fill"></i>
+          </span>
+          <div class="space-y-1">
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <strong class="font-extrabold text-amber-950 dark:text-amber-100 text-xs">Oportunidade para Estudantes</strong>
+              <span class="px-2 py-0.2 rounded text-[9px] font-black bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 uppercase tracking-wider">${app.badge || 'Benefício'}</span>
+            </div>
+            <p class="text-[11px] leading-relaxed text-amber-900 dark:text-amber-200 font-bold">
+              ${app.opportunity_plan}
+            </p>
+            <p class="text-[10px] text-amber-800 dark:text-amber-300 flex items-center gap-1 pt-0.5 font-medium">
+              <i class="bi bi-check-circle-fill shrink-0 text-amber-600 dark:text-amber-400"></i>
+              <span>${app.domain_requirement || 'Acesso verificado com e-mail escolar institucional'}</span>
+            </p>
+          </div>
+        </div>
+      `;
+    } else if (isGem) {
       this.modalAccessNotice.innerHTML = `
         <div class="p-3.5 rounded-2xl bg-purple-50/90 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-800/70 text-left text-xs text-purple-950 dark:text-purple-200 w-full flex items-start gap-3 shadow-2xs">
           <span class="w-7 h-7 rounded-xl bg-purple-600 text-white flex items-center justify-center text-xs shrink-0 mt-0.5 shadow-xs">
@@ -397,7 +639,7 @@ export class UIController {
           <div class="space-y-1">
             <div class="flex items-center gap-1.5 flex-wrap">
               <strong class="font-extrabold text-purple-950 dark:text-purple-100 text-xs">Exclusivo para Domínio IFSC</strong>
-              <span class="px-2 py-0.2 rounded text-[9px] font-black bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100 uppercase tracking-wider">Aluno &bull; Servidor</span>
+              <span class="px-2 py-0.2 rounded text-[9px] font-black bg-purple-200 dark:bg-purple-900 text-purple-900 dark:text-purple-100 uppercase tracking-wider">Aluno • Servidor</span>
             </div>
             <p class="text-[11px] leading-relaxed text-purple-900 dark:text-purple-300">
               Esta <strong>Gem do Gemini</strong> opera exclusivamente no ecossistema educacional do IFSC. O acesso só é autorizado com contas institucionais oficiais:
@@ -463,7 +705,7 @@ export class UIController {
         </div>
       `;
     } else {
-      iconContainer.innerHTML = this.getIfscIconMarkup(app.iconKey);
+      iconContainer.innerHTML = this.getBrandOrGenericIconMarkup(app);
     }
 
     let modalDomainBadge = '';
@@ -526,5 +768,7 @@ export class UIController {
     if (eCount) eCount.textContent = this.catalog.allGems.length;
     if (gCount) gCount.textContent = this.catalog.allGoogle.length;
     if (mCount) mCount.textContent = this.catalog.allMicrosoft.length;
+    const pCount = document.getElementById('tab-partnerships-count');
+    if (pCount && this.catalog.allPartnerships) pCount.textContent = this.catalog.allPartnerships.length;
   }
 }

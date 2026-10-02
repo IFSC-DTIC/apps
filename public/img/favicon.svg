@@ -1,18 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
-  <g transform="translate(7.5, 1.75)">
-    <!-- Row 0: Red Circle + 2 Green Squares -->
-    <circle cx="5" cy="5" r="5" fill="#C8191E"/>
-    <rect x="11.5" y="0" width="10" height="10" rx="2" fill="#32A041"/>
-    <rect x="23" y="0" width="10" height="10" rx="2" fill="#32A041"/>
-    <!-- Row 1: 2 Green Squares -->
-    <rect x="0" y="11.5" width="10" height="10" rx="2" fill="#32A041"/>
-    <rect x="11.5" y="11.5" width="10" height="10" rx="2" fill="#32A041"/>
-    <!-- Row 2: 3 Green Squares -->
-    <rect x="0" y="23" width="10" height="10" rx="2" fill="#32A041"/>
-    <rect x="11.5" y="23" width="10" height="10" rx="2" fill="#32A041"/>
-    <rect x="23" y="23" width="10" height="10" rx="2" fill="#32A041"/>
-    <!-- Row 3: 2 Green Squares -->
-    <rect x="0" y="34.5" width="10" height="10" rx="2" fill="#32A041"/>
-    <rect x="11.5" y="34.5" width="10" height="10" rx="2" fill="#32A041"/>
+  <!-- Símbolo Oficial do Instituto Federal - Manual da Marca 2024 -->
+  <g transform="translate(8.7, 3.3)">
+    <!-- Coluna 1 -->
+    <circle cx="4.5" cy="4.5" r="4.95" fill="#c8191e"/>
+    <rect x="0" y="10.8" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="0" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="0" y="32.4" width="9" height="9" rx="0.9" fill="#32a041"/>
+
+    <!-- Coluna 2 -->
+    <rect x="10.8" y="0" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="10.8" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="10.8" y="32.4" width="9" height="9" rx="0.9" fill="#32a041"/>
+
+    <!-- Coluna 3 -->
+    <rect x="21.6" y="0" width="9" height="9" rx="0.9" fill="#32a041"/>
+    <rect x="21.6" y="21.6" width="9" height="9" rx="0.9" fill="#32a041"/>
   </g>
 </svg>
