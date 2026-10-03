@@ -1,22 +1,27 @@
 # ==============================================================================
-# Portal de Inteligência Artificial e Aplicações - IFSC
+# Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa
 # Diretoria de Tecnologia da Informação e Comunicação (DTIC/CGD)
-# Orientação Técnica nº 04/2025 • Produção em GitHub Pages
+# Instituto Federal de Santa Catarina (IFSC) • Orientação Técnica nº 04/2025
+# Produção em GitHub Pages: https://apps.ifsc.edu.br/
 # ==============================================================================
 
+# Regras Gerais para Motores de Busca e Indexadores
 User-agent: *
 Allow: /
 Allow: /assets/
 Allow: /public/
 Allow: /termo/
+Allow: /favicon.svg
+Allow: /robots.txt
+Allow: /sitemap.xml
 
-# Bloqueio de rotas internas, diagnóstico e arquivos de controle
+# Bloqueio de rotas internas, diagnóstico em tempo real e arquivos temporários
 Disallow: /__client_log
 Disallow: /scratch/
 Disallow: /.git/
 Disallow: /apps_ifsc_live.html
 
-# Regras explícitas para robôs de busca e indexação
+# Motores de Busca Principais
 User-agent: Googlebot
 Allow: /
 
@@ -24,12 +29,46 @@ User-agent: Googlebot-Image
 Allow: /public/
 Allow: /assets/
 
+User-agent: Google-Extended
+Allow: /
+
 User-agent: Bingbot
+Allow: /
+
+User-agent: msnbot
 Allow: /
 
 User-agent: Applebot
 Allow: /
 
-# Host Canônico e Mapa do Site (Sitemap)
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Rastreadores e Agentes de IA Generativa Homologados para Indexação Educacional
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Parâmetros de Rasteamento e Host Canônico
 Host: https://apps.ifsc.edu.br
 Sitemap: https://apps.ifsc.edu.br/sitemap.xml
