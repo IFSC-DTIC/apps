@@ -248,6 +248,7 @@ export const defaultToolsCategories = [
           "siads",
           "inventário",
           "consolidação",
+          "patrimônio",
           "bens",
           "publico",
           "gmail"
@@ -397,7 +398,7 @@ export const defaultGemsCategories = [
 
 export const googleEduCategories = [
   {
-    name: "Assistentes & Criação IA",
+    name: "Assistentes & Criação",
     slug: "assistentes-criacao",
     apps: [
       {
@@ -451,7 +452,7 @@ export const googleEduCategories = [
     ]
   },
   {
-    name: "Produtividade Acadêmica (Workspace IFSC)",
+    name: "Produtividade Acadêmica",
     slug: "produtividade-workspace",
     apps: [
       {
@@ -512,7 +513,7 @@ export const googleEduCategories = [
     ]
   },
   {
-    name: "Engenharia, Agentes & Código",
+    name: "Engenharia & Código",
     slug: "engenharia-codigo",
     apps: [
       {
@@ -558,7 +559,7 @@ export const googleEduCategories = [
     ]
   },
   {
-    name: "Google Labs & Micro-Aplicações",
+    name: "Google Labs",
     slug: "google-labs",
     apps: [
       {
@@ -799,7 +800,7 @@ export const defaultPartnershipsCategories = [
   {
     "name": "Desenvolvimento & Pesquisa",
     "slug": "dev-pesquisa",
-    "iconKey": "especialistas",
+    "iconKey": "parcerias",
     "apps": [
       {
         "id": "partner-github-copilot",
@@ -855,13 +856,13 @@ export const defaultPartnershipsCategories = [
   {
     "name": "Design & Criatividade",
     "slug": "design-criatividade",
-    "iconKey": "professores",
+    "iconKey": "parcerias",
     "apps": [
       {
         "id": "partner-canva-edu",
         "name": "Canva para Educação",
         "url": "https://www.canva.com/education/",
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/canva.png",
+        "iconUrl": "./public/img/canva.svg",
         "badge": "Canva Pro Gratuito",
         "category": "Design & Criatividade",
         "description": "Acesso total gratuito a todos os recursos premium do Canva Pro para alunos e professores: ferramentas de IA generativa como Magic Write (geração e reescrita de texto), Magic Media (geração de imagem e vídeo), Magic Switch e removedor de fundo instantâneo.",
@@ -886,7 +887,7 @@ export const defaultPartnershipsCategories = [
         "id": "partner-adobe-cc",
         "name": "Adobe Creative Cloud + Firefly",
         "url": "https://www.adobe.com/br/creativecloud/buy/students.html",
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/adobe-creative-cloud.png",
+        "iconUrl": "./public/img/adobe-creative-cloud.svg",
         "badge": "60%+ Desconto",
         "category": "Design & Criatividade",
         "description": "IA Generativa Adobe Firefly integrada a toda a suíte criativa (Photoshop, Illustrator, Premiere Pro, InDesign, After Effects). Geração e edição generativa de imagens, efeitos de texto vetoriais e ferramentas de nível industrial para estudantes.",
@@ -911,7 +912,7 @@ export const defaultPartnershipsCategories = [
   {
     "name": "Escrita & Organização",
     "slug": "escrita-organizacao",
-    "iconKey": "alunos",
+    "iconKey": "parcerias",
     "apps": [
       {
         "id": "partner-notion-ai",
@@ -940,7 +941,7 @@ export const defaultPartnershipsCategories = [
         "id": "partner-grammarly-edu",
         "name": "Grammarly Education",
         "url": "https://www.grammarly.com/edu",
-        "iconUrl": "https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/grammarly.png",
+        "iconUrl": "./public/img/grammarly.svg",
         "badge": "Desconto / Parceria",
         "category": "Escrita & Organização",
         "description": "Revisor de escrita assistido por IA de alta precisão: correção profunda de gramática, ortografia, pontuação, concisão, clareza e ajustes de tom formal para artigos científicos e comunicações internacionais.",
@@ -1009,11 +1010,12 @@ export function flattenCategories(categories) {
   if (!Array.isArray(categories)) return list;
   categories.forEach(cat => {
     (cat.apps || []).forEach(app => {
+      const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-'))) || cat.slug === 'dev-pesquisa' || cat.slug === 'design-criatividade' || cat.slug === 'escrita-organizacao' || cat.slug === 'ia-produtividade';
       list.push({
         ...app,
         categoryName: cat.name,
         categorySlug: cat.slug,
-        iconKey: cat.iconKey || app.iconKey,
+        iconKey: isPartner ? null : (cat.iconKey || app.iconKey),
         audiences: inferAudiences(app, cat)
       });
     });
