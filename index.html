@@ -3,7 +3,89 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Portal de IA do IFSC - Catálogo de Ferramentas de Inteligência Artificial</title>
+    <title>Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa</title>
+
+    <!-- Inicialização Imediata do Tema (Auto-Detect prefers-color-scheme, Persistência e Alternador) -->
+    <script>
+      (function() {
+        function getStoredTheme() {
+          try {
+            return localStorage.getItem('theme') || localStorage.getItem('color-theme');
+          } catch(e) {
+            return null;
+          }
+        }
+
+        function applyTheme(isDark) {
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+          if (typeof window.updateThemeUI === 'function') {
+            window.updateThemeUI(isDark);
+          }
+        }
+
+        var stored = getStoredTheme();
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var initialDark = (stored === 'dark') || (!stored && prefersDark);
+
+        if (initialDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+
+        window.updateThemeUI = function(darkState) {
+          if (typeof darkState !== 'boolean') {
+            darkState = document.documentElement.classList.contains('dark');
+          }
+          var darkIcon = document.getElementById('theme-toggle-dark-icon');
+          var lightIcon = document.getElementById('theme-toggle-light-icon');
+          var btn = document.getElementById('theme-toggle');
+          if (darkIcon && lightIcon) {
+            if (darkState) {
+              lightIcon.classList.remove('hidden');
+              darkIcon.classList.add('hidden');
+              if (btn) btn.setAttribute('title', 'Mudar para tema claro');
+            } else {
+              darkIcon.classList.remove('hidden');
+              lightIcon.classList.add('hidden');
+              if (btn) btn.setAttribute('title', 'Mudar para tema escuro');
+            }
+          }
+        };
+
+        window.toggleTheme = function() {
+          var isDark = document.documentElement.classList.contains('dark');
+          var nextDark = !isDark;
+          applyTheme(nextDark);
+          try {
+            var val = nextDark ? 'dark' : 'light';
+            localStorage.setItem('theme', val);
+            localStorage.setItem('color-theme', val);
+          } catch (e) {}
+        };
+
+        if (window.matchMedia) {
+          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            var currentStored = getStoredTheme();
+            if (!currentStored) {
+              applyTheme(e.matches);
+            }
+          });
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', function() {
+            window.updateThemeUI();
+          });
+        } else {
+          window.updateThemeUI();
+        }
+      })();
+    </script>
     
     <!-- Content Security Policy (Blindagem Ampla e Compatível com Extensões e GitHub Pages) -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' https: http: data: blob:; connect-src 'self' https: http: ws: wss:; frame-src 'self' https:;" />
@@ -47,9 +129,9 @@
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.clarity.ms" />
 
-    <!-- SEO & Indexação Estratégica para Motores de Busca (Googlebot, Bingbot) -->
-    <meta name="description" content="Portal oficial de ferramentas, diretrizes e agentes de Inteligência Artificial (IA) do Instituto Federal de Santa Catarina (IFSC). Catálogo homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD, com parcerias educacionais, Google for Education e Microsoft 365." />
-    <meta name="keywords" content="Inteligência Artificial IFSC, IA IFSC, IA no IFSC, OT 04/2025 IFSC, Orientação Técnica 04 IFSC, DTIC IFSC, CGD IFSC, Parcerias IA IFSC, Google AI Pro IFSC, Microsoft Copilot IFSC, Agentes IA IFSC, LGPD IFSC, Guardião LGPD, ECA Digital IFSC, apps ifsc, portal ia ifsc, ferramentas ia ifsc, gems ifsc" />
+    <!-- SEO & Indexação Estratégica para Motores de Busca e IA Generativa (Google, Bing, Perplexity, GPTBot) -->
+    <meta name="description" content="Portal oficial de Inteligência Artificial do Instituto Federal de Santa Catarina (IFSC). Catálogo e diretório de ferramentas de Inteligência Artificial Generativa, agentes especializados Gems, parcerias educacionais (Google AI Pro, Microsoft Copilot, Canva, Adobe Firefly) homologados conforme a Orientação Técnica nº 04/2025 da DTIC/CGD." />
+    <meta name="keywords" content="Portal de IA do IFSC, Ferramentas de Inteligência Artificial Generativa, IA Generativa IFSC, Inteligência Artificial IFSC, IA IFSC, IA no IFSC, OT 04/2025 IFSC, Orientação Técnica 04 IFSC, DTIC IFSC, CGD IFSC, Parcerias IA IFSC, Google AI Pro IFSC, Microsoft Copilot IFSC, Canva Pro Gratuito IFSC, Adobe Firefly IFSC, Grammarly Education IFSC, Agentes IA IFSC, Gems IFSC, LGPD IFSC, Guardião LGPD, ECA Digital IFSC, apps ifsc, portal ia ifsc, ferramentas ia ifsc" />
     <meta name="author" content="Instituto Federal de Santa Catarina - DTIC / CGD" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="theme-color" content="#247a30" media="(prefers-color-scheme: light)" />
@@ -61,8 +143,8 @@
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Portal de IA do IFSC" />
     <meta property="og:url" content="https://apps.ifsc.edu.br/" />
-    <meta property="og:title" content="Portal de IA do IFSC - Catálogo de Ferramentas de Inteligência Artificial" />
-    <meta property="og:description" content="Portal oficial de ferramentas, parcerias oficiais e agentes de Inteligência Artificial do IFSC. Em conformidade com a Orientação Técnica nº 04/2025 da DTIC/CGD." />
+    <meta property="og:title" content="Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa" />
+    <meta property="og:description" content="Portal institucional de ferramentas de Inteligência Artificial Generativa, diretrizes éticas (OT nº 04/2025 DTIC/CGD), agentes especializados Gems e parcerias educacionais do IFSC." />
     <meta property="og:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
     <meta property="og:image:secure_url" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
     <meta property="og:image:type" content="image/png" />
@@ -72,12 +154,12 @@
 
     <!-- Twitter Cards (X) -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Portal de IA do IFSC - Catálogo de Ferramentas de Inteligência Artificial" />
-    <meta name="twitter:description" content="Diretrizes da OT 04/2025, parcerias educacionais, ferramentas e agentes de IA homologados para a comunidade do Instituto Federal de Santa Catarina." />
+    <meta name="twitter:title" content="Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa" />
+    <meta name="twitter:description" content="Diretrizes da OT 04/2025, ferramentas de Inteligência Artificial Generativa, parcerias educacionais e agentes homologados do Instituto Federal de Santa Catarina." />
     <meta name="twitter:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
     <meta name="twitter:image:alt" content="Logotipo Oficial do Instituto Federal de Santa Catarina" />
 
-    <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets) -->
+    <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets & Knowledge Graph) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -86,8 +168,9 @@
           "@type": "WebSite",
           "@id": "https://apps.ifsc.edu.br/#website",
           "url": "https://apps.ifsc.edu.br/",
-          "name": "Portal de IA do IFSC - Catálogo de Ferramentas de Inteligência Artificial",
-          "description": "Portal institucional de ferramentas, diretrizes, parcerias oficiais e agentes de Inteligência Artificial do Instituto Federal de Santa Catarina (IFSC), homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD.",
+          "name": "Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa",
+          "alternateName": "Portal de IA do IFSC",
+          "description": "Portal institucional de ferramentas de Inteligência Artificial Generativa, diretrizes éticas, parcerias oficiais e agentes de IA do Instituto Federal de Santa Catarina (IFSC), homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD.",
           "publisher": {
             "@type": "EducationalOrganization",
             "name": "Instituto Federal de Santa Catarina",
@@ -95,11 +178,19 @@
             "url": "https://www.ifsc.edu.br",
             "logo": "https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg"
           },
-          "inLanguage": "pt-BR"
+          "inLanguage": "pt-BR",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://apps.ifsc.edu.br/?q={search_term_string}"
+            },
+            "query-input": "required name=search_term_string"
+          }
         },
         {
           "@type": "GovernmentService",
-          "name": "Diretório de Aplicações de Inteligência Artificial do IFSC",
+          "name": "Diretório de Aplicações e Ferramentas de Inteligência Artificial Generativa do IFSC",
           "serviceType": "Catálogo Institucional de Ferramentas de IA Homologadas",
           "provider": {
             "@type": "GovernmentOrganization",
@@ -176,86 +267,6 @@
     <!-- Folha de Estilos Modular Oficial do Portal -->
     <link rel="stylesheet" href="./assets/css/portal.css">
 
-    <!-- Theme Manager Script (Detecção Automática do Navegador e Persistência) -->
-    <script>
-      (function() {
-        function getInitialTheme() {
-          var stored = localStorage.getItem('theme') || localStorage.getItem('color-theme');
-          if (stored === 'dark' || stored === 'light') return stored;
-          return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-        }
-
-        var currentTheme = getInitialTheme();
-        if (currentTheme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else {
-          document.documentElement.classList.remove('dark');
-        }
-
-        window.updateThemeUI = function(isDark) {
-          if (typeof isDark !== 'boolean') {
-            isDark = document.documentElement.classList.contains('dark');
-          }
-          var darkIcon = document.getElementById('theme-toggle-dark-icon');
-          var lightIcon = document.getElementById('theme-toggle-light-icon');
-          if (darkIcon && lightIcon) {
-            if (isDark) {
-              lightIcon.classList.remove('hidden');
-              darkIcon.classList.add('hidden');
-            } else {
-              darkIcon.classList.remove('hidden');
-              lightIcon.classList.add('hidden');
-            }
-          }
-        };
-
-        window.toggleTheme = function() {
-          var isDark = document.documentElement.classList.contains('dark');
-          var newTheme = isDark ? 'light' : 'dark';
-          if (newTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-          } else {
-            document.documentElement.classList.remove('dark');
-          }
-          try {
-            localStorage.setItem('theme', newTheme);
-            localStorage.setItem('color-theme', newTheme);
-          } catch(e) {}
-          window.updateThemeUI(newTheme === 'dark');
-        };
-
-        if (window.matchMedia) {
-          window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
-            if (!localStorage.getItem('theme') && !localStorage.getItem('color-theme')) {
-              var prefersDark = e.matches;
-              if (prefersDark) {
-                document.documentElement.classList.add('dark');
-              } else {
-                document.documentElement.classList.remove('dark');
-              }
-              window.updateThemeUI(prefersDark);
-            }
-          });
-        }
-
-        function initThemeButton() {
-          window.updateThemeUI();
-          var btn = document.getElementById('theme-toggle');
-          if (btn) {
-            btn.onclick = function(e) {
-              if (e && e.preventDefault) e.preventDefault();
-              window.toggleTheme();
-            };
-          }
-        }
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', initThemeButton);
-        } else {
-          initThemeButton();
-        }
-      })();
-    </script>
 </head>
 <body class="bg-[#f8fafc] dark:bg-[#0b0f17] text-gray-800 dark:text-gray-100 antialiased flex flex-col min-h-screen selection:bg-green-100 selection:text-green-900 transition-colors duration-200">
 
@@ -343,7 +354,7 @@
             <!-- Título do Portal e Unidade Gestora -->
             <div class="hidden sm:flex flex-col justify-center">
               <span class="text-sm sm:text-base font-extrabold text-gray-900 dark:text-white tracking-tight leading-none">Portal de IA do IFSC</span>
-              <span class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">Catálogo de Ferramentas de Inteligência Artificial</span>
+              <span class="text-[11px] text-gray-500 dark:text-gray-400 mt-0.5 font-medium">Ferramentas de Inteligência Artificial Generativa</span>
             </div>
           </div>
 
@@ -366,7 +377,7 @@
             </button>
 
             <!-- Alternador de Tema Escuro / Claro -->
-            <button id="theme-toggle" type="button" aria-label="Alternar tema" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors cursor-pointer" title="Alternar tema (Claro / Escuro)">
+            <button id="theme-toggle" type="button" aria-label="Alternar tema" onclick="window.toggleTheme()" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg text-sm p-1.5 transition-colors cursor-pointer" title="Alternar tema (Claro / Escuro)">
               <i id="theme-toggle-dark-icon" class="bi bi-moon-stars hidden text-base"></i>
               <i id="theme-toggle-light-icon" class="bi bi-sun hidden text-base"></i>
             </button>
