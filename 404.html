@@ -368,6 +368,17 @@
             partsData.forEach(c => (c.apps || []).forEach(a => catalog.push({ ...a, iconKey: c.iconKey || a.iconKey })));
           }
 
+          const escapeHtml = (str) => {
+            if (!str) return '';
+            return String(str).replace(/[&<>"']/g, s => ({
+              '&': '&amp;',
+              '<': '&lt;',
+              '>': '&gt;',
+              '"': '&quot;',
+              "'": '&#39;'
+            }[s]));
+          };
+
           const targetApp = catalog.find(a => 
             a.id.toLowerCase() === resolvedId || 
             (routeAliases[resolvedId] && a.id.toLowerCase() === routeAliases[resolvedId].id)
@@ -404,7 +415,7 @@
             };
 
             if (targetApp.iconUrl) {
-              document.getElementById('modal-app-icon-container').innerHTML = `<div class="w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center"><img src="${targetApp.iconUrl}" class="w-10 h-10 object-contain" alt="${targetApp.name}"></div>`;
+              document.getElementById('modal-app-icon-container').innerHTML = `<div class="w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 p-2 border border-gray-200 dark:border-gray-700 shadow-md flex items-center justify-center"><img src="${escapeHtml(targetApp.iconUrl)}" class="w-10 h-10 object-contain" alt="${escapeHtml(targetApp.name)}"></div>`;
             } else {
               document.getElementById('modal-app-icon-container').innerHTML = icons[targetApp.iconKey] || icons.bpmn;
             }
@@ -420,14 +431,14 @@
                   <div>
                     <div class="flex items-center gap-1.5 flex-wrap">
                       <strong class="font-extrabold text-xs text-amber-950 dark:text-amber-100">Oportunidade para Estudantes</strong>
-                      <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 uppercase">${targetApp.badge || 'Benefício'}</span>
+                      <span class="px-1.5 py-0.2 rounded text-[9px] font-black bg-amber-200 dark:bg-amber-900 text-amber-900 dark:text-amber-200 uppercase">${escapeHtml(targetApp.badge || 'Benefício')}</span>
                     </div>
                     <p class="mt-1 text-xs text-amber-900 dark:text-amber-200 font-bold leading-relaxed">
-                      ${targetApp.opportunity_plan}
+                      ${escapeHtml(targetApp.opportunity_plan)}
                     </p>
                     <p class="mt-1 text-[11px] text-amber-800 dark:text-amber-300 flex items-center gap-1">
                       <i class="bi bi-check-circle-fill text-amber-600"></i>
-                      <span>${targetApp.domain_requirement || 'Acesso para estudantes com e-mail institucional acadêmico'}</span>
+                      <span>${escapeHtml(targetApp.domain_requirement || 'Acesso para estudantes com e-mail institucional acadêmico')}</span>
                     </p>
                   </div>
                 </div>
@@ -481,13 +492,13 @@
               badgesHTML += `<span class="bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-1"><i class="bi bi-globe2"></i>Público (@gmail)</span>`;
             }
             if (targetApp.ot04_status) {
-              badgesHTML += `<span class="bg-emerald-100 dark:bg-emerald-950/60 text-[#247a30] dark:text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-1"><i class="bi bi-shield-check"></i>OT 04/2025: ${targetApp.ot04_status}</span>`;
+              badgesHTML += `<span class="bg-emerald-100 dark:bg-emerald-950/60 text-[#247a30] dark:text-emerald-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800/60 flex items-center gap-1"><i class="bi bi-shield-check"></i>OT 04/2025: ${escapeHtml(targetApp.ot04_status)}</span>`;
             }
             if (targetApp.safety_rating) {
-              badgesHTML += `<span class="bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-800/60 flex items-center gap-1"><i class="bi bi-info-circle"></i>${targetApp.safety_rating}</span>`;
+              badgesHTML += `<span class="bg-blue-100 dark:bg-blue-950/60 text-blue-800 dark:text-blue-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full border border-blue-200 dark:border-blue-800/60 flex items-center gap-1"><i class="bi bi-info-circle"></i>${escapeHtml(targetApp.safety_rating)}</span>`;
             }
             if (targetApp.tags && Array.isArray(targetApp.tags)) {
-              badgesHTML += targetApp.tags.slice(0, 3).map(t => `<span class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">${t}</span>`).join('');
+              badgesHTML += targetApp.tags.slice(0, 3).map(t => `<span class="bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 border border-gray-200 dark:border-gray-700 text-[9px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">${escapeHtml(t)}</span>`).join('');
             }
             badgesContainer.innerHTML = badgesHTML;
 
