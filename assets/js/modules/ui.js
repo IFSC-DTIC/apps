@@ -132,7 +132,7 @@ export class UIController {
   getBrandOrGenericIconMarkup(app) {
     const isGoogle = app.platform === 'google' || (app.id && app.id.startsWith('g-')) || (app.tags && app.tags.includes('google'));
     const isMicrosoft = app.platform === 'microsoft' || (app.id && app.id.startsWith('ms-')) || (app.tags && app.tags.includes('microsoft'));
-    const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-')));
+    const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-'))) || app.categorySlug === 'dev-pesquisa' || app.categorySlug === 'design-criatividade' || app.categorySlug === 'escrita-organizacao' || app.categorySlug === 'ia-produtividade';
 
     if (isGoogle) {
       return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png" alt="Google" class="w-7 h-7 object-contain" /></div>`;
@@ -141,11 +141,11 @@ export class UIController {
       return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-sky-50 dark:bg-sky-950/50 border border-sky-200 dark:border-sky-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png" alt="Microsoft" class="w-7 h-7 object-contain" /></div>`;
     }
     if (isPartner) {
-      return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><i class="bi bi-stars text-xl text-amber-500"></i></div>`;
+      return `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-800 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="./public/img/partner-fallback.svg" alt="Parceria" class="w-7 h-7 object-contain" /></div>`;
     }
 
     // Apenas ferramentas institucionais homologadas do próprio IFSC recebem o ícone IFSC
-    if (app.iconKey && ['lgpd', 'bpmn', 'siads', 'rsctae', 'taes', 'professores', 'alunos'].includes(app.iconKey)) {
+    if (app.iconKey && ['lgpd', 'bpmn', 'siads', 'rsctae', 'taes', 'professores', 'alunos'].includes(app.iconKey) && !isPartner) {
       return this.getIfscIconMarkup(app.iconKey);
     }
 
@@ -184,7 +184,12 @@ export class UIController {
 
     const isGoogle = app.platform === 'google' || (app.id && app.id.startsWith('g-')) || (app.tags && app.tags.includes('google'));
     const isMicrosoft = app.platform === 'microsoft' || (app.id && app.id.startsWith('ms-')) || (app.tags && app.tags.includes('microsoft'));
-    const fallbackSrc = isGoogle ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png' : (isMicrosoft ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png' : './favicon.svg');
+    const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-'))) || app.categorySlug === 'dev-pesquisa' || app.categorySlug === 'design-criatividade' || app.categorySlug === 'escrita-organizacao' || app.categorySlug === 'ia-produtividade';
+    const fallbackSrc = isGoogle
+      ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png'
+      : (isMicrosoft
+          ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png'
+          : (isPartner ? './public/img/partner-fallback.svg' : './favicon.svg'));
 
     const iconMarkup = app.iconUrl
       ? `<div class="w-11 h-11 rounded-xl flex items-center justify-center p-1.5 bg-white dark:bg-gray-800/90 border border-gray-200/90 dark:border-gray-700 shadow-2xs shrink-0 group-hover:scale-105 transition-transform"><img src="${app.iconUrl}" alt="${app.name}" class="w-8 h-8 object-contain" loading="lazy" decoding="async" onerror="this.onerror=null; this.src='${fallbackSrc}';" /></div>`
@@ -697,11 +702,18 @@ export class UIController {
       this.modalAccessNotice.innerHTML = '';
     }
 
+    const isPartner = (app.id && (app.id.startsWith('partner-') || app.id.startsWith('p-'))) || app.categorySlug === 'dev-pesquisa' || app.categorySlug === 'design-criatividade' || app.categorySlug === 'escrita-organizacao' || app.categorySlug === 'ia-produtividade';
+    const modalFallbackSrc = isGoogle
+      ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/google.png'
+      : (isMicrosoft
+          ? 'https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/png/microsoft-office.png'
+          : (isPartner ? './public/img/partner-fallback.svg' : './favicon.svg'));
+
     const iconContainer = document.getElementById('modal-icon-container');
     if (app.iconUrl) {
       iconContainer.innerHTML = `
         <div class="w-14 h-14 rounded-2xl flex items-center justify-center p-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 shadow-sm">
-          <img src="${app.iconUrl}" alt="${app.name}" class="w-10 h-10 object-contain" />
+          <img src="${app.iconUrl}" alt="${app.name}" class="w-10 h-10 object-contain" onerror="this.onerror=null; this.src='${modalFallbackSrc}';" />
         </div>
       `;
     } else {
