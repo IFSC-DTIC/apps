@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100">
+  <defs>
+    <linearGradient id="gramGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#15C39A"/>
+      <stop offset="100%" stop-color="#0E9F7D"/>
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="22" fill="url(#gramGrad)"/>
+  <path fill="#ffffff" d="M50 20C33.4 20 20 33.4 20 50s13.4 30 30 30 30-13.4 30-30h-9c0 11.6-9.4 21-21 21s-21-9.4-21-21 9.4-21 21-21c6.5 0 12.3 3 16.1 7.6L55 48h25V23l-7.3 7.3C66.9 24.3 58.9 20 50 20z"/>
+</svg>
