@@ -87,8 +87,10 @@
       })();
     </script>
     
-    <!-- Content Security Policy (Blindagem Ampla e Compatível com Extensões e GitHub Pages) -->
+    <!-- Content Security Policy e Cabeçalhos de Segurança (Blindagem Ampla e Compatível com GitHub Pages) -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: blob:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; font-src 'self' https: data:; img-src 'self' https: http: data: blob:; connect-src 'self' https: http: ws: wss:; frame-src 'self' https:;" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
 
     <!-- Captura de Erros do Cliente para Diagnóstico em Tempo Real -->
     <script>
@@ -136,17 +138,17 @@
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="theme-color" content="#247a30" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0b0f17" media="(prefers-color-scheme: dark)" />
-    <link rel="canonical" href="https://apps.ifsc.edu.br/" />
+    <link rel="canonical" href="https://ia.ifsc.edu.br/" />
 
     <!-- Open Graph (WhatsApp, Facebook, LinkedIn, Discord) -->
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pt_BR" />
     <meta property="og:site_name" content="Portal de IA do IFSC" />
-    <meta property="og:url" content="https://apps.ifsc.edu.br/" />
+    <meta property="og:url" content="https://ia.ifsc.edu.br/" />
     <meta property="og:title" content="Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa" />
     <meta property="og:description" content="Portal institucional de ferramentas de Inteligência Artificial Generativa, diretrizes éticas (OT nº 04/2025 DTIC/CGD), agentes especializados Gems e parcerias educacionais do IFSC." />
-    <meta property="og:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
-    <meta property="og:image:secure_url" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta property="og:image" content="https://ia.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta property="og:image:secure_url" content="https://ia.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
     <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -156,7 +158,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa" />
     <meta name="twitter:description" content="Diretrizes da OT 04/2025, ferramentas de Inteligência Artificial Generativa, parcerias educacionais e agentes homologados do Instituto Federal de Santa Catarina." />
-    <meta name="twitter:image" content="https://apps.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
+    <meta name="twitter:image" content="https://ia.ifsc.edu.br/public/img/ifsc-logo-oficial-colorido.png" />
     <meta name="twitter:image:alt" content="Logotipo Oficial do Instituto Federal de Santa Catarina" />
 
     <!-- Schema.org JSON-LD Structured Data (Google Rich Snippets & Knowledge Graph) -->
@@ -166,8 +168,8 @@
       "@graph": [
         {
           "@type": "WebSite",
-          "@id": "https://apps.ifsc.edu.br/#website",
-          "url": "https://apps.ifsc.edu.br/",
+          "@id": "https://ia.ifsc.edu.br/#website",
+          "url": "https://ia.ifsc.edu.br/",
           "name": "Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa",
           "alternateName": "Portal de IA do IFSC",
           "description": "Portal institucional de ferramentas de Inteligência Artificial Generativa, diretrizes éticas, parcerias oficiais e agentes de IA do Instituto Federal de Santa Catarina (IFSC), homologado conforme a Orientação Técnica nº 04/2025 da DTIC/CGD.",
@@ -176,14 +178,14 @@
             "name": "Instituto Federal de Santa Catarina",
             "alternateName": "IFSC",
             "url": "https://www.ifsc.edu.br",
-            "logo": "https://apps.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg"
+            "logo": "https://ia.ifsc.edu.br/public/img/ifsc-logo-horizontal.svg"
           },
           "inLanguage": "pt-BR",
           "potentialAction": {
             "@type": "SearchAction",
             "target": {
               "@type": "EntryPoint",
-              "urlTemplate": "https://apps.ifsc.edu.br/?q={search_term_string}"
+              "urlTemplate": "https://ia.ifsc.edu.br/?q={search_term_string}"
             },
             "query-input": "required name=search_term_string"
           }
@@ -197,7 +199,7 @@
             "name": "Diretoria de Tecnologia da Informação e Comunicação (DTIC) e Coordenadoria de Gestão de Dados (CGD) - IFSC",
             "url": "https://www.ifsc.edu.br/dtic"
           },
-          "termsOfService": "https://apps.ifsc.edu.br/termo/",
+          "termsOfService": "https://ia.ifsc.edu.br/termo/",
           "audience": {
             "@type": "Audience",
             "audienceType": "Servidores, Docentes, Estudantes e Comunidade Externa do Instituto Federal de Santa Catarina"
