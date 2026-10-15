@@ -1,14 +1,16 @@
-# Portal de Inteligência Artificial e Aplicações - IFSC
+# Portal de Inteligência Artificial do IFSC — ia.ifsc.edu.br
 
 [![Status: Homologado OT 04/2025](https://img.shields.io/badge/IFSC-OT%2004%2F2025-00823B.svg)](https://www.ifsc.edu.br/web/portal-do-servidor/gestao-de-dados)
 [![Arquitetura: Zero-Backend](https://img.shields.io/badge/Arquitetura-Zero--Backend-blue.svg)](ARQUITETURA.md)
 [![Conformidade: LGPD & ECA](https://img.shields.io/badge/Conformidade-LGPD%20%26%20ECA-success.svg)](SEGURANCA.md)
-[![Hospedagem: GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-informational.svg)](https://apps.ifsc.edu.br/)
+[![Hospedagem: GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-informational.svg)](https://ia.ifsc.edu.br/)
 [![Analytics: GA4 + Clarity](https://img.shields.io/badge/Telemetria-GA4%20%2B%20Clarity-orange.svg)](#-observabilidade-telemetria-ética--seo)
 
 🛡️ **Portal oficial de diretrizes, ferramentas homologadas e agentes especialistas de Inteligência Artificial (IA)** do Instituto Federal de Educação, Ciência e Tecnologia de Santa Catarina (IFSC), mantido e coordenado pela **Diretoria de Tecnologia da Informação e Comunicação (DTIC)** e pela **Coordenadoria de Gestão de Dados (CGD)**.
 
-Disponível publicamente em: **[https://apps.ifsc.edu.br/](https://apps.ifsc.edu.br/)**
+Disponível publicamente em: **[https://ia.ifsc.edu.br/](https://ia.ifsc.edu.br/)**
+
+> O endereço legado `apps.ifsc.edu.br` conta com redirecionamento automático permanente (301-equivalent) preservando rotas e parâmetros para `ia.ifsc.edu.br`.
 
 ---
 
@@ -43,16 +45,16 @@ Este portal foi concebido e estruturado para operacionalizar as diretrizes da **
 
 ### 2. Filtros Unificados e Responsivos
 - **Segmentação por Público-Alvo:** Filtros em linha única para `Todos`, `Servidores`, `Alunos` e `Comunidade`, permitindo refinar o catálogo de forma instantânea sem poluição visual.
-- **Categorias Dinâmicas & Favoritos:** Filtros por categoria funcional e aba exclusiva de favoritos salvos localmente.
+- **Categorias Dinâmicas & Favoritos:** Filtros por categoria funcional e favoritos locais persistidos no navegador.
 
 ### 3. Segurança e Privacidade no Cliente
 - **Proteção Anti-Scraping de E-mails com JS/Base64:** Todos os e-mails institucionais exibidos no portal são ofuscados no HTML estático e reconstruídos dinamicamente apenas durante a interação do navegador, neutralizando bots coletores de spam.
 - **Gerador de Termos de Consentimento ([`/termo/`](termo/index.html)):** Aplicação 100% client-side (Vue 3 + html2pdf) para emissão de termos LGPD e ECA Digital em PDF, sem transmissão de dados para servidores externos.
-- **Deep Linking e Roteamento Inteligente ([`404.html`](404.html)):** Suporte a links diretos para ferramentas (`apps.ifsc.edu.br/?app=guardiao`) e abas (`apps.ifsc.edu.br/?tab=partnerships`) em servidores estáticos do GitHub Pages.
+- **Deep Linking e Roteamento Inteligente ([`404.html`](404.html)):** Suporte a links diretos para ferramentas (`ia.ifsc.edu.br/?app=guardiao`) e abas (`ia.ifsc.edu.br/?tab=partnerships`) em servidores estáticos do GitHub Pages.
 
 ---
 
-## 🔒 Auditoria de Segurança, Riscos e Privacidade
+## 🔒 Auditoria de Segurança, Riscos e Melhores Práticas
 
 | Critério | Status | Implementação |
 | :--- | :---: | :--- |
@@ -60,8 +62,11 @@ Este portal foi concebido e estruturado para operacionalizar as diretrizes da **
 | **Zero PII de Desenvolvedores** | ✅ Conforme | Nenhum dado pessoal (CPF, e-mails privados, telefones, caminhos locais) de desenvolvedores ou servidores consta nos códigos estáticos públicos. |
 | **Proteção contra Spam** | ✅ Conforme | E-mails institucionais protegidos por codificação Base64 e hidratados via JavaScript no cliente (`js-safe-email`). |
 | **Content Security Policy (CSP)** | ✅ Ativo | Meta tags restritivas em `index.html`, `404.html` e `termo/index.html` limitando fontes de scripts, estilos, conexões e fontes externas. |
-| **Anonimização de Telemetria** | ✅ Conforme | Google Analytics 4 com `anonymize_ip: true` e flags de personalização desligadas; Microsoft Clarity com máscara para privacidade total. |
-| **Hospedagem Estática Segura** | ✅ Conforme | Execução exclusiva via GitHub Pages com arquivo `.nojekyll`, eliminando riscos de vulnerabilidades do lado servidor. |
+| **Cabeçalhos de Segurança Client-Side** | ✅ Ativo | `Referrer-Policy: strict-origin-when-cross-origin` e `X-Content-Type-Options: nosniff` ativos em todas as páginas HTML. |
+| **Sanitização contra XSS** | ✅ Conforme | Todos os parâmetros e campos de pesquisa tratados via `escapeHtml()` e `textContent`. |
+| **Links Externos Seguros** | ✅ Conforme | Todas as âncoras para sistemas de terceiros utilizam `target="_blank"` e `rel="noopener noreferrer"`. |
+| **Anonimização de Telemetria** | ✅ Conforme | Google Analytics 4 com `anonymize_ip: true` e flags de personalização desligadas; Microsoft Clarity com máscara para conformidade LGPD. |
+| **Hospedagem Estática Segura** | ✅ Conforme | Execução exclusiva via GitHub Pages com arquivo `.nojekyll`, eliminando superfície de ataque do lado servidor. |
 
 ---
 
@@ -77,8 +82,8 @@ O portal conta com infraestrutura de observabilidade e otimização para motores
   - **ID de Projeto:** `wddq8jjbkx`
   - **Configuração:** Heatmaps e métricas de navegação com mascaramento automático de campos sensíveis para conformidade LGPD.
 - **SEO & Indexação:**
-  - **`robots.txt`:** Regras para Googlebot, Bingbot, Applebot, bloqueio de rotas de diagnóstico interno e indicação do sitemap canônico.
-  - **`sitemap.xml`:** Catálogo XML atualizado com prioridades, datas de modificação e rotas diretas para todas as 5 abas e ferramentas.
+  - **`robots.txt`:** Regras para Googlebot, Bingbot, Applebot, GPTBot, PerplexityBot, ClaudeBot, bloqueio de rotas de diagnóstico interno e indicação do sitemap canônico em `ia.ifsc.edu.br`.
+  - **`sitemap.xml`:** Catálogo XML atualizado com prioridades, datas de modificação (`2026-10-14`), imagens e rotas diretas para todas as 5 abas e ferramentas.
   - **Open Graph & Twitter Cards:** Imagem em formato raster PNG oficial (`ifsc-logo-oficial-colorido.png`) em resolução 1200x630 para exibição correta em WhatsApp, LinkedIn e redes sociais.
   - **Schema.org (JSON-LD):** Metadados estruturados de `WebSite` e `GovernmentService` vinculando formalmente o portal à DTIC e ao IFSC.
 
@@ -95,7 +100,7 @@ O portal conta com infraestrutura de observabilidade e otimização para motores
 ├── robots.txt                   # Regras de rastreamento e indexação otimizadas
 ├── sitemap.xml                  # Mapa XML do site completo e atualizado
 ├── favicon.svg                  # Favicon vetorial com o logo oficial do IFSC
-├── CNAME                        # Domínio canônico de produção (apps.ifsc.edu.br)
+├── CNAME                        # Domínio canônico de produção (ia.ifsc.edu.br)
 ├── .nojekyll                    # Instrução para GitHub Pages ignorar Jekyll
 ├── .gitignore                   # Bloqueio de arquivos locais, segredos e logs
 ├── termo/                       # Módulo do Gerador de Termos de Consentimento (LGPD / ECA)
@@ -123,8 +128,8 @@ Para executar o portal localmente:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/IFSC-DTIC/apps.git
-   cd apps
+   git clone https://github.com/IFSC-DTIC/ia.ifsc.edu.br.git
+   cd ia.ifsc.edu.br
    ```
 2. Inicie um servidor HTTP estático (por exemplo, com Python):
    ```bash

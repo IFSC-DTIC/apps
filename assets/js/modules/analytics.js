@@ -1,6 +1,6 @@
 /**
  * Modulo de Rastreamento e Telemetria Institucional (GA4 & Microsoft Clarity)
- * IDs homologados em producao no portal apps.ifsc.edu.br
+ * IDs homologados em producao no portal ia.ifsc.edu.br
  */
 
 export const Analytics = {

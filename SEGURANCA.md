@@ -1,55 +1,44 @@
-# 🛡️ Análise de Segurança e Guia de Implementação (Foco: GitHub Pages & LGPD)
+# 🛡️ Diretrizes de Segurança, Privacidade e Melhores Práticas (ia.ifsc.edu.br)
 
-Este documento apresenta uma análise técnica da postura de segurança atual do Portal de Aplicações IFSC-DTIC-CGD, adaptada para hospedagem estática e conformidade com a LGPD.
+Este documento estabelece as diretrizes técnicas, arquiteturais e normativas de segurança da informação adotadas no **Portal de Inteligência Artificial do IFSC** ([ia.ifsc.edu.br](https://ia.ifsc.edu.br/)), em conformidade com a **Orientação Técnica nº 04/2025 (DTIC/CGD)**, a **Lei Geral de Proteção de Dados (LGPD - Lei nº 13.709/2018)** e as normativas do **ECA Digital (Estatuto da Criança e do Adolescente)**.
 
 ---
 
-## 📋 Checklist de Segurança e Privacidade
+## 📋 Checklist de Segurança e Melhores Práticas Implementadas
 
-| Status | Item de Segurança | Descrição | Impacto |
+| Status | Mecanismo | Implementação Técnica | Nível de Risco Mitigado |
 | :---: | :--- | :--- | :--- |
-| [x] | **Gestão de Segredos (Tokens/Keys)** | Verificado e blindado. Arquivo `.env` sanitizado com placeholder BYOK e `.gitignore` configurado. | Crítico |
-| [x] | **Conformidade LGPD & OT 04/2025** | Anonimização de IP no GA4, Clarity ativo, avisos da OT 04/2025 no topo e modais. | Crítico |
-| [x] | **Proteção de Menores (ECA Digital)** | Diretrizes explícitas da OT 04/2025, vedação a coleta de dados de estudantes menores. | Crítico |
-| [x] | **Content Security Policy (CSP)** | Meta tags CSP ativas e estritas em `index.html`, `404.html` e `termo/index.html`. | Alto |
-| [x] | **Governança Zero-Backend** | Sem armazenamento central de prompts ou termos; persistência 100% no cliente. | Alto |
-| [x] | **Prevenção XSS / Sanitização** | Validação de chaves e atributos em `apps.json`, `agents.json` e URLs institucionais. | Alto |
+| ✅ | **Gestão de Segredos (Zero Secrets)** | Repositório 100% público sem credenciais, API Keys ou senhas. Filosofia BYOK (*Bring Your Own Key*) quando aplicável. | Crítico (Prevenção de vazamento) |
+| ✅ | **Anonimização de Telemetria** | Google Analytics 4 com `anonymize_ip: true`, `allow_google_signals: false` e personalização desativada. Microsoft Clarity com máscara LGPD. | Crítico (Privacidade de servidores e discentes) |
+| ✅ | **Proteção de Menores (ECA Digital)** | Avisos normativos da OT 04/2025 e vedação expressa à submissão de dados de menores ou de saúde em IAs públicas externas. | Crítico (Conformidade legal e ética) |
+| ✅ | **Content Security Policy (CSP)** | Meta tags CSP ativas em `index.html`, `404.html` e `termo/index.html` limitando fontes confiáveis de scripts, fontes e conexões. | Alto (Prevenção de injeção de código) |
+| ✅ | **Cabeçalhos de Segurança Client-Side** | `Referrer-Policy: strict-origin-when-cross-origin` e `X-Content-Type-Options: nosniff` ativos em todas as páginas HTML. | Alto (Prevenção de vazamento de URL e MIME-sniffing) |
+| ✅ | **Sanitização contra XSS** | Parâmetros de pesquisa e entradas de usuário tratados via `escapeHtml()` e `textContent` antes da renderização no DOM. | Alto (Prevenção de Cross-Site Scripting) |
+| ✅ | **Links Externos Seguros** | Todas as âncoras para sistemas de terceiros utilizam `target="_blank"` e `rel="noopener noreferrer"`. | Médio (Prevenção de *Reverse Tabnabbing*) |
+| ✅ | **Ofuscação Anti-Scraping de E-mails** | E-mails institucionais ofuscados em Base64 no HTML estático e reconstruídos via JavaScript (`js-safe-email`) para bloquear bots coletores de spam. | Médio (Proteção contra SPAM/Phishing) |
+| ✅ | **Arquitetura Zero-Backend (Local-First)** | Sem banco de dados em nuvem, sem coleta de prompts. Preferências e termos gerados 100% no navegador do dispositivo do usuário. | Crítico (Superfície de ataque zero no servidor) |
 
 ---
 
-## 🚀 Prompts para o Antigravity
+## 🏛️ Princípios de Arquitetura e Privacidade
 
-### 1. Auditoria de Segredos e Prevenção de Vazamento
-**Persona:** Auditor de Segurança Cloud/DevSecOps.
-**Contexto:** O projeto é público no GitHub e utiliza GitHub Pages. Qualquer segredo (tokens, chaves de IA) colocado no JS será visível para todos.
-**Tarefa:** Analise todo o repositório em busca de strings que pareçam chaves de API ou tokens. Crie um guia no README instruindo como os contribuidores devem usar variáveis de ambiente (se houver build process) ou como configurar chaves de forma que o usuário final forneça a sua própria chave no navegador (armazenada apenas no LocalStorage do usuário).
-**Resultado:** Repositório livre de segredos expostos e documentação de "Bring Your Own Key" (BYOK).
+### 1. Modelo Local-First e Zero-Backend
+O portal foi projetado para operar como um **Hub de Diretrizes e Aplicações Estáticas**. Ele não possui backend próprio, banco de dados ou endpoints capazes de interceptar as conversas ou consultas de IA dos usuários. Todas as interações ocorrem diretamente entre o navegador do usuário e os serviços homologados (ex.: Google Workspace institucional ou Microsoft 365).
 
-### 2. Implementação de Privacy-by-Design (LGPD)
-**Persona:** Consultor Jurídico-Tecnológico (LGPD).
-**Contexto:** O IFSC lida com dados de alunos, muitos dos quais são menores de idade. O portal deve ser um exemplo de privacidade.
-**Tarefa:** Implemente um banner de "Aviso de Privacidade" que explique que o portal não coleta dados pessoais e que toda a inteligência artificial é processada em servidores externos (Google AI Studio), alertando para não inserir dados sensíveis ou de identificação de menores nos prompts.
-**Resultado:** Portal em conformidade ética e legal com a LGPD.
+### 2. Tratamento de Dados no Gerador de Termos (`/termo/`)
+O módulo do Gerador de Termos de Consentimento (LGPD / ECA Digital) processa os dados de estudantes e responsáveis exclusivamente na memória do navegador (via Vue 3 e `html2pdf.js`). **Nenhum dado é enviado para servidores da nuvem ou mantido em cache persistente de rede.**
 
-### 3. Fortalecimento Técnico (SRI & CSP)
-**Persona:** Especialista em Segurança Web.
-**Contexto:** Hospedagem no GitHub Pages limita o controle sobre cabeçalhos HTTP.
-**Tarefa:** Adicione SRI a todas as CDNs e implemente uma meta tag CSP rigorosa que bloqueie `eval()` e limite `script-src` apenas aos domínios estritamente necessários (Google Analytics e as URLs do AI Studio).
-**Resultado:** Proteção contra ataques de injeção e comprometimento de CDNs.
+### 3. Delimitação de Contas Institucionais vs. Contas Pessoais
+- **Gems Especialistas do IFSC:** São exclusivas do domínio `@ifsc.edu.br` e `@aluno.ifsc.edu.br`, operando com a garantia contratual do Google Workspace for Education de não utilização dos dados institucionais para treinamento de modelos públicos.
+- **Ferramentas Públicas:** Funcionam com qualquer login `@gmail.com`, com alertas explícitos para que os usuários **nunca insiram documentos sigilosos ou dados pessoais protegidos**.
 
 ---
 
-## 🛡️ Segurança em Ambiente Estático e Delegação de Plataforma (Zero Backend)
+## 💻 Orientações para Contribuidores
 
-Como o portal roda no **GitHub Pages**, todas as melhorias devem ser **Client-Side** e a segurança operacional é fundamentalmente baseada na delegação e no redirecionamento:
-1.  **Portal como Diretório:** O portal é estritamente um hub de agregação e links rápidos. Ele não se conecta a bancos de dados centrais, não coleta credenciais e não intercepta dados inseridos nos chats/prompts das ferramentas. A proteção de dados e a segurança das APIs de IA são tarefas integralmente resolvidas nas plataformas de destino (Google AI Studio, Gemini, etc.).
-2.  **Persistência Local:** Qualquer persistência de preferências de interface (como modo escuro e favoritos) é salva exclusivamente no `LocalStorage` ou `IndexedDB` do próprio navegador do usuário.
-3.  **Processamento Isolado:** O preenchimento e a geração de termos (como no Gerador de Termos) ocorrem inteiramente no ambiente do cliente (navegador). Nenhuma informação é transmitida ou salva em servidores do IFSC ou de terceiros.
-4.  **Privacidade de Menores:** Garanta que as descrições dos apps não contenham links para conteúdos inadequados e que haja avisos em conformidade com o ECA Digital e a LGPD.
+Ao submeter Pull Requests para o repositório `IFSC-DTIC/ia.ifsc.edu.br`:
 
----
-
-## 🛠️ Notas Técnicas
-- **NUNCA** submeta arquivos `.env` ou chaves no código-fonte.
-- **DADOS DE MENORES:** Se um app sugerido for voltado para menores, ele deve seguir a regra de "Coleta Zero" de dados pessoais.
-- **XSS:** Substitua `element.innerHTML = ...` por `element.textContent = ...` ou use métodos de criação de elementos do DOM para evitar execução de scripts maliciosos injetados via JSON.
+1. **Nunca inclua arquivos `.env`, chaves de API ou dados pessoais** nos commits.
+2. **Utilize sempre `escapeHtml()` ou `textContent`** para renderização de dados que dependam de entradas dinâmicas.
+3. **Mantenha todos os links externos com `rel="noopener noreferrer"` e `target="_blank"`.**
+4. **Verifique se novos domínios ou serviços de terceiros estão declarados na meta tag de CSP.**
