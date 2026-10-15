@@ -7,10 +7,11 @@ Este documento define a arquitetura estática do portal, o fluxo de dados e, sob
 ## 1. Arquitetura do Sistema (Local-First e Estática)
 O portal foi concebido sob a filosofia **Zero-Backend (Vanilla)**. Por estar hospedado primariamente no *GitHub Pages*, não existe um servidor processando dados do usuário, bancos de dados ativos ou complexidade de infraestrutura. O portal atua estritamente como um **diretório/hub de redirecionamento**, e toda a lógica de inteligência artificial ou processamento de prompts é de responsabilidade e execução exclusivas das plataformas proprietárias externas (Google AI Studio, NotebookLM, Gemini, etc.).
 
-*   **Linguagens Core:** HTML5, CSS e JS (ES6+) puros.
-*   **Estilização:** Tailwind CSS (via script CDN).
+*   **Linguagens Core:** HTML5, CSS e JS (ES6+ modular).
+*   **Estilização:** Tailwind CSS (via CDN) com tokens do Manual da Marca IFSC e design system oficial gov.br/ds.
+*   **Domínio de Produção:** `ia.ifsc.edu.br` (com redirecionamento transparente de `apps.ifsc.edu.br`).
 *   **Armazenamento de Estado:** `localStorage` do navegador do usuário.
-*   **Fontes de Dados:** Arquivos JSON locais e autônomos (`apps.json` para ferramentas e `agents.json` para especialistas), lidos de forma assíncrona com versionamento dinâmico temporário (*Cache Busting*).
+*   **Fontes de Dados:** Arquivos JSON locais e autônomos (`apps.json` para ferramentas, `agents.json` para especialistas Gems e `partnerships.json` para benefícios/parcerias), lidos de forma assíncrona com versionamento dinâmico temporário (*Cache Busting*).
 
 ---
 

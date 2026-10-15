@@ -2,7 +2,7 @@
 # Portal de IA do IFSC - Ferramentas de Inteligência Artificial Generativa
 # Diretoria de Tecnologia da Informação e Comunicação (DTIC/CGD)
 # Instituto Federal de Santa Catarina (IFSC) • Orientação Técnica nº 04/2025
-# Produção em GitHub Pages: https://apps.ifsc.edu.br/
+# Produção em GitHub Pages: https://ia.ifsc.edu.br/
 # ==============================================================================
 
 # Regras Gerais para Motores de Busca e Indexadores
@@ -70,5 +70,5 @@ User-agent: cohere-ai
 Allow: /
 
 # Parâmetros de Rasteamento e Host Canônico
-Host: https://apps.ifsc.edu.br
-Sitemap: https://apps.ifsc.edu.br/sitemap.xml
+Host: https://ia.ifsc.edu.br
+Sitemap: https://ia.ifsc.edu.br/sitemap.xml
